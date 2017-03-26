@@ -1,7 +1,7 @@
 /*  Tim Sonnen        Lab #5
  *  9/24/2015
  *
- *  linkedList.h
+ *  FrameList.h
  *  Class that holds a linked list
  */
 
@@ -10,7 +10,7 @@
 
 #include <iostream>
 #include "framestructure.h"
-class LinkedList{
+class FrameList{
 private:
     struct Node{
         t_FrameData FrameData;
@@ -25,13 +25,13 @@ private:
 
 public:
     // Constructor
-    LinkedList(){
+    FrameList(){
         head = NULL;
         count = 0;
     }
 
     // Destructor
-    ~LinkedList(){
+    ~FrameList(){
         NodePtr p = head;
         NodePtr n;
 

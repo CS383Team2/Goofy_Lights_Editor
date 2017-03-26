@@ -1,19 +1,19 @@
 /* Tim Sonnen       Lab #4
  * 9/25/2015
  *
- * linkedList.cpp
+ * FrameList.cpp
  *
  */
 
 #include <iostream>
 
-#include "linkedList.h"
+#include "FrameList.h"
 #include "framestructure.h"
 
 using namespace std;
 
 /* Add an item to the front of the list*/
-void LinkedList::AddNode( t_FrameData n ){
+void FrameList::AddNode( t_FrameData n ){
     NodePtr p;
 
     //Allocate the node
@@ -32,7 +32,7 @@ void LinkedList::AddNode( t_FrameData n ){
 }
 
 /*Deletes the first node in the list*/
-void LinkedList::DeleteNode(){
+void FrameList::DeleteNode(){
     NodePtr p = head;
 
     if( p == NULL){
@@ -47,12 +47,12 @@ void LinkedList::DeleteNode(){
 }
 
 /*Returns the first node in the list */
-t_FrameData LinkedList::FirstNode(){
+t_FrameData FrameList::FirstNode(){
     return head->FrameData;
 }
 
 /*Returns if the list is empty or not*/
-int LinkedList::IsEmpty(){
+int FrameList::IsEmpty(){
     if(head == NULL){
         return 1;
     }
@@ -61,7 +61,7 @@ int LinkedList::IsEmpty(){
     }
 }
 
-void LinkedList::PrintNode(){
+void FrameList::PrintNode(){
     NodePtr p = head;
 
     while(p != NULL){
