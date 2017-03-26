@@ -15,7 +15,7 @@ typedef struct
     long ID;         // Unique ID of frame. Static once generated.
     int durration;   // Frame Duration in MS
     // Where do we get the R C from at this point?
-    //RGB data[??][??]  //Frame data
+    t_RGB** data;  //Frame data
 } t_FrameData;
 
 #endif // FRAMESTRUCTURE_H

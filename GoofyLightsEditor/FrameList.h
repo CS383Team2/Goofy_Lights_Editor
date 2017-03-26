@@ -20,13 +20,15 @@ private:
     typedef struct Node* NodePtr;
 
     NodePtr head;
-
+    int row, col;
     int count;
 
 public:
     // Constructor
-    FrameList(){
+    FrameList(int r, int c){
         head = NULL;
+        row = r;
+        col = c;
         count = 0;
     }
 
