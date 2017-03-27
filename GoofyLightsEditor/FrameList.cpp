@@ -12,7 +12,7 @@
 
 using namespace std;
 
-/* Add an item to the front of the list*/
+/* Add an item to the end of the list*/
 void FrameList::AddNode( t_FrameData n ){
     NodePtr p;
 
@@ -26,8 +26,12 @@ void FrameList::AddNode( t_FrameData n ){
         head = p;
     }
     else{
-        p->next=head;
-        head = p;
+        NodePtr temp = head;
+        while (temp -> next != NULL)
+        {
+            temp = temp -> next;
+        }
+        temp -> next = p;
     }
 }
 
