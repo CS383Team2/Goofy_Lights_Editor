@@ -1,8 +1,10 @@
 #include <iostream>
 #include "mainwindow.h"
 #include <QApplication>
+
 #include "framestructure.h"
 #include "FrameList.h"
+#include "FrameManipulation.h"
 
 long FrameIDCount = 0;
 
@@ -73,14 +75,4 @@ int main(int argc, char *argv[])
     frames.PrintNode();
 
     return a.exec();
-}
-
-// Function creates a 2d memory element of the RGB struct then passes back the pointer to it.
-// source http://stackoverflow.com/questions/936687/how-do-i-declare-a-2d-array-in-c-using-new
-t_RGB** create_RGB(int r, int c)
-{
-    t_RGB** arr = new t_RGB*[r];
-    for(int i = 0; i < r; ++i)
-        arr[i] = new t_RGB[c];
-    return arr;
 }
