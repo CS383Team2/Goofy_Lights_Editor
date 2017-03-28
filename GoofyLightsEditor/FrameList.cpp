@@ -55,7 +55,6 @@ void FrameList::AddNode_Middle(t_FrameData x, int pos){
     // Node 0 is the head of the list while node (count - 1) is the tail
     int tempCount = 0;
     
-    NodePtr previous = head;
     NodePtr current = head;
     NodePtr insert = new Node;
     insert -> FrameData = x;
@@ -69,7 +68,7 @@ void FrameList::AddNode_Middle(t_FrameData x, int pos){
     else
     {
         tempCount++;                                // Both tempCounter and current are refrencing
-        current = current _. next;                  // position 1 in the list
+        current = current -> next;                  // position 1 in the list
         while (tempCount != pos)
         {
             current = current -> next;
