@@ -43,11 +43,17 @@ public:
             delete n;
         }
     }                                                                                                                      
-    // Add a node onto the front of the linked list.
+    // Add a node onto the end of the linked list.
     void AddNode(t_FrameData x);
     
-    // Delete the first node in the lisr.
+    // Delete the first node in the list.
     void DeleteNode();
+	
+    // Add node at position x in the list
+    void AddNode_Middle(t_FrameData x, int pos);
+	
+    // Delete node at position x in the list
+    void DeleteNode_Middle(int pos);
  
     // Return the first node found in the list
     t_FrameData FirstNode();
