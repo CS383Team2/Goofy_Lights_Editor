@@ -21,7 +21,9 @@ t_RGB** create_RGB(int r, int c);
 //https://github.com/CS383Team2/Goofy_Lights_Editor/issues/9
 t_FrameData copyFrame(t_FrameData FrameData)
 {
+    t_FrameData NewFrame;
     //Black magic
+    return NewFrame;
 }
 
 // translates from by a given direction
@@ -29,21 +31,23 @@ t_FrameData copyFrame(t_FrameData FrameData)
 int translateFrame(t_FrameData d, int direction)
 {
     //Black magic
+    return SUCSSESFUL;
 }
 
 // Fills given frame with color
 //https://github.com/CS383Team2/Goofy_Lights_Editor/issues/6
-int fillFrame(t_FrameData d, t_RGB rgb)
+int fillFrame(t_FrameData &d, t_RGB rgb)
 {
     //Black magic
+    return SUCSSESFUL;
 }
 
-int fillFrame2(t_FrameData d, short r, short g, short b)
+int fillFrame2(t_FrameData &d, short r, short g, short b)
 {
     t_RGB rgb;
     rgb.R = r;
     rgb.G = g;
     rgb.B = b;
 
-    fillFrame(d, rgb);
+    return fillFrame(d, rgb);
 }
