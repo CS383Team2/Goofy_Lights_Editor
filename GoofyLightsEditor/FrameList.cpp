@@ -50,6 +50,70 @@ void FrameList::DeleteNode(){
     }
 }
 
+void FrameList::AddNode_Middle(t_FrameData x, int pos){
+    // indexing scheme to start at 0 to n where n == items in linked list
+    // Node 0 is the head of the list while node (count - 1) is the tail
+    int tempCount = 0;
+    
+    NodePtr previous = head;
+    NodePtr current = head;
+    NodePtr insert = new Node;
+    insert -> FrameData = x;
+    insert -> next = NULL;
+    
+    if (pos == 0)
+    {
+        insert -> next = head;
+        head = insert;
+    }
+    else
+    {
+        tempCount++;                                // Both tempCounter and current are refrencing
+        current = current _. next;                  // position 1 in the list
+        while (tempCount != pos)
+        {
+            current = current -> next;
+            tempCount++;
+        }
+        insert -> next = current -> next;
+        current -> next = insert;
+        return;
+    }
+}
+
+void FrameList::DeleteNode_Middle(int pos){
+    int temp = 0;
+    
+    if (head == NULL){
+        // Error list is empty, do nothing and return.
+        return;
+    }
+    
+    NodePtr current = head;
+    
+    if (pos == 0){
+        // Delete the head node.
+        head = current -> next;
+        delete(current);
+        return;
+    }
+    
+    for (int i = 0; current != NULL && i < pos - 1; i++){
+        current = current -> next;
+    }
+    
+    if (current == NULL || current -> next == NULL){
+        // the position given is greater than total number of nodes in the list.
+        return;
+    }
+    
+    // if this point has been reached and the function has not returned, current -> next holds
+    // the node to be deleted from the list.
+    NodePtr p = current -> next -> next;
+    delete (current -> next);
+    current -> next = p;
+}
+
 /*Returns the first node in the list */
 t_FrameData FrameList::FirstNode(){
     return head->FrameData;
