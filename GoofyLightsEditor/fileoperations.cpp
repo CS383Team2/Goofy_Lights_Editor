@@ -12,6 +12,7 @@
 #include <QWidget>
 #include <QString>
 #include <QObject>
+#include <QtDebug>
 
 int fileoperations::saveToFile(FrameList frameList, QString fileName){
     QFile file; /* Load the file and write to it */
@@ -22,7 +23,13 @@ int fileoperations::saveToFile(FrameList frameList, QString fileName){
         stream << frameList.GetRowCount() << "," << frameList.GetColCount() << endl;
         stream << frameList.Size() << endl << endl;
 
+        /* If the frameList is empty */
+        if(frameList.Size() == 0)
+            return 0;
+
         do{
+            qDebug() << "We got to the do..while";
+            qDebug() << frameList.Size();
             t_FrameData frameData = frameList.FirstNode();
 
             for(int i = 0; i < frameList.GetRowCount(); i++){

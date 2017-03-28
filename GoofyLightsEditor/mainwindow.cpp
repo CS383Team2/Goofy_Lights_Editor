@@ -3,6 +3,7 @@
 #include "fileoperations.h"
 #include "FrameList.h"
 #include <QFileDialog>
+#include <QtDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -23,6 +24,9 @@ void MainWindow::on_actionSave_As_triggered()
             tr("Save Project"), "",
             tr("Project (*.proj);;All Files (*)"));
     FrameList frameList = FrameList(10,10);
+    t_FrameData frameData;
+    frameList.AddNode(frameData);
 
     fileoperations::saveToFile(frameList,fileName);
+    qDebug() << "Returned safely";
 }
