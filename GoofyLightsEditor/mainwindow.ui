@@ -578,7 +578,7 @@
      <x>0</x>
      <y>0</y>
      <width>1024</width>
-     <height>22</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuSuper_Animator_Window">
@@ -637,6 +637,12 @@
   <action name="actionSave_As">
    <property name="text">
     <string>Save As...</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::ApplicationSpecificRole</enum>
+   </property>
+   <property name="priority">
+    <enum>QAction::NormalPriority</enum>
    </property>
   </action>
   <action name="actionSave_2">

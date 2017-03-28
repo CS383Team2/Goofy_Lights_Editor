@@ -51,6 +51,27 @@ t_FrameData FrameList::FirstNode(){
     return head->FrameData;
 }
 
+/* Advance one node through the list */
+int FrameList::AdvanceList(){
+    this->head = this->head->next;
+
+    /* If we are out of the list return 0, else return 1 */
+    if (this->head == NULL)
+        return 0;
+    else
+        return 1;
+}
+
+/* Get the row count */
+int FrameList::GetRowCount(){
+    return this->row;
+}
+
+/* Get the column count */
+int FrameList::GetColCount(){
+    return this->col;
+}
+
 /*Returns if the list is empty or not*/
 int FrameList::IsEmpty(){
     if(head == NULL){
@@ -84,4 +105,8 @@ void FrameList::PrintNode(){
         cout << endl;
         p = p->next;
     }
+}
+
+int FrameList::Size(){
+    return this->count;
 }

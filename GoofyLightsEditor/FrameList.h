@@ -51,6 +51,15 @@ public:
  
     // Return the first node found in the list
     t_FrameData FirstNode();
+
+    // Advance one node in the list
+    int AdvanceList();
+
+    // Get the row count
+    int GetRowCount();
+
+    // Get the column count
+    int GetColCount();
  
     // Output the values in the nodes, one integer per line. 
     void PrintNode();
