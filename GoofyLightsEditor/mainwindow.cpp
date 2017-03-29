@@ -16,26 +16,76 @@ MainWindow::MainWindow(QWidget *parent) :
     scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene); //give the grid to the graphics view -Paul
 
-    QBrush redBrush(Qt::red);
-    QBrush blueBrush(Qt::blue);
-    QPen blackPen(Qt::black);
-    blackPen.setWidth(1); //each cell has a 1px border -Paul
+    /*
+     * ok, don't want to mess around with loops and actually use my brain,
+     * so here are 16 GridSquares all created and places individually.
+     * -Paul.....
+     */
 
-    int COLS = 10; //put this somewhere else lol -Paul
-    int ROWS = 10;
-
-    int i=0;
-    int j=0;
-    for(i=0; i<ROWS; i++) //create rows -Paul
-    {
-
-        for(j=0; j<COLS; j++) //create columns -Paul
-        {
-            rectangle = scene->addRect((i*25),(j*25),20,20,blackPen,blueBrush); //(xpos,ypos,xsize,ysize,bordercolor,brushcolor) -Paul
-            rectangle->setFlag(QGraphicsItem::ItemIsSelectable);
-        }
-    }
-
+    square1 = new GridSquare();
+    square2 = new GridSquare();
+    square3 = new GridSquare();
+    square4 = new GridSquare();
+    square5 = new GridSquare();
+    square6 = new GridSquare();
+    square7 = new GridSquare();
+    square8 = new GridSquare();
+    square9 = new GridSquare();
+    square10 = new GridSquare();
+    square11 = new GridSquare();
+    square12 = new GridSquare();
+    square13 = new GridSquare();
+    square14 = new GridSquare();
+    square15 = new GridSquare();
+    square16 = new GridSquare();
+    square1->x = 0;
+    square1->y = 0;
+    square2->x = 0;
+    square2->y = 25;
+    square3->x = 0;
+    square3->y = 50;
+    square4->x = 0;
+    square4->y = 75; //end row
+    square5->x = 25;
+    square5->y = 0;
+    square6->x = 25;
+    square6->y = 25;
+    square7->x = 25;
+    square7->y = 50;
+    square8->x = 25;
+    square8->y = 75; //end row
+    square9->x = 50;
+    square9->y = 0;
+    square10->x = 50;
+    square10->y = 25;
+    square11->x = 50;
+    square11->y = 50;
+    square12->x = 50;
+    square12->y = 75; //end row
+    square13->x = 75;
+    square13->y = 0;
+    square14->x = 75;
+    square14->y = 25;
+    square15->x = 75;
+    square15->y = 50;
+    square16->x = 75;
+    square16->y = 75; //end row
+    scene->addItem(square1);
+    scene->addItem(square2);
+    scene->addItem(square3);
+    scene->addItem(square4);
+    scene->addItem(square5);
+    scene->addItem(square6);
+    scene->addItem(square7);
+    scene->addItem(square8);
+    scene->addItem(square9);
+    scene->addItem(square10);
+    scene->addItem(square11);
+    scene->addItem(square12);
+    scene->addItem(square13);
+    scene->addItem(square14);
+    scene->addItem(square15);
+    scene->addItem(square16);
 
 }
 

@@ -5,6 +5,7 @@
 #include <QtCore>
 #include <QtGui>
 #include <QtWidgets>
+#include <gridsquare.h>
 #include "FrameList.h"
 
 namespace Ui {
@@ -26,8 +27,29 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
     QGraphicsScene *scene;
-    QGraphicsRectItem *rectangle;
+
+    //excuse the mess for now -P
+    GridSquare *square1; //create an object for a square
+    GridSquare *square2; //create an object for a square
+    GridSquare *square3; //create an object for a square
+    GridSquare *square4; //create an object for a square
+    GridSquare *square5; //create an object for a square
+    GridSquare *square6; //create an object for a square
+    GridSquare *square7; //create an object for a square
+    GridSquare *square8; //create an object for a square
+    GridSquare *square9; //create an object for a square
+    GridSquare *square10; //create an object for a square
+    GridSquare *square11; //create an object for a square
+    GridSquare *square12; //create an object for a square
+    GridSquare *square13; //create an object for a square
+    GridSquare *square14; //create an object for a square
+    GridSquare *square15; //create an object for a square
+    GridSquare *square16; //create an object for a square
+
+
+
     void createActions();
 };
 
