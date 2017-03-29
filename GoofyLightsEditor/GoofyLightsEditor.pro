@@ -26,11 +26,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         mainwindow.cpp \
     FrameList.cpp \
-    FrameManipulation.cpp
+    FrameManipulation.cpp \
+    FileOperations.cpp
 
 HEADERS  += mainwindow.h \
     framestructure.h \
     FrameList.h \
-    FrameManipulation.h
+    FrameManipulation.h \
+    FileOperations.h
 
 FORMS    += mainwindow.ui

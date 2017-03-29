@@ -1,5 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "FileOperations.h"
+#include "FrameList.h"
+#include <QFileDialog>
+#include <QtDebug>
+#include <QWidget>
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -36,4 +42,26 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::on_actionSave_As_triggered()
+{
+    QString fileName = QFileDialog::getSaveFileName(this,
+            tr("Save Project"), "",
+            tr("Project (*.proj);;All Files (*)"));
+    FrameList frameList = FrameList(10,10);
+    t_FrameData frameData;
+    frameList.AddNode(frameData);
+
+    FileOperations::SaveToFile(frameList,fileName);
+    qDebug() << "Returned safely";
+}
+
+FrameList MainWindow::on_actionOpenProject_triggered()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,
+            tr("Open Project"), "",
+            tr("Project (*.proj);;All Files (*)"));
+
+    return FileOperations::LoadFromFile(fileName);
 }

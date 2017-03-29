@@ -32,6 +32,14 @@ public:
         count = 0;
     }
 
+    // Constructor for empty FrameList
+    FrameList(){
+        head = NULL;
+        row = 0;
+        col = 0;
+        count = 0;
+    }
+
     // Destructor
     ~FrameList(){
         NodePtr p = head;
@@ -57,6 +65,15 @@ public:
  
     // Return the first node found in the list
     t_FrameData FirstNode();
+
+    // Advance one node in the list
+    int AdvanceList();
+
+    // Get the row count
+    int GetRowCount();
+
+    // Get the column count
+    int GetColCount();
  
     // Output the values in the nodes, one integer per line. 
     void PrintNode();
@@ -65,7 +82,6 @@ public:
     int IsEmpty();
  
     // Return a count of the number of nodes in the list.
-    // Not implemented yet
 	int Size();
 };
 #endif
