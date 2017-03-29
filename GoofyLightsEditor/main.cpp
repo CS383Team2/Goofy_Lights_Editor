@@ -5,6 +5,7 @@
 #include "framestructure.h"
 #include "FrameList.h"
 #include "FrameManipulation.h"
+#include "FileOperations.h"
 
 long FrameIDCount = 0;
 
@@ -69,10 +70,13 @@ int main(int argc, char *argv[])
     rgb_data  = NULL; // disconnect this pointer from rgb_data
 
 
-    std::cout << "Now printing frames" << std::endl;
+    // std::cout << "Now printing frames" << std::endl;
     // note: frames are in reverse order when added to head
     // print frames
-    frames.PrintNode();
+    // frames.PrintNode();
+    // FrameList frameList = FileOperations::LoadFromFile("autofill.proj");
+    // frameList.PrintNode();
+    // FileOperations::SaveToFile(frameList, "autofill.proj");
 
     return a.exec();
 }
