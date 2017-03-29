@@ -596,7 +596,7 @@
      <string>File</string>
     </property>
     <addaction name="actionNew_Project"/>
-    <addaction name="actionSave"/>
+    <addaction name="actionOpenProject"/>
     <addaction name="actionSave_As"/>
     <addaction name="actionSave_2"/>
    </widget>
@@ -639,7 +639,7 @@
     <string>New Project</string>
    </property>
   </action>
-  <action name="actionSave">
+  <action name="actionOpenProject">
    <property name="text">
     <string>Open Project</string>
    </property>

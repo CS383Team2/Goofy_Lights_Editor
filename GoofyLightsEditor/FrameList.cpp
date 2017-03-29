@@ -33,6 +33,7 @@ void FrameList::AddNode( t_FrameData n ){
         }
         temp -> next = p;
     }
+    this->count++;
 }
 
 /*Deletes the first node in the list*/
@@ -48,6 +49,7 @@ void FrameList::DeleteNode(){
 
         delete p;
     }
+    this->count--;
 }
 
 void FrameList::AddNode_Middle(t_FrameData x, int pos){
@@ -64,6 +66,7 @@ void FrameList::AddNode_Middle(t_FrameData x, int pos){
     {
         insert -> next = head;
         head = insert;
+        this->count++;
     }
     else
     {
@@ -76,6 +79,7 @@ void FrameList::AddNode_Middle(t_FrameData x, int pos){
         }
         insert -> next = current -> next;
         current -> next = insert;
+        this->count++;
         return;
     }
 }
@@ -94,6 +98,7 @@ void FrameList::DeleteNode_Middle(int pos){
         // Delete the head node.
         head = current -> next;
         delete(current);
+        this->count--;
         return;
     }
     
@@ -111,6 +116,7 @@ void FrameList::DeleteNode_Middle(int pos){
     NodePtr p = current -> next -> next;
     delete (current -> next);
     current -> next = p;
+    this->count--;
 }
 
 /*Returns the first node in the list */

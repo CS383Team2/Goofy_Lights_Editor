@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "fileoperations.h"
+#include "FileOperations.h"
 #include "FrameList.h"
 #include <QFileDialog>
 #include <QtDebug>
@@ -53,6 +53,15 @@ void MainWindow::on_actionSave_As_triggered()
     t_FrameData frameData;
     frameList.AddNode(frameData);
 
-    fileoperations::saveToFile(frameList,fileName);
+    FileOperations::SaveToFile(frameList,fileName);
     qDebug() << "Returned safely";
+}
+
+FrameList MainWindow::on_actionOpenProject_triggered()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,
+            tr("Open Project"), "",
+            tr("Project (*.proj);;All Files (*)"));
+
+    return FileOperations::LoadFromFile(fileName);
 }

@@ -27,12 +27,12 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     FrameList.cpp \
     FrameManipulation.cpp \
-    fileoperations.cpp
+    FileOperations.cpp
 
 HEADERS  += mainwindow.h \
     framestructure.h \
     FrameList.h \
     FrameManipulation.h \
-    fileoperations.h
+    FileOperations.h
 
 FORMS    += mainwindow.ui

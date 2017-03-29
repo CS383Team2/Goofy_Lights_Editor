@@ -5,6 +5,7 @@
 #include <QtCore>
 #include <QtGui>
 #include <QtWidgets>
+#include "FrameList.h"
 
 namespace Ui {
 class MainWindow;
@@ -20,6 +21,8 @@ public:
 
 private slots:
     void on_actionSave_As_triggered();
+
+    FrameList on_actionOpenProject_triggered();
 
 private:
     Ui::MainWindow *ui;

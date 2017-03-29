@@ -32,6 +32,14 @@ public:
         count = 0;
     }
 
+    // Constructor for empty FrameList
+    FrameList(){
+        head = NULL;
+        row = 0;
+        col = 0;
+        count = 0;
+    }
+
     // Destructor
     ~FrameList(){
         NodePtr p = head;
@@ -74,7 +82,6 @@ public:
     int IsEmpty();
  
     // Return a count of the number of nodes in the list.
-    // Not implemented yet
 	int Size();
 };
 #endif
