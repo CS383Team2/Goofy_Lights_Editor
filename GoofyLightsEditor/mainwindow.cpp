@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
      * -Paul.....
      */
 
-    square1 = new GridSquare();
+    square1 = new GridSquare(); //ooooh memory... Oh well -P
     square2 = new GridSquare();
     square3 = new GridSquare();
     square4 = new GridSquare();
@@ -30,14 +30,14 @@ MainWindow::MainWindow(QWidget *parent) :
     square6 = new GridSquare();
     square7 = new GridSquare();
     square8 = new GridSquare();
-    square9 = new GridSquare();
+    square9 = new GridSquare(); //really gonna have 400 of these and do it like this? -P
     square10 = new GridSquare();
     square11 = new GridSquare();
     square12 = new GridSquare();
     square13 = new GridSquare();
     square14 = new GridSquare();
-    square15 = new GridSquare();
-    square16 = new GridSquare();
+    square15 = new GridSquare(); //easy enough
+    square16 = new GridSquare(); //maybe I'll come up with something nicer
     square1->x = 0;
     square1->y = 0;
     square2->x = 0;
