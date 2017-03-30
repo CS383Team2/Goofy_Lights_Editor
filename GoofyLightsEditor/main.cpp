@@ -87,9 +87,9 @@ int main(int argc, char *argv[])
     // note: frames are in reverse order when added to head
     // print frames
     // frames.PrintNode();
-    // FrameList frameList = FileOperations::LoadFromFile("autofill.proj");
-    // frameList.PrintNode();
-    // FileOperations::SaveToFile(frameList, "autofill.proj");
+    FrameList frameList = FileOperations::LoadFromFile("autofill.proj");
+    frameList.PrintNode();
+    FileOperations::SaveToFile(frameList, "autofill.proj");
 
 
     std::cout << "Program end" << std::endl;
