@@ -36,9 +36,24 @@ int translateFrame(t_FrameData d, int direction)
 
 // Fills given frame with color
 //https://github.com/CS383Team2/Goofy_Lights_Editor/issues/6
-int fillFrame(t_FrameData &d, t_RGB rgb)
+int fillFrame(t_FrameData &d, t_RGB rgb_fill)
 {
-    //Black magic
+    // Dereference
+    unsigned short r = d.r;
+    unsigned short c = d.c;
+    int i, j; // loop control
+
+    // Error checking
+    if (d.data == nullptr)
+        return ERROR;
+
+    //Fill data
+    for (i = 0; i < r; i++) {
+        for (j = 0; j < c; j++) {
+            d.data[i][c] = rgb_fill;  // set fra
+        }
+    }
+
     return SUCSSESFUL;
 }
 
