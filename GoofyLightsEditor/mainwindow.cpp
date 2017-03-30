@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
-    exit(0); //WHOA fixed the SIGABRT of Linux -P
+    exit(0); //WHOA fixed the SIGABRT on Linux -P
 }
 
 void MainWindow::on_actionSave_As_triggered()
