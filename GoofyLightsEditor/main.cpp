@@ -80,6 +80,10 @@ int main(int argc, char *argv[])
     fillFrame2(FrameData, 21, 32, 45);
     frames.AddNode(FrameData);
 
+    // add breakpoint here. rgb_data set 'change disp val formate' to array 10
+    delete_RGB(rgb_data, r, c);
+
+
     frames.PrintNode();
 
 

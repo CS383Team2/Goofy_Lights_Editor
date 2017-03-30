@@ -25,11 +25,6 @@ int delete_RGB(t_RGB** arr, int r, int c)
     return SUCSSESFUL;
 }
 
-
-// creates a RGB Array and returns a pointer to it.
-t_RGB** create_RGB(int r, int c);
-
-
 // Takes origional frame and returnes a new copy of it
 //https://github.com/CS383Team2/Goofy_Lights_Editor/issues/9
 t_FrameData copyFrame(t_FrameData FrameData)
