@@ -143,13 +143,12 @@ void FrameList::DeleteNode_Middle(int pos){
     return;
 }
 
-/*
 // Added function to search the lined list for node at position x
 // same indexing scheme as before, passing 0 to this function refers to the head
 // passing count - 1 to this function refers to the tail.
 t_FrameData * FrameList::RetrieveNode_Middle(int pos){
 	int tempCount = 0;
-	t_FrameData x = NULL;
+	t_FrameData *x = NULL;
 	NodePtr temp = head;
 	
 	if (pos == 0)
@@ -158,7 +157,7 @@ t_FrameData * FrameList::RetrieveNode_Middle(int pos){
 		if (head == NULL)
 		{
 			// no pointer to return Error.
-            return NULL;
+            		return NULL;
 		}
 		else
 		{
@@ -184,11 +183,10 @@ t_FrameData * FrameList::RetrieveNode_Middle(int pos){
 		}
 		else
 		{
-            return NULL;
+            		return NULL;
 		}
 	}
 }
-*/
 
 /*Returns the first node in the list */
 t_FrameData FrameList::FirstNode(){
