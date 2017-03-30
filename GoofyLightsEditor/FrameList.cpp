@@ -13,7 +13,7 @@
 using namespace std;
 
 /* Add an item to the end of the list*/
-void FrameList::AddNode( t_FrameData n ){
+void FrameList::AddTail( t_FrameData n ){
     NodePtr p;
 
     //Allocate the node
@@ -32,8 +32,18 @@ void FrameList::AddNode( t_FrameData n ){
             temp = temp -> next;
         }
         temp -> next = p;
+        // Previous pointer adjustment for new tail.
+        p -> prev = temp;
     }
     this->count++;
+}
+
+/*Function to delete all the entries in the Linked List upon program termination */
+void FrameList::DeleteList(){
+    while (head != NULL)
+    {
+        DeleteNode();
+    }
 }
 
 /*Deletes the first node in the list*/
@@ -46,7 +56,7 @@ void FrameList::DeleteNode(){
     else{
         head = p->next;
         p->next = NULL;
-
+        // Delete Attached RGB structure here
         delete p;
     }
     this->count--;
@@ -65,27 +75,35 @@ void FrameList::AddNode_Middle(t_FrameData x, int pos){
     if (pos == 0)
     {
         insert -> next = head;
+        current = insert -> next;
         head = insert;
+        // Adjustment of previous pointer for addition of a new head node.
+        current -> prev = head;
         this->count++;
+        return;
     }
     else
     {
         tempCount++;                                // Both tempCounter and current are refrencing
-        current = current -> next;                  // position 1 in the list
+        current = current -> next;                  // position 1 in the list (head -> next)
         while (tempCount != pos)
         {
             current = current -> next;
             tempCount++;
         }
         insert -> next = current -> next;
+        // Adjustment of previous pointer for addition of node x
+        NodePtr p = current -> next;
+        p -> prev = insert;
+        // Adjustment of prev pointer for node added at position x
         current -> next = insert;
+        insert -> prev = current;
         this->count++;
         return;
     }
 }
 
 void FrameList::DeleteNode_Middle(int pos){
-    int temp = 0;
     
     if (head == NULL){
         // Error list is empty, do nothing and return.
@@ -97,6 +115,8 @@ void FrameList::DeleteNode_Middle(int pos){
     if (pos == 0){
         // Delete the head node.
         head = current -> next;
+        head -> prev = NULL;
+        // Delete Attached RGB structure here 
         delete(current);
         this->count--;
         return;
@@ -114,9 +134,13 @@ void FrameList::DeleteNode_Middle(int pos){
     // if this point has been reached and the function has not returned, current -> next holds
     // the node to be deleted from the list.
     NodePtr p = current -> next -> next;
+    // Adjustment of previous pointers.
+    p -> prev = current;
+    // Delete Attached RGB Structure here
     delete (current -> next);
     current -> next = p;
     this->count--;
+    return;
 }
 
 /*Returns the first node in the list */
