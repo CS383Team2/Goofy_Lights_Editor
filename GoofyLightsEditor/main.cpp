@@ -28,6 +28,8 @@ int main(int argc, char *argv[])
     t_RGB ** rgb_data;
 
     t_FrameData FrameData;  // Local frame data
+    FrameData.r = r;
+    FrameData.c = c;
     FrameList frames(r, c); // linked list for frame data. r c for print function
 
     //Frame 1
@@ -70,6 +72,17 @@ int main(int argc, char *argv[])
     rgb_data  = NULL; // disconnect this pointer from rgb_data
 
 
+    // fillFrame Test
+    rgb_data = create_RGB(r, c);
+    FrameData.ID = FrameIDCount++;
+    FrameData.durration = 214;
+    FrameData.data = rgb_data;
+    fillFrame2(FrameData, 21, 32, 45);
+    frames.AddNode(FrameData);
+
+    frames.PrintNode();
+
+
     // std::cout << "Now printing frames" << std::endl;
     // note: frames are in reverse order when added to head
     // print frames
@@ -78,5 +91,7 @@ int main(int argc, char *argv[])
     // frameList.PrintNode();
     // FileOperations::SaveToFile(frameList, "autofill.proj");
 
+
+    std::cout << "Program end" << std::endl;
     return a.exec();
 }

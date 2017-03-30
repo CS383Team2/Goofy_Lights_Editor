@@ -50,7 +50,7 @@ int fillFrame(t_FrameData &d, t_RGB rgb_fill)
     //Fill data
     for (i = 0; i < r; i++) {
         for (j = 0; j < c; j++) {
-            d.data[i][c] = rgb_fill;  // set fra
+            d.data[i][j] = rgb_fill;
         }
     }
 
