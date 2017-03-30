@@ -57,12 +57,16 @@ int fillFrame(t_FrameData &d, t_RGB rgb_fill)
     return SUCSSESFUL;
 }
 
-int fillFrame2(t_FrameData &d, short r, short g, short b)
+int fillFrame2(t_FrameData &d, unsigned short r, unsigned short g, unsigned short b)
 {
     t_RGB rgb;
     rgb.R = r;
     rgb.G = g;
     rgb.B = b;
+
+    // error check if over bounds for type short
+    if (r > 255 || g > 255 || b > 255)
+        return ERROR;
 
     return fillFrame(d, rgb);
 }

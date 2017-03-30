@@ -4,9 +4,9 @@
 // RGB
 typedef struct
 {
-    short R;    // Red
-    short G;    // Green
-    short B;    // Blue
+    unsigned short R;    // Red
+    unsigned short G;    // Green
+    unsigned short B;    // Blue
 } t_RGB;
 
 // Frame data

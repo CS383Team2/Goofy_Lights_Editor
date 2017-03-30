@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
     rgb_data = create_RGB(r, c);
 
     // fill rgb_data for Frame 1
-    int color = 0;   // arbritrary data
+    unsigned short color = 0;   // arbritrary data
     for (int i = 0; i < r; i++){
         for (int j = 0; j < c; j++){
             rgb_data[i][j].R = color++;
