@@ -71,12 +71,10 @@ public:
     // If pos == count - 1 this refers to the tail node.
     void DeleteNode_Middle(int pos);
 
-/*
     // retrieve node at given position x.
     // If pos == 0 this refers to the head node and,
     // If pos == count - 1 this refers to the tail node.
     t_FrameData * RetrieveNode_Middle(int pos);
-*/ 
  
     // Return the first node found in the list
     t_FrameData FirstNode();
