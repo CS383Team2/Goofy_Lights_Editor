@@ -5,7 +5,6 @@
 #include <QFileDialog>
 #include <QtDebug>
 #include <QWidget>
-//#include <vector> //all sorts of fancy -P
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -36,15 +35,12 @@ MainWindow::MainWindow(QWidget *parent) :
         }
     }
 
-    delete square; //yeah need to fix this to fix the signal at on close -P
-
-
 }
 
 MainWindow::~MainWindow()
 {
-    // delete square?!?!?!??!?!!!??! -P
     delete ui;
+    exit(0); //WHOA fixed the SIGABRT of Linux -P
 }
 
 void MainWindow::on_actionSave_As_triggered()
