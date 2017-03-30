@@ -8,7 +8,7 @@ GridSquare::GridSquare()
 
 QRectF GridSquare::boundingRect() const
 {
-    return QRectF(x,y,20,20);
+    return QRectF(x,y,20,20); //x and y position the square before it's painted -P
 }
 
 void GridSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
