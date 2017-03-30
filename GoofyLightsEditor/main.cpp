@@ -93,5 +93,6 @@ int main(int argc, char *argv[])
 
 
     std::cout << "Program end" << std::endl;
+    frames.DeleteList();
     return a.exec();
 }
