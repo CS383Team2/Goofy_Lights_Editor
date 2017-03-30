@@ -50,7 +50,7 @@ void MainWindow::on_actionSave_As_triggered()
             tr("Project (*.proj);;All Files (*)"));
     FrameList frameList = FrameList(10,10);
     t_FrameData frameData;
-    frameList.AddNode(frameData);
+    frameList.AddTail(frameData);
 
     FileOperations::SaveToFile(frameList,fileName);
     qDebug() << "Returned safely";
