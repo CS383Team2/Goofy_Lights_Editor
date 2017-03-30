@@ -5,7 +5,6 @@
 #include <QFileDialog>
 #include <QtDebug>
 #include <QWidget>
-//#include <vector> //all sorts of fancy -P
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -36,15 +35,12 @@ MainWindow::MainWindow(QWidget *parent) :
         }
     }
 
-    delete square; //yeah need to fix this to fix the signal at on close -P
-
-
 }
 
 MainWindow::~MainWindow()
 {
-    // delete square?!?!?!??!?!!!??! -P
     delete ui;
+    exit(0); //WHOA fixed the SIGABRT on Linux -P
 }
 
 void MainWindow::on_actionSave_As_triggered()
@@ -54,7 +50,7 @@ void MainWindow::on_actionSave_As_triggered()
             tr("Project (*.proj);;All Files (*)"));
     FrameList frameList = FrameList(10,10);
     t_FrameData frameData;
-    frameList.AddNode(frameData);
+    frameList.AddTail(frameData);
 
     FileOperations::SaveToFile(frameList,fileName);
     qDebug() << "Returned safely";

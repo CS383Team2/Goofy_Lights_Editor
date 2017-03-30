@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
     FrameData.ID = FrameIDCount++;
     FrameData.durration = 123;
     FrameData.data = rgb_data;
-    frames.AddNode(FrameData);  // add this frameData to linked list
+    frames.AddTail(FrameData);  // add this frameData to linked list
     rgb_data  = NULL; // disconnect this pointer from rgb_data
 
 
@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
     FrameData.ID = FrameIDCount++;
     FrameData.durration = 212;
     FrameData.data = rgb_data;
-    frames.AddNode(FrameData);
+    frames.AddTail(FrameData);
     rgb_data  = NULL; // disconnect this pointer from rgb_data
 
 
@@ -78,7 +78,7 @@ int main(int argc, char *argv[])
     FrameData.durration = 214;
     FrameData.data = rgb_data;
     fillFrame2(FrameData, 21, 32, 45);
-    frames.AddNode(FrameData);
+    frames.AddTail(FrameData);
 
     frames.PrintNode();
 
@@ -93,5 +93,6 @@ int main(int argc, char *argv[])
 
 
     std::cout << "Program end" << std::endl;
+    frames.DeleteList();
     return a.exec();
 }
