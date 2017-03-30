@@ -17,8 +17,8 @@ MainWindow::MainWindow(QWidget *parent) :
     scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene); //give the grid to the graphics view -Paul
 
-    int ROWS = 10; //switched these on accident lol
-    int COLS = 10;
+    int ROWS = 15; //switched these on accident lol
+    int COLS = 15;
 
     GridSquare **square = new GridSquare*[ROWS];  //Type is GridSquare, square is object
     for (int i = 0; i < ROWS; ++i)
