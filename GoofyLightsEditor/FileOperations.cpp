@@ -43,7 +43,7 @@ int FileOperations::SaveToFile(FrameList frameList, QString fileName){
             t_FrameData frameData = frameList.FirstNode();
 
             // stream << frameData.ID << endl;
-            stream << elapsedTime.toString("hh:mm:ss.zzz") << endl;
+            stream << elapsedTime.toString("mm:ss.zzz") << endl;
 
             for(int i = 0; i < frameList.GetRowCount(); i++){
                 for(int j = 0; j < frameList.GetColCount(); j++){
@@ -88,7 +88,7 @@ FrameList FileOperations::LoadFromFile(QString fileName){
 
     int currentElement = 0;
     QString startTime = fileContents.readLine();
-    QTime currTime = QTime::fromString(startTime, "hh:mm:ss.zzz");
+    QTime currTime = QTime::fromString(startTime, "mm:ss.zzz");
     QTime nextTime = QTime(0,0,0,0);
     while(!fileContents.atEnd() && currentElement < numElements){
         t_FrameData frameData;
