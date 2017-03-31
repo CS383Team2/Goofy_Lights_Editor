@@ -103,7 +103,7 @@ FrameList FileOperations::LoadFromFile(QString fileName){
             }
         }
         frameData.data = data;
-        frameList.AddNode(frameData);
+        frameList.AddTail(frameData);
         // frameList.PrintNode();
         currentElement++;
     }

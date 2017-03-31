@@ -1,7 +1,6 @@
 
 #include "FrameManipulation.h"
 
-
 // Function creates a 2d memory element of the RGB struct then passes back the pointer to it.
 // source http://stackoverflow.com/questions/936687/how-do-i-declare-a-2d-array-in-c-using-new
 t_RGB** create_RGB(int r, int c)
@@ -38,7 +37,69 @@ t_FrameData copyFrame(t_FrameData FrameData)
 //https://github.com/CS383Team2/Goofy_Lights_Editor/issues/7
 int translateFrame(t_FrameData d, int direction)
 {
-    //Black magic
+    int i = 0; //counters
+    int j = 0;
+    t_RGB *temp; //Temp variable for row that is pushed out of the frame
+    t_RGB emptyRGB;
+    emptyRGB.B = 0;
+    emptyRGB.G = 0;
+    emptyRGB.R = 0;
+
+    //Condition for up, up left, and up right. Uses recursion for left and right translation
+    if(direction == D_UP || direction == D_UP_L || direction == D_UP_R){
+        temp = d.data[0];
+        for(i = 0; i < d.r-1; i++){
+            d.data[i] = d.data[i+1];
+        }
+        d.data[i] = temp;
+        for(int j = 0; j < d.c; j++){
+            d.data[i][j] = emptyRGB;
+
+        }
+        if(direction == D_UP_L)
+            translateFrame(d, D_LEFT);
+        if(direction == D_UP_R)
+            translateFrame(d, D_RIGHT);
+
+    }
+    //Condition for down, down left, and down right. Uses recursion for left and right translation
+    if(direction == D_DWN || direction == D_DWN_L || direction == D_DWN_R){
+        temp = d.data[d.r-1];
+        for(i = d.r-1; i > 0; i--){
+            d.data[i] = d.data[i-1];
+        }
+        d.data[i] = temp;
+        for(j = 0; j < d.c; j++){
+            d.data[i][j] = emptyRGB;
+        }
+        if(direction == D_DWN_L)
+            translateFrame(d, D_LEFT);
+        if(direction == D_DWN_R)
+            translateFrame(d, D_RIGHT);
+    }
+    //Condition for left transition
+    if(direction == D_LEFT){
+        for(i = 0; i < d.r; i++){
+            for (j = 0; j < d.c-1; j++){
+                d.data[i][j] = d.data[i][j+1];
+            }
+        }
+        for(i = 0; i < d.r; i++){
+            d.data[i][j] = emptyRGB;
+        }
+     }
+    //Condition for right transition
+    if(direction == D_RIGHT){
+        for(i = 0; i < d.r; i++){
+            for (j = d.c-1; j > 0; j--){
+                d.data[i][j] = d.data[i][j-1];
+            }
+        }
+        for(i = 0; i < d.r; i++){
+            d.data[i][j] = emptyRGB;
+        }
+     }
+
     return SUCSSESFUL;
 }
 

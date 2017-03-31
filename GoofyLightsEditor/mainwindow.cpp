@@ -16,82 +16,31 @@ MainWindow::MainWindow(QWidget *parent) :
     scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene); //give the grid to the graphics view -Paul
 
-    /*
-     * ok, don't want to mess around with loops and actually use my brain,
-     * so here are 16 GridSquares all created and places individually.
-     * -Paul.....
-     */
+    int ROWS = 15; //switched these on accident lol
+    int COLS = 15;
 
-    square1 = new GridSquare(); //ooooh memory... Oh well -P
-    square2 = new GridSquare();
-    square3 = new GridSquare();
-    square4 = new GridSquare();
-    square5 = new GridSquare();
-    square6 = new GridSquare();
-    square7 = new GridSquare();
-    square8 = new GridSquare();
-    square9 = new GridSquare(); //really gonna have 400 of these and do it like this? -P
-    square10 = new GridSquare();
-    square11 = new GridSquare();
-    square12 = new GridSquare();
-    square13 = new GridSquare();
-    square14 = new GridSquare();
-    square15 = new GridSquare(); //easy enough
-    square16 = new GridSquare(); //maybe I'll come up with something nicer
-    square1->x = 0;
-    square1->y = 0;
-    square2->x = 0;
-    square2->y = 25;
-    square3->x = 0;
-    square3->y = 50;
-    square4->x = 0;
-    square4->y = 75; //end row
-    square5->x = 25;
-    square5->y = 0;
-    square6->x = 25;
-    square6->y = 25;
-    square7->x = 25;
-    square7->y = 50;
-    square8->x = 25;
-    square8->y = 75; //end row
-    square9->x = 50;
-    square9->y = 0;
-    square10->x = 50;
-    square10->y = 25;
-    square11->x = 50;
-    square11->y = 50;
-    square12->x = 50;
-    square12->y = 75; //end row
-    square13->x = 75;
-    square13->y = 0;
-    square14->x = 75;
-    square14->y = 25;
-    square15->x = 75;
-    square15->y = 50;
-    square16->x = 75;
-    square16->y = 75; //end row
-    scene->addItem(square1);
-    scene->addItem(square2);
-    scene->addItem(square3);
-    scene->addItem(square4);
-    scene->addItem(square5);
-    scene->addItem(square6);
-    scene->addItem(square7);
-    scene->addItem(square8);
-    scene->addItem(square9);
-    scene->addItem(square10);
-    scene->addItem(square11);
-    scene->addItem(square12);
-    scene->addItem(square13);
-    scene->addItem(square14);
-    scene->addItem(square15);
-    scene->addItem(square16);
+    GridSquare **square = new GridSquare*[ROWS];  //Type is GridSquare, square is object
+    for (int i = 0; i < ROWS; ++i)
+    {
+        square[i] = new GridSquare[COLS];
+    }
+
+    for(int x=0; x<ROWS; x++)
+    {
+        for(int y=0; y<COLS; y++)
+        {
+            square[x][y].x = (25*x);
+            square[x][y].y = (25*y);
+            scene->addItem(&square[x][y]);
+        }
+    }
 
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    exit(0); //WHOA fixed the SIGABRT on Linux -P
 }
 
 void MainWindow::on_actionSave_As_triggered()
@@ -101,7 +50,7 @@ void MainWindow::on_actionSave_As_triggered()
             tr("Project (*.proj);;All Files (*)"));
     FrameList frameList = FrameList(10,10);
     t_FrameData frameData;
-    frameList.AddNode(frameData);
+    frameList.AddTail(frameData);
 
     FileOperations::SaveToFile(frameList,fileName);
     qDebug() << "Returned safely";
