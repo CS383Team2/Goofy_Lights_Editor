@@ -24,10 +24,6 @@ private slots:
 
     void on_buttonBox_rejected();
 
-    void on_SizeDialog_destroyed();
-
-    void on_SizeDialog_destroyed(QObject *arg1);
-
 private:
     Ui::SizeDialog *ui;
 };

@@ -22,6 +22,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     //LET'S GET IT STARTED -P
     SizeDialog dialog1;
+    dialog1.setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint); //You will NOT exit this window your way -P
     dialog1.setModal(true); //YOU SHALL NOT CLICK OUTSIDE OF THIS WINDOW -P
     dialog1.exec(); //execute pls -P
 

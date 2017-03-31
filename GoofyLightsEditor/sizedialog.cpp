@@ -35,15 +35,5 @@ void SizeDialog::on_buttonBox_accepted()
 
 void SizeDialog::on_buttonBox_rejected()
 {
-    exit(0);
-}
-
-void SizeDialog::on_SizeDialog_destroyed()
-{
-    //oops -P
-}
-
-void SizeDialog::on_SizeDialog_destroyed(QObject *arg1)
-{
-    //no -P
+    exit(0); //Don't run the main window -P
 }
