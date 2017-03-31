@@ -29,6 +29,10 @@ private slots:
 
     void on_spinBox_editingFinished();
 
+    void on_spinBox_2_editingFinished();
+
+    void on_spinBox_3_editingFinished();
+
 private:
     Ui::MainWindow *ui;
 

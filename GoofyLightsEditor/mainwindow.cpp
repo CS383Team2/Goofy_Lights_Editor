@@ -73,4 +73,15 @@ void MainWindow::on_pushButton_22_clicked()
 void MainWindow::on_spinBox_editingFinished()
 {
     //crap -P
+    G_RED = ui->spinBox->value();
+}
+
+void MainWindow::on_spinBox_2_editingFinished()
+{
+    G_GREEN = ui->spinBox_2->value(); //-P
+}
+
+void MainWindow::on_spinBox_3_editingFinished()
+{
+    G_BLUE = ui->spinBox_3->value();
 }

@@ -12,6 +12,10 @@
 int G_COL = 0; //initialize globals -P
 int G_ROW = 0;
 
+int G_RED = 0;
+int G_GREEN = 255; //change this later -P
+int G_BLUE = 0;
+
 long FrameIDCount = 0;
 
 // creates the dynamic RGB array
