@@ -26,6 +26,8 @@ int main(int argc, char *argv[])
     dialog1.setModal(true); //YOU SHALL NOT CLICK OUTSIDE OF THIS WINDOW -P
     dialog1.exec(); //execute pls -P
 
+    //read in a file here probably -P
+
     MainWindow w;
     w.show();
 
