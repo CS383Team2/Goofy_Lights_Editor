@@ -6,6 +6,10 @@
 #include "FrameList.h"
 #include "FrameManipulation.h"
 #include "FileOperations.h"
+#include <globals.h>
+
+int G_COL = 15; //initialize globals -P
+int G_ROW = 15;
 
 long FrameIDCount = 0;
 
