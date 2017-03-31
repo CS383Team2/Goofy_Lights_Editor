@@ -32,11 +32,11 @@ int main(int argc, char *argv[])
     FrameData.c = c;
     FrameList frames(r, c); // linked list for frame data. r c for print function
 
-    //Frame 1
+    //Frame 0
     // Generate new rgb_data arrary
     rgb_data = create_RGB(r, c);
 
-    // fill rgb_data for Frame 1
+    // fill rgb_data for Frame 0
     unsigned short color = 0;   // arbritrary data
     for (int i = 0; i < r; i++){
         for (int j = 0; j < c; j++){
@@ -52,11 +52,11 @@ int main(int argc, char *argv[])
     rgb_data  = NULL; // disconnect this pointer from rgb_data
 
 
-    // next frame Frame 2
+    // next frame Frame 1
     // Generate new rgb_data arrary
     rgb_data = create_RGB(r, c);
 
-     // fill rgb for Frame 2
+     // fill rgb for Frame 1
     color = 100; // arbritrary increment to make data different
     for (int i = 0; i < r; i++){
         for (int j = 0; j < c; j++){
@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
     rgb_data  = NULL; // disconnect this pointer from rgb_data
 
 
-    // fillFrame Test
+    // next frame Frame 2
     rgb_data = create_RGB(r, c);
     FrameData.ID = FrameIDCount++;
     FrameData.durration = 214;
