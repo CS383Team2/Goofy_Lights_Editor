@@ -1,8 +1,8 @@
 #include "sizedialog.h"
 #include "ui_sizedialog.h"
 #include <globals.h> //G_ROW and G_COL
-#include <globals.h>
 #include <mainwindow.h>
+#include <QFileDialog> //file browser -P
 
 
 SizeDialog::SizeDialog(QWidget *parent) :
@@ -36,4 +36,12 @@ void SizeDialog::on_buttonBox_accepted()
 void SizeDialog::on_buttonBox_rejected()
 {
     exit(0); //Don't run the main window -P
+}
+
+void SizeDialog::on_pushButton_clicked()
+{
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open a Goofy File!"), QDir::homePath(), tr("Only .tan Files (*.tan)")); //browse filename -P
+    //fun stuff -P
+    //filename variable now contains the file we want, woohoo
+    //do stuff with this later -P
 }
