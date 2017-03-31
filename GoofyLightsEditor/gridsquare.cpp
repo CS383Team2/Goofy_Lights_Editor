@@ -21,7 +21,11 @@ void GridSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
     {
         if(brush.color() == Qt::gray)
         {
-            brush.setColor(Qt::blue); //change this to color wheel/data -P
+            //QColor(int r, int g, int b, int a = 255) //use this, last argument always 255
+
+            brush.setColor(QColor(0, 255, 0, 255)); //HELLO RGB COLOR -green -P
+
+            //brush.setColor(Qt::blue); //old -P
         }
     }
 
