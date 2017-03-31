@@ -27,6 +27,8 @@ private slots:
 
     void on_pushButton_22_clicked();
 
+    void on_spinBox_editingFinished();
+
 private:
     Ui::MainWindow *ui;
 

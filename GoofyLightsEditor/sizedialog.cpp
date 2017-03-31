@@ -31,8 +31,19 @@ void SizeDialog::on_buttonBox_accepted()
 {
     G_COL=ui->spinBox_2->value();
     G_ROW=ui->spinBox->value(); //redundant redundant, shush -P
+}
 
-    //QWidget::repaint(); //DRAW THE NEW GRID -P
-    //set = true;
-    //MainWindow(this);
+void SizeDialog::on_buttonBox_rejected()
+{
+    exit(0);
+}
+
+void SizeDialog::on_SizeDialog_destroyed()
+{
+    //oops -P
+}
+
+void SizeDialog::on_SizeDialog_destroyed(QObject *arg1)
+{
+    //no -P
 }

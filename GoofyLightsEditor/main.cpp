@@ -7,9 +7,10 @@
 #include "FrameManipulation.h"
 #include "FileOperations.h"
 #include <globals.h>
+#include <sizedialog.h>
 
-int G_COL = 15; //initialize globals -P
-int G_ROW = 15;
+int G_COL = 0; //initialize globals -P
+int G_ROW = 0;
 
 long FrameIDCount = 0;
 
@@ -19,6 +20,11 @@ t_RGB** create_RGB(int r, int c);
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    //LET'S GET IT STARTED -P
+    SizeDialog dialog1;
+    dialog1.setModal(true); //YOU SHALL NOT CLICK OUTSIDE OF THIS WINDOW -P
+    dialog1.exec(); //execute pls -P
+
     MainWindow w;
     w.show();
 

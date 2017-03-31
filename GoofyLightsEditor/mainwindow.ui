@@ -522,7 +522,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>**$$** LET'S GET IT STARTED **$$**</string>
+     <string>Nothing here yet...</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_8">

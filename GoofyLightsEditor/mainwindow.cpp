@@ -20,9 +20,6 @@ MainWindow::MainWindow(QWidget *parent) :
     scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene); //give the grid to the graphics view -Paul
 
-    //G_COL = 0; //fixed the swap -P
-    //G_ROW = 0;
-
     GridSquare **square = new GridSquare*[G_COL];  //Type is GridSquare, square is object
     for (int i = 0; i < G_COL; ++i)
     {
@@ -70,10 +67,10 @@ FrameList MainWindow::on_actionOpenProject_triggered()
 
 void MainWindow::on_pushButton_22_clicked()
 {
-    //LET'S GET IT STARTED -P
-    SizeDialog dialog1;
-    dialog1.setModal(true); //YOU SHALL NOT CLICK OUTSIDE OF THIS WINDOW -P
-    dialog1.exec(); //execute pls -P
-    //QWidget::repaint(); //DRAW THE NEW GRID -P
-    //set = true;
+    //nothing to see here -P
+}
+
+void MainWindow::on_spinBox_editingFinished()
+{
+    //crap -P
 }
