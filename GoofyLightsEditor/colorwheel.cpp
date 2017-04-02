@@ -1,9 +1,13 @@
+//Some free color wheel code borrowed from the Qt-Plus package: https://github.com/liuyanghejerry/Qt-Plus
+//-P
+
 #include "colorwheel.h"
 #include <QPainter>
 #include <QResizeEvent>
 #include <QStyleOption>
 #include <QtCore/qmath.h>
 #include <QDebug>
+#include <globals.h> //RGB -P
 
 ColorWheel::ColorWheel(QWidget *parent) :
     QWidget(parent),
@@ -40,6 +44,7 @@ void ColorWheel::setColor(const QColor &color)
 
     update();
     emit colorChange(color);
+
 }
 
 
@@ -71,6 +76,7 @@ QColor ColorWheel::posColor(const QPoint &point)
         return QColor::fromHsv(hue,
                                current.saturation(),
                                current.value());
+
     }
     if(inSquare){
         // region of the widget
@@ -87,6 +93,7 @@ QColor ColorWheel::posColor(const QPoint &point)
                                  p.x()/SquareWidth,
                                  p.y()/SquareWidth);
     }
+
     return QColor();
 }
 
@@ -322,6 +329,12 @@ void ColorWheel::hueChanged(const int &hue)
     //drawIndicator(hue);
     //drawPicker(current);
     repaint();
+
+    G_RED = current.red(); //-P
+    G_GREEN = current.green();
+    G_BLUE = current.blue();
+    G_ALPHA = current.alpha(); //-P
+
     emit colorChange(current);
 }
 
@@ -336,5 +349,11 @@ void ColorWheel::svChanged(const QColor &newcolor)
     //drawIndicator(hue);
     //drawPicker(newcolor);
     repaint();
+
+    G_RED = current.red(); //-P
+    G_GREEN = current.green();
+    G_BLUE = current.blue();
+    G_ALPHA = current.alpha(); //-P
+
     emit colorChange(current);
 }

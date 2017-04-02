@@ -7,6 +7,7 @@ extern int G_COL; //global variables, deal. -P
 extern int G_RED;
 extern int G_GREEN;
 extern int G_BLUE;
+extern int G_ALPHA;
 
 
 //extern bool set;

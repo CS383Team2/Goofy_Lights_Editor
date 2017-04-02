@@ -1,3 +1,6 @@
+//Some free color wheel code borrowed from the Qt-Plus package: https://github.com/liuyanghejerry/Qt-Plus
+//-P
+
 #ifndef COLORWHEEL_H
 #define COLORWHEEL_H
 
