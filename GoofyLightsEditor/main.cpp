@@ -15,7 +15,6 @@ int G_ROW = 0;
 int G_RED = 255;
 int G_GREEN = 0; //fixed -P
 int G_BLUE = 0;
-int G_ALPHA = 255;
 
 
 long FrameIDCount = 0;

@@ -337,8 +337,7 @@ void ColorWheel::hueChanged(const int &hue)
 
     G_RED = current.red(); //-P
     G_GREEN = current.green();
-    G_BLUE = current.blue();
-    G_ALPHA = current.alpha(); //-P
+    G_BLUE = current.blue(); //-P
 
     emit colorChange(current);
 }
@@ -357,8 +356,7 @@ void ColorWheel::svChanged(const QColor &newcolor)
 
     G_RED = current.red(); //-P
     G_GREEN = current.green();
-    G_BLUE = current.blue();
-    G_ALPHA = current.alpha(); //-P
+    G_BLUE = current.blue(); //-P
 
     emit colorChange(current);
 }

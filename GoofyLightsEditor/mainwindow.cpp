@@ -124,7 +124,6 @@ void MainWindow::on_pushButton_21_released()
     G_RED = temp_R;
     G_GREEN = temp_G;
     G_BLUE = temp_B;
-    G_ALPHA = temp_A;
 
     ui->spinBox->setValue(G_RED); //-P
     ui->spinBox_2->setValue(G_GREEN);
@@ -136,7 +135,6 @@ void MainWindow::on_pushButton_21_pressed()
     temp_R = G_RED;
     temp_G = G_GREEN;
     temp_B = G_BLUE;
-    temp_A = G_ALPHA;
     //first let's update the GRAPHICAL EYBALL STIMILATION GRID for motivation -P
     for(int x=0; x<G_COL; x++)
     {
@@ -147,7 +145,6 @@ void MainWindow::on_pushButton_21_pressed()
             G_RED = 0;
             G_GREEN = 0;
             G_BLUE = 0;
-            G_ALPHA = 255;
             square[x][y].update(); //Fill that frame son -P
         }
     }

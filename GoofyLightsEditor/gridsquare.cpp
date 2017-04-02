@@ -23,7 +23,7 @@ void GridSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
         {
             //QColor(int r, int g, int b, int a = 255) //use this, last argument always 255
 
-            brush.setColor(QColor(G_RED, G_GREEN, G_BLUE, G_ALPHA)); //HELLO RGB COLOR -green -P
+            brush.setColor(QColor(G_RED, G_GREEN, G_BLUE, 255)); //HELLO RGB COLOR Alpha locked to 255 -green -P
 
             //The color of any grid square can be had by brush.color() -P
         }
