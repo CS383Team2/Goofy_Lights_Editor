@@ -7,6 +7,7 @@
 #include <QtWidgets>
 #include <gridsquare.h>
 #include "FrameList.h"
+#include <colorwheel.h>
 
 namespace Ui {
 class MainWindow;
@@ -25,7 +26,6 @@ private slots:
 
     FrameList on_actionOpenProject_triggered();
 
-    void on_pushButton_22_clicked();
 
     void on_spinBox_editingFinished();
 
@@ -33,7 +33,7 @@ private slots:
 
     void on_spinBox_3_editingFinished();
 
-    void on_widget_destroyed();
+    void mousePressEvent(QMouseEvent *event);
 
 private:
     Ui::MainWindow *ui;

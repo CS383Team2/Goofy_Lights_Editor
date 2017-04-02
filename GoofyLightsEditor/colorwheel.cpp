@@ -8,6 +8,7 @@
 #include <QtCore/qmath.h>
 #include <QDebug>
 #include <globals.h> //RGB -P
+#include <mainwindow.h>
 
 ColorWheel::ColorWheel(QWidget *parent) :
     QWidget(parent),
@@ -121,6 +122,9 @@ void ColorWheel::mousePressEvent(QMouseEvent *event)
         svChanged(color);
     }
     mouseDown = true;
+
+    QWidget::mousePressEvent(event); //UPDATE THE DARN SPINBOXES with the current RGB -P
+
 }
 
 void ColorWheel::mouseMoveEvent(QMouseEvent *event)
@@ -150,6 +154,7 @@ void ColorWheel::mouseMoveEvent(QMouseEvent *event)
         //            //
         //        }
     }
+
 }
 
 void ColorWheel::mouseReleaseEvent(QMouseEvent *)
@@ -357,3 +362,4 @@ void ColorWheel::svChanged(const QColor &newcolor)
 
     emit colorChange(current);
 }
+

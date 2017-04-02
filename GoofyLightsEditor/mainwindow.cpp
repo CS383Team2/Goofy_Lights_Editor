@@ -35,6 +35,10 @@ MainWindow::MainWindow(QWidget *parent) :
             scene->addItem(&square[x][y]);
         }
     }
+    ColorWheel *wheel = new ColorWheel;
+    QSpinBox *spinbox = new QSpinBox;
+    connect(wheel, SIGNAL(colorChange(QColor)), spinbox, SLOT(on_spinBox_editingFinished()));
+
 }
 
 MainWindow::~MainWindow()
@@ -65,10 +69,6 @@ FrameList MainWindow::on_actionOpenProject_triggered()
     return FileOperations::LoadFromFile(fileName);
 }
 
-void MainWindow::on_pushButton_22_clicked()
-{
-    //nothing to see here -P
-}
 
 void MainWindow::on_spinBox_editingFinished()
 {
@@ -86,7 +86,11 @@ void MainWindow::on_spinBox_3_editingFinished()
     G_BLUE = ui->spinBox_3->value();
 }
 
-void MainWindow::on_widget_destroyed()
+
+void MainWindow::mousePressEvent(QMouseEvent *event)
 {
-    //nothing here yet
+    ui->spinBox->setValue(G_RED); //-P
+    ui->spinBox_2->setValue(G_GREEN);
+    ui->spinBox_3->setValue(G_BLUE); //-P
 }
+

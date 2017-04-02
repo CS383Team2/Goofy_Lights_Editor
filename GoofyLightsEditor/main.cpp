@@ -12,8 +12,8 @@
 int G_COL = 0; //initialize globals -P
 int G_ROW = 0;
 
-int G_RED = 0;
-int G_GREEN = 255; //change this later -P
+int G_RED = 255;
+int G_GREEN = 0; //fixed -P
 int G_BLUE = 0;
 int G_ALPHA = 255;
 
@@ -36,7 +36,6 @@ int main(int argc, char *argv[])
 
     MainWindow w;
     w.show();
-
 
     // linked list test
     std::cout << "FrameList testing" << std::endl;
