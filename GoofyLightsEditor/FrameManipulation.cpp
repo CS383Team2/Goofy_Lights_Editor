@@ -121,7 +121,7 @@ int fillFrame(t_FrameData &d, t_RGB rgb_fill)
     int i, j; // loop control
 
     // Error checking
-    if (d.data == nullptr)
+    if (d.data == NULL)
         return ERROR;
 
     //Fill data
