@@ -6,6 +6,17 @@
 #include "FrameList.h"
 #include "FrameManipulation.h"
 #include "FileOperations.h"
+#include <globals.h>
+#include <sizedialog.h>
+
+int G_COL = 0; //initialize globals -P
+int G_ROW = 0;
+
+int G_RED = 255;
+int G_GREEN = 0; //fixed -P
+int G_BLUE = 0;
+int G_ALPHA = 255;
+
 
 long FrameIDCount = 0;
 
@@ -15,9 +26,16 @@ t_RGB** create_RGB(int r, int c);
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    //LET'S GET IT STARTED -P
+    SizeDialog dialog1;
+    dialog1.setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint); //You will NOT exit this window your way -P
+    dialog1.setModal(true); //YOU SHALL NOT CLICK OUTSIDE OF THIS WINDOW -P
+    dialog1.exec(); //execute pls -P
+
+    //read in a file here probably -P
+
     MainWindow w;
     w.show();
-
 
     // linked list test
     std::cout << "FrameList testing" << std::endl;
@@ -32,11 +50,11 @@ int main(int argc, char *argv[])
     FrameData.c = c;
     FrameList frames(r, c); // linked list for frame data. r c for print function
 
-    //Frame 1
+    //Frame 0
     // Generate new rgb_data arrary
     rgb_data = create_RGB(r, c);
 
-    // fill rgb_data for Frame 1
+    // fill rgb_data for Frame 0
     unsigned short color = 0;   // arbritrary data
     for (int i = 0; i < r; i++){
         for (int j = 0; j < c; j++){
@@ -52,11 +70,11 @@ int main(int argc, char *argv[])
     rgb_data  = NULL; // disconnect this pointer from rgb_data
 
 
-    // next frame Frame 2
+    // next frame Frame 1
     // Generate new rgb_data arrary
     rgb_data = create_RGB(r, c);
 
-     // fill rgb for Frame 2
+     // fill rgb for Frame 1
     color = 100; // arbritrary increment to make data different
     for (int i = 0; i < r; i++){
         for (int j = 0; j < c; j++){
@@ -72,13 +90,22 @@ int main(int argc, char *argv[])
     rgb_data  = NULL; // disconnect this pointer from rgb_data
 
 
-    // fillFrame Test
+    // next frame Frame 2
     rgb_data = create_RGB(r, c);
     FrameData.ID = FrameIDCount++;
     FrameData.durration = 214;
     FrameData.data = rgb_data;
     fillFrame2(FrameData, 21, 32, 45);
     frames.AddTail(FrameData);
+
+    // add breakpoint here. rgb_data set 'change disp val formate' to array 10
+    //delete_RGB(rgb_data, r, c);
+    std::cout << "printing" << std::endl;
+    frames.PrintNode();
+    std::cout << "Deleting node 1" << std::endl;
+    frames.DeleteNode_Middle(1);
+    std::cout << "printing" << std::endl;
+
 
     frames.PrintNode();
 

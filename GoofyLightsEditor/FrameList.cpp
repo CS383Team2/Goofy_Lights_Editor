@@ -148,7 +148,7 @@ void FrameList::DeleteNode_Middle(int pos){
 // passing count - 1 to this function refers to the tail.
 t_FrameData * FrameList::RetrieveNode_Middle(int pos){
 	int tempCount = 0;
-	t_FrameData x = NULL;
+	t_FrameData *x = NULL;
 	NodePtr temp = head;
 	
 	if (pos == 0)
@@ -157,7 +157,7 @@ t_FrameData * FrameList::RetrieveNode_Middle(int pos){
 		if (head == NULL)
 		{
 			// no pointer to return Error.
-            return NULL;
+            		return NULL;
 		}
 		else
 		{
@@ -183,7 +183,7 @@ t_FrameData * FrameList::RetrieveNode_Middle(int pos){
 		}
 		else
 		{
-            return NULL;
+            		return NULL;
 		}
 	}
 }

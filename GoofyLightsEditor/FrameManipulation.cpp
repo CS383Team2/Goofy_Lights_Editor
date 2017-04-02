@@ -33,6 +33,10 @@ int translateFrame(t_FrameData d, int direction)
     int i = 0; //counters
     int j = 0;
     t_RGB *temp; //Temp variable for row that is pushed out of the frame
+    t_RGB emptyRGB;
+    emptyRGB.B = 0;
+    emptyRGB.G = 0;
+    emptyRGB.R = 0;
 
     //Condition for up, up left, and up right. Uses recursion for left and right translation
     if(direction == D_UP || direction == D_UP_L || direction == D_UP_R){
@@ -42,9 +46,8 @@ int translateFrame(t_FrameData d, int direction)
         }
         d.data[i] = temp;
         for(int j = 0; j < d.c; j++){
-            d.data[i][j].R = 0;
-            d.data[i][j].G = 0;
-            d.data[i][j].B = 0;
+            d.data[i][j] = emptyRGB;
+
         }
         if(direction == D_UP_L)
             translateFrame(d, D_LEFT);
@@ -60,9 +63,7 @@ int translateFrame(t_FrameData d, int direction)
         }
         d.data[i] = temp;
         for(j = 0; j < d.c; j++){
-            d.data[i][j].R = 0;
-            d.data[i][j].G = 0;
-            d.data[i][j].B = 0;
+            d.data[i][j] = emptyRGB;
         }
         if(direction == D_DWN_L)
             translateFrame(d, D_LEFT);
@@ -77,9 +78,7 @@ int translateFrame(t_FrameData d, int direction)
             }
         }
         for(i = 0; i < d.r; i++){
-            d.data[i][j].R = 0;
-            d.data[i][j].G = 0;
-            d.data[i][j].B = 0;
+            d.data[i][j] = emptyRGB;
         }
      }
     //Condition for right transition
@@ -90,9 +89,7 @@ int translateFrame(t_FrameData d, int direction)
             }
         }
         for(i = 0; i < d.r; i++){
-            d.data[i][j].R = 0;
-            d.data[i][j].G = 0;
-            d.data[i][j].B = 0;
+            d.data[i][j] = emptyRGB;
         }
      }
 
