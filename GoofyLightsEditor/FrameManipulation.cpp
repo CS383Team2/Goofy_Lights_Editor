@@ -21,7 +21,12 @@ t_RGB** create_RGB(int r, int c);
 t_FrameData copyFrame(t_FrameData FrameData)
 {
     t_FrameData NewFrame;
-    //Black magic
+
+    // Dereference
+    unsigned short row = FrameData.r;
+    unsigned short col = FrameData.c;
+
+
     return NewFrame;
 }
 
@@ -100,8 +105,8 @@ int translateFrame(t_FrameData d, int direction)
 int fillFrame(t_FrameData &d, t_RGB rgb_fill)
 {
     // Dereference
-    unsigned short r = d.r;
-    unsigned short c = d.c;
+    unsigned short row = d.r;
+    unsigned short col = d.c;
     int i, j; // loop control
 
     // Error checking
@@ -109,8 +114,8 @@ int fillFrame(t_FrameData &d, t_RGB rgb_fill)
         return ERROR;
 
     //Fill data
-    for (i = 0; i < r; i++) {
-        for (j = 0; j < c; j++) {
+    for (i = 0; i < row; i++) {
+        for (j = 0; j < col; j++) {
             d.data[i][j] = rgb_fill;
         }
     }
