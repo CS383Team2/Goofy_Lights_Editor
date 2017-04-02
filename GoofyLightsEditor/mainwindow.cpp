@@ -131,5 +131,5 @@ void MainWindow::on_pushButton_21_clicked()
 
     //do this:
 
-    //fillFrame(t_FrameData &d, t_RGB rgb_fill) //do this later -P
+    //clearFrame????(t_FrameData &d, t_RGB rgb_fill) //do this later -P
 }
