@@ -354,13 +354,13 @@
     <property name="geometry">
      <rect>
       <x>790</x>
-      <y>150</y>
-      <width>141</width>
+      <y>140</y>
+      <width>101</width>
       <height>25</height>
      </rect>
     </property>
     <property name="text">
-     <string>Insert Char/String</string>
+     <string>Insert Char</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_6">
@@ -379,27 +379,27 @@
    <widget class="QPushButton" name="pushButton_18">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>810</y>
-      <width>89</width>
+      <x>400</x>
+      <y>780</y>
+      <width>101</width>
       <height>25</height>
      </rect>
     </property>
     <property name="text">
-     <string>Save Frame</string>
+     <string>Copy Frame</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_19">
     <property name="geometry">
      <rect>
-      <x>790</x>
-      <y>120</y>
-      <width>141</width>
+      <x>400</x>
+      <y>810</y>
+      <width>101</width>
       <height>25</height>
      </rect>
     </property>
     <property name="text">
-     <string>Insert Saved Frame</string>
+     <string>Paste Frame</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_20">
@@ -407,7 +407,7 @@
      <rect>
       <x>790</x>
       <y>90</y>
-      <width>89</width>
+      <width>101</width>
       <height>25</height>
      </rect>
     </property>
@@ -420,7 +420,7 @@
      <rect>
       <x>790</x>
       <y>60</y>
-      <width>89</width>
+      <width>101</width>
       <height>25</height>
      </rect>
     </property>
@@ -666,6 +666,19 @@
      </property>
     </widget>
    </widget>
+   <widget class="QPushButton" name="pushButton_22">
+    <property name="geometry">
+     <rect>
+      <x>790</x>
+      <y>170</y>
+      <width>101</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Insert Shape</string>
+    </property>
+   </widget>
    <zorder>frame_3</zorder>
    <zorder>pushButton</zorder>
    <zorder>pushButton_2</zorder>
@@ -704,6 +717,7 @@
    <zorder>label_11</zorder>
    <zorder>widget</zorder>
    <zorder>frame</zorder>
+   <zorder>pushButton_22</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
