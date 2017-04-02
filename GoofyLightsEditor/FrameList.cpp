@@ -52,6 +52,7 @@ void FrameList::DeleteNode(){
 
     if( p == NULL){
         /*Nothing. Error case.*/
+        return;
     }
     else{
         head = p->next;
@@ -84,8 +85,8 @@ void FrameList::AddNode_Middle(t_FrameData x, int pos){
     }
     else
     {
-        tempCount++;                                // Both tempCounter and current are refrencing
         current = current -> next;                  // position 1 in the list (head -> next)
+        tempCount++;                                // Both tempCounter and current are refrencing
         while (tempCount != pos)
         {
             current = current -> next;
