@@ -28,13 +28,19 @@ SOURCES += main.cpp\
     FrameList.cpp \
     FrameManipulation.cpp \
     FileOperations.cpp \
-    gridsquare.cpp
+    gridsquare.cpp \
+    sizedialog.cpp \
+    colorwheel.cpp
 
 HEADERS  += mainwindow.h \
     framestructure.h \
     FrameList.h \
     FrameManipulation.h \
     FileOperations.h \
-    gridsquare.h
+    gridsquare.h \
+    sizedialog.h \
+    globals.h \
+    colorwheel.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    sizedialog.ui

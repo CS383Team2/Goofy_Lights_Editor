@@ -1,5 +1,5 @@
 #include "gridsquare.h"
-
+#include <globals.h>
 
 GridSquare::GridSquare()
 {
@@ -21,7 +21,11 @@ void GridSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
     {
         if(brush.color() == Qt::gray)
         {
-            brush.setColor(Qt::blue); //change this to color wheel/data -P
+            //QColor(int r, int g, int b, int a = 255) //use this, last argument always 255
+
+            brush.setColor(QColor(G_RED, G_GREEN, G_BLUE, G_ALPHA)); //HELLO RGB COLOR -green -P
+
+            //brush.setColor(Qt::blue); //old -P
         }
     }
 

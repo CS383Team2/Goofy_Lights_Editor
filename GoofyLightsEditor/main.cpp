@@ -6,6 +6,17 @@
 #include "FrameList.h"
 #include "FrameManipulation.h"
 #include "FileOperations.h"
+#include <globals.h>
+#include <sizedialog.h>
+
+int G_COL = 0; //initialize globals -P
+int G_ROW = 0;
+
+int G_RED = 255;
+int G_GREEN = 0; //fixed -P
+int G_BLUE = 0;
+int G_ALPHA = 255;
+
 
 long FrameIDCount = 0;
 
@@ -15,9 +26,16 @@ t_RGB** create_RGB(int r, int c);
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    //LET'S GET IT STARTED -P
+    SizeDialog dialog1;
+    dialog1.setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint); //You will NOT exit this window your way -P
+    dialog1.setModal(true); //YOU SHALL NOT CLICK OUTSIDE OF THIS WINDOW -P
+    dialog1.exec(); //execute pls -P
+
+    //read in a file here probably -P
+
     MainWindow w;
     w.show();
-
 
     // linked list test
     std::cout << "FrameList testing" << std::endl;
