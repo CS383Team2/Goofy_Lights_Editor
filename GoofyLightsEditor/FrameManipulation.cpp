@@ -11,10 +11,18 @@ t_RGB** create_RGB(int r, int c)
     return arr;
 }
 
+int delete_RGB(t_RGB** arr, int r, int c)
+{
+    if (arr == nullptr)
+        return ERROR;
 
-// creates a RGB Array and returns a pointer to it.
-t_RGB** create_RGB(int r, int c);
-
+    //Reference: http://www.cplusplus.com/forum/beginner/38226/
+    for(int i = 0; i < r; ++i)
+        delete [] arr[i];   // delete data arrays
+    delete [] arr;          // delete pointer array
+    arr = nullptr;          // null the pointer
+    return SUCSSESFUL;
+}
 
 // Takes origional frame and returnes a new copy of it
 //https://github.com/CS383Team2/Goofy_Lights_Editor/issues/9
