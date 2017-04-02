@@ -8,6 +8,7 @@
 #include <gridsquare.h>
 #include "FrameList.h"
 #include <colorwheel.h>
+#include <globals.h>
 
 namespace Ui {
 class MainWindow;
@@ -20,6 +21,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+    GridSquare **square = new GridSquare*[G_COL];  //Type is GridSquare, square is object
 
 private slots:
     void on_actionSave_As_triggered();
@@ -34,6 +37,10 @@ private slots:
     void on_spinBox_3_editingFinished();
 
     void mousePressEvent(QMouseEvent *event);
+
+    void on_pushButton_20_clicked();
+
+    void on_pushButton_21_clicked();
 
 private:
     Ui::MainWindow *ui;
