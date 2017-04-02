@@ -8,7 +8,8 @@
 #include <sizedialog.h>
 #include <globals.h> //G_ROW and G_COL
 
-bool set = false;
+
+int temp_R, temp_G, temp_B, temp_A; //yeah.... -P
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -114,6 +115,28 @@ void MainWindow::on_pushButton_20_clicked()
 
 void MainWindow::on_pushButton_21_clicked()
 {
+
+
+}
+
+void MainWindow::on_pushButton_21_released()
+{
+    G_RED = temp_R;
+    G_GREEN = temp_G;
+    G_BLUE = temp_B;
+    G_ALPHA = temp_A;
+
+    ui->spinBox->setValue(G_RED); //-P
+    ui->spinBox_2->setValue(G_GREEN);
+    ui->spinBox_3->setValue(G_BLUE); //-P
+}
+
+void MainWindow::on_pushButton_21_pressed()
+{
+    temp_R = G_RED;
+    temp_G = G_GREEN;
+    temp_B = G_BLUE;
+    temp_A = G_ALPHA;
     //first let's update the GRAPHICAL EYBALL STIMILATION GRID for motivation -P
     for(int x=0; x<G_COL; x++)
     {
@@ -128,6 +151,7 @@ void MainWindow::on_pushButton_21_clicked()
             square[x][y].update(); //Fill that frame son -P
         }
     }
+
 
     //do this:
 
