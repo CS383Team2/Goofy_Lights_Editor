@@ -85,3 +85,8 @@ void MainWindow::on_spinBox_3_editingFinished()
 {
     G_BLUE = ui->spinBox_3->value();
 }
+
+void MainWindow::on_widget_destroyed()
+{
+    //nothing here yet
+}

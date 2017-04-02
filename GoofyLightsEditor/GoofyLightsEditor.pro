@@ -29,7 +29,8 @@ SOURCES += main.cpp\
     FrameManipulation.cpp \
     FileOperations.cpp \
     gridsquare.cpp \
-    sizedialog.cpp
+    sizedialog.cpp \
+    colorwheel.cpp
 
 HEADERS  += mainwindow.h \
     framestructure.h \
@@ -38,7 +39,8 @@ HEADERS  += mainwindow.h \
     FileOperations.h \
     gridsquare.h \
     sizedialog.h \
-    globals.h
+    globals.h \
+    colorwheel.h
 
 FORMS    += mainwindow.ui \
     sizedialog.ui

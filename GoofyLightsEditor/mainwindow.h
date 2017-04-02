@@ -33,6 +33,8 @@ private slots:
 
     void on_spinBox_3_editingFinished();
 
+    void on_widget_destroyed();
+
 private:
     Ui::MainWindow *ui;
 
