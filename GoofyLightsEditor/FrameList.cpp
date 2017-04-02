@@ -9,7 +9,6 @@
 
 #include "FrameList.h"
 #include "framestructure.h"
-#include "FrameManipulation.h"  // for delete_RGB()
 
 using namespace std;
 
@@ -57,7 +56,7 @@ void FrameList::DeleteNode(){
     else{
         head = p->next;
         p->next = NULL;
-        delete_RGB(p->FrameData.data, this->row, this->col); // Delete Attached RGB structure
+        // Delete Attached RGB structure here
         delete p;
     }
     this->count--;
@@ -117,7 +116,8 @@ void FrameList::DeleteNode_Middle(int pos){
         // Delete the head node.
         head = current -> next;
         head -> prev = NULL;
-        delete_RGB(head->FrameData.data, this->row, this->col); // Delete Attached RGB structure
+        // Delete Attached RGB structure here 
+        delete(current);
         this->count--;
         return;
     }
@@ -136,7 +136,7 @@ void FrameList::DeleteNode_Middle(int pos){
     NodePtr p = current -> next -> next;
     // Adjustment of previous pointers.
     p -> prev = current;
-    delete_RGB(p->FrameData.data, this->row, this->col); // Delete Attached RGB structure
+    // Delete Attached RGB Structure here
     delete (current -> next);
     current -> next = p;
     this->count--;

@@ -101,9 +101,9 @@ int main(int argc, char *argv[])
     // add breakpoint here. rgb_data set 'change disp val formate' to array 10
     //delete_RGB(rgb_data, r, c);
     std::cout << "printing" << std::endl;
-	frames.PrintNode();
+    frames.PrintNode();
     std::cout << "Deleting node 1" << std::endl;
-	frames.DeleteNode_Middle(1);
+    frames.DeleteNode_Middle(1);
     std::cout << "printing" << std::endl;
 
 
