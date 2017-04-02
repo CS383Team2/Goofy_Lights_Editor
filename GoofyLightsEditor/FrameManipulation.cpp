@@ -18,8 +18,9 @@ t_RGB** create_RGB(int r, int c);
 
 
 // Takes origional frame and returnes a new copy of it
+// Frame must be declared and rgb_data array must already be allocated
 //https://github.com/CS383Team2/Goofy_Lights_Editor/issues/9
-int copyFrame(t_FrameData * copyFrame, t_FrameData origFrame)
+int copyFrame(t_FrameData &copyFrame, t_FrameData origFrame)
 {
     // Error checking
     if (origFrame.data == NULL)
@@ -30,19 +31,8 @@ int copyFrame(t_FrameData * copyFrame, t_FrameData origFrame)
     unsigned short col = origFrame.c;
     int i, j; // loop control
 
-
-    // if copyframe exists already
-    if (copyFrame != NULL) {
-        // if copyframe has arrary already
-        if (copyFrame.data != NULL)
-            std::cout << "here" << std::endl;
-    }
-
-
-    t_FrameData copyFrame;                      // New Frame
-    t_RGB ** rgb_data = create_RGB(row, col);  // Create new Frames's rgb array
+    t_RGB ** rgb_data = copyFrame.data
     t_RGB ** rgb_origional = origFrame.data;   // Pointer to origional rgb data
-    copyFrame.data = rgb_data;                  // Attach new rgb arry to new frame
 
     //Fill rgb_data with data from FrameData
     for (i = 0; i < row; i++) {
@@ -51,7 +41,7 @@ int copyFrame(t_FrameData * copyFrame, t_FrameData origFrame)
         }
     }
 
-    return NewFrame;
+    return SUCSSESFUL;
 }
 
 // translates from by a given direction

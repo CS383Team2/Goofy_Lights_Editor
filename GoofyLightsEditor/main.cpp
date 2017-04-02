@@ -98,6 +98,15 @@ int main(int argc, char *argv[])
     fillFrame2(FrameData, 21, 32, 45);
     frames.AddTail(FrameData);
 
+    // copyFrame Test
+    t_FrameData newFrame;
+    //rgb_data = create_RGB(r, c);
+    newFrame.ID = FrameIDCount++;
+    newFrame.durration = 217;
+    copyFrame(newFrame, FrameData);
+    frames.AddTail(FrameData);
+
+
     frames.PrintNode();
 
 

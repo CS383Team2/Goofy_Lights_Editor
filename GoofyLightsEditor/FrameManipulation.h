@@ -26,7 +26,7 @@ t_RGB** create_RGB(int r, int c);
 
 // Takes origional frame and returnes a new copy of it
 //https://github.com/CS383Team2/Goofy_Lights_Editor/issues/9
-int copyFrame(t_FrameData * copyFrame, t_FrameData origFrame);
+int copyFrame(t_FrameData &copyFrame, t_FrameData origFrame);
 
 // translates from by a given direction
 //https://github.com/CS383Team2/Goofy_Lights_Editor/issues/7
