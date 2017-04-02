@@ -110,7 +110,7 @@ int main(int argc, char *argv[])
     // FileOperations::SaveToFile(frameList, "autofill.proj");
 
 
-    std::cout << "Program end" << std::endl;
     frames.DeleteList();
+    std::cout << "Program end" << std::endl;
     return a.exec();
 }
