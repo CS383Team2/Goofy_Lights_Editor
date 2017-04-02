@@ -97,13 +97,14 @@ int main(int argc, char *argv[])
     fillFrame2(FrameData, 21, 32, 45);
     frames.AddTail(FrameData);
 
-    // add breakpoint here. rgb_data set 'change disp val formate' to array 10
-    //delete_RGB(rgb_data, r, c);
-    std::cout << "printing" << std::endl;
-    frames.PrintNode();
-    std::cout << "Deleting node 1" << std::endl;
-    frames.DeleteNode_Middle(1);
-    std::cout << "printing" << std::endl;
+    // copyFrame Test
+    t_FrameData newFrame;
+    rgb_data = create_RGB(r, c);
+    newFrame.ID = FrameIDCount++;
+    newFrame.durration = 217;
+    newFrame.data = rgb_data;
+    copyFrame(newFrame, FrameData);
+    frames.AddTail(newFrame);
 
 
     frames.PrintNode();
@@ -118,7 +119,7 @@ int main(int argc, char *argv[])
     // FileOperations::SaveToFile(frameList, "autofill.proj");
 
 
-    std::cout << "Program end" << std::endl;
     frames.DeleteList();
+    std::cout << "Program end" << std::endl;
     return a.exec();
 }
