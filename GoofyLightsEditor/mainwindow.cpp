@@ -143,10 +143,10 @@ void MainWindow::on_pushButton_21_pressed()
         for(int y=0; y<G_ROW; y++)
         {
             square[x][y].Selected = true;
-            //Gray (#a0a0a4)
-            G_RED = 0xa0;
-            G_GREEN = 0xa0;
-            G_BLUE = 0xa4;
+            //BLACK
+            G_RED = 0;
+            G_GREEN = 0;
+            G_BLUE = 0;
             G_ALPHA = 255;
             square[x][y].update(); //Fill that frame son -P
         }

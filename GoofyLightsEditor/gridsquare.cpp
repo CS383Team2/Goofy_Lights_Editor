@@ -14,12 +14,12 @@ QRectF GridSquare::boundingRect() const
 void GridSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QRectF rec = boundingRect();
-    QBrush brush(Qt::gray);
+    QBrush brush(Qt::black);
 
 
     if(Selected)
     {
-        if(brush.color() == Qt::gray)
+        if(brush.color() == Qt::black)
         {
             //QColor(int r, int g, int b, int a = 255) //use this, last argument always 255
 
