@@ -25,7 +25,7 @@ void GridSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 
             brush.setColor(QColor(G_RED, G_GREEN, G_BLUE, G_ALPHA)); //HELLO RGB COLOR -green -P
 
-            //brush.setColor(Qt::blue); //old -P
+            //The color of any grid square can be had by brush.color() -P
         }
     }
 
