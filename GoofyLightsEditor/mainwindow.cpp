@@ -96,7 +96,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
 }
 
 
-void MainWindow::on_pushButton_20_clicked()
+void MainWindow::on_pushButton_20_clicked() //Fill Frame
 {
     //first let's update the GRAPHICAL EYBALL STIMILATION GRID for motivation -P
     for(int x=0; x<G_COL; x++)
@@ -119,7 +119,7 @@ void MainWindow::on_pushButton_21_clicked()
 
 }
 
-void MainWindow::on_pushButton_21_released()
+void MainWindow::on_pushButton_21_released() //Clear Frame
 {
     G_RED = temp_R;
     G_GREEN = temp_G;
@@ -130,7 +130,7 @@ void MainWindow::on_pushButton_21_released()
     ui->spinBox_3->setValue(G_BLUE); //-P
 }
 
-void MainWindow::on_pushButton_21_pressed()
+void MainWindow::on_pushButton_21_pressed() //Clear Frame
 {
     temp_R = G_RED;
     temp_G = G_GREEN;
@@ -152,5 +152,5 @@ void MainWindow::on_pushButton_21_pressed()
 
     //do this:
 
-    //clearFrame????(t_FrameData &d, t_RGB rgb_fill) //do this later -P
+    //fillFrame2(FrameData, 0, 0, 0); //do this later -P
 }
