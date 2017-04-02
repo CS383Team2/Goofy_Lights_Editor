@@ -20,8 +20,26 @@ t_RGB** create_RGB(int r, int c);
 //https://github.com/CS383Team2/Goofy_Lights_Editor/issues/9
 t_FrameData copyFrame(t_FrameData FrameData)
 {
-    t_FrameData NewFrame;
-    //Black magic
+    t_FrameData NewFrame; //shamelessly copied everything from fillFrame -P
+    NewFrame.r = FrameData.r; //same size duh -P
+    NewFrame.c = FrameData.c;
+
+    // Dereference
+    unsigned short r = FrameData.r;
+    unsigned short c = FrameData.c;
+    int i, j; // loop control
+
+    // Error checking
+    //if (FrameData.data == nullptr)
+        //return ERROR; //There needs to be a FramData typed error? -P
+
+    //Fill data
+    for (i = 0; i < r; i++) {
+        for (j = 0; j < c; j++) {
+            NewFrame.data[i][j] = FrameData.data[i][j]; //copy it over -P
+        }
+    }
+
     return NewFrame;
 }
 
