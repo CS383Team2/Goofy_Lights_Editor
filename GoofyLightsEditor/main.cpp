@@ -116,7 +116,7 @@ int main(int argc, char *argv[])
     // frames.PrintNode();
     // FrameList frameList = FileOperations::LoadFromFile("autofill.proj");
     // frameList.PrintNode();
-    // FileOperations::SaveToFile(frameList, "autofill.proj");
+    FileOperations::SaveToFile(frames, "autofill.proj");
 
 
     std::cout << "Program end" << std::endl;
