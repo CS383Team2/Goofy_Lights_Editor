@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene); //give the grid to the graphics view -Paul
 
-    GridSquare **square = new GridSquare*[G_COL];  //Type is GridSquare, square is object
+    //GridSquare **square = new GridSquare*[G_COL];  //Type is GridSquare, square is object
     for (int i = 0; i < G_COL; ++i)
     {
         square[i] = new GridSquare[G_ROW];
@@ -94,3 +94,42 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
     ui->spinBox_3->setValue(G_BLUE); //-P
 }
 
+
+void MainWindow::on_pushButton_20_clicked()
+{
+    //first let's update the GRAPHICAL EYBALL STIMILATION GRID for motivation -P
+    for(int x=0; x<G_COL; x++)
+    {
+        for(int y=0; y<G_ROW; y++)
+        {
+            square[x][y].Selected = true;
+            square[x][y].update(); //Fill that frame son -P
+        }
+    }
+
+    //do this:
+
+    //fillFrame(t_FrameData &d, t_RGB rgb_fill) //do this later -P
+}
+
+void MainWindow::on_pushButton_21_clicked()
+{
+    //first let's update the GRAPHICAL EYBALL STIMILATION GRID for motivation -P
+    for(int x=0; x<G_COL; x++)
+    {
+        for(int y=0; y<G_ROW; y++)
+        {
+            square[x][y].Selected = true;
+            //Gray (#a0a0a4)
+            G_RED = 0xa0;
+            G_GREEN = 0xa0;
+            G_BLUE = 0xa4;
+            G_ALPHA = 255;
+            square[x][y].update(); //Fill that frame son -P
+        }
+    }
+
+    //do this:
+
+    //fillFrame(t_FrameData &d, t_RGB rgb_fill) //do this later -P
+}
