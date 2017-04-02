@@ -1,6 +1,5 @@
 
 #include "FrameManipulation.h"
-#include <iostream>
 
 // Function creates a 2d memory element of the RGB struct then passes back the pointer to it.
 // source http://stackoverflow.com/questions/936687/how-do-i-declare-a-2d-array-in-c-using-new
@@ -106,7 +105,7 @@ int fillFrame(t_FrameData &d, t_RGB rgb_fill)
     int i, j; // loop control
 
     // Error checking
-    if (d.data == NULL)
+    if (d.data == nullptr)
         return ERROR;
 
     //Fill data

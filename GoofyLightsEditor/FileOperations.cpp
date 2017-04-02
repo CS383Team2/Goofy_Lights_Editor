@@ -103,10 +103,6 @@ FrameList FileOperations::LoadFromFile(QString fileName){
             }
         }
         frameData.data = data;
-	QString timeStr     = fileContents.readLine();
-        QTime time;
-        time                = QTime::fromString(timeStr, "hh:mm:ss.zzz");
-        nextTime            = time;
         frameList.AddTail(frameData);
         // frameList.PrintNode();
         currentElement++;
