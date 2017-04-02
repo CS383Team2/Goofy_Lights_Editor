@@ -31,13 +31,10 @@ int copyFrame(t_FrameData &copyFrame, t_FrameData origFrame)
     unsigned short col = origFrame.c;
     int i, j; // loop control
 
-    t_RGB ** rgb_data = copyFrame.data
-    t_RGB ** rgb_origional = origFrame.data;   // Pointer to origional rgb data
-
     //Fill rgb_data with data from FrameData
     for (i = 0; i < row; i++) {
         for (j = 0; j < col; j++) {
-            rgb_data[i][j] = rgb_origional[i][j];
+            copyFrame.data[i][j] = origFrame.data[i][j];
         }
     }
 
