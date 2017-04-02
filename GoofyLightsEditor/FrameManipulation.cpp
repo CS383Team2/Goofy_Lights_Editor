@@ -1,5 +1,6 @@
 
 #include "FrameManipulation.h"
+#include <iostream>
 
 // Function creates a 2d memory element of the RGB struct then passes back the pointer to it.
 // source http://stackoverflow.com/questions/936687/how-do-i-declare-a-2d-array-in-c-using-new
@@ -20,12 +21,25 @@ t_RGB** create_RGB(int r, int c);
 //https://github.com/CS383Team2/Goofy_Lights_Editor/issues/9
 t_FrameData copyFrame(t_FrameData FrameData)
 {
-    t_FrameData NewFrame;
+    // Error checking
+    if (FrameData.data == NULL)
+        return NULL;
 
-    // Dereference
+    // Row/col data
     unsigned short row = FrameData.r;
     unsigned short col = FrameData.c;
 
+    t_FrameData NewFrame;                      // New Frame
+    t_RGB ** rgb_data = create_RGB(row, col);  // Create new Frames's rgb array
+    t_RGB ** rgb_origional = FrameData.data;   // Pointer to origional rgb data
+    NewFrame.data = rgb_data;                  // Attach new rgb arry to new frame
+
+    //Fill rgb_data with data from FrameData
+    for (i = 0; i < row; i++) {
+        for (j = 0; j < col; j++) {
+            rgb_data[i][j] = rgb_origional;
+        }
+    }
 
     return NewFrame;
 }
