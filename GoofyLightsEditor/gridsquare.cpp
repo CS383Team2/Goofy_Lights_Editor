@@ -38,6 +38,9 @@ void GridSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
     painter->setPen(pen);
     painter->fillRect(rec,brush);
     painter->drawRect(rec);
+
+    //Fix the FILL BUG: -P
+    Selected = false; //simply unselect after each repaint/change. Fixed -P
 }
 
 void GridSquare::mousePressEvent(QGraphicsSceneMouseEvent *event) //-P
