@@ -23,17 +23,13 @@
 // creates a RGB Array and returns a pointer to it.
 t_RGB** create_RGB(int r, int c);
 
-
 // Takes origional frame and returnes a new copy of it
-//https://github.com/CS383Team2/Goofy_Lights_Editor/issues/9
 int copyFrame(t_FrameData &copyFrame, t_FrameData origFrame);
 
 // translates from by a given direction
-//https://github.com/CS383Team2/Goofy_Lights_Editor/issues/7
 int translateFrame(t_FrameData d, int direction);
 
 // Fills given frame with color
-//https://github.com/CS383Team2/Goofy_Lights_Editor/issues/6
 int fillFrame(t_FrameData &d, t_RGB rgb_fill);
 int fillFrame2(t_FrameData &d, unsigned short r, unsigned short g, unsigned short b);
 

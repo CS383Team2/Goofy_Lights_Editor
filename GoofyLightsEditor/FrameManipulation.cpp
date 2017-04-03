@@ -3,7 +3,6 @@
 #include <iostream>
 
 // Function creates a 2d memory element of the RGB struct then passes back the pointer to it.
-// source http://stackoverflow.com/questions/936687/how-do-i-declare-a-2d-array-in-c-using-new
 t_RGB** create_RGB(int r, int c)
 {
     t_RGB** arr = new t_RGB*[r];
@@ -19,7 +18,6 @@ t_RGB** create_RGB(int r, int c);
 
 // Takes origional frame and returnes a new copy of it
 // Frame must be declared and rgb_data array must already be allocated
-//https://github.com/CS383Team2/Goofy_Lights_Editor/issues/9
 int copyFrame(t_FrameData &copyFrame, t_FrameData origFrame)
 {
     // Error checking
@@ -42,7 +40,6 @@ int copyFrame(t_FrameData &copyFrame, t_FrameData origFrame)
 }
 
 // translates from by a given direction
-//https://github.com/CS383Team2/Goofy_Lights_Editor/issues/7
 int translateFrame(t_FrameData d, int direction)
 {
     int i = 0; //counters
@@ -112,7 +109,6 @@ int translateFrame(t_FrameData d, int direction)
 }
 
 // Fills given frame with color
-//https://github.com/CS383Team2/Goofy_Lights_Editor/issues/6
 int fillFrame(t_FrameData &d, t_RGB rgb_fill)
 {
     // Dereference
