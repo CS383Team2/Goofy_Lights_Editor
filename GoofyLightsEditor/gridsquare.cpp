@@ -8,7 +8,7 @@ GridSquare::GridSquare()
 
 QRectF GridSquare::boundingRect() const
 {
-    return QRectF(x,y,20,20); //x and y position the square before it's painted -P
+    return QRectF(x,y,24,24); //x and y position the square before it's painted -P
 }
 
 void GridSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -33,7 +33,8 @@ void GridSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 
     square_RGB = brush.color();  
     
-    painter->setPen(Qt::noPen);
+
+    painter->setPen(Qt::NoPen);
     painter->fillRect(rec,brush);
     painter->drawRect(rec);
 }
