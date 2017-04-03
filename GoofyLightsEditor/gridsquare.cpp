@@ -29,6 +29,8 @@ void GridSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
         }
     }
 
+    square_RGB = brush.color();
+
     painter->fillRect(rec,brush);
     painter->drawRect(rec);
 }
@@ -37,5 +39,6 @@ void GridSquare::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     Selected = true;
     QGraphicsItem::mousePressEvent(event);
+
     update(); //repaint the grid whenever a cell is clicked
 }

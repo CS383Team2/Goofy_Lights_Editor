@@ -7,8 +7,9 @@
 #include <QWidget>
 #include <sizedialog.h>
 #include <globals.h> //G_ROW and G_COL
+#include <FrameManipulation.h>
 
-
+long FrameID = 0; //-P
 int temp_R, temp_G, temp_B, temp_A; //yeah.... -P
 
 
@@ -39,6 +40,44 @@ MainWindow::MainWindow(QWidget *parent) :
     ColorWheel *wheel = new ColorWheel;
     QSpinBox *spinbox = new QSpinBox;
     connect(wheel, SIGNAL(colorChange(QColor)), spinbox, SLOT(on_spinBox_editingFinished()));
+
+    //Start the FrameData nonsense -P
+    //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+    // set grid size
+    int r = G_ROW;
+    int c = G_COL;
+    t_RGB ** rgb_data;
+
+    //t_FrameData FrameData;  // THE frame data (this is in mainwindow.h) -P
+    FrameData.r = r;
+    FrameData.c = c;
+    FrameList frames(r, c); // linked list for frame data. r c for print function
+
+    //Frame 0
+    // Generate new rgb_data arrary
+    rgb_data = create_RGB(r, c);
+
+    // fill rgb_data for Frame 0
+    //unsigned short color = 0;   // arbritrary data
+    for (int i = 0; i < r; i++){
+        for (int j = 0; j < c; j++){
+            rgb_data[i][j].R = 0;
+            rgb_data[i][j].G = 0;
+            rgb_data[i][j].B = 0;
+        }
+    }
+    FrameData.ID = FrameID++;
+    FrameData.durration = 0.20;
+    FrameData.data = rgb_data;
+    frames.AddTail(FrameData);  // add this frameData to linked list
+    rgb_data  = NULL; // disconnect this pointer from rgb_data
+
+
+    // next frame Frame 1
+    // Generate new rgb_data arrary
+    //rgb_data = create_RGB(r, c);
+    //...
+    //...
 
 }
 
@@ -88,11 +127,13 @@ void MainWindow::on_spinBox_3_editingFinished()
 }
 
 
-void MainWindow::mousePressEvent(QMouseEvent *event)
+void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is clicked inside of, lol -P
 {
     ui->spinBox->setValue(G_RED); //-P
     ui->spinBox_2->setValue(G_GREEN);
     ui->spinBox_3->setValue(G_BLUE); //-P
+
+    gridToFrameDate(); //on every click lol -P
 }
 
 
@@ -154,3 +195,16 @@ void MainWindow::on_pushButton_21_pressed() //Clear Frame
 
     //fillFrame2(FrameData, 0, 0, 0); //do this later -P
 }
+
+void MainWindow::gridToFrameDate()
+{
+    //fill the FrameData with GUI grid data here -P
+    for (int i = 0; i < G_ROW; i++){
+        for (int j = 0; j < G_COL; j++){
+            FrameData.data[i][j].R = square[i][j].square_RGB.red(); //wowzers, that's stitched together -P
+            FrameData.data[i][j].G = square[i][j].square_RGB.green();
+            FrameData.data[i][j].B = square[i][j].square_RGB.blue(); //-P
+        }
+    }
+}
+

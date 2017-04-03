@@ -23,6 +23,9 @@ public:
     ~MainWindow();
 
     GridSquare **square = new GridSquare*[G_COL];  //Type is GridSquare, square is object
+    t_FrameData FrameData;  // THE frame data (this is in mainwindow.h) -P
+
+    void gridToFrameDate();
 
 private slots:
     void on_actionSave_As_triggered();
@@ -45,6 +48,7 @@ private slots:
     void on_pushButton_21_released();
 
     void on_pushButton_21_pressed();
+
 
 private:
     Ui::MainWindow *ui;

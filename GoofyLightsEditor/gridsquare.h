@@ -16,6 +16,7 @@ public:
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget); //paint function -P
 
+    QColor square_RGB;
 
     bool Selected; //is this square selected? -P
 
