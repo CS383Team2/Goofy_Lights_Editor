@@ -755,7 +755,6 @@
     </property>
     <addaction name="actionAbout"/>
     <addaction name="actionDocumentation"/>
-    <addaction name="actionHelp"/>
    </widget>
    <addaction name="menuSuper_Animator_Window"/>
    <addaction name="menuEdit"/>
