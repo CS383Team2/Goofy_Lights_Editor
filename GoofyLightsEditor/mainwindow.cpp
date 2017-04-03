@@ -133,7 +133,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
     ui->spinBox_2->setValue(G_GREEN);
     ui->spinBox_3->setValue(G_BLUE); //-P
 
-    gridToFrameDate(); //on every click lol -P
+    //gridToFrameDate(); //on every click lol -P SEG FAULT on  FrameData.data[i][j].R = square[i][j].square_RGB.red();
 }
 
 
