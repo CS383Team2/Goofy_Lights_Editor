@@ -8,7 +8,7 @@ GridSquare::GridSquare()
 
 QRectF GridSquare::boundingRect() const
 {
-    return QRectF(x,y,24,24); //x and y position the square before it's painted -P
+    return QRectF(x,y,22,22); //x and y position the square before it's painted -P
 }
 
 void GridSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -31,18 +31,20 @@ void GridSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
         }
     }
 
-    square_RGB = brush.color();  
+    square_RGB = brush.color();
     
+    QPen pen = square_RGB;
 
-    painter->setPen(Qt::NoPen);
+    painter->setPen(pen);
     painter->fillRect(rec,brush);
     painter->drawRect(rec);
 }
 
-void GridSquare::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void GridSquare::mousePressEvent(QGraphicsSceneMouseEvent *event) //-P
 {
     Selected = true;
     QGraphicsItem::mousePressEvent(event);
 
     update(); //repaint the grid whenever a cell is clicked
 }
+
