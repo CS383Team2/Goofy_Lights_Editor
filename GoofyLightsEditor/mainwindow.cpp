@@ -193,10 +193,10 @@ void MainWindow::on_pushButton_21_pressed() //Clear Frame
 
     //do this:
 
-    //fillFrame2(FrameData, 0, 0, 0); //do this later -P
+    fillFrame2(FrameData, 0, 0, 0); //not tested yet -P
 }
 
-void MainWindow::gridToFrameDate()
+void MainWindow::gridToFrameDate() //stitching rubbish -P
 {
     //fill the FrameData with GUI grid data here -P
     for (int i = 0; i < G_ROW; i++){
