@@ -26,6 +26,7 @@ public:
     t_FrameData FrameData;  // THE frame data (this is in mainwindow.h) -P
 
     void gridToFrameDate();
+    void FrameDateToGrid(); //stitching rubbish -P
 
 private slots:
     void on_actionSave_As_triggered();

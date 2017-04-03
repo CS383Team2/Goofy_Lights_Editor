@@ -14,16 +14,18 @@ QRectF GridSquare::boundingRect() const
 void GridSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QRectF rec = boundingRect();
-    QBrush brush(Qt::black);
+    QBrush brush(square_RGB);
 
+    square_RGB.setRgb(G_RED, G_GREEN, G_BLUE, 255); //grab the color... -P
 
     if(Selected)
     {
-        if(brush.color() == Qt::black)
+        //if(brush.color() == Qt::black)
+        if(1)
         {
             //QColor(int r, int g, int b, int a = 255) //use this, last argument always 255
 
-            brush.setColor(QColor(G_RED, G_GREEN, G_BLUE, 255)); //HELLO RGB COLOR Alpha locked to 255 -green -P
+            brush.setColor(square_RGB); //HELLO RGB COLOR Alpha locked to 255 -green -P
 
             //The color of any grid square can be had by brush.color() -P
         }

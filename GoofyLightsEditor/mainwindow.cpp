@@ -208,3 +208,14 @@ void MainWindow::gridToFrameDate() //stitching rubbish -P
     }
 }
 
+void MainWindow::FrameDateToGrid()
+{
+    //fill the GUI grid with FrameData here -P
+    for (int i = 0; i < G_ROW; i++){
+        for (int j = 0; j < G_COL; j++){
+            //wowzers, the stitching -P
+            square[i][j].square_RGB.setRgb(FrameData.data[i][j].R, FrameData.data[i][j].G, FrameData.data[i][j].B, 255);
+        }
+    }
+}
+
