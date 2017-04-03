@@ -31,8 +31,9 @@ void GridSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
         }
     }
 
-    square_RGB = brush.color();
-
+    square_RGB = brush.color();  
+    
+    painter->setPen(Qt::noPen);
     painter->fillRect(rec,brush);
     painter->drawRect(rec);
 }
