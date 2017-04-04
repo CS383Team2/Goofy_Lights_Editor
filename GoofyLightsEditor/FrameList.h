@@ -96,5 +96,8 @@ public:
  
     // Return a count of the number of nodes in the list.
 	int Size();
+	    
+    // Updates frame data
+    void UpdateNode(t_FrameData d, int position);
 };
 #endif
