@@ -65,7 +65,7 @@ int FileOperations::SaveToFile(FrameList frameList, QString fileName){
 /* Load a project from a file.
  * Currently is looking for a file in the same format as the above save file
  */
-FrameList FileOperations::LoadFromFile(QString fileName){
+int FileOperations::LoadFromFile(QString fileName, FrameList * frameList){
     QFile file;
     file.setFileName(fileName);
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){
@@ -84,7 +84,7 @@ FrameList FileOperations::LoadFromFile(QString fileName){
     int col         = frameInfo[2].toInt();
 
     /* Initialize the frame list */
-    FrameList frameList = FrameList(row, col);
+    FrameList tmpFrameList = FrameList(row, col);
 
     int currentElement = 0;
     QString startTime = fileContents.readLine();
@@ -117,13 +117,14 @@ FrameList FileOperations::LoadFromFile(QString fileName){
         time                = QTime::fromString(timeStr, "hh:mm:ss.zzz");
         nextTime            = time;
         frameData.durration = currTime.msecsTo(nextTime);
-        frameList.AddTail(frameData);
+        tmpFrameList.AddTail(frameData);
         // frameList.PrintNode();
         currentElement++;
 
     }
     file.close();
+    *frameList = tmpFrameList;
     //std::cout << "Function Print\n";
     //frameList.PrintNode();
-    return frameList;
+    //return frameList;
 }

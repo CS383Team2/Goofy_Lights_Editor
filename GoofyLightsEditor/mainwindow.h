@@ -31,7 +31,7 @@ public:
 private slots:
     void on_actionSave_As_triggered();
 
-    FrameList on_actionOpenProject_triggered();
+    void on_actionOpenProject_triggered();
 
 
     void on_spinBox_editingFinished();

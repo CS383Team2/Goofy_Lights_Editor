@@ -11,7 +11,7 @@ public:
     /* Save to a file */
     static int SaveToFile(FrameList frameList, QString fileName);
     /* Load from a file */
-    static FrameList LoadFromFile(QString fileName);
+    static int LoadFromFile(QString fileName, FrameList * frameList);
 
     /* These two DO use the *.tan file format
      * Neither of these are currently implemented
