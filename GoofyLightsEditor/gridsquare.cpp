@@ -6,6 +6,11 @@ GridSquare::GridSquare()
     Selected = false; //constructor
 }
 
+GridSquare::~GridSquare()
+{
+    Selected = false; //destructor lol
+}
+
 QRectF GridSquare::boundingRect() const
 {
     return QRectF(x,y,22,22); //x and y position the square before it's painted -P

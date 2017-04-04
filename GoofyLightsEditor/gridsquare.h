@@ -7,10 +7,10 @@
 
 
 class GridSquare : public QGraphicsItem //inherit the public methods of QGraphicsItem -Paul
-
 {
 public:
     GridSquare();
+    ~GridSquare();
 
     QRectF boundingRect() const; //MUST have a bounding rectangle for each square -P
 

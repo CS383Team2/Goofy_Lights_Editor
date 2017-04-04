@@ -19,13 +19,17 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    scene = new QGraphicsScene(this);
-    ui->graphicsView->setScene(scene); //give the grid to the graphics view -Paul
+    scene1 = new QGraphicsScene(this);
+    ui->graphicsView->setScene(scene1); //give the grid to the graphics view -Paul
+
+    scene2 = new QGraphicsScene(this);
+    ui->graphicsView_2->setScene(scene2); //give the timeline to the graphics view -Paul
 
     //GridSquare **square = new GridSquare*[G_COL];  //Type is GridSquare, square is object
     for (int i = 0; i < G_COL; ++i)
     {
         square[i] = new GridSquare[G_ROW];
+        square2[i] = new TimelineGrid[G_ROW];
     }
 
     for(int x=0; x<G_COL; x++)
@@ -34,9 +38,13 @@ MainWindow::MainWindow(QWidget *parent) :
         {
             square[x][y].x = (25*x);
             square[x][y].y = (25*y);
-            scene->addItem(&square[x][y]);
+            square2[x][y].x = (10*x); //timeline magic about to happen here -P
+            square2[x][y].y = (10*y); //will add the magic soon -P
+            scene1->addItem(&square[x][y]);
+            scene2->addItem(&square2[x][y]); //timeline testing here -P
         }
     }
+
     ColorWheel *wheel = new ColorWheel;
     QSpinBox *spinbox = new QSpinBox;
     connect(wheel, SIGNAL(colorChange(QColor)), spinbox, SLOT(on_spinBox_editingFinished()));

@@ -9,6 +9,7 @@
 #include "FrameList.h"
 #include <colorwheel.h>
 #include <globals.h>
+#include <timelinegrid.h>
 
 namespace Ui {
 class MainWindow;
@@ -23,6 +24,7 @@ public:
     ~MainWindow();
 
     GridSquare **square = new GridSquare*[G_COL];  //Type is GridSquare, square is object
+    TimelineGrid **square2 = new TimelineGrid*[G_COL];  //Type is TimelineGrid, square2 is object
     t_FrameData FrameData;  // THE frame data (this is in mainwindow.h) -P
 
     void gridToFrameData();
@@ -54,7 +56,9 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    QGraphicsScene *scene;
+    QGraphicsScene *scene1; //grid -P
+
+    QGraphicsScene *scene2; //timeline -P
 
 
     void createActions();
