@@ -1,5 +1,6 @@
 #include "gridsquare.h"
 #include <globals.h>
+#include <mainwindow.h>
 
 GridSquare::GridSquare()
 {

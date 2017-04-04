@@ -119,7 +119,8 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
     ui->spinBox_2->setValue(G_GREEN);
     ui->spinBox_3->setValue(G_BLUE); //-P
 
-    gridToFrameData(); //on every click lol -P SEG FAULT on  FrameData.data[i][j].R = square[i][j].square_RGB.red();
+    gridToFrameData(); //on every click lol -P
+    updateTimeline(); //lol -P
 }
 
 
@@ -204,6 +205,18 @@ void MainWindow::FrameDataToGrid()
             //wowzers, the stitching -P
             square[j][i].square_RGB.setRgb(FrameData.data[i][j].R, FrameData.data[i][j].G, FrameData.data[i][j].B, 255);
             //yes i and j still switched in frame
+        }
+    }
+}
+
+void MainWindow::updateTimeline()
+{
+    for(int x=0; x<G_COL; x++)
+    {
+        for(int y=0; y<G_ROW; y++)
+        {
+            square2[x][y].square_RGB = square[x][y].square_RGB; //grab the colors from the real grid
+            square2[x][y].update();
         }
     }
 }

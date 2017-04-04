@@ -29,6 +29,7 @@ public:
 
     void gridToFrameData();
     void FrameDataToGrid(); //stitching rubbish -P
+    void updateTimeline();
 
 private slots:
     void on_actionSave_As_triggered();
