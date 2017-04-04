@@ -44,23 +44,21 @@ MainWindow::MainWindow(QWidget *parent) :
     //Start the FrameData nonsense -P
     //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     // set grid size
-    int r = G_ROW;
-    int c = G_COL;
     t_RGB ** rgb_data;
 
     //t_FrameData FrameData;  // THE frame data (this is in mainwindow.h) -P
-    FrameData.r = r;
-    FrameData.c = c;
-    FrameList frames(r, c); // linked list for frame data. r c for print function
+    FrameData.r = G_ROW;
+    FrameData.c = G_COL;
+    FrameList frames(G_ROW, G_COL); // linked list for frame data. r c for print function
 
     //Frame 0
     // Generate new rgb_data arrary
-    rgb_data = create_RGB(r, c);
+    rgb_data = create_RGB(G_ROW, G_COL);
 
     // fill rgb_data for Frame 0
     //unsigned short color = 0;   // arbritrary data
-    for (int i = 0; i < r; i++){
-        for (int j = 0; j < c; j++){
+    for (int i = 0; i < G_ROW; i++){
+        for (int j = 0; j < G_COL; j++){
             rgb_data[i][j].R = 0;
             rgb_data[i][j].G = 0;
             rgb_data[i][j].B = 0;
