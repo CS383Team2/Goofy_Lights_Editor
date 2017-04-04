@@ -253,3 +253,25 @@ void FrameList::PrintNode(){
 int FrameList::Size(){
     return this->count;
 }
+
+void FrameList::UpdateNode(t_FrameData d, int position)
+{
+   int pcount = 0;
+   NodePtr current = head;
+   if (position == 0)
+      {
+      head -> FrameData = d;
+      }
+   else
+      {
+      current = current -> next;
+      pcount++;
+      while (pcount != position)
+         {
+         current = current -> next;
+     pcount++;
+         }
+      current -> FrameData = d;
+      }
+   return;
+}
