@@ -44,38 +44,18 @@ MainWindow::MainWindow(QWidget *parent) :
     //Start the FrameData nonsense -P
     //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     // set grid size
-    t_RGB ** rgb_data;
 
     //t_FrameData FrameData;  // THE frame data (this is in mainwindow.h) -P
     FrameData.r = G_ROW;
     FrameData.c = G_COL;
-    FrameList frames(G_ROW, G_COL); // linked list for frame data. r c for print function
+    FrameList framelist(G_ROW, G_COL); // linked list for frame data. r c for print function
 
-    //Frame 0
-    // Generate new rgb_data arrary
-    rgb_data = create_RGB(G_ROW, G_COL);
 
-    // fill rgb_data for Frame 0
-    //unsigned short color = 0;   // arbritrary data
-    for (int i = 0; i < G_ROW; i++){
-        for (int j = 0; j < G_COL; j++){
-            rgb_data[i][j].R = 0;
-            rgb_data[i][j].G = 0;
-            rgb_data[i][j].B = 0;
-        }
-    }
     FrameData.ID = FrameID++;
     FrameData.durration = 0.20;
-    FrameData.data = rgb_data;
-    frames.AddTail(FrameData);  // add this frameData to linked list
-    rgb_data  = NULL; // disconnect this pointer from rgb_data
-
-
-    // next frame Frame 1
-    // Generate new rgb_data arrary
-    //rgb_data = create_RGB(r, c);
-    //...
-    //...
+    FrameData.data = create_RGB(G_ROW, G_COL);  // Generate new rgb_data arrary
+    fillFrame2(FrameData, 100, 100, 100);             // Clear initial frame
+    framelist.AddTail(FrameData);               // add this frameData to linked list
 
 }
 
