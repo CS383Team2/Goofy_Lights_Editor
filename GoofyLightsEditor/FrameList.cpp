@@ -258,20 +258,40 @@ void FrameList::UpdateNode(t_FrameData d, int position)
 {
    int pcount = 0;
    NodePtr current = head;
+   NodePtr temp = new Node;
+   NodePtr old;
+   temp -> FrameData = d;
+   temp -> next = NULL;
    if (position == 0)
       {
-      head -> FrameData = d;
+      if (head == NULL)
+         head = temp;
+      else if (head -> next == NULL)
+         {
+         head = temp;
+         delete current;
+         }
+      else
+     {
+         old = current;
+         current = current -> next;
+         temp -> next = current;
+     delete old;
+         }
       }
    else
       {
       current = current -> next;
       pcount++;
-      while (pcount != position)
+      while (pcount != position-1)
          {
          current = current -> next;
-     pcount++;
+         pcount++;
          }
-      current -> FrameData = d;
+      temp -> next = current -> next -> next;
+      old = current -> next;
+      current -> next = temp;
+      delete old;
       }
    return;
 }
