@@ -107,7 +107,7 @@ int main(int argc, char *argv[])
     frames.AddTail(newFrame);
 
 
-    frames.PrintNode();
+    //frames.PrintNode();
 
 
     // std::cout << "Now printing frames" << std::endl;
@@ -119,7 +119,7 @@ int main(int argc, char *argv[])
     frameList.PrintNode();
     // frameList.PrintNode();
     // FileOperations::SaveToFile(frames, "autofill.proj");
-
+    FileOperations::SaveToFile(frames, "autofill.proj");
 
     frames.DeleteList();
     std::cout << "Program end" << std::endl;

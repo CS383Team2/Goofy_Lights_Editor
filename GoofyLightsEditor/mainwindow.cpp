@@ -105,8 +105,9 @@ void MainWindow::on_actionOpenProject_triggered()
     QString fileName = QFileDialog::getOpenFileName(this,
             tr("Open Project"), "",
             tr("Project (*.tan);;All Files (*)"));
+    FrameList frameList;
 
-    //return FileOperations::LoadFromFile(fileName);
+    FileOperations::LoadFromFile(fileName, &frameList);
 }
 
 

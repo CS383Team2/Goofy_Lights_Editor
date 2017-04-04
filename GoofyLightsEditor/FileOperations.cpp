@@ -70,7 +70,7 @@ int FileOperations::LoadFromFile(QString fileName, FrameList * frameList){
     file.setFileName(fileName);
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){
         QMessageBox::information(0,"error",file.errorString());
-        //return FrameList(0,0); // Return a frame list with size 0,0
+        return -1;
     }
     QTextStream fileContents(&file);
     QString version = fileContents.readLine();
@@ -93,7 +93,6 @@ int FileOperations::LoadFromFile(QString fileName, FrameList * frameList){
     while(!fileContents.atEnd() && currentElement < numElements){
         t_FrameData frameData;
         currTime = nextTime;
-        frameData.ID        = currentElement;
 
         //std::cout << frameData.ID << "\n";
 
@@ -114,17 +113,20 @@ int FileOperations::LoadFromFile(QString fileName, FrameList * frameList){
         frameData.data      = data;
         QString timeStr     = fileContents.readLine();
         QTime time;
-        time                = QTime::fromString(timeStr, "hh:mm:ss.zzz");
+        time                = QTime::fromString(timeStr, "mm:ss.zzz");
         nextTime            = time;
         frameData.durration = currTime.msecsTo(nextTime);
+        frameData.ID        = currentElement;
         tmpFrameList.AddTail(frameData);
-        // frameList.PrintNode();
+        // std::cout << "Current FrameList" << std::endl;
+        // tmpFrameList.PrintNode();
+        // std::cout << currentElement << std::endl;
         currentElement++;
-
     }
     file.close();
-    *frameList = tmpFrameList;
+    (*frameList) = tmpFrameList;
     //std::cout << "Function Print\n";
-    //frameList.PrintNode();
-    //return frameList;
+    //tmpFrameList.PrintNode();
+    (*frameList).PrintNode();
+    return 1;
 }
