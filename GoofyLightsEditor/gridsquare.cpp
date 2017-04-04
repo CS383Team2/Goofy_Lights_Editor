@@ -9,6 +9,7 @@ GridSquare::GridSquare()
 QRectF GridSquare::boundingRect() const
 {
     return QRectF(x,y,22,22); //x and y position the square before it's painted -P
+    //x, y are top left corner -P
 }
 
 void GridSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

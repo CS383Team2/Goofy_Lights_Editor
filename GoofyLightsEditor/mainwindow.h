@@ -25,8 +25,8 @@ public:
     GridSquare **square = new GridSquare*[G_COL];  //Type is GridSquare, square is object
     t_FrameData FrameData;  // THE frame data (this is in mainwindow.h) -P
 
-    void gridToFrameDate();
-    void FrameDateToGrid(); //stitching rubbish -P
+    void gridToFrameData();
+    void FrameDataToGrid(); //stitching rubbish -P
 
 private slots:
     void on_actionSave_As_triggered();

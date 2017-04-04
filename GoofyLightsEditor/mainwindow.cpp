@@ -111,7 +111,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
     ui->spinBox_2->setValue(G_GREEN);
     ui->spinBox_3->setValue(G_BLUE); //-P
 
-    //gridToFrameDate(); //on every click lol -P SEG FAULT on  FrameData.data[i][j].R = square[i][j].square_RGB.red();
+    gridToFrameData(); //on every click lol -P SEG FAULT on  FrameData.data[i][j].R = square[i][j].square_RGB.red();
 }
 
 
@@ -174,25 +174,28 @@ void MainWindow::on_pushButton_21_pressed() //Clear Frame
     fillFrame2(FrameData, 0, 0, 0); //not tested yet -P
 }
 
-void MainWindow::gridToFrameDate() //stitching rubbish -P
+void MainWindow::gridToFrameData() //stitching rubbish -P
 {
     //fill the FrameData with GUI grid data here -P
     for (int i = 0; i < G_ROW; i++){
         for (int j = 0; j < G_COL; j++){
-            FrameData.data[i][j].R = square[i][j].square_RGB.red(); //wowzers, that's stitched together -P
-            FrameData.data[i][j].G = square[i][j].square_RGB.green();
-            FrameData.data[i][j].B = square[i][j].square_RGB.blue(); //-P
+            //qDebug() << FrameData.data[i][j].R;
+            //qDebug() << square[i][j].square_RGB.red();
+            FrameData.data[i][j].R = square[j][i].square_RGB.red(); //wowzers, that's stitched together -P
+            FrameData.data[i][j].G = square[j][i].square_RGB.green(); //yes, i and j are switched in square. Get over it -P
+            FrameData.data[i][j].B = square[j][i].square_RGB.blue(); //-P
         }
     }
 }
 
-void MainWindow::FrameDateToGrid()
+void MainWindow::FrameDataToGrid()
 {
     //fill the GUI grid with FrameData here -P
     for (int i = 0; i < G_ROW; i++){
         for (int j = 0; j < G_COL; j++){
             //wowzers, the stitching -P
-            square[i][j].square_RGB.setRgb(FrameData.data[i][j].R, FrameData.data[i][j].G, FrameData.data[i][j].B, 255);
+            square[j][i].square_RGB.setRgb(FrameData.data[i][j].R, FrameData.data[i][j].G, FrameData.data[i][j].B, 255);
+            //yes i and j still switched in frame
         }
     }
 }
