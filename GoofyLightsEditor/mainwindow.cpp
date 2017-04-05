@@ -78,7 +78,7 @@ void MainWindow::on_actionSave_As_triggered()
     QString fileName = QFileDialog::getSaveFileName(this,
             tr("Save Project"), "",
             tr("Project (*.proj);;All Files (*)"));
-    FrameList frameList = FrameList(10,10);
+    FrameList frameList = FrameList(10,10); //why is this 10x10??? answer me that. -P
     t_FrameData frameData;
     frameList.AddTail(frameData);
 
@@ -210,13 +210,13 @@ void MainWindow::FrameDataToGrid()
     }
 }
 
-void MainWindow::updateTimeline()
+void MainWindow::updateTimeline() //fix the update lag later -P
 {
     for(int x=0; x<G_COL; x++)
     {
         for(int y=0; y<G_ROW; y++)
         {
-            square2[x][y].square_RGB = square[x][y].square_RGB; //grab the colors from the real grid
+            square2[x][y].square_RGB = square[x][y].square_RGB; //grab the colors from the real grid -P
             square2[x][y].update();
         }
     }
