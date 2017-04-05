@@ -16,9 +16,9 @@ public:
     ~SizeDialog();
 
 private slots:
-    void on_spinBox_editingFinished();
+    void on_sbox_Row_editingFinished();
 
-    void on_spinBox_2_editingFinished();
+    void on_sbox_Col_editingFinished();
 
     void on_btnBox_OkClose_accepted();
 

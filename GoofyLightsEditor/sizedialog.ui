@@ -50,7 +50,7 @@
     <set>QDialogButtonBox::Close|QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="QSpinBox" name="spinBox">
+  <widget class="QSpinBox" name="sbox_Row">
    <property name="geometry">
     <rect>
      <x>110</x>
@@ -69,7 +69,7 @@
     <number>10</number>
    </property>
   </widget>
-  <widget class="QSpinBox" name="spinBox_2">
+  <widget class="QSpinBox" name="sbox_Col">
    <property name="geometry">
     <rect>
      <x>110</x>

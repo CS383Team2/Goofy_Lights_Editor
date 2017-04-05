@@ -17,20 +17,20 @@ SizeDialog::~SizeDialog()
     delete ui;
 }
 
-void SizeDialog::on_spinBox_editingFinished()
+void SizeDialog::on_sbox_Row_editingFinished()
 {
-    G_ROW=ui->spinBox->value();
+    G_ROW=ui->sbox_Row->value();
 }
 
-void SizeDialog::on_spinBox_2_editingFinished()
+void SizeDialog::on_sbox_Col_editingFinished()
 {
-    G_COL=ui->spinBox_2->value();
+    G_COL=ui->sbox_Col->value();
 }
 
 void SizeDialog::on_btnBox_OkClose_accepted()
 {
-    G_COL=ui->spinBox_2->value();
-    G_ROW=ui->spinBox->value(); //redundant redundant, shush -P
+    G_COL=ui->sbox_Col->value();
+    G_ROW=ui->sbox_Row->value(); //redundant redundant, shush -P
 }
 
 void SizeDialog::on_btnBox_OkClose_rejected()
