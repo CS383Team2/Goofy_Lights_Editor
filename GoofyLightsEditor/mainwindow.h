@@ -45,13 +45,13 @@ private slots:
 
     void mousePressEvent(QMouseEvent *event);
 
-    void on_pushButton_20_clicked();
+    void on_btn_FillFrame_clicked();
 
-    void on_pushButton_21_clicked();
+    void on_btn_ClearFrame_clicked();
 
-    void on_pushButton_21_released();
+    void on_btn_ClearFrame_released();
 
-    void on_pushButton_21_pressed();
+    void on_btn_ClearFrame_pressed();
 
 
 private:
