@@ -41,7 +41,7 @@ private slots:
 
     void on_sbox_ValueGreen_editingFinished();
 
-    void on_spinBox_3_editingFinished();
+    void on_sbox_ValueBlue_editingFinished();
 
     void mousePressEvent(QMouseEvent *event);
 

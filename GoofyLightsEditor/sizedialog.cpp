@@ -27,18 +27,18 @@ void SizeDialog::on_spinBox_2_editingFinished()
     G_COL=ui->spinBox_2->value();
 }
 
-void SizeDialog::on_buttonBox_accepted()
+void SizeDialog::on_btnBox_OkClose_accepted()
 {
     G_COL=ui->spinBox_2->value();
     G_ROW=ui->spinBox->value(); //redundant redundant, shush -P
 }
 
-void SizeDialog::on_buttonBox_rejected()
+void SizeDialog::on_btnBox_OkClose_rejected()
 {
     exit(0); //Don't run the main window -P
 }
 
-void SizeDialog::on_pushButton_clicked()
+void SizeDialog::on_btn_Browse_clicked()
 {
     QString filename = QFileDialog::getOpenFileName(this, tr("Open a Goofy File!"), QDir::homePath(), tr("Only .tan Files (*.tan)")); //browse filename -P
     //fun stuff -P

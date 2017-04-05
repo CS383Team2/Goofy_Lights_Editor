@@ -107,9 +107,9 @@ void MainWindow::on_sbox_ValueGreen_editingFinished()
     G_GREEN = ui->sbox_ValueGreen->value(); //-P
 }
 
-void MainWindow::on_spinBox_3_editingFinished()
+void MainWindow::on_sbox_ValueBlue_editingFinished()
 {
-    G_BLUE = ui->spinBox_3->value();
+    G_BLUE = ui->sbox_ValueBlue->value();
 }
 
 
@@ -117,7 +117,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
 {
     ui->spinBox->setValue(G_RED); //-P
     ui->sbox_ValueGreen->setValue(G_GREEN);
-    ui->spinBox_3->setValue(G_BLUE); //-P
+    ui->sbox_ValueBlue->setValue(G_BLUE); //-P
 
     gridToFrameData(); //on every click lol -P
     updateTimeline(); //lol -P
@@ -155,7 +155,7 @@ void MainWindow::on_btn_ClearFrame_released() //Clear Frame
 
     ui->spinBox->setValue(G_RED); //-P
     ui->sbox_ValueGreen->setValue(G_GREEN);
-    ui->spinBox_3->setValue(G_BLUE); //-P
+    ui->sbox_ValueBlue->setValue(G_BLUE); //-P
 }
 
 void MainWindow::on_btn_ClearFrame_pressed() //Clear Frame
