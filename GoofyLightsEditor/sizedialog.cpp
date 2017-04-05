@@ -39,7 +39,8 @@ void SizeDialog::on_btnBox_OkClose_accepted()
     else
         max = G_ROW;
 
-    G_SCALE = (20.0 / max); //scaled based on a max size of 20x20 -P
+    //MAIN WINDOW TOO BIG, gonna take the scaling down to 85% -P
+    G_SCALE = ((20.0 / max) * 0.85); //scaled based on a max size of 20x20 -P
 }
 
 void SizeDialog::on_btnBox_OkClose_rejected()

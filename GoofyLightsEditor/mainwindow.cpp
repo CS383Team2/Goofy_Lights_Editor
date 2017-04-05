@@ -119,6 +119,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
     ui->sbox_ValueGreen->setValue(G_GREEN);
     ui->sbox_ValueBlue->setValue(G_BLUE); //-P
 
+
     gridToFrameData(); //on every click lol -P
     updateTimeline(); //lol -P
 }
