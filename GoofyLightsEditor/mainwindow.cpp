@@ -102,9 +102,9 @@ void MainWindow::on_spinBox_editingFinished()
     G_RED = ui->spinBox->value();
 }
 
-void MainWindow::on_spinBox_2_editingFinished()
+void MainWindow::on_sbox_ValueGreen_editingFinished()
 {
-    G_GREEN = ui->spinBox_2->value(); //-P
+    G_GREEN = ui->sbox_ValueGreen->value(); //-P
 }
 
 void MainWindow::on_spinBox_3_editingFinished()
@@ -116,7 +116,7 @@ void MainWindow::on_spinBox_3_editingFinished()
 void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is clicked inside of, lol -P
 {
     ui->spinBox->setValue(G_RED); //-P
-    ui->spinBox_2->setValue(G_GREEN);
+    ui->sbox_ValueGreen->setValue(G_GREEN);
     ui->spinBox_3->setValue(G_BLUE); //-P
 
     gridToFrameData(); //on every click lol -P
@@ -154,7 +154,7 @@ void MainWindow::on_btn_ClearFrame_released() //Clear Frame
     G_BLUE = temp_B;
 
     ui->spinBox->setValue(G_RED); //-P
-    ui->spinBox_2->setValue(G_GREEN);
+    ui->sbox_ValueGreen->setValue(G_GREEN);
     ui->spinBox_3->setValue(G_BLUE); //-P
 }
 

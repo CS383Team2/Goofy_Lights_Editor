@@ -39,7 +39,7 @@ private slots:
 
     void on_spinBox_editingFinished();
 
-    void on_spinBox_2_editingFinished();
+    void on_sbox_ValueGreen_editingFinished();
 
     void on_spinBox_3_editingFinished();
 

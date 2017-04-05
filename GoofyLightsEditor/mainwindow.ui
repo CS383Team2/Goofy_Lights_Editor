@@ -32,7 +32,7 @@
    <string>Goofy Lights Editor!</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="btn_NewFrame">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -45,7 +45,7 @@
      <string>New Frame</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="btn_DeleteFrame">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -71,7 +71,7 @@
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="btn_TransUP">
     <property name="geometry">
      <rect>
       <x>840</x>
@@ -89,7 +89,7 @@
      <string>Up</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="btn_TransDwn">
     <property name="geometry">
      <rect>
       <x>840</x>
@@ -107,7 +107,7 @@
      <string>Down</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_5">
+   <widget class="QPushButton" name="btn_TransLeft">
     <property name="geometry">
      <rect>
       <x>800</x>
@@ -125,7 +125,7 @@
      <string>Left</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_6">
+   <widget class="QPushButton" name="btn_TransRight">
     <property name="geometry">
      <rect>
       <x>880</x>
@@ -143,7 +143,7 @@
      <string>Right</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_7">
+   <widget class="QPushButton" name="btn_PlayPause">
     <property name="geometry">
      <rect>
       <x>890</x>
@@ -156,7 +156,7 @@
      <string>Play/Pause</string>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox">
+   <widget class="QDoubleSpinBox" name="dsbox_FramDur">
     <property name="geometry">
      <rect>
       <x>230</x>
@@ -188,7 +188,7 @@
      <string>Frame Duration</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_8">
+   <widget class="QPushButton" name="btn_ScrollLeft">
     <property name="geometry">
      <rect>
       <x>760</x>
@@ -206,7 +206,7 @@
      <string>Scroll</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_9">
+   <widget class="QPushButton" name="btn_ScrollUp">
     <property name="geometry">
      <rect>
       <x>840</x>
@@ -224,7 +224,7 @@
      <string>Scroll</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_10">
+   <widget class="QPushButton" name="btn_ScrollRight">
     <property name="geometry">
      <rect>
       <x>920</x>
@@ -242,7 +242,7 @@
      <string>Scroll</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_11">
+   <widget class="QPushButton" name="btn_ScrollDwn">
     <property name="geometry">
      <rect>
       <x>840</x>
@@ -260,7 +260,7 @@
      <string>Scroll</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_12">
+   <widget class="QPushButton" name="btn_TransUpLeft">
     <property name="geometry">
      <rect>
       <x>800</x>
@@ -278,7 +278,7 @@
      <string>U/L</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_13">
+   <widget class="QPushButton" name="btn_TransUpRight">
     <property name="geometry">
      <rect>
       <x>880</x>
@@ -296,7 +296,7 @@
      <string>U/R</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_14">
+   <widget class="QPushButton" name="btn_TransDwnRight">
     <property name="geometry">
      <rect>
       <x>880</x>
@@ -314,7 +314,7 @@
      <string>D/R</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_15">
+   <widget class="QPushButton" name="btn_TransDwnLeft">
     <property name="geometry">
      <rect>
       <x>800</x>
@@ -376,7 +376,7 @@
      <string>Color Picker:</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_18">
+   <widget class="QPushButton" name="btn_CopyFrame">
     <property name="geometry">
      <rect>
       <x>400</x>
@@ -389,7 +389,7 @@
      <string>Copy Frame</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_19">
+   <widget class="QPushButton" name="btn_PasteFrame">
     <property name="geometry">
      <rect>
       <x>400</x>
@@ -441,7 +441,7 @@
      <string>Current Time</string>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+   <widget class="QDoubleSpinBox" name="dsbox_CurrTime">
     <property name="geometry">
      <rect>
       <x>780</x>
@@ -498,7 +498,7 @@
      </palette>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_23">
+   <widget class="QPushButton" name="btn_Mystery">
     <property name="geometry">
      <rect>
       <x>780</x>
@@ -527,7 +527,7 @@
      <number>255</number>
     </property>
    </widget>
-   <widget class="QSpinBox" name="spinBox_2">
+   <widget class="QSpinBox" name="sbox_ValueGreen">
     <property name="geometry">
      <rect>
       <x>607</x>
@@ -704,7 +704,7 @@
      <x>0</x>
      <y>0</y>
      <width>1000</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuSuper_Animator_Window">
