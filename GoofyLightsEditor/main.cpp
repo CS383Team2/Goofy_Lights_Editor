@@ -11,6 +11,7 @@
 
 int G_COL = 0; //initialize globals -P
 int G_ROW = 0;
+double G_SCALE = 0;
 
 int G_RED = 255;
 int G_GREEN = 0; //fixed -P

@@ -14,7 +14,7 @@ GridSquare::~GridSquare()
 
 QRectF GridSquare::boundingRect() const
 {
-    return QRectF(x,y,22,22); //x and y position the square before it's painted -P
+    return QRectF(x,y,22*G_SCALE,22*G_SCALE); //x and y position the square before it's painted -P
     //x, y are top left corner -P
 }
 

@@ -31,6 +31,15 @@ void SizeDialog::on_btnBox_OkClose_accepted()
 {
     G_COL=ui->sbox_Col->value();
     G_ROW=ui->sbox_Row->value(); //redundant redundant, shush -P
+
+    double max = 0;
+
+    if(G_COL > G_ROW)
+        max = G_COL;
+    else
+        max = G_ROW;
+
+    G_SCALE = (20.0 / max); //scaled based on a max size of 20x20 -P
 }
 
 void SizeDialog::on_btnBox_OkClose_rejected()

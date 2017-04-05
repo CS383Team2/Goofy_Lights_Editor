@@ -13,7 +13,7 @@ TimelineGrid::~TimelineGrid()
 
 QRectF TimelineGrid::boundingRect() const
 {
-    return QRectF(x,y,8,8); //x and y position the square before it's painted -P
+    return QRectF(x,y,8*G_SCALE,8*G_SCALE); //x and y position the square before it's painted -P
     //x, y are top left corner -P
 }
 

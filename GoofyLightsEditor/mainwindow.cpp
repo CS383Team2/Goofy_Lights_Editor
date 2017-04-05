@@ -36,10 +36,10 @@ MainWindow::MainWindow(QWidget *parent) :
     {
         for(int y=0; y<G_ROW; y++)
         {
-            square[x][y].x = (25*x);
-            square[x][y].y = (25*y);
-            square2[x][y].x = (10*x); //timeline magic about to happen here -P
-            square2[x][y].y = (10*y); //will add the magic soon -P
+            square[x][y].x = (25*x*G_SCALE);
+            square[x][y].y = (25*y*G_SCALE);
+            square2[x][y].x = (10*x*G_SCALE); //timeline magic about to happen here -P
+            square2[x][y].y = (10*y*G_SCALE); //will add the magic soon -P
             scene1->addItem(&square[x][y]);
             scene2->addItem(&square2[x][y]); //timeline testing here -P
         }
