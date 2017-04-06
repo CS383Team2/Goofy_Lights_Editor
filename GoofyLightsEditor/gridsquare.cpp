@@ -5,6 +5,7 @@
 GridSquare::GridSquare()
 {
     Selected = false; //constructor
+    ClearSquare = false;
 }
 
 GridSquare::~GridSquare()
@@ -23,19 +24,24 @@ void GridSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
     QRectF rec = boundingRect();
     QBrush brush(square_RGB);
 
-    square_RGB.setRgb(G_RED, G_GREEN, G_BLUE, 255); //grab the color... -P
-
     if(Selected)
     {
+        if (ClearSquare)
+        {
+            square_RGB.setRgb(0, 0, 0, 255);
+            ClearSquare = false;
+        }
+        else
+            square_RGB.setRgb(G_RED, G_GREEN, G_BLUE, 255); //grab the color... -P
             //QColor(int r, int g, int b, int a = 255) //use this, last argument always 255
 
-            brush.setColor(square_RGB); //HELLO RGB COLOR Alpha locked to 255 -green -P
+        brush.setColor(square_RGB); //HELLO RGB COLOR Alpha locked to 255 -green -P
 
             //The color of any grid square can be had by brush.color() -P
     }
 
     square_RGB = brush.color();
-    
+
     QPen pen = square_RGB;
 
     painter->setPen(pen);
@@ -54,3 +60,10 @@ void GridSquare::mousePressEvent(QGraphicsSceneMouseEvent *event) //-P
     update(); //repaint the grid whenever a cell is clicked
 }
 
+void GridSquare::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
+{
+    Selected = true;
+    ClearSquare = true;
+    QGraphicsItem::mouseDoubleClickEvent(event);
+    update();
+}
