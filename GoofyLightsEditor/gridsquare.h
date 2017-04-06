@@ -19,6 +19,7 @@ public:
     QColor square_RGB = Qt::black;
 
     bool Selected; //is this square selected? -P
+    bool ClearSquare;
 
     int x = 0; //drawing locations -P
     int y = 0;
@@ -29,6 +30,7 @@ public:
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event); //need to know when the things are clicked on -P
+    void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
 };
 
 #endif // GRIDSQUARE_H
