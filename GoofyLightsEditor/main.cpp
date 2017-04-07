@@ -48,8 +48,6 @@ int main(int argc, char *argv[])
     t_RGB ** rgb_data;
 
     t_FrameData FrameData;  // Local frame data
-    FrameData.r = r;
-    FrameData.c = c;
     FrameList frames(r, c); // linked list for frame data. r c for print function
 
     //Frame 0

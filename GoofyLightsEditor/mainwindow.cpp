@@ -54,8 +54,6 @@ MainWindow::MainWindow(QWidget *parent) :
     // set grid size
 
     //t_FrameData FrameData;  // THE frame data (this is in mainwindow.h) -P
-    FrameData.r = G_ROW;
-    FrameData.c = G_COL;
     FrameList framelist(G_ROW, G_COL); // linked list for frame data. r c for print function
 
 
