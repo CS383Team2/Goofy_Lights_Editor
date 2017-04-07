@@ -237,11 +237,11 @@ void FrameList::PrintNode(){
     */
 
     while(p != NULL){
-        cout << "ID: " << p->FrameData.ID << "\tDur: " << p->FrameData.durration << endl;
+        cout << "ID: " << p->FrameData.ID << "\tDur: " << p->FrameData.duration << endl;
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
-                cout << p->FrameData.newdata[i][j].square_RGB.red() << "," << p->FrameData.newdata[i][j].square_RGB.green()
-                     << "," << p->FrameData.newdata[i][j].square_RGB.blue() << " : ";
+                cout << p->FrameData.squareData[i][j].square_RGB.red() << "," << p->FrameData.squareData[i][j].square_RGB.green()
+                     << "," << p->FrameData.squareData[i][j].square_RGB.blue() << " : ";
             }
             cout << endl;
         }

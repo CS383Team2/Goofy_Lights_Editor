@@ -23,7 +23,7 @@ int G_FRAMECOUNT = 0; //hah -P
 long FrameIDCount = 0;
 
 // creates the dynamic RGB array
-t_RGB** create_RGB(int r, int c);
+GridSquare** create_RGB(int r, int c);
 
 int main(int argc, char *argv[])
 {
@@ -41,21 +41,19 @@ int main(int argc, char *argv[])
 
     // linked list test
     std::cout << "FrameList testing" << std::endl;
+    //Arbitrary size for testing only
+    G_ROW = 5;
+    G_COL = 3;
 
-    // set arbitrary grid size
-    int r = 5;
-    int c = 3;
-    GridSquare **rgb_data = new GridSquare*[r]; //Initial gridsquare testing
+    GridSquare **rgb_data = new GridSquare*[G_ROW]; //Initial gridsquare testing
 
-    for (int i = 0; i < r; ++i)
+    for (int i = 0; i < G_ROW; ++i)
     {
-        rgb_data[i] = new GridSquare[c];
+        rgb_data[i] = new GridSquare[G_COL];
     }
 
     t_FrameData FrameData;  // Local frame data
-    FrameData.r = r;
-    FrameData.c = c;
-    FrameList frames(r, c); // linked list for frame data. r c for print function
+    FrameList frames(G_ROW, G_COL); // linked list for frame data. r c for print function
 
     //Frame 0
     // Generate new rgb_data arrary
@@ -63,8 +61,8 @@ int main(int argc, char *argv[])
 
     // fill rgb_data for Frame 0
     unsigned short color = 0;   // arbritrary data
-    for (int i = 0; i < r; i++){
-        for (int j = 0; j < c; j++){
+    for (int i = 0; i < G_ROW; i++){
+        for (int j = 0; j < G_COL; j++){
             rgb_data[i][j].square_RGB.setRed(color++);
             rgb_data[i][j].square_RGB.setGreen(color++);
             rgb_data[i][j].square_RGB.setBlue(color++);
@@ -72,49 +70,50 @@ int main(int argc, char *argv[])
         }
     }
     FrameData.ID = FrameIDCount++;
-    FrameData.durration = 123;
-    FrameData.newdata = rgb_data;
+    FrameData.duration = 123;
+    FrameData.squareData = rgb_data;
+    translateFrame(FrameData, D_UP);
     frames.AddTail(FrameData);  // add this frameData to linked list
     rgb_data  = NULL; // disconnect this pointer from rgb_data
 
 
     // next frame Frame 1
     // Generate new rgb_data arrary
-    /*rgb_data = create_RGB(r, c);
+    rgb_data = create_RGB(G_ROW, G_COL);
 
      // fill rgb for Frame 1
     color = 100; // arbritrary increment to make data different
-    for (int i = 0; i < r; i++){
-        for (int j = 0; j < c; j++){
-            rgb_data[i][j].R = color++;
-            rgb_data[i][j].G = color++;
-            rgb_data[i][j].B = color++;
+    for (int i = 0; i < G_ROW; i++){
+        for (int j = 0; j < G_COL; j++){
+            rgb_data[i][j].square_RGB.setRed(color++);
+            rgb_data[i][j].square_RGB.setGreen(color++);
+            rgb_data[i][j].square_RGB.setBlue(color++);
         }
     }
     FrameData.ID = FrameIDCount++;
-    FrameData.durration = 212;
-    FrameData.data = rgb_data;
+    FrameData.duration = 212;
+    FrameData.squareData = rgb_data;
     frames.AddTail(FrameData);
     rgb_data  = NULL; // disconnect this pointer from rgb_data
 
 
     // next frame Frame 2
-    rgb_data = create_RGB(r, c);
+    rgb_data = create_RGB(G_ROW, G_COL);
     FrameData.ID = FrameIDCount++;
-    FrameData.durration = 214;
-    FrameData.data = rgb_data;
+    FrameData.duration = 214;
+    FrameData.squareData = rgb_data;
     fillFrame2(FrameData, 21, 32, 45);
     frames.AddTail(FrameData);
 
     // copyFrame Test
     t_FrameData newFrame;
-    rgb_data = create_RGB(r, c);
+    rgb_data = create_RGB(G_ROW, G_COL);
     newFrame.ID = FrameIDCount++;
-    newFrame.durration = 217;
-    newFrame.data = rgb_data;
+    newFrame.duration = 217;
+    newFrame.squareData = rgb_data;
     copyFrame(newFrame, FrameData);
     frames.AddTail(newFrame);
-*/
+
 
     frames.PrintNode();
 

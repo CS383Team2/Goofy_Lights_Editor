@@ -47,13 +47,13 @@ int FileOperations::SaveToFile(FrameList frameList, QString fileName){
 
             for(int i = 0; i < frameList.GetRowCount(); i++){
                 for(int j = 0; j < frameList.GetColCount(); j++){
-                    stream << frameData.data[i][j].R << " "
-                           << frameData.data[i][j].G << " "
-                           << frameData.data[i][j].B << " ";
+                    stream << frameData.squareData[i][j].square_RGB.red() << " "
+                           << frameData.squareData[i][j].square_RGB.green() << " "
+                           << frameData.squareData[i][j].square_RGB.blue() << " ";
                 }
                 stream << endl;
             }
-            elapsedTime = elapsedTime.addMSecs(frameData.durration);
+            elapsedTime = elapsedTime.addMSecs(frameData.duration);
         }while(frameList.AdvanceList());
         file.close();
         return 1;
@@ -97,7 +97,7 @@ FrameList FileOperations::LoadFromFile(QString fileName){
 
         //std::cout << frameData.ID << "\n";
 
-        t_RGB ** data = create_RGB(row, col);
+        GridSquare ** data = create_RGB(row, col);
 
         for(int i = 0; i < row; i++){
             QString line = fileContents.readLine();
@@ -105,18 +105,18 @@ FrameList FileOperations::LoadFromFile(QString fileName){
             // qDebug() << rowValues << endl;
             int j = 0;
             for(int k = 0; k < rowValues.size(); k += 3){
-                data[i][j].R = rowValues[k].toShort();
-                data[i][j].G = rowValues[k + 1].toShort();
-                data[i][j].B = rowValues[k + 2].toShort();
+                data[i][j].square_RGB.setRed(rowValues[k].toShort());
+                data[i][j].square_RGB.setGreen(rowValues[k + 1].toShort());
+                data[i][j].square_RGB.setBlue(rowValues[k + 2].toShort());
                 j++;
             }
         }
-        frameData.data      = data;
+        frameData.squareData      = data;
         QString timeStr     = fileContents.readLine();
         QTime time;
         time                = QTime::fromString(timeStr, "hh:mm:ss.zzz");
         nextTime            = time;
-        frameData.durration = currTime.msecsTo(nextTime);
+        frameData.duration = currTime.msecsTo(nextTime);
         frameList.AddTail(frameData);
         // frameList.PrintNode();
         currentElement++;

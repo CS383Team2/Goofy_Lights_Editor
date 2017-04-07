@@ -21,7 +21,7 @@
 // Prototypes
 
 // creates a RGB Array and returns a pointer to it.
-t_RGB** create_RGB(int r, int c);
+GridSquare** create_RGB(int r, int c);
 
 // Takes origional frame and returnes a new copy of it
 int copyFrame(t_FrameData &copyFrame, t_FrameData origFrame);
@@ -30,7 +30,7 @@ int copyFrame(t_FrameData &copyFrame, t_FrameData origFrame);
 int translateFrame(t_FrameData d, int direction);
 
 // Fills given frame with color
-int fillFrame(t_FrameData &d, t_RGB rgb_fill);
+int fillFrame(t_FrameData &d, QColor rgb_fill);
 int fillFrame2(t_FrameData &d, unsigned short r, unsigned short g, unsigned short b);
 
 #endif // FRAMEMANIPULATION_H
