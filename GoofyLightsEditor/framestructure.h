@@ -1,6 +1,8 @@
 #ifndef FRAMESTRUCTURE_H
 #define FRAMESTRUCTURE_H
 
+#include "gridsquare.h"
+
 // RGB
 typedef struct
 {
@@ -16,7 +18,8 @@ typedef struct
     unsigned int durration;   // Frame Duration in MS
     unsigned short r;   //Number of rows in frame
     unsigned short c;   //Number of columns in frame
-    t_RGB** data;  //Frame data
+    t_RGB **data;
+    GridSquare **newdata;  //Frame data
 } t_FrameData;
 
 #endif // FRAMESTRUCTURE_H

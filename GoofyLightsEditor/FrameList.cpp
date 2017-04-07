@@ -240,8 +240,8 @@ void FrameList::PrintNode(){
         cout << "ID: " << p->FrameData.ID << "\tDur: " << p->FrameData.durration << endl;
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
-                cout << p->FrameData.data[i][j].R << "," << p->FrameData.data[i][j].G
-                     << "," << p->FrameData.data[i][j].B << " : ";
+                cout << p->FrameData.newdata[i][j].square_RGB.red() << "," << p->FrameData.newdata[i][j].square_RGB.green()
+                     << "," << p->FrameData.newdata[i][j].square_RGB.blue() << " : ";
             }
             cout << endl;
         }

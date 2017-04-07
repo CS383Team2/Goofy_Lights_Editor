@@ -45,7 +45,12 @@ int main(int argc, char *argv[])
     // set arbitrary grid size
     int r = 5;
     int c = 3;
-    t_RGB ** rgb_data;
+    GridSquare **rgb_data = new GridSquare*[r]; //Initial gridsquare testing
+
+    for (int i = 0; i < r; ++i)
+    {
+        rgb_data[i] = new GridSquare[c];
+    }
 
     t_FrameData FrameData;  // Local frame data
     FrameData.r = r;
@@ -54,27 +59,28 @@ int main(int argc, char *argv[])
 
     //Frame 0
     // Generate new rgb_data arrary
-    rgb_data = create_RGB(r, c);
+    //rgb_data = create_RGB(r, c);
 
     // fill rgb_data for Frame 0
     unsigned short color = 0;   // arbritrary data
     for (int i = 0; i < r; i++){
         for (int j = 0; j < c; j++){
-            rgb_data[i][j].R = color++;
-            rgb_data[i][j].G = color++;
-            rgb_data[i][j].B = color++;
+            rgb_data[i][j].square_RGB.setRed(color++);
+            rgb_data[i][j].square_RGB.setGreen(color++);
+            rgb_data[i][j].square_RGB.setBlue(color++);
+
         }
     }
     FrameData.ID = FrameIDCount++;
     FrameData.durration = 123;
-    FrameData.data = rgb_data;
+    FrameData.newdata = rgb_data;
     frames.AddTail(FrameData);  // add this frameData to linked list
     rgb_data  = NULL; // disconnect this pointer from rgb_data
 
 
     // next frame Frame 1
     // Generate new rgb_data arrary
-    rgb_data = create_RGB(r, c);
+    /*rgb_data = create_RGB(r, c);
 
      // fill rgb for Frame 1
     color = 100; // arbritrary increment to make data different
@@ -108,7 +114,7 @@ int main(int argc, char *argv[])
     newFrame.data = rgb_data;
     copyFrame(newFrame, FrameData);
     frames.AddTail(newFrame);
-
+*/
 
     frames.PrintNode();
 
@@ -119,7 +125,7 @@ int main(int argc, char *argv[])
     // frames.PrintNode();
     // FrameList frameList = FileOperations::LoadFromFile("autofill.proj");
     // frameList.PrintNode();
-    FileOperations::SaveToFile(frames, "autofill.proj");
+    //FileOperations::SaveToFile(frames, "autofill.proj");
 
 
     frames.DeleteList();
