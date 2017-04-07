@@ -25,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
     scene2 = new QGraphicsScene(this);
     ui->graphicsView_2->setScene(scene2); //give the timeline to the graphics view -Paul
 
-    //GridSquare **square = new GridSquare*[G_COL];  //Type is GridSquare, square is object
+    //GridSquare **square = new GridSquare*[G_COL];  //This is now in mainwindow.h -P
     for (int i = 0; i < G_COL; ++i)
     {
         square[i] = new GridSquare[G_ROW];
