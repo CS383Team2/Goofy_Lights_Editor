@@ -1,6 +1,7 @@
 
 #include "FrameManipulation.h"
 #include <iostream>
+#include "globals.h"
 
 // Function creates a 2d memory element of the RGB struct then passes back the pointer to it.
 t_RGB** create_RGB(int r, int c)
@@ -24,14 +25,11 @@ int copyFrame(t_FrameData &copyFrame, t_FrameData origFrame)
     if (origFrame.data == NULL)
         return ERROR;
 
-    // Row/col data
-    unsigned short row = origFrame.r;
-    unsigned short col = origFrame.c;
     int i, j; // loop control
 
     //Fill rgb_data with data from FrameData
-    for (i = 0; i < row; i++) {
-        for (j = 0; j < col; j++) {
+    for (i = 0; i < G_ROW; i++) {
+        for (j = 0; j < G_COL; j++) {
             copyFrame.data[i][j] = origFrame.data[i][j];
         }
     }
@@ -53,11 +51,11 @@ int translateFrame(t_FrameData d, int direction)
     //Condition for up, up left, and up right. Uses recursion for left and right translation
     if(direction == D_UP || direction == D_UP_L || direction == D_UP_R){
         temp = d.data[0];
-        for(i = 0; i < d.r-1; i++){
+        for(i = 0; i < G_ROW-1; i++){
             d.data[i] = d.data[i+1];
         }
         d.data[i] = temp;
-        for(int j = 0; j < d.c; j++){
+        for(int j = 0; j < G_COL; j++){
             d.data[i][j] = emptyRGB;
 
         }
@@ -69,12 +67,12 @@ int translateFrame(t_FrameData d, int direction)
     }
     //Condition for down, down left, and down right. Uses recursion for left and right translation
     if(direction == D_DWN || direction == D_DWN_L || direction == D_DWN_R){
-        temp = d.data[d.r-1];
-        for(i = d.r-1; i > 0; i--){
+        temp = d.data[G_ROW-1];
+        for(i = G_ROW-1; i > 0; i--){
             d.data[i] = d.data[i-1];
         }
         d.data[i] = temp;
-        for(j = 0; j < d.c; j++){
+        for(j = 0; j < G_COL; j++){
             d.data[i][j] = emptyRGB;
         }
         if(direction == D_DWN_L)
@@ -84,23 +82,23 @@ int translateFrame(t_FrameData d, int direction)
     }
     //Condition for left transition
     if(direction == D_LEFT){
-        for(i = 0; i < d.r; i++){
-            for (j = 0; j < d.c-1; j++){
+        for(i = 0; i < G_ROW; i++){
+            for (j = 0; j < G_COL-1; j++){
                 d.data[i][j] = d.data[i][j+1];
             }
         }
-        for(i = 0; i < d.r; i++){
+        for(i = 0; i < G_ROW; i++){
             d.data[i][j] = emptyRGB;
         }
      }
     //Condition for right transition
     if(direction == D_RIGHT){
-        for(i = 0; i < d.r; i++){
-            for (j = d.c-1; j > 0; j--){
+        for(i = 0; i < G_ROW; i++){
+            for (j = G_COL-1; j > 0; j--){
                 d.data[i][j] = d.data[i][j-1];
             }
         }
-        for(i = 0; i < d.r; i++){
+        for(i = 0; i < G_ROW; i++){
             d.data[i][j] = emptyRGB;
         }
      }
@@ -111,9 +109,6 @@ int translateFrame(t_FrameData d, int direction)
 // Fills given frame with color
 int fillFrame(t_FrameData &d, t_RGB rgb_fill)
 {
-    // Dereference
-    unsigned short row = d.r;
-    unsigned short col = d.c;
     int i, j; // loop control
 
     // Error checking
@@ -121,8 +116,8 @@ int fillFrame(t_FrameData &d, t_RGB rgb_fill)
         return ERROR;
 
     //Fill data
-    for (i = 0; i < row; i++) {
-        for (j = 0; j < col; j++) {
+    for (i = 0; i < G_ROW; i++) {
+        for (j = 0; j < G_COL; j++) {
             d.data[i][j] = rgb_fill;
         }
     }

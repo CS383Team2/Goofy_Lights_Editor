@@ -14,8 +14,6 @@ typedef struct
 {
     unsigned long ID;         // Unique ID of frame. Static once generated.
     unsigned int durration;   // Frame Duration in MS
-    unsigned short r;   //Number of rows in frame
-    unsigned short c;   //Number of columns in frame
     t_RGB** data;  //Frame data
 } t_FrameData;
 
