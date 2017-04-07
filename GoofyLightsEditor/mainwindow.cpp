@@ -54,14 +54,14 @@ MainWindow::MainWindow(QWidget *parent) :
     // set grid size
 
     //t_FrameData FrameData;  // THE frame data (this is in mainwindow.h) -P
-    FrameData.r = G_ROW;
-    FrameData.c = G_COL;
+    //FrameData.r = G_ROW;
+    //FrameData.c = G_COL;
     FrameList framelist(G_ROW, G_COL); // linked list for frame data. r c for print function
 
 
     FrameData.ID = FrameID++;
-    FrameData.durration = 0.20;
-    FrameData.data = create_RGB(G_ROW, G_COL);  // Generate new rgb_data arrary
+    FrameData.duration = 0.20;
+    //FrameData.data = create_RGB(G_ROW, G_COL);  // Generate new rgb_data arrary
     fillFrame2(FrameData, 100, 100, 100);             // Clear initial frame
     framelist.AddTail(FrameData);               // add this frameData to linked list
 
