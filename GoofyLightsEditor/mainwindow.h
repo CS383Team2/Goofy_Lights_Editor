@@ -37,7 +37,7 @@ private slots:
     FrameList on_actionOpenProject_triggered();
 
 
-    void on_spinBox_editingFinished();
+    void on_sbox_ValueRed_editingFinished();
 
     void on_sbox_ValueGreen_editingFinished();
 

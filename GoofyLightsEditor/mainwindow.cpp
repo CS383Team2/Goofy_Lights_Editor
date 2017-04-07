@@ -47,7 +47,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ColorWheel *wheel = new ColorWheel;
     QSpinBox *spinbox = new QSpinBox;
-    connect(wheel, SIGNAL(colorChange(QColor)), spinbox, SLOT(on_spinBox_editingFinished()));
+    connect(wheel, SIGNAL(colorChange(QColor)), spinbox, SLOT(on_sbox_ValueRed_editingFinished()));
 
     //Start the FrameData nonsense -P
     //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -94,10 +94,10 @@ FrameList MainWindow::on_actionOpenProject_triggered()
 }
 
 
-void MainWindow::on_spinBox_editingFinished()
+void MainWindow::on_sbox_ValueRed_editingFinished()
 {
     //crap -P
-    G_RED = ui->spinBox->value();
+    G_RED = ui->sbox_ValueRed->value();
 }
 
 void MainWindow::on_sbox_ValueGreen_editingFinished()
@@ -113,7 +113,7 @@ void MainWindow::on_sbox_ValueBlue_editingFinished()
 
 void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is clicked inside of, lol -P
 {
-    ui->spinBox->setValue(G_RED); //-P
+    ui->sbox_ValueRed->setValue(G_RED); //-P
     ui->sbox_ValueGreen->setValue(G_GREEN);
     ui->sbox_ValueBlue->setValue(G_BLUE); //-P
 
@@ -152,7 +152,7 @@ void MainWindow::on_btn_ClearFrame_released() //Clear Frame
     G_GREEN = temp_G;
     G_BLUE = temp_B;
 
-    ui->spinBox->setValue(G_RED); //-P
+    ui->sbox_ValueRed->setValue(G_RED); //-P
     ui->sbox_ValueGreen->setValue(G_GREEN);
     ui->sbox_ValueBlue->setValue(G_BLUE); //-P
 }
