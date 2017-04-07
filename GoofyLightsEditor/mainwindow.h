@@ -23,8 +23,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    GridSquare **square = new GridSquare*[G_COL];  //Type is GridSquare, square is object
-    TimelineGrid **square2 = new TimelineGrid*[G_COL];  //Type is TimelineGrid, square2 is object
+    GridSquare **gridGridSquare = new GridSquare*[G_COL];  //Type is GridSquare, square is object
+    TimelineGrid **timelineTimelineGrid = new TimelineGrid*[G_COL];  //Type is TimelineGrid, square2 is object
     t_FrameData FrameData;  // THE frame data (this is in mainwindow.h) -P
 
     void gridToFrameData();
@@ -57,9 +57,9 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    QGraphicsScene *scene1; //grid -P
+    QGraphicsScene *gridScene; //grid -P
 
-    QGraphicsScene *scene2; //timeline -P
+    QGraphicsScene *timelineScene; //timeline -P
 
 
     void createActions();
