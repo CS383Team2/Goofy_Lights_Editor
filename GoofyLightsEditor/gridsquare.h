@@ -20,6 +20,7 @@ public:
 
     bool Selected; //is this square selected? -P
     bool ClearSquare;
+    bool leftclick;
 
     int x = 0; //drawing locations -P
     int y = 0;
