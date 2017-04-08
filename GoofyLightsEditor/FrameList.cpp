@@ -57,6 +57,7 @@ void FrameList::DeleteNode(){
     else{
         head = p->next;
         p->next = NULL;
+        head->prev = NULL;
         // Delete Attached RGB structure here
         delete p;
     }
@@ -72,6 +73,7 @@ void FrameList::AddNode_Middle(t_FrameData x, int pos){
     NodePtr insert = new Node;
     insert -> FrameData = x;
     insert -> next = NULL;
+    insert -> prev = NULL;
     
     if (pos == 0)
     {
