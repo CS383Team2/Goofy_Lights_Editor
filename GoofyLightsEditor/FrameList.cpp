@@ -57,7 +57,8 @@ void FrameList::DeleteNode(){
     else{
         head = p->next;
         p->next = NULL;
-        head->prev = NULL;
+        if (head != NULL)
+            head->prev = NULL;
         // Delete Attached RGB structure here
         delete p;
     }
