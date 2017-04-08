@@ -24,16 +24,16 @@ void FrameList::AddTail( t_FrameData n ){
     //Check if the list is empty
     if(head == NULL ){
         head = p;
+        tail = p;
+        p->prev = NULL;
     }
     else{
-        NodePtr temp = head;
-        while (temp -> next != NULL)
-        {
-            temp = temp -> next;
-        }
-        temp -> next = p;
-        // Previous pointer adjustment for new tail.
-        p -> prev = temp;
+        // next/prev pointers
+        tail -> next = p;
+        p -> prev = tail;
+
+        // update tail pointer
+        tail = p;
     }
     this->count++;
 }

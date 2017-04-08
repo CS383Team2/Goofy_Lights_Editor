@@ -20,6 +20,7 @@ private:
     typedef struct Node* NodePtr;
 
     NodePtr head;
+    NodePtr tail;
     int row, col;
     int count;
 
@@ -42,14 +43,7 @@ public:
 
     // Destructor
     ~FrameList(){
-        NodePtr p = head;
-        NodePtr n;
-
-        while (p != NULL){
-            n = p;
-            p = p->next;
-            delete n;
-        }
+      FrameList::DeleteList();
     }                                                                                                                      
     // Add a node onto the end of the linked list.
     void AddTail(t_FrameData x);
@@ -61,7 +55,7 @@ public:
     // Delete the first node in the list.
     void DeleteNode();
 	
-    // Add node at position x in the list
+    // Add node after position x
     // If pos == 0 this refers to the head node, and
     // If pos == count - 1 this refers to the tail node.
     void AddNode_Middle(t_FrameData x, int pos);
