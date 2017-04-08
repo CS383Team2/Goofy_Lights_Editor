@@ -55,9 +55,8 @@ public:
     // Delete the first node in the list.
     void DeleteNode();
 	
-    // Add node after position x
-    // If pos == 0 this refers to the head node, and
-    // If pos == count - 1 this refers to the tail node.
+    // Add node at position x
+    // 0 will be the first node. 1 would be the 2nd node in the list.
     void AddNode_Middle(t_FrameData x, int pos);
 	
     // Delete node at position x in the list

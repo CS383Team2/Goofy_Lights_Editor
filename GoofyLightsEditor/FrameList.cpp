@@ -75,32 +75,40 @@ void FrameList::AddNode_Middle(t_FrameData x, int pos){
     insert -> next = NULL;
     insert -> prev = NULL;
     
-    if (pos == 0)
+    if (head == NULL)
+    {
+        head = insert;
+    }
+
+    else if (pos == 0)
     {
         insert -> next = head;
-        current = insert -> next;
+        insert -> prev = NULL;
+        head  -> prev = insert;
         head = insert;
-        // Adjustment of previous pointer for addition of a new head node.
-        current -> prev = head;
         this->count++;
         return;
     }
     else
     {
-        current = current -> next;                  // position 1 in the list (head -> next)
-        tempCount++;                                // Both tempCounter and current are refrencing
-        while (tempCount != pos)
+        while (tempCount != pos-1 && current != NULL)
         {
             current = current -> next;
             tempCount++;
         }
         insert -> next = current -> next;
         // Adjustment of previous pointer for addition of node x
-        NodePtr p = current -> next;
-        p -> prev = insert;
+        if (current -> next != NULL)
+        {
+            NodePtr p = current -> next;
+            p -> prev = insert;
+        }
+        // else if current -> next == null then insert == null above
+
         // Adjustment of prev pointer for node added at position x
         current -> next = insert;
         insert -> prev = current;
+
         this->count++;
         return;
     }
