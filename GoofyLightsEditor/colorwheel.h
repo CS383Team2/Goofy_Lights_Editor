@@ -34,6 +34,7 @@ private:
     QImage squareImage;
     QPixmap wheel;
     bool mouseDown;
+    bool leftclick;
     QPoint lastPos;
     int margin;
     int wheelWidth;

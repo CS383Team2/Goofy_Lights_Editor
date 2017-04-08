@@ -16,6 +16,9 @@ double G_SCALE = 0;
 int G_RED = 255;
 int G_GREEN = 0; //fixed -P
 int G_BLUE = 0;
+int G_RED_RIGHT = 0;
+int G_GREEN_RIGHT = 0;
+int G_BLUE_RIGHT = 0;
 
 int G_FRAMECOUNT = 0; //hah -P
 

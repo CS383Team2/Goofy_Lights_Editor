@@ -133,6 +133,7 @@ void MainWindow::on_btn_FillFrame_clicked() //Fill Frame
         for(int y=0; y<G_ROW; y++)
         {
             square[x][y].Selected = true;
+            square[x][y].leftclick = true;
             square[x][y].update(); //Fill that frame son -P
         }
     }
@@ -170,6 +171,7 @@ void MainWindow::on_btn_ClearFrame_pressed() //Clear Frame
         for(int y=0; y<G_ROW; y++)
         {
             square[x][y].Selected = true;
+            square[x][y].leftclick = true;
             //BLACK
             G_RED = 0;
             G_GREEN = 0;
