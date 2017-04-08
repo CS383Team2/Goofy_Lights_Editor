@@ -19,43 +19,41 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    scene1 = new QGraphicsScene(this);
-    ui->graphicsView->setScene(scene1); //give the grid to the graphics view -Paul
+    gridScene = new QGraphicsScene(this);
+    ui->gView_Grid->setScene(gridScene); //give the grid to the graphics view -Paul
 
-    scene2 = new QGraphicsScene(this);
-    ui->graphicsView_2->setScene(scene2); //give the timeline to the graphics view -Paul
+    timelineScene = new QGraphicsScene(this);
+    ui->gView_Timeline->setScene(timelineScene); //give the timeline to the graphics view -Paul
 
-    //GridSquare **square = new GridSquare*[G_COL];  //Type is GridSquare, square is object
+    //GridSquare **square = new GridSquare*[G_COL];  //This is now in mainwindow.h -P
     for (int i = 0; i < G_COL; ++i)
     {
-        square[i] = new GridSquare[G_ROW];
-        square2[i] = new TimelineGrid[G_ROW];
+        gridGridSquare[i] = new GridSquare[G_ROW];
+        timelineTimelineGrid[i] = new TimelineGrid[G_ROW];
     }
 
     for(int x=0; x<G_COL; x++)
     {
         for(int y=0; y<G_ROW; y++)
         {
-            square[x][y].x = (25*x*G_SCALE);
-            square[x][y].y = (25*y*G_SCALE);
-            square2[x][y].x = (5.9*x*G_SCALE); //timeline magic about to happen here -P
-            square2[x][y].y = (5.9*y*G_SCALE); //will add the magic soon -P
-            scene1->addItem(&square[x][y]);
-            scene2->addItem(&square2[x][y]); //timeline testing here -P
+            gridGridSquare[x][y].x = (25*x*G_SCALE);
+            gridGridSquare[x][y].y = (25*y*G_SCALE);
+            timelineTimelineGrid[x][y].x = (5.9*x*G_SCALE); //timeline magic about to happen here -P
+            timelineTimelineGrid[x][y].y = (5.9*y*G_SCALE); //will add the magic soon -P
+            gridScene->addItem(&gridGridSquare[x][y]);
+            timelineScene->addItem(&timelineTimelineGrid[x][y]); //timeline testing here -P
         }
     }
 
     ColorWheel *wheel = new ColorWheel;
     QSpinBox *spinbox = new QSpinBox;
-    connect(wheel, SIGNAL(colorChange(QColor)), spinbox, SLOT(on_spinBox_editingFinished()));
+    connect(wheel, SIGNAL(colorChange(QColor)), spinbox, SLOT(on_sbox_ValueRed_editingFinished()));
 
     //Start the FrameData nonsense -P
     //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     // set grid size
 
     //t_FrameData FrameData;  // THE frame data (this is in mainwindow.h) -P
-    FrameData.r = G_ROW;
-    FrameData.c = G_COL;
     FrameList framelist(G_ROW, G_COL); // linked list for frame data. r c for print function
 
 
@@ -96,10 +94,10 @@ FrameList MainWindow::on_actionOpenProject_triggered()
 }
 
 
-void MainWindow::on_spinBox_editingFinished()
+void MainWindow::on_sbox_ValueRed_editingFinished()
 {
     //crap -P
-    G_RED = ui->spinBox->value();
+    G_RED = ui->sbox_ValueRed->value();
 }
 
 void MainWindow::on_sbox_ValueGreen_editingFinished()
@@ -115,7 +113,7 @@ void MainWindow::on_sbox_ValueBlue_editingFinished()
 
 void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is clicked inside of, lol -P
 {
-    ui->spinBox->setValue(G_RED); //-P
+    ui->sbox_ValueRed->setValue(G_RED); //-P
     ui->sbox_ValueGreen->setValue(G_GREEN);
     ui->sbox_ValueBlue->setValue(G_BLUE); //-P
 
@@ -132,9 +130,9 @@ void MainWindow::on_btn_FillFrame_clicked() //Fill Frame
     {
         for(int y=0; y<G_ROW; y++)
         {
-            square[x][y].Selected = true;
-            square[x][y].leftclick = true;
-            square[x][y].update(); //Fill that frame son -P
+            gridGridSquare[x][y].Selected = true;
+            gridGridSquare[x][y].leftclick = true;
+            gridGridSquare[x][y].update(); //Fill that frame son -P
         }
     }
 
@@ -155,7 +153,7 @@ void MainWindow::on_btn_ClearFrame_released() //Clear Frame
     G_GREEN = temp_G;
     G_BLUE = temp_B;
 
-    ui->spinBox->setValue(G_RED); //-P
+    ui->sbox_ValueRed->setValue(G_RED); //-P
     ui->sbox_ValueGreen->setValue(G_GREEN);
     ui->sbox_ValueBlue->setValue(G_BLUE); //-P
 }
@@ -170,13 +168,13 @@ void MainWindow::on_btn_ClearFrame_pressed() //Clear Frame
     {
         for(int y=0; y<G_ROW; y++)
         {
-            square[x][y].Selected = true;
-            square[x][y].leftclick = true;
+            gridGridSquare[x][y].Selected = true;
+            gridGridSquare[x][y].leftclick = true;
             //BLACK
             G_RED = 0;
             G_GREEN = 0;
             G_BLUE = 0;
-            square[x][y].update(); //Fill that frame son -P
+            gridGridSquare[x][y].update(); //Fill that frame son -P
         }
     }
 
@@ -192,10 +190,10 @@ void MainWindow::gridToFrameData() //stitching rubbish -P
     for (int i = 0; i < G_ROW; i++){
         for (int j = 0; j < G_COL; j++){
             //qDebug() << FrameData.data[i][j].R;
-            //qDebug() << square[i][j].square_RGB.red();
-            FrameData.data[i][j].R = square[j][i].square_RGB.red(); //wowzers, that's stitched together -P
-            FrameData.data[i][j].G = square[j][i].square_RGB.green(); //yes, i and j are switched in square. Get over it -P
-            FrameData.data[i][j].B = square[j][i].square_RGB.blue(); //-P
+            //qDebug() << gridGridSquare[i][j].square_RGB.red();
+            FrameData.data[i][j].R = gridGridSquare[j][i].square_RGB.red(); //wowzers, that's stitched together -P
+            FrameData.data[i][j].G = gridGridSquare[j][i].square_RGB.green(); //yes, i and j are switched in square. Get over it -P
+            FrameData.data[i][j].B = gridGridSquare[j][i].square_RGB.blue(); //-P
         }
     }
 }
@@ -206,7 +204,7 @@ void MainWindow::FrameDataToGrid()
     for (int i = 0; i < G_ROW; i++){
         for (int j = 0; j < G_COL; j++){
             //wowzers, the stitching -P
-            square[j][i].square_RGB.setRgb(FrameData.data[i][j].R, FrameData.data[i][j].G, FrameData.data[i][j].B, 255);
+            gridGridSquare[j][i].square_RGB.setRgb(FrameData.data[i][j].R, FrameData.data[i][j].G, FrameData.data[i][j].B, 255);
             //yes i and j still switched in frame
         }
     }
@@ -218,8 +216,8 @@ void MainWindow::updateTimeline() //fix the update lag later -P
     {
         for(int y=0; y<G_ROW; y++)
         {
-            square2[x][y].square_RGB = square[x][y].square_RGB; //grab the colors from the real grid -P
-            square2[x][y].update();
+            timelineTimelineGrid[x][y].square_RGB = gridGridSquare[x][y].square_RGB; //grab the colors from the real grid -P
+            timelineTimelineGrid[x][y].update();
         }
     }
 }

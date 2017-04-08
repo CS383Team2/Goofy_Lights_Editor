@@ -25,10 +25,6 @@ public:
     int x = 0; //drawing locations -P
     int y = 0;
 
-    //row and column locations are not used, as the frames are just numbered sequentially.... bleh. -P
-    int rL = 0; //row location -P
-    int cL = 0; //column location -P
-
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event); //need to know when the things are clicked on -P
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
