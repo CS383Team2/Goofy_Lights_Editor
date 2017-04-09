@@ -58,7 +58,7 @@ void FrameList::DeleteNode(){
         head = p->next;
         p->next = NULL;
         if (head != NULL)
-            head->prev = NULL;
+            head->prev = NULL; //this is causing a seg fault when I close -P
         // Delete Attached RGB structure here
         delete p;
     }
