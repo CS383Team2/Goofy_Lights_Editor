@@ -13,6 +13,7 @@
 #include <QWidget>
 #include <QString>
 #include <QObject>
+#include <QFileInfo>
 #include <QtDebug>
 #include <QMessageBox>
 #include <QTime>
@@ -20,9 +21,7 @@
 
 #define VERSION .3
 
-/* Save the project to a file. There is no predefined file format for this
- * I would like to convert it to print a JSON or XML file in the future.
- */
+/* Save the project to a file. There is no predefined file format for this */
 int FileOperations::SaveToFile(FrameList frameList, QString fileName){
     QFile file; /* Load the file and write to it */
     QTime elapsedTime = QTime(0,0,0,0); // Time elapsed in milliseconds
@@ -62,9 +61,7 @@ int FileOperations::SaveToFile(FrameList frameList, QString fileName){
         return 0;
 }
 
-/* Load a project from a file.
- * Currently is looking for a file in the same format as the above save file
- */
+/* Load a project from a file. */
 int FileOperations::LoadFromFile(QString fileName, FrameList * frameList){
     QFile file;
     file.setFileName(fileName);
@@ -74,8 +71,13 @@ int FileOperations::LoadFromFile(QString fileName, FrameList * frameList){
     }
     QTextStream fileContents(&file);
     QString version = fileContents.readLine();
+
+    QStringList currLineList = fileContents.readLine().split(" ");
+    while(currLineList.count() > 3){
+        currLineList = fileContents.readLine().split(" ");
+    }
     /* Get the frame size from the file */
-    QStringList frameInfo = fileContents.readLine().split(" ");
+    QStringList frameInfo = currLineList;
 
     // qDebug() << frameInfo << endl;
 

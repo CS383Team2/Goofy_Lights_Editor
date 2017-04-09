@@ -75,8 +75,12 @@ void MainWindow::on_actionSave_As_triggered()
 {
     QString fileName = QFileDialog::getSaveFileName(this,
             tr("Save Project"), "",
-            tr("Project (*.proj);;All Files (*)"));
+            tr("Project (*.tan);;All Files (*)"));
     FrameList frameList = FrameList(10,10); //why is this 10x10??? answer me that. -P
+                                            // This was for testing purposes. There should
+                                            // instead be some FrameList object that holds
+                                            // our current animation so that it can be saved
+                                            // and loaded to. -T
     t_FrameData frameData;
     frameList.AddTail(frameData);
 
@@ -84,13 +88,14 @@ void MainWindow::on_actionSave_As_triggered()
     qDebug() << "Returned safely";
 }
 
-FrameList MainWindow::on_actionOpenProject_triggered()
+void MainWindow::on_actionOpenProject_triggered()
 {
     QString fileName = QFileDialog::getOpenFileName(this,
             tr("Open Project"), "",
-            tr("Project (*.proj);;All Files (*)"));
+            tr("Project (*.tan);;All Files (*)"));
 
-    return FileOperations::LoadFromFile(fileName);
+    FrameList frameList;
+    FileOperations::LoadFromFile(fileName, &frameList);
 }
 
 
