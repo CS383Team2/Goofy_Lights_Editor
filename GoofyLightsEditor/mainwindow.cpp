@@ -32,14 +32,19 @@ MainWindow::MainWindow(QWidget *parent) :
         timelineTimelineGrid[i] = new TimelineGrid[G_ROW];
     }
 
+    int gridScale = 22*G_SCALE;
+    int timelineScale = 4*G_SCALE;
+    int g_SPACING = 3; //grid spacing woohooo -P
+    int t_SPACING = 2; //timeline spacing woohooo -P
+
     for(int x=0; x<G_COL; x++)
     {
         for(int y=0; y<G_ROW; y++)
         {
-            gridGridSquare[x][y].x = (25*x*G_SCALE);
-            gridGridSquare[x][y].y = (25*y*G_SCALE);
-            timelineTimelineGrid[x][y].x = (5.9*x*G_SCALE); //timeline magic about to happen here -P
-            timelineTimelineGrid[x][y].y = (5.9*y*G_SCALE); //will add the magic soon -P
+            gridGridSquare[x][y].x = (x*gridScale + x*g_SPACING);
+            gridGridSquare[x][y].y = (y*gridScale + y*g_SPACING);
+            timelineTimelineGrid[x][y].x = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
+            timelineTimelineGrid[x][y].y = (y*timelineScale + y*t_SPACING); //will add the magic soon -P
             gridScene->addItem(&gridGridSquare[x][y]);
             timelineScene->addItem(&timelineTimelineGrid[x][y]); //timeline testing here -P
         }
