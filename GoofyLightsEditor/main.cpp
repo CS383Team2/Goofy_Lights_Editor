@@ -109,17 +109,19 @@ int main(int argc, char *argv[])
     frames.AddTail(newFrame);
 
 
-    frames.PrintNode();
+    //frames.PrintNode();
 
 
     // std::cout << "Now printing frames" << std::endl;
     // note: frames are in reverse order when added to head
     // print frames
     // frames.PrintNode();
-    // FrameList frameList = FileOperations::LoadFromFile("autofill.proj");
+    FrameList frameList;
+    FileOperations::LoadFromFile("autofill.proj", &frameList);
+    frameList.PrintNode();
     // frameList.PrintNode();
+    // FileOperations::SaveToFile(frames, "autofill.proj");
     FileOperations::SaveToFile(frames, "autofill.proj");
-
 
     frames.DeleteList();
     std::cout << "Program end" << std::endl;
