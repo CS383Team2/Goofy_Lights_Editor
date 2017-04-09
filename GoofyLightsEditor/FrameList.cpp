@@ -127,7 +127,8 @@ void FrameList::DeleteNode_Middle(int pos){
     if (pos == 0){
         // Delete the head node.
         head = current -> next;
-        head -> prev = NULL;
+        if (head != NULL)
+            head -> prev = NULL;
         // Delete Attached RGB structure here 
         delete(current);
         this->count--;
