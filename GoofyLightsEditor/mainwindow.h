@@ -9,6 +9,7 @@
 #include "FrameList.h"
 #include <colorwheel.h>
 #include <globals.h>
+#include <timelinegrid.h>
 
 namespace Ui {
 class MainWindow;
@@ -22,11 +23,13 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    GridSquare **square = new GridSquare*[G_COL];  //Type is GridSquare, square is object
+    GridSquare **gridGridSquare = new GridSquare*[G_COL];  //Type is GridSquare, square is object
+    TimelineGrid **timelineTimelineGrid = new TimelineGrid*[G_COL];  //Type is TimelineGrid, square2 is object
     t_FrameData FrameData;  // THE frame data (this is in mainwindow.h) -P
 
-    void gridToFrameDate();
-    void FrameDateToGrid(); //stitching rubbish -P
+    void gridToFrameData();
+    void FrameDataToGrid(); //stitching rubbish -P
+    void updateTimeline();
 
 private slots:
     void on_actionSave_As_triggered();
@@ -34,27 +37,29 @@ private slots:
     void on_actionOpenProject_triggered();
 
 
-    void on_spinBox_editingFinished();
+    void on_sbox_ValueRed_editingFinished();
 
-    void on_spinBox_2_editingFinished();
+    void on_sbox_ValueGreen_editingFinished();
 
-    void on_spinBox_3_editingFinished();
+    void on_sbox_ValueBlue_editingFinished();
 
     void mousePressEvent(QMouseEvent *event);
 
-    void on_pushButton_20_clicked();
+    void on_btn_FillFrame_clicked();
 
-    void on_pushButton_21_clicked();
+    void on_btn_ClearFrame_clicked();
 
-    void on_pushButton_21_released();
+    void on_btn_ClearFrame_released();
 
-    void on_pushButton_21_pressed();
+    void on_btn_ClearFrame_pressed();
 
 
 private:
     Ui::MainWindow *ui;
 
-    QGraphicsScene *scene;
+    QGraphicsScene *gridScene; //grid -P
+
+    QGraphicsScene *timelineScene; //timeline -P
 
 
     void createActions();

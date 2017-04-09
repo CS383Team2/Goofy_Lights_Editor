@@ -11,10 +11,16 @@
 
 int G_COL = 0; //initialize globals -P
 int G_ROW = 0;
+double G_SCALE = 0;
 
 int G_RED = 255;
 int G_GREEN = 0; //fixed -P
 int G_BLUE = 0;
+int G_RED_RIGHT = 0;
+int G_GREEN_RIGHT = 0;
+int G_BLUE_RIGHT = 0;
+
+int G_FRAMECOUNT = 0; //hah -P
 
 
 long FrameIDCount = 0;
@@ -39,24 +45,20 @@ int main(int argc, char *argv[])
     // linked list test
     std::cout << "FrameList testing" << std::endl;
 
-    // set arbitrary grid size
-    int r = 5;
-    int c = 3;
+
     t_RGB ** rgb_data;
 
     t_FrameData FrameData;  // Local frame data
-    FrameData.r = r;
-    FrameData.c = c;
-    FrameList frames(r, c); // linked list for frame data. r c for print function
+    FrameList frames(G_ROW, G_COL); // linked list for frame data. r c for print function
 
     //Frame 0
     // Generate new rgb_data arrary
-    rgb_data = create_RGB(r, c);
+    rgb_data = create_RGB(G_ROW, G_COL);
 
     // fill rgb_data for Frame 0
     unsigned short color = 0;   // arbritrary data
-    for (int i = 0; i < r; i++){
-        for (int j = 0; j < c; j++){
+    for (int i = 0; i < G_ROW; i++){
+        for (int j = 0; j < G_COL; j++){
             rgb_data[i][j].R = color++;
             rgb_data[i][j].G = color++;
             rgb_data[i][j].B = color++;
@@ -71,12 +73,12 @@ int main(int argc, char *argv[])
 
     // next frame Frame 1
     // Generate new rgb_data arrary
-    rgb_data = create_RGB(r, c);
+    rgb_data = create_RGB(G_ROW, G_COL);
 
      // fill rgb for Frame 1
     color = 100; // arbritrary increment to make data different
-    for (int i = 0; i < r; i++){
-        for (int j = 0; j < c; j++){
+    for (int i = 0; i < G_ROW; i++){
+        for (int j = 0; j < G_COL; j++){
             rgb_data[i][j].R = color++;
             rgb_data[i][j].G = color++;
             rgb_data[i][j].B = color++;
@@ -90,7 +92,7 @@ int main(int argc, char *argv[])
 
 
     // next frame Frame 2
-    rgb_data = create_RGB(r, c);
+    rgb_data = create_RGB(G_ROW, G_COL);
     FrameData.ID = FrameIDCount++;
     FrameData.durration = 214;
     FrameData.data = rgb_data;
@@ -99,7 +101,7 @@ int main(int argc, char *argv[])
 
     // copyFrame Test
     t_FrameData newFrame;
-    rgb_data = create_RGB(r, c);
+    rgb_data = create_RGB(G_ROW, G_COL);
     newFrame.ID = FrameIDCount++;
     newFrame.durration = 217;
     newFrame.data = rgb_data;

@@ -17,28 +17,38 @@ SizeDialog::~SizeDialog()
     delete ui;
 }
 
-void SizeDialog::on_spinBox_editingFinished()
+void SizeDialog::on_sbox_Row_editingFinished()
 {
-    G_ROW=ui->spinBox->value();
+    G_ROW=ui->sbox_Row->value();
 }
 
-void SizeDialog::on_spinBox_2_editingFinished()
+void SizeDialog::on_sbox_Col_editingFinished()
 {
-    G_COL=ui->spinBox_2->value();
+    G_COL=ui->sbox_Col->value();
 }
 
-void SizeDialog::on_buttonBox_accepted()
+void SizeDialog::on_btnBox_OkClose_accepted()
 {
-    G_COL=ui->spinBox_2->value();
-    G_ROW=ui->spinBox->value(); //redundant redundant, shush -P
+    G_COL=ui->sbox_Col->value();
+    G_ROW=ui->sbox_Row->value(); //redundant redundant, shush -P
+
+    double max = 0;
+
+    if(G_COL > G_ROW)
+        max = G_COL;
+    else
+        max = G_ROW;
+
+    //MAIN WINDOW TOO BIG, gonna take the scaling down to 85% -P
+    G_SCALE = ((20.0 / max) * 0.85); //scaled based on a max size of 20x20 -P
 }
 
-void SizeDialog::on_buttonBox_rejected()
+void SizeDialog::on_btnBox_OkClose_rejected()
 {
     exit(0); //Don't run the main window -P
 }
 
-void SizeDialog::on_pushButton_clicked()
+void SizeDialog::on_btn_Browse_clicked()
 {
     QString filename = QFileDialog::getOpenFileName(this, tr("Open a Goofy File!"), QDir::homePath(), tr("Only .tan Files (*.tan)")); //browse filename -P
     //fun stuff -P

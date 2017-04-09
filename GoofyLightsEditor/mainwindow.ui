@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>900</height>
+    <width>960</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,25 +18,25 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>1000</width>
-    <height>900</height>
+    <width>960</width>
+    <height>700</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>1000</width>
-    <height>900</height>
+    <width>960</width>
+    <height>700</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>Goofy Lights Editor!</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="btn_NewFrame">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>780</y>
+      <x>10</x>
+      <y>580</y>
       <width>89</width>
       <height>25</height>
      </rect>
@@ -45,11 +45,11 @@
      <string>New Frame</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="btn_DeleteFrame">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>780</y>
+      <x>110</x>
+      <y>580</y>
       <width>101</width>
       <height>25</height>
      </rect>
@@ -58,24 +58,11 @@
      <string>Delete Frame</string>
     </property>
    </widget>
-   <widget class="QSlider" name="horizontalSlider">
+   <widget class="QPushButton" name="btn_TransUP">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>750</y>
-      <width>961</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_3">
-    <property name="geometry">
-     <rect>
-      <x>840</x>
-      <y>260</y>
+      <x>800</x>
+      <y>230</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -89,11 +76,11 @@
      <string>Up</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="btn_TransDwn">
     <property name="geometry">
      <rect>
-      <x>840</x>
-      <y>340</y>
+      <x>800</x>
+      <y>310</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -107,11 +94,11 @@
      <string>Down</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_5">
+   <widget class="QPushButton" name="btn_TransLeft">
     <property name="geometry">
      <rect>
-      <x>800</x>
-      <y>300</y>
+      <x>760</x>
+      <y>270</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -125,11 +112,11 @@
      <string>Left</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_6">
+   <widget class="QPushButton" name="btn_TransRight">
     <property name="geometry">
      <rect>
-      <x>880</x>
-      <y>300</y>
+      <x>840</x>
+      <y>270</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -143,11 +130,11 @@
      <string>Right</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_7">
+   <widget class="QPushButton" name="btn_PlayPause">
     <property name="geometry">
      <rect>
-      <x>890</x>
-      <y>780</y>
+      <x>850</x>
+      <y>580</y>
       <width>89</width>
       <height>25</height>
      </rect>
@@ -156,11 +143,11 @@
      <string>Play/Pause</string>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox">
+   <widget class="QDoubleSpinBox" name="dsbox_FramDur">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>780</y>
+      <x>220</x>
+      <y>580</y>
       <width>101</width>
       <height>26</height>
      </rect>
@@ -178,8 +165,8 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>810</y>
+      <x>220</x>
+      <y>610</y>
       <width>111</width>
       <height>16</height>
      </rect>
@@ -188,11 +175,11 @@
      <string>Frame Duration</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_8">
+   <widget class="QPushButton" name="btn_ScrollLeft">
     <property name="geometry">
      <rect>
-      <x>760</x>
-      <y>300</y>
+      <x>720</x>
+      <y>270</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -206,65 +193,65 @@
      <string>Scroll</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_9">
-    <property name="geometry">
-     <rect>
-      <x>840</x>
-      <y>230</y>
-      <width>41</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Scroll</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_10">
-    <property name="geometry">
-     <rect>
-      <x>920</x>
-      <y>300</y>
-      <width>41</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Scroll</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_11">
-    <property name="geometry">
-     <rect>
-      <x>840</x>
-      <y>380</y>
-      <width>41</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Scroll</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_12">
+   <widget class="QPushButton" name="btn_ScrollUp">
     <property name="geometry">
      <rect>
       <x>800</x>
-      <y>260</y>
+      <y>200</y>
+      <width>41</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Scroll</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_ScrollRight">
+    <property name="geometry">
+     <rect>
+      <x>880</x>
+      <y>270</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Scroll</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_ScrollDwn">
+    <property name="geometry">
+     <rect>
+      <x>800</x>
+      <y>350</y>
+      <width>41</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Scroll</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_TransUpLeft">
+    <property name="geometry">
+     <rect>
+      <x>760</x>
+      <y>230</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -278,11 +265,11 @@
      <string>U/L</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_13">
+   <widget class="QPushButton" name="btn_TransUpRight">
     <property name="geometry">
      <rect>
-      <x>880</x>
-      <y>260</y>
+      <x>840</x>
+      <y>230</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -296,11 +283,11 @@
      <string>U/R</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_14">
+   <widget class="QPushButton" name="btn_TransDwnRight">
     <property name="geometry">
      <rect>
-      <x>880</x>
-      <y>340</y>
+      <x>840</x>
+      <y>310</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -314,11 +301,11 @@
      <string>D/R</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_15">
+   <widget class="QPushButton" name="btn_TransDwnLeft">
     <property name="geometry">
      <rect>
-      <x>800</x>
-      <y>340</y>
+      <x>760</x>
+      <y>310</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -350,11 +337,11 @@
      <string>Echo</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_17">
+   <widget class="QPushButton" name="btn_InsertChar">
     <property name="geometry">
      <rect>
-      <x>790</x>
-      <y>140</y>
+      <x>750</x>
+      <y>110</y>
       <width>101</width>
       <height>25</height>
      </rect>
@@ -363,24 +350,11 @@
      <string>Insert Char</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_6">
+   <widget class="QPushButton" name="btn_CopyFrame">
     <property name="geometry">
      <rect>
-      <x>610</x>
-      <y>10</y>
-      <width>111</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Color Picker:</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_18">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>780</y>
+      <x>390</x>
+      <y>580</y>
       <width>101</width>
       <height>25</height>
      </rect>
@@ -389,11 +363,11 @@
      <string>Copy Frame</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_19">
+   <widget class="QPushButton" name="btn_PasteFrame">
     <property name="geometry">
      <rect>
-      <x>400</x>
-      <y>810</y>
+      <x>390</x>
+      <y>610</y>
       <width>101</width>
       <height>25</height>
      </rect>
@@ -402,11 +376,11 @@
      <string>Paste Frame</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_20">
+   <widget class="QPushButton" name="btn_FillFrame">
     <property name="geometry">
      <rect>
-      <x>790</x>
-      <y>90</y>
+      <x>750</x>
+      <y>60</y>
       <width>101</width>
       <height>25</height>
      </rect>
@@ -415,11 +389,11 @@
      <string>Fill Frame</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_21">
+   <widget class="QPushButton" name="btn_ClearFrame">
     <property name="geometry">
      <rect>
-      <x>790</x>
-      <y>60</y>
+      <x>750</x>
+      <y>30</y>
       <width>101</width>
       <height>25</height>
      </rect>
@@ -428,40 +402,11 @@
      <string>Clear Frame</string>
     </property>
    </widget>
-   <widget class="QFrame" name="frame_3">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>520</y>
-      <width>971</width>
-      <height>221</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-    <widget class="QLabel" name="label_3">
-     <property name="geometry">
-      <rect>
-       <x>420</x>
-       <y>100</y>
-       <width>67</width>
-       <height>17</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Timeline</string>
-     </property>
-    </widget>
-   </widget>
    <widget class="QLabel" name="label_8">
     <property name="geometry">
      <rect>
-      <x>780</x>
-      <y>810</y>
+      <x>740</x>
+      <y>610</y>
       <width>111</width>
       <height>17</height>
      </rect>
@@ -470,23 +415,23 @@
      <string>Current Time</string>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+   <widget class="QDoubleSpinBox" name="dsbox_CurrTime">
     <property name="geometry">
      <rect>
-      <x>780</x>
-      <y>780</y>
+      <x>740</x>
+      <y>580</y>
       <width>101</width>
       <height>26</height>
      </rect>
     </property>
    </widget>
-   <widget class="QGraphicsView" name="graphicsView">
+   <widget class="QGraphicsView" name="gView_Grid">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>0</y>
-      <width>521</width>
-      <height>511</height>
+      <width>451</width>
+      <height>441</height>
      </rect>
     </property>
     <property name="palette">
@@ -527,24 +472,24 @@
      </palette>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_23">
+   <widget class="QPushButton" name="btn_RepeatFrame">
     <property name="geometry">
      <rect>
-      <x>780</x>
-      <y>440</y>
-      <width>161</width>
+      <x>760</x>
+      <y>400</y>
+      <width>121</width>
       <height>25</height>
      </rect>
     </property>
     <property name="text">
-     <string>What is this button?</string>
+     <string>Repeat Frame</string>
     </property>
    </widget>
-   <widget class="QSpinBox" name="spinBox">
+   <widget class="QSpinBox" name="sbox_ValueRed">
     <property name="geometry">
      <rect>
-      <x>607</x>
-      <y>260</y>
+      <x>537</x>
+      <y>220</y>
       <width>51</width>
       <height>26</height>
      </rect>
@@ -556,11 +501,11 @@
      <number>255</number>
     </property>
    </widget>
-   <widget class="QSpinBox" name="spinBox_2">
+   <widget class="QSpinBox" name="sbox_ValueGreen">
     <property name="geometry">
      <rect>
-      <x>607</x>
-      <y>300</y>
+      <x>537</x>
+      <y>260</y>
       <width>51</width>
       <height>26</height>
      </rect>
@@ -572,11 +517,11 @@
      <number>0</number>
     </property>
    </widget>
-   <widget class="QSpinBox" name="spinBox_3">
+   <widget class="QSpinBox" name="sbox_ValueBlue">
     <property name="geometry">
      <rect>
-      <x>607</x>
-      <y>340</y>
+      <x>537</x>
+      <y>300</y>
       <width>51</width>
       <height>26</height>
      </rect>
@@ -591,8 +536,8 @@
    <widget class="QLabel" name="label_9">
     <property name="geometry">
      <rect>
-      <x>670</x>
-      <y>270</y>
+      <x>600</x>
+      <y>230</y>
       <width>67</width>
       <height>17</height>
      </rect>
@@ -604,8 +549,8 @@
    <widget class="QLabel" name="label_10">
     <property name="geometry">
      <rect>
-      <x>670</x>
-      <y>310</y>
+      <x>600</x>
+      <y>270</y>
       <width>67</width>
       <height>17</height>
      </rect>
@@ -617,8 +562,8 @@
    <widget class="QLabel" name="label_11">
     <property name="geometry">
      <rect>
-      <x>670</x>
-      <y>350</y>
+      <x>600</x>
+      <y>310</y>
       <width>67</width>
       <height>17</height>
      </rect>
@@ -627,11 +572,11 @@
      <string>BLUE</string>
     </property>
    </widget>
-   <widget class="ColorWheel" name="widget" native="true">
+   <widget class="ColorWheel" name="widget_ColorWheel" native="true">
     <property name="geometry">
      <rect>
-      <x>570</x>
-      <y>50</y>
+      <x>500</x>
+      <y>30</y>
       <width>171</width>
       <height>171</height>
      </rect>
@@ -640,8 +585,8 @@
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>570</x>
-      <y>400</y>
+      <x>500</x>
+      <y>350</y>
       <width>171</width>
       <height>81</height>
      </rect>
@@ -666,11 +611,11 @@
      </property>
     </widget>
    </widget>
-   <widget class="QPushButton" name="pushButton_22">
+   <widget class="QPushButton" name="btn_InsertShape">
     <property name="geometry">
      <rect>
-      <x>790</x>
-      <y>170</y>
+      <x>750</x>
+      <y>140</y>
       <width>101</width>
       <height>25</height>
      </rect>
@@ -679,52 +624,60 @@
      <string>Insert Shape</string>
     </property>
    </widget>
-   <zorder>frame_3</zorder>
-   <zorder>pushButton</zorder>
-   <zorder>pushButton_2</zorder>
-   <zorder>horizontalSlider</zorder>
-   <zorder>pushButton_3</zorder>
-   <zorder>pushButton_4</zorder>
-   <zorder>pushButton_5</zorder>
-   <zorder>pushButton_6</zorder>
-   <zorder>pushButton_7</zorder>
-   <zorder>doubleSpinBox</zorder>
-   <zorder>label_4</zorder>
-   <zorder>pushButton_8</zorder>
-   <zorder>pushButton_9</zorder>
-   <zorder>pushButton_10</zorder>
-   <zorder>pushButton_11</zorder>
-   <zorder>pushButton_12</zorder>
-   <zorder>pushButton_13</zorder>
-   <zorder>pushButton_14</zorder>
-   <zorder>pushButton_15</zorder>
-   <zorder>pushButton_16</zorder>
-   <zorder>pushButton_17</zorder>
-   <zorder>label_6</zorder>
-   <zorder>pushButton_18</zorder>
-   <zorder>pushButton_19</zorder>
-   <zorder>pushButton_20</zorder>
-   <zorder>pushButton_21</zorder>
-   <zorder>label_8</zorder>
-   <zorder>doubleSpinBox_2</zorder>
-   <zorder>graphicsView</zorder>
-   <zorder>pushButton_23</zorder>
-   <zorder>spinBox</zorder>
-   <zorder>spinBox_2</zorder>
-   <zorder>spinBox_3</zorder>
-   <zorder>label_9</zorder>
-   <zorder>label_10</zorder>
-   <zorder>label_11</zorder>
-   <zorder>widget</zorder>
-   <zorder>frame</zorder>
-   <zorder>pushButton_22</zorder>
+   <widget class="QGraphicsView" name="gView_Timeline">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>450</y>
+      <width>931</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="palette">
+     <palette>
+      <active>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>211</red>
+          <green>215</green>
+          <blue>207</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </active>
+      <inactive>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>211</red>
+          <green>215</green>
+          <blue>207</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </inactive>
+      <disabled>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>239</red>
+          <green>235</green>
+          <blue>231</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </disabled>
+     </palette>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1000</width>
+     <width>960</width>
      <height>22</height>
     </rect>
    </property>

@@ -109,6 +109,10 @@ QSize ColorWheel::minimumSizeHint () const
 
 void ColorWheel::mousePressEvent(QMouseEvent *event)
 {
+    if (event->button() == Qt::RightButton)
+        leftclick = false;
+    else
+        leftclick = true;
     lastPos = event->pos();
     if(wheelRegion.contains(lastPos)){
         inWheel = true;
@@ -335,9 +339,16 @@ void ColorWheel::hueChanged(const int &hue)
     //drawPicker(current);
     repaint();
 
-    G_RED = current.red(); //-P
-    G_GREEN = current.green();
-    G_BLUE = current.blue(); //-P
+    if (leftclick) {
+        G_RED = current.red(); //-P
+        G_GREEN = current.green();
+        G_BLUE = current.blue(); //-P
+    }
+    else {
+        G_RED_RIGHT = current.red();
+        G_GREEN_RIGHT = current.green();
+        G_BLUE_RIGHT = current.blue();
+    }
 
     emit colorChange(current);
 }
@@ -354,9 +365,17 @@ void ColorWheel::svChanged(const QColor &newcolor)
     //drawPicker(newcolor);
     repaint();
 
-    G_RED = current.red(); //-P
-    G_GREEN = current.green();
-    G_BLUE = current.blue(); //-P
+    if (leftclick) {
+        G_RED = current.red(); //-P
+        G_GREEN = current.green();
+        G_BLUE = current.blue(); //-P
+    }
+    else {
+        G_RED_RIGHT = current.red();
+        G_GREEN_RIGHT = current.green();
+        G_BLUE_RIGHT = current.blue();
+    }
+
 
     emit colorChange(current);
 }

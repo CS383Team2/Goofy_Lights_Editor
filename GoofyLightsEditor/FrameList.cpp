@@ -24,16 +24,16 @@ void FrameList::AddTail( t_FrameData n ){
     //Check if the list is empty
     if(head == NULL ){
         head = p;
+        tail = p;
+        p->prev = NULL;
     }
     else{
-        NodePtr temp = head;
-        while (temp -> next != NULL)
-        {
-            temp = temp -> next;
-        }
-        temp -> next = p;
-        // Previous pointer adjustment for new tail.
-        p -> prev = temp;
+        // next/prev pointers
+        tail -> next = p;
+        p -> prev = tail;
+
+        // update tail pointer
+        tail = p;
     }
     this->count++;
 }
@@ -57,6 +57,8 @@ void FrameList::DeleteNode(){
     else{
         head = p->next;
         p->next = NULL;
+        if (head != NULL)
+            head->prev = NULL;
         // Delete Attached RGB structure here
         delete p;
     }
@@ -72,33 +74,42 @@ void FrameList::AddNode_Middle(t_FrameData x, int pos){
     NodePtr insert = new Node;
     insert -> FrameData = x;
     insert -> next = NULL;
+    insert -> prev = NULL;
     
-    if (pos == 0)
+    if (head == NULL)
+    {
+        head = insert;
+    }
+
+    else if (pos == 0)
     {
         insert -> next = head;
-        current = insert -> next;
+        insert -> prev = NULL;
+        head  -> prev = insert;
         head = insert;
-        // Adjustment of previous pointer for addition of a new head node.
-        current -> prev = head;
         this->count++;
         return;
     }
     else
     {
-        current = current -> next;                  // position 1 in the list (head -> next)
-        tempCount++;                                // Both tempCounter and current are refrencing
-        while (tempCount != pos)
+        while (tempCount != pos-1 && current != NULL)
         {
             current = current -> next;
             tempCount++;
         }
         insert -> next = current -> next;
         // Adjustment of previous pointer for addition of node x
-        NodePtr p = current -> next;
-        p -> prev = insert;
+        if (current -> next != NULL)
+        {
+            NodePtr p = current -> next;
+            p -> prev = insert;
+        }
+        // else if current -> next == null then insert == null above
+
         // Adjustment of prev pointer for node added at position x
         current -> next = insert;
         insert -> prev = current;
+
         this->count++;
         return;
     }
@@ -149,7 +160,7 @@ void FrameList::DeleteNode_Middle(int pos){
 // passing count - 1 to this function refers to the tail.
 t_FrameData * FrameList::RetrieveNode_Middle(int pos){
 	int tempCount = 0;
-	t_FrameData *x = NULL;
+    t_FrameData *rtnVal = NULL;
 	NodePtr temp = head;
 	
 	if (pos == 0)
@@ -162,15 +173,13 @@ t_FrameData * FrameList::RetrieveNode_Middle(int pos){
 		}
 		else
 		{
-			*x = head -> FrameData;
-			return x;
+            *rtnVal = head -> FrameData;
+            return rtnVal;
 		}
 	}
 	else
-	{
-		tempCount++;
-		temp = temp -> next;
-		while (tempCount != pos)
+    {
+        while (tempCount != pos && temp != NULL)
 		{
 			tempCount++;
 			temp = temp -> next;
@@ -179,12 +188,12 @@ t_FrameData * FrameList::RetrieveNode_Middle(int pos){
 		if (temp != NULL)
 		{
 			// Just checking to make sure no bounds have been crossed.
-			*x = temp -> FrameData;
-			return x;	
+            *rtnVal = temp -> FrameData;
+            return rtnVal;
 		}
 		else
 		{
-            		return NULL;
+            return NULL;
 		}
 	}
 }
@@ -252,4 +261,46 @@ void FrameList::PrintNode(){
 
 int FrameList::Size(){
     return this->count;
+}
+
+void FrameList::UpdateNode(t_FrameData d, int position)
+{
+   int pcount = 0;
+   NodePtr current = head;
+   NodePtr temp = new Node;
+   NodePtr old;
+   temp -> FrameData = d;
+   temp -> next = NULL;
+   if (position == 0)
+      {
+      if (head == NULL)
+         head = temp;
+      else if (head -> next == NULL)
+         {
+         head = temp;
+         delete current;
+         }
+      else
+     {
+         old = current;
+         current = current -> next;
+         temp -> next = current;
+     delete old;
+         }
+      }
+   else
+      {
+      current = current -> next;
+      pcount++;
+      while (pcount != position-1)
+         {
+         current = current -> next;
+         pcount++;
+         }
+      temp -> next = current -> next -> next;
+      old = current -> next;
+      current -> next = temp;
+      delete old;
+      }
+   return;
 }

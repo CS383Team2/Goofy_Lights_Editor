@@ -16,15 +16,15 @@ public:
     ~SizeDialog();
 
 private slots:
-    void on_spinBox_editingFinished();
+    void on_sbox_Row_editingFinished();
 
-    void on_spinBox_2_editingFinished();
+    void on_sbox_Col_editingFinished();
 
-    void on_buttonBox_accepted();
+    void on_btnBox_OkClose_accepted();
 
-    void on_buttonBox_rejected();
+    void on_btnBox_OkClose_rejected();
 
-    void on_pushButton_clicked();
+    void on_btn_Browse_clicked();
 
 private:
     Ui::SizeDialog *ui;
