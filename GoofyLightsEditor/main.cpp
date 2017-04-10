@@ -16,6 +16,9 @@ double G_SCALE = 0;
 int G_RED = 255;
 int G_GREEN = 0; //fixed -P
 int G_BLUE = 0;
+int G_RED_RIGHT = 0;
+int G_GREEN_RIGHT = 0;
+int G_BLUE_RIGHT = 0;
 
 int G_FRAMECOUNT = 0; //hah -P
 
@@ -105,7 +108,7 @@ int main(int argc, char *argv[])
     fillFrame2(FrameData, 21, 32, 45);
     frames.AddTail(FrameData);
 
-    // copyFrame Test
+    // copyFrame Test Frame 3
     t_FrameData newFrame;
     rgb_data = create_RGB(G_ROW, G_COL);
     newFrame.ID = FrameIDCount++;
@@ -114,18 +117,12 @@ int main(int argc, char *argv[])
     copyFrame(newFrame, FrameData);
     frames.AddTail(newFrame);
 
-
-    frames.PrintNode();
-
-
     // std::cout << "Now printing frames" << std::endl;
-    // note: frames are in reverse order when added to head
-    // print frames
     // frames.PrintNode();
-    // FrameList frameList = FileOperations::LoadFromFile("autofill.proj");
-    // frameList.PrintNode();
-    //FileOperations::SaveToFile(frames, "autofill.proj");
-
+    FrameList frameList;
+    FileOperations::LoadFromFile("autofill.proj", &frameList);
+    frameList.PrintNode();
+    FileOperations::SaveToFile(frames, "autofill.proj");
 
     frames.DeleteList();
     std::cout << "Program end" << std::endl;

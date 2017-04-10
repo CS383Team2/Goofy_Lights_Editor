@@ -13,6 +13,7 @@
 #include <QWidget>
 #include <QString>
 #include <QObject>
+#include <QFileInfo>
 #include <QtDebug>
 #include <QMessageBox>
 #include <QTime>
@@ -20,9 +21,7 @@
 
 #define VERSION .3
 
-/* Save the project to a file. There is no predefined file format for this
- * I would like to convert it to print a JSON or XML file in the future.
- */
+/* Save the project to a file. There is no predefined file format for this */
 int FileOperations::SaveToFile(FrameList frameList, QString fileName){
     QFile file; /* Load the file and write to it */
     QTime elapsedTime = QTime(0,0,0,0); // Time elapsed in milliseconds
@@ -62,20 +61,23 @@ int FileOperations::SaveToFile(FrameList frameList, QString fileName){
         return 0;
 }
 
-/* Load a project from a file.
- * Currently is looking for a file in the same format as the above save file
- */
-FrameList FileOperations::LoadFromFile(QString fileName){
+/* Load a project from a file. */
+int FileOperations::LoadFromFile(QString fileName, FrameList * frameList){
     QFile file;
     file.setFileName(fileName);
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){
         QMessageBox::information(0,"error",file.errorString());
-        //return FrameList(0,0); // Return a frame list with size 0,0
+        return -1;
     }
     QTextStream fileContents(&file);
     QString version = fileContents.readLine();
+
+    QStringList currLineList = fileContents.readLine().split(" ");
+    while(currLineList.count() > 3){
+        currLineList = fileContents.readLine().split(" ");
+    }
     /* Get the frame size from the file */
-    QStringList frameInfo = fileContents.readLine().split(" ");
+    QStringList frameInfo = currLineList;
 
     // qDebug() << frameInfo << endl;
 
@@ -84,7 +86,7 @@ FrameList FileOperations::LoadFromFile(QString fileName){
     int col         = frameInfo[2].toInt();
 
     /* Initialize the frame list */
-    FrameList frameList = FrameList(row, col);
+    FrameList tmpFrameList = FrameList(row, col);
 
     int currentElement = 0;
     QString startTime = fileContents.readLine();
@@ -93,7 +95,6 @@ FrameList FileOperations::LoadFromFile(QString fileName){
     while(!fileContents.atEnd() && currentElement < numElements){
         t_FrameData frameData;
         currTime = nextTime;
-        frameData.ID        = currentElement;
 
         //std::cout << frameData.ID << "\n";
 
@@ -114,16 +115,20 @@ FrameList FileOperations::LoadFromFile(QString fileName){
         frameData.squareData      = data;
         QString timeStr     = fileContents.readLine();
         QTime time;
-        time                = QTime::fromString(timeStr, "hh:mm:ss.zzz");
+        time                = QTime::fromString(timeStr, "mm:ss.zzz");
         nextTime            = time;
-        frameData.duration = currTime.msecsTo(nextTime);
-        frameList.AddTail(frameData);
-        // frameList.PrintNode();
+        frameData.durration = currTime.msecsTo(nextTime);
+        frameData.ID        = currentElement;
+        tmpFrameList.AddTail(frameData);
+        // std::cout << "Current FrameList" << std::endl;
+        // tmpFrameList.PrintNode();
+        // std::cout << currentElement << std::endl;
         currentElement++;
-
     }
     file.close();
+    (*frameList) = tmpFrameList;
     //std::cout << "Function Print\n";
-    //frameList.PrintNode();
-    return frameList;
+    //tmpFrameList.PrintNode();
+    (*frameList).PrintNode();
+    return 1;
 }

@@ -32,7 +32,8 @@ void GridSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
             ClearSquare = false;
         }
         else
-            square_RGB.setRgb(G_RED, G_GREEN, G_BLUE, 255); //grab the color... -P
+            if (leftclick) square_RGB.setRgb(G_RED, G_GREEN, G_BLUE, 255); //grab the color... -P
+            else  square_RGB.setRgb(G_RED_RIGHT, G_GREEN_RIGHT, G_BLUE_RIGHT, 255);
             //QColor(int r, int g, int b, int a = 255) //use this, last argument always 255
 
         brush.setColor(square_RGB); //HELLO RGB COLOR Alpha locked to 255 -green -P
@@ -54,6 +55,10 @@ void GridSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 
 void GridSquare::mousePressEvent(QGraphicsSceneMouseEvent *event) //-P
 {
+    if (event->button() == Qt::RightButton)
+        leftclick = false;
+    else
+        leftclick = true;
     Selected = true;
     QGraphicsItem::mousePressEvent(event);
 
