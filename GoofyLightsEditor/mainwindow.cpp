@@ -61,7 +61,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     FrameData.ID = FrameID++;
     FrameData.duration = 0.20;
-    //FrameData.data = create_RGB(G_ROW, G_COL);  // Generate new rgb_data arrary
+    //FrameData.squareData = create_RGB(G_ROW, G_COL);  // Generate new rgb_data arrary
     fillFrame2(FrameData, 100, 100, 100);             // Clear initial frame
     framelist.AddTail(FrameData);               // add this frameData to linked list
 
@@ -189,11 +189,11 @@ void MainWindow::gridToFrameData() //stitching rubbish -P
     //fill the FrameData with GUI grid data here -P
     for (int i = 0; i < G_ROW; i++){
         for (int j = 0; j < G_COL; j++){
-            //qDebug() << FrameData.data[i][j].R;
+            //qDebug() << FrameData.squareData[i][j].R;
             //qDebug() << square[i][j].square_RGB.red();
-            FrameData.data[i][j].R = square[j][i].square_RGB.red(); //wowzers, that's stitched together -P
-            FrameData.data[i][j].G = square[j][i].square_RGB.green(); //yes, i and j are switched in square. Get over it -P
-            FrameData.data[i][j].B = square[j][i].square_RGB.blue(); //-P
+            FrameData.squareData[i][j].square_RGB.setRed(square[j][i].square_RGB.red()); //wowzers, that's stitched together -P
+            FrameData.squareData[i][j].square_RGB.setGreen(square[j][i].square_RGB.green()); //yes, i and j are switched in square. Get over it -P
+            FrameData.squareData[i][j].square_RGB.setBlue(square[j][i].square_RGB.blue()); //-P
         }
     }
 }
@@ -204,7 +204,7 @@ void MainWindow::FrameDataToGrid()
     for (int i = 0; i < G_ROW; i++){
         for (int j = 0; j < G_COL; j++){
             //wowzers, the stitching -P
-            square[j][i].square_RGB.setRgb(FrameData.data[i][j].R, FrameData.data[i][j].G, FrameData.data[i][j].B, 255);
+            square[j][i].square_RGB.setRgb(FrameData.squareData[i][j].square_RGB.red(), FrameData.squareData[i][j].square_RGB.green(), FrameData.squareData[i][j].square_RGB.blue(), 255);
             //yes i and j still switched in frame
         }
     }

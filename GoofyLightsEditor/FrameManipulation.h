@@ -21,7 +21,7 @@
 // Prototypes
 
 // creates a RGB Array and returns a pointer to it.
-GridSquare** create_RGB(int r, int c);
+TimelineGrid** create_RGB(int r, int c);
 
 // Takes origional frame and returnes a new copy of it
 int copyFrame(t_FrameData &copyFrame, t_FrameData origFrame);

@@ -97,7 +97,7 @@ FrameList FileOperations::LoadFromFile(QString fileName){
 
         //std::cout << frameData.ID << "\n";
 
-        GridSquare ** data = create_RGB(row, col);
+        TimelineGrid ** data = create_RGB(row, col);
 
         for(int i = 0; i < row; i++){
             QString line = fileContents.readLine();

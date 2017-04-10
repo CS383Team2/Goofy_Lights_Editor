@@ -23,7 +23,7 @@ int G_FRAMECOUNT = 0; //hah -P
 long FrameIDCount = 0;
 
 // creates the dynamic RGB array
-GridSquare** create_RGB(int r, int c);
+TimelineGrid** create_RGB(int r, int c);
 
 int main(int argc, char *argv[])
 {
@@ -45,11 +45,11 @@ int main(int argc, char *argv[])
     G_ROW = 5;
     G_COL = 3;
 
-    GridSquare **rgb_data = new GridSquare*[G_ROW]; //Initial gridsquare testing
+    TimelineGrid **rgb_data = new TimelineGrid*[G_ROW]; //Initial TimelineGrid testing
 
     for (int i = 0; i < G_ROW; ++i)
     {
-        rgb_data[i] = new GridSquare[G_COL];
+        rgb_data[i] = new TimelineGrid[G_COL];
     }
 
     t_FrameData FrameData;  // Local frame data

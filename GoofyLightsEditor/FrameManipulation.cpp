@@ -4,11 +4,11 @@
 #include "globals.h"
 
 // Function creates a 2d memory element of the RGB struct then passes back the pointer to it.
-GridSquare** create_RGB(int r, int c)
+TimelineGrid** create_RGB(int r, int c)
 {
-    GridSquare** arr = new GridSquare*[r];
+    TimelineGrid** arr = new TimelineGrid*[r];
     for(int i = 0; i < r; ++i)
-        arr[i] = new GridSquare[c];
+        arr[i] = new TimelineGrid[c];
     return arr;
 }
 
@@ -38,7 +38,7 @@ int translateFrame(t_FrameData d, int direction)
 {
     int i = 0; //counters
     int j = 0;
-    GridSquare *temp; //Temp variable for row that is pushed out of the frame
+    TimelineGrid *temp; //Temp variable for row that is pushed out of the frame
 
 
     //Condition for up, up left, and up right. Uses recursion for left and right translation
@@ -120,7 +120,7 @@ int fillFrame(t_FrameData &d, QColor rgb_fill)
 //This also needs some work.
 int fillFrame2(t_FrameData &d, unsigned short r, unsigned short g, unsigned short b)
 {
-    GridSquare rgb;
+    TimelineGrid rgb;
     rgb.square_RGB.red();
     rgb.square_RGB.green();
     rgb.square_RGB.blue();
