@@ -13,7 +13,7 @@ typedef struct
 typedef struct
 {
     unsigned long ID;         // Unique ID of frame. Static once generated.
-    unsigned int durration;   // Frame Duration in MS
+    unsigned int duration;   // Frame Duration in MS
     t_RGB** data;  //Frame data
 } t_FrameData;
 

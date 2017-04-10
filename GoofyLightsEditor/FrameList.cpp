@@ -247,7 +247,7 @@ void FrameList::PrintNode(){
     */
 
     while(p != NULL){
-        cout << "ID: " << p->FrameData.ID << "\tDur: " << p->FrameData.durration << endl;
+        cout << "ID: " << p->FrameData.ID << "\tDur: " << p->FrameData.duration << endl;
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 cout << p->FrameData.data[i][j].R << "," << p->FrameData.data[i][j].G

@@ -63,7 +63,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     FrameData.ID = FrameID++;
-    FrameData.durration = 0.20;
+    FrameData.duration = 0.20;
     FrameData.data = create_RGB(G_ROW, G_COL);  // Generate new rgb_data arrary
     fillFrame2(FrameData, 100, 100, 100);             // Clear initial frame
     framelist.AddTail(FrameData);               // add this frameData to linked list

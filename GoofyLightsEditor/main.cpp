@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
         }
     }
     FrameData.ID = FrameIDCount++;
-    FrameData.durration = 123;
+    FrameData.duration = 123;
     FrameData.data = rgb_data;
     frames.AddTail(FrameData);  // add this frameData to linked list
     rgb_data  = NULL; // disconnect this pointer from rgb_data
@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
         }
     }
     FrameData.ID = FrameIDCount++;
-    FrameData.durration = 212;
+    FrameData.duration = 212;
     FrameData.data = rgb_data;
     frames.AddTail(FrameData);
     rgb_data  = NULL; // disconnect this pointer from rgb_data
@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
     // next frame Frame 2
     rgb_data = create_RGB(G_ROW, G_COL);
     FrameData.ID = FrameIDCount++;
-    FrameData.durration = 214;
+    FrameData.duration = 214;
     FrameData.data = rgb_data;
     fillFrame2(FrameData, 21, 32, 45);
     frames.AddTail(FrameData);
@@ -103,7 +103,7 @@ int main(int argc, char *argv[])
     t_FrameData newFrame;
     rgb_data = create_RGB(G_ROW, G_COL);
     newFrame.ID = FrameIDCount++;
-    newFrame.durration = 217;
+    newFrame.duration = 217;
     newFrame.data = rgb_data;
     copyFrame(newFrame, FrameData);
     frames.AddTail(newFrame);
