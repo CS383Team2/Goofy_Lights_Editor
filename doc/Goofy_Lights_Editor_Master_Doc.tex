@@ -97,7 +97,7 @@
 	\\
 	\makebox[.3\linewidth]{Tim Sonnen}\\File Master\ \and
 	\\
-	\makebox[.3\linewidth]{Kevin Dorscher}\\Linked List Librarian\ \and
+	\makebox[.3\linewidth]{Kevin Dorscher}\\Linked List / Developer\ \and
 	\\
 	\makebox[.3\linewidth]{Joe Carter}\\Developer\ \and
 	\\
@@ -130,15 +130,13 @@
 \tableofcontents
 
 \section{About this Project}
-This project is the best project, a simply fantastic project. I know because I've worked with some of the best projects in the world. It's gonna be great. We're gonna build this project, and Mexico is gonna pay for it.
-
-"I know words. I have the best words." -Donald
+This project is a alteration of the Tower Lights Project done in previous semesters for Cs 383 at the University of Idaho. The end goal of this project is to create an editor for the Goofy Glasses. goofy glasses are a creation of the University of Idaho computer science department, goofy glasses are normal sun glasses, with RGB LED lighting, and a transmitter to send and receive data to turn the LED's on each pair of glasses on or off, as well as change the color the glasses are currently displaying. The editor we (team 2) are creating will be able to set specific coloring patterns for all of the goofy glasses at once. The general idea behind this is to create a grid with individual squares, where each square represents a single pair of goofy glasses. The user will then be able to create frames, and make a slide show of frames, and transmit the data from the slide show to the goofy glasses to create a scene. 
 
 \section{Design process}
-stuff
+The general outline of the development process can be simplified into three basic steps. Our first order of business was to start developing back-end functionality for the use cases specified (see appendix). Secondly, we created a basic GUI template to visualize layout, and speculate where extra functionality may be needed. Lastly, our focus was placed on integrating the back-end functionality we created with the GUI to bring everything together.
 
 \subsection{Problems encountered}
-stuff
+Some of the issues we have encountered as a team are presented below. Originally we created a set of global variables, that almost every function would need access to such as, row#, col#, and RGB data. This worked great for testing purposes, but has created scoping issues for future updates. We are currently working on changing all of the global variables previously mentioned into local variables. We are currently working on altering our existing functions to deal with this scope change from global to local. We also originally created a RGB type, and are now altering this to an already existing Qt RGB type called Qcolor. Lastly, we are currently considering data flow, and how data will be used be our goofy lights editor we have discussed creating some data flow diagrams to help visualize this process.
 
 
 \newpage
