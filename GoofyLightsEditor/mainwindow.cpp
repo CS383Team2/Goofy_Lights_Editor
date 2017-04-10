@@ -11,6 +11,7 @@
 
 long FrameID = 0; //-P
 int temp_R, temp_G, temp_B, temp_A; //yeah.... -P
+FrameList frameList(G_ROW,G_COL);
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -57,16 +58,13 @@ MainWindow::MainWindow(QWidget *parent) :
     //Start the FrameData nonsense -P
     //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     // set grid size
+    t_FrameData FrameData;  // THE frame data (this is in mainwindow.h) -P
+    //FrameList frameList(G_ROW, G_COL); // linked list for frame data. r c for print function
 
-    //t_FrameData FrameData;  // THE frame data (this is in mainwindow.h) -P
-    FrameList framelist(G_ROW, G_COL); // linked list for frame data. r c for print function
+    FrameData.squareData = create_RGB(G_ROW, G_COL);  // Generate new rgb_data arrary
 
 
-    FrameData.ID = FrameID++;
-    FrameData.duration = 0.20;
-    //FrameData.squareData = create_RGB(G_ROW, G_COL);  // Generate new rgb_data arrary
-    //fillFrame2(FrameData, 100, 100, 100);             // Clear initial frame
-    framelist.AddTail(FrameData);               // add this frameData to linked list
+
 
 }
 
@@ -81,13 +79,6 @@ void MainWindow::on_actionSave_As_triggered()
     QString fileName = QFileDialog::getSaveFileName(this,
             tr("Save Project"), "",
             tr("Project (*.tan);;All Files (*)"));
-    FrameList frameList = FrameList(10,10); //why is this 10x10??? answer me that. -P
-                                            // This was for testing purposes. There should
-                                            // instead be some FrameList object that holds
-                                            // our current animation so that it can be saved
-                                            // and loaded to. -T
-    t_FrameData frameData;
-    frameList.AddTail(frameData);
 
     FileOperations::SaveToFile(frameList,fileName);
     qDebug() << "Returned safely";
@@ -123,12 +114,7 @@ void MainWindow::on_sbox_ValueBlue_editingFinished()
 
 void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is clicked inside of, lol -P
 {
-    ui->sbox_ValueRed->setValue(G_RED); //-P
-    ui->sbox_ValueGreen->setValue(G_GREEN);
-    ui->sbox_ValueBlue->setValue(G_BLUE); //-P
 
-
-    gridToFrameData(); //on every click lol -P
     updateTimeline(); //lol -P
 }
 
@@ -188,36 +174,9 @@ void MainWindow::on_btn_ClearFrame_pressed() //Clear Frame
         }
     }
 
-
     //do this:
 
-    fillFrame2(FrameData, 0, 0, 0); //not tested yet -P
-}
-
-void MainWindow::gridToFrameData() //stitching rubbish -P
-{
-    //fill the FrameData with GUI grid data here -P
-    for (int i = 0; i < G_ROW; i++){
-        for (int j = 0; j < G_COL; j++){
-            //qDebug() << FrameData.squareData[i][j].R;
-            //qDebug() << gridGridSquare[i][j].square_RGB.red();
-            FrameData.squareData[i][j].square_RGB.setRed(gridGridSquare[j][i].square_RGB.red()); //wowzers, that's stitched together -P
-            FrameData.squareData[i][j].square_RGB.setGreen(gridGridSquare[j][i].square_RGB.green()); //yes, i and j are switched in square. Get over it -P
-            FrameData.squareData[i][j].square_RGB.setBlue(gridGridSquare[j][i].square_RGB.blue()); //-P
-        }
-    }
-}
-
-void MainWindow::FrameDataToGrid()
-{
-    //fill the GUI grid with FrameData here -P
-    for (int i = 0; i < G_ROW; i++){
-        for (int j = 0; j < G_COL; j++){
-            //wowzers, the stitching -P
-            gridGridSquare[j][i].square_RGB.setRgb(FrameData.squareData[i][j].square_RGB.red(), FrameData.squareData[i][j].square_RGB.green(), FrameData.squareData[i][j].square_RGB.blue(), 255);
-            //yes i and j still switched in frame
-        }
-    }
+    //fillFrame2(FrameData, 0, 0, 0); //not tested yet -P
 }
 
 void MainWindow::updateTimeline() //fix the update lag later -P

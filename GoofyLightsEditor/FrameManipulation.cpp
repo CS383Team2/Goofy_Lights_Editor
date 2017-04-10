@@ -111,23 +111,26 @@ int fillFrame(t_FrameData &d, QColor rgb_fill)
     //Fill data
     for (i = 0; i < G_ROW; i++) {
         for (j = 0; j < G_COL; j++) {
-            d.squareData[i][j].square_RGB = rgb_fill;
+            d.squareData[i][j].square_RGB.setRed(50/*rgb_fill.green()*/);
+            d.squareData[i][j].square_RGB.setGreen(50/*rgb_fill.green()*/);
+            d.squareData[i][j].square_RGB.setBlue(50/*rgb_fill.blue()*/);
+
         }
     }
 
     return SUCSSESFUL;
 }
 //This also needs some work.
-int fillFrame2(t_FrameData &d, unsigned short r, unsigned short g, unsigned short b)
+int fillFrame2(t_FrameData &d, int r, int g, int b)
 {
-    TimelineGrid rgb;
-    rgb.square_RGB.red();
-    rgb.square_RGB.green();
-    rgb.square_RGB.blue();
+    QColor rgb;
+    rgb.setRed(r);
+    rgb.setGreen(g);
+    rgb.setBlue(b);
 
     // error check if over bounds for type short
     if (r > 255 || g > 255 || b > 255)
         return ERROR;
 
-    return fillFrame(d, Qt::black);
+    return fillFrame(d, rgb);
 }

@@ -45,8 +45,8 @@ int main(int argc, char *argv[])
     // linked list test
     std::cout << "FrameList testing" << std::endl;
     //Arbitrary size for testing only
-    G_ROW = 5;
-    G_COL = 3;
+    //G_ROW = 10;
+    //G_COL = 10;
 
     TimelineGrid **rgb_data = new TimelineGrid*[G_ROW]; //Initial TimelineGrid testing
 
@@ -67,8 +67,8 @@ int main(int argc, char *argv[])
     for (int i = 0; i < G_ROW; i++){
         for (int j = 0; j < G_COL; j++){
             rgb_data[i][j].square_RGB.setRed(color++);
-            rgb_data[i][j].square_RGB.setGreen(color++);
-            rgb_data[i][j].square_RGB.setBlue(color++);
+            rgb_data[i][j].square_RGB.setGreen(color);
+            rgb_data[i][j].square_RGB.setBlue(color);
 
         }
     }
@@ -85,12 +85,12 @@ int main(int argc, char *argv[])
     rgb_data = create_RGB(G_ROW, G_COL);
 
      // fill rgb for Frame 1
-    color = 100; // arbritrary increment to make data different
+    color = 0; // arbritrary increment to make data different
     for (int i = 0; i < G_ROW; i++){
         for (int j = 0; j < G_COL; j++){
             rgb_data[i][j].square_RGB.setRed(color++);
-            rgb_data[i][j].square_RGB.setGreen(color++);
-            rgb_data[i][j].square_RGB.setBlue(color++);
+            rgb_data[i][j].square_RGB.setGreen(color);
+            rgb_data[i][j].square_RGB.setBlue(color);
         }
     }
     FrameData.ID = FrameIDCount++;
