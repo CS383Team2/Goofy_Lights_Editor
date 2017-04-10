@@ -52,7 +52,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ColorWheel *wheel = new ColorWheel;
     QSpinBox *spinbox = new QSpinBox;
-    connect(wheel, SIGNAL(colorChange(QColor)), spinbox, SLOT(on_sbox_ValueRed_editingFinished()));
+    //connect(wheel, SIGNAL(colorChange(QColor)), spinbox, SLOT(on_sbox_ValueRed_editingFinished()));
 
     //Start the FrameData nonsense -P
     //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -65,7 +65,7 @@ MainWindow::MainWindow(QWidget *parent) :
     FrameData.ID = FrameID++;
     FrameData.duration = 0.20;
     //FrameData.squareData = create_RGB(G_ROW, G_COL);  // Generate new rgb_data arrary
-    fillFrame2(FrameData, 100, 100, 100);             // Clear initial frame
+    //fillFrame2(FrameData, 100, 100, 100);             // Clear initial frame
     framelist.AddTail(FrameData);               // add this frameData to linked list
 
 }
@@ -199,11 +199,11 @@ void MainWindow::gridToFrameData() //stitching rubbish -P
     //fill the FrameData with GUI grid data here -P
     for (int i = 0; i < G_ROW; i++){
         for (int j = 0; j < G_COL; j++){
-            //qDebug() << FrameData.data[i][j].R;
+            //qDebug() << FrameData.squareData[i][j].R;
             //qDebug() << gridGridSquare[i][j].square_RGB.red();
-            FrameData.data[i][j].R = gridGridSquare[j][i].square_RGB.red(); //wowzers, that's stitched together -P
-            FrameData.data[i][j].G = gridGridSquare[j][i].square_RGB.green(); //yes, i and j are switched in square. Get over it -P
-            FrameData.data[i][j].B = gridGridSquare[j][i].square_RGB.blue(); //-P
+            FrameData.squareData[i][j].square_RGB.setRed(gridGridSquare[j][i].square_RGB.red()); //wowzers, that's stitched together -P
+            FrameData.squareData[i][j].square_RGB.setGreen(gridGridSquare[j][i].square_RGB.green()); //yes, i and j are switched in square. Get over it -P
+            FrameData.squareData[i][j].square_RGB.setBlue(gridGridSquare[j][i].square_RGB.blue()); //-P
         }
     }
 }
@@ -214,7 +214,7 @@ void MainWindow::FrameDataToGrid()
     for (int i = 0; i < G_ROW; i++){
         for (int j = 0; j < G_COL; j++){
             //wowzers, the stitching -P
-            gridGridSquare[j][i].square_RGB.setRgb(FrameData.data[i][j].R, FrameData.data[i][j].G, FrameData.data[i][j].B, 255);
+            gridGridSquare[j][i].square_RGB.setRgb(FrameData.squareData[i][j].square_RGB.red(), FrameData.squareData[i][j].square_RGB.green(), FrameData.squareData[i][j].square_RGB.blue(), 255);
             //yes i and j still switched in frame
         }
     }

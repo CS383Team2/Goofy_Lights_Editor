@@ -117,7 +117,7 @@ int FileOperations::LoadFromFile(QString fileName, FrameList * frameList){
         QTime time;
         time                = QTime::fromString(timeStr, "mm:ss.zzz");
         nextTime            = time;
-        frameData.durration = currTime.msecsTo(nextTime);
+        frameData.duration = currTime.msecsTo(nextTime);
         frameData.ID        = currentElement;
         tmpFrameList.AddTail(frameData);
         // std::cout << "Current FrameList" << std::endl;

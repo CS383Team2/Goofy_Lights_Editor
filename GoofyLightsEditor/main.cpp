@@ -105,7 +105,7 @@ int main(int argc, char *argv[])
     FrameData.ID = FrameIDCount++;
     FrameData.duration = 214;
     FrameData.squareData = rgb_data;
-    fillFrame2(FrameData, 21, 32, 45);
+    //fillFrame2(FrameData, 21, 32, 45);
     frames.AddTail(FrameData);
 
     // copyFrame Test Frame 3
