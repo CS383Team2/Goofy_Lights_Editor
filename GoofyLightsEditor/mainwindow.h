@@ -61,6 +61,7 @@ private:
 
     QGraphicsScene *timelineScene; //timeline -P
 
+    QGraphicsScene *currentcolorsScene;
 
     void createActions();
 };
