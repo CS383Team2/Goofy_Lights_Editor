@@ -6,6 +6,14 @@ GridSquare::GridSquare()
 {
     Selected = false; //constructor
     ClearSquare = false;
+    Palette = false;
+}
+
+GridSquare::GridSquare(bool if_palette)
+{
+    Selected = false; //constructor
+    ClearSquare = false;
+    Palette = if_palette;
 }
 
 GridSquare::~GridSquare()
@@ -55,6 +63,8 @@ void GridSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 
 void GridSquare::mousePressEvent(QGraphicsSceneMouseEvent *event) //-P
 {
+    if (Palette == true)
+        return;
     if (event->button() == Qt::RightButton)
         leftclick = false;
     else
