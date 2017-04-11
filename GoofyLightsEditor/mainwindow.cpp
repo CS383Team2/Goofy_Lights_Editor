@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     Lcolor->x = 0;
     Lcolor->y = 0;
     Rcolor->x = 0;
-    Rcolor->y = 25*G_SCALE;
+    Rcolor->y = 40;
 
     currentcolorsScene->addItem(Lcolor);
     currentcolorsScene->addItem(Rcolor);
