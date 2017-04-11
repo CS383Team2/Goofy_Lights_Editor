@@ -56,9 +56,14 @@ void FrameList::DeleteNode(){
     }
     else{
         head = p->next;
-        p->next = NULL;
+		NodePtr newHead = head;
+		// p -> next = NULL 
+		// The line above should be the cause of the seg faults, cannot assign
+		// head = p -> next, and then assign p -> next = NULL, as this sets the new head to NULL.
+		// which is also why the "if (head != NULL)" was not hitting correctly. 
+		
         if (head != NULL)
-            head->prev = NULL; //this is causing a seg fault when I close -P
+            newHead -> prev = NULL; //this is causing a seg fault when I close -P
         // Delete Attached RGB structure here
         delete p;
     }
