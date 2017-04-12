@@ -55,6 +55,7 @@ int FileOperations::SaveToFile(FrameList frameList, QString fileName){
                 stream << endl;
             }
             elapsedTime = elapsedTime.addMSecs(frameData.duration);
+            frameDataPtr = frameList.AdvanceList(); // grab next FrameDataPtr
         }
         file.close();
         return 1;
@@ -128,9 +129,9 @@ int FileOperations::LoadFromFile(QString fileName, FrameList * frameList){
         currentElement++;
     }
     file.close();
-    (*frameList) = tmpFrameList;
+    frameList = &tmpFrameList;          // frameList pointer = address of tmpFrameList
     //std::cout << "Function Print\n";
-    //tmpFrameList.PrintNode();
+    tmpFrameList.PrintNode();
     (*frameList).PrintNode();
     return 1;
 }

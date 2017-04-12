@@ -105,7 +105,7 @@ int main(int argc, char *argv[])
     FrameData.ID = FrameIDCount++;
     FrameData.duration = 214;
     FrameData.squareData = rgb_data;
-    //fillFrame2(FrameData, 21, 32, 45);
+    fillFrame2(FrameData, 21, 32, 45);
     frames.AddTail(FrameData);
 
     // copyFrame Test Frame 3
@@ -117,10 +117,18 @@ int main(int argc, char *argv[])
     copyFrame(newFrame, FrameData);
     frames.AddTail(newFrame);
 
-    // std::cout << "Now printing frames" << std::endl;
-    // frames.PrintNode();
-    FrameList frameList(G_ROW, G_COL);
-    FileOperations::LoadFromFile("autofill.proj", &frameList);
+    std::cout << "Now printing frames" << std::endl;
+    frames.PrintNode();
+
+    std::cout << "=======================" << std::endl;
+    std::cout << "\nMain: Testing File IO" << std::endl;
+    FileOperations::SaveToFile(frames, "autofill.proj");
+
+    FrameList *frameListPtr;                                       // LoadFromFile() will generate this
+    FileOperations::LoadFromFile("autofill.proj", &frameListPtr);
+    FrameList frameList = *frameListPtr;                           // dereference frameListPtr
+    //frameListPtr->PrintNode();
+    (*frameListPtr).PrintNode();
     frameList.PrintNode();
     FileOperations::SaveToFile(frames, "autofill.proj");
 
