@@ -119,7 +119,7 @@ int main(int argc, char *argv[])
 
     // std::cout << "Now printing frames" << std::endl;
     // frames.PrintNode();
-    FrameList frameList;
+    FrameList frameList(G_ROW, G_COL);
     FileOperations::LoadFromFile("autofill.proj", &frameList);
     frameList.PrintNode();
     FileOperations::SaveToFile(frames, "autofill.proj");

@@ -15,7 +15,6 @@ typedef struct
     //Each FrameData will however have its own TimelineGrid object, since the timeline will have more than one item
 
     TimelineGrid **squareData;
-    t_RGB** data;  //Frame data
 } t_FrameData;
 
 #endif // FRAMESTRUCTURE_H

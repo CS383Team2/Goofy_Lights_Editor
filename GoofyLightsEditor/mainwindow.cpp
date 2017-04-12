@@ -102,7 +102,7 @@ void MainWindow::on_actionOpenProject_triggered()
             tr("Open Project"), "",
             tr("Project (*.tan);;All Files (*)"));
 
-    FrameList frameList;
+    FrameList frameList(G_ROW, G_COL);
     FileOperations::LoadFromFile(fileName, &frameList);
 }
 
@@ -132,7 +132,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
     Rcolor->update();
     Lcolor->update();
     
-    gridToFrameData(); //on every click lol -P
+    //gridToFrameData(); //on every click lol -P
     updateTimeline(); //lol -P
 }
 
