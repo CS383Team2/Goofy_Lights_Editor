@@ -129,18 +129,20 @@
 
 \tableofcontents
 
-\section{About this Project}
+\section{Sprint 1 \& 2}
+
+\subsection{About this Project}
 This project is a alteration of the Tower Lights Project done in previous semesters for Cs 383 at the University of Idaho. The end goal of this project is to create an editor for the Goofy Glasses. goofy glasses are a creation of the University of Idaho computer science department, goofy glasses are normal sun glasses, with RGB LED lighting, and a transmitter to send and receive data to turn the LED's on each pair of glasses on or off, as well as change the color the glasses are currently displaying. The editor we (team 2) are creating will be able to set specific coloring patterns for all of the goofy glasses at once. The general idea behind this is to create a grid with individual squares, where each square represents a single pair of goofy glasses. The user will then be able to create frames, and make a slide show of frames, and transmit the data from the slide show to the goofy glasses to create a scene. 
 
-\section{Design process}
+\subsection{Design process}
 The general outline of the development process can be simplified into three basic steps. Our first order of business was to start developing back-end functionality for the use cases specified (see appendix). Secondly, we created a basic GUI template to visualize layout, and speculate where extra functionality may be needed. Lastly, our focus was placed on integrating the back-end functionality we created with the GUI to bring everything together.
 
-\subsection{Problems encountered}
+\subsubsection{Problems encountered}
 Some of the issues we have encountered as a team are presented below. Originally we created a set of global variables, that almost every function would need access to such as, row\#, col\#, and RGB data. This worked great for testing purposes, but has created scoping issues for future updates. We are currently working on changing all of the global variables previously mentioned into local variables. We are currently working on altering our existing functions to deal with this scope change from global to local. We also originally created a RGB type, and are now altering this to an already existing Qt RGB type called Qcolor. Lastly, we are currently considering data flow, and how data will be used be in our goofy lights editor, we have discussed creating some data flow diagrams to help visualize this process.
 
 
-\vspace{20pt}
-\section{Figures}
+\subsection{Figures}
+\subsubsection{Gui Screenshots}
   
   \begin{figure}[H]
   	\centering
@@ -221,13 +223,10 @@ Some of the issues we have encountered as a team are presented below. Originally
   \end{figure}
   
   
-\newpage
-\subsection{Timeline}
-% the language={} disables language colorings
-\lstinputlisting[language={}]{Timeline2.txt}
+
 
 \newpage
-\section{UML Diagrams}
+\subsubsection{UML Diagrams}
 
 \begin{figure}[H]
 	\centering
@@ -326,9 +325,40 @@ Some of the issues we have encountered as a team are presented below. Originally
 \end{figure}
 
 \newpage
-\section{GitLog}
+\subsection{Timeline sprint 2}
+% the language={} disables language colorings
+\lstinputlisting[language={}]{Timeline_sprint_2.txt}
+
+\newpage
+\subsection{GitLog during sprint 2}
 Git log since 2017\-03\-30
-\lstinputlisting[language={}]{gitLog2.log}
+\lstinputlisting[language={}]{gitLog_sprint_2.log}
+
+
+\section{Sprint 3}
+Sprint 3 stuff here
+
+\subsubsection{Gui Screenshots}
+  
+  \begin{figure}[H]
+  	\centering
+  	%\fbox{\includegraphics[width=350pt]{GUI_Screenshots/stuff.png}}
+  	\caption{stuff}
+  	\label{fig:stuff}
+  \end{figure}
+
+
+
+\newpage
+\subsection{Timeline sprint 3}
+% the language={} disables language colorings
+%\lstinputlisting[language={}]{Timeline_sprint_3.txt}
+
+\newpage
+\subsection{GitLog during sprint 3}
+Git log since 2017\-0\-11
+%\lstinputlisting[language={}]{gitLog_sprint_3.log}
+
 
 
 
