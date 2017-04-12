@@ -21,6 +21,7 @@ private:
 
     NodePtr head;
     NodePtr tail;
+    NodePtr advPtr; // pointer for advancing through the list
     int row, col;
     int count;
 
@@ -64,8 +65,11 @@ public:
     // Return the first node found in the list
     t_FrameData FirstNode();
 
-    // Advance one node in the list
-    int AdvanceList();
+    /* Sets internal advance pointer back to head */
+    void AdvanceListReset();
+
+    /* Advance one node through the list & return Framedata pointer*/
+    t_FrameData * AdvanceList();
 
     // Get the row count
     int GetRowCount();

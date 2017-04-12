@@ -38,8 +38,10 @@ int FileOperations::SaveToFile(FrameList frameList, QString fileName){
         if(frameList.Size() == 0)
             return 0;
 
-        do{
-            t_FrameData frameData = frameList.FirstNode();
+        frameList.AdvanceListReset();                   // Reset internal advancement pointer to head
+        t_FrameData * frameDataPtr = frameList.AdvanceList(); // grab first FrameDataPtr
+        while (frameDataPtr != NULL) {                  // If list is empty FrameDataPtr will be null
+            t_FrameData frameData = *frameDataPtr;      // Dereference pointer
 
             // stream << frameData.ID << endl;
             stream << elapsedTime.toString("mm:ss.zzz") << endl;
@@ -53,7 +55,7 @@ int FileOperations::SaveToFile(FrameList frameList, QString fileName){
                 stream << endl;
             }
             elapsedTime = elapsedTime.addMSecs(frameData.duration);
-        }while(frameList.AdvanceList());
+        }
         file.close();
         return 1;
     }

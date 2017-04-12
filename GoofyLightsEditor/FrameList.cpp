@@ -209,15 +209,21 @@ t_FrameData FrameList::FirstNode(){
     return head->FrameData;
 }
 
-/* Advance one node through the list */
-int FrameList::AdvanceList(){
-    this->head = this->head->next;
+/* Sets internal advance pointer back to head */
+void FrameList::AdvanceListReset(){
+    this->advPtr = head;
+    return;
+}
 
-    /* If we are out of the list return 0, else return 1 */
-    if (this->head == NULL)
-        return 0;
-    else
-        return 1;
+/* Advance one node through the list & return Framedata pointer*/
+t_FrameData * FrameList::AdvanceList(){
+    if (advPtr == NULL)
+        return NULL;
+    else {
+        t_FrameData * rtnVal = &advPtr->FrameData; // Pointer to the address of FrameData
+        this->advPtr = this->advPtr->next;        // Advance pointer
+        return rtnVal;                            // return FrameData pointer
+    }
 }
 
 /* Get the row count */
