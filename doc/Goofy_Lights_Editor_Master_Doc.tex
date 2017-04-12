@@ -97,7 +97,7 @@
 	\\
 	\makebox[.3\linewidth]{Tim Sonnen}\\File Master\ \and
 	\\
-	\makebox[.3\linewidth]{Kevin Dorscher}\\Linked List Librarian\ \and
+	\makebox[.3\linewidth]{Kevin Dorscher}\\Linked List / Developer\ \and
 	\\
 	\makebox[.3\linewidth]{Joe Carter}\\Developer\ \and
 	\\
@@ -130,18 +130,16 @@
 \tableofcontents
 
 \section{About this Project}
-This project is the best project, a simply fantastic project. I know because I've worked with some of the best projects in the world. It's gonna be great. We're gonna build this project, and Mexico is gonna pay for it.
-
-"I know words. I have the best words." -Donald
+This project is a alteration of the Tower Lights Project done in previous semesters for Cs 383 at the University of Idaho. The end goal of this project is to create an editor for the Goofy Glasses. goofy glasses are a creation of the University of Idaho computer science department, goofy glasses are normal sun glasses, with RGB LED lighting, and a transmitter to send and receive data to turn the LED's on each pair of glasses on or off, as well as change the color the glasses are currently displaying. The editor we (team 2) are creating will be able to set specific coloring patterns for all of the goofy glasses at once. The general idea behind this is to create a grid with individual squares, where each square represents a single pair of goofy glasses. The user will then be able to create frames, and make a slide show of frames, and transmit the data from the slide show to the goofy glasses to create a scene. 
 
 \section{Design process}
-stuff
+The general outline of the development process can be simplified into three basic steps. Our first order of business was to start developing back-end functionality for the use cases specified (see appendix). Secondly, we created a basic GUI template to visualize layout, and speculate where extra functionality may be needed. Lastly, our focus was placed on integrating the back-end functionality we created with the GUI to bring everything together.
 
 \subsection{Problems encountered}
-stuff
+Some of the issues we have encountered as a team are presented below. Originally we created a set of global variables, that almost every function would need access to such as, row\#, col\#, and RGB data. This worked great for testing purposes, but has created scoping issues for future updates. We are currently working on changing all of the global variables previously mentioned into local variables. We are currently working on altering our existing functions to deal with this scope change from global to local. We also originally created a RGB type, and are now altering this to an already existing Qt RGB type called Qcolor. Lastly, we are currently considering data flow, and how data will be used be in our goofy lights editor, we have discussed creating some data flow diagrams to help visualize this process.
 
 
-\newpage
+\vspace{20pt}
 \section{Figures}
   
   \begin{figure}[H]
@@ -154,70 +152,70 @@ stuff
   
   \begin{figure}[H]
   	\centering
-  	\fbox{\includegraphics[width=350pt]{GUI_Screenshots/gui_1.png}}
+  	\fbox{\includegraphics[width=320pt]{GUI_Screenshots/gui_1.png}}
   	\caption{Our initial GUI after first sprint}
   	\label{fig:GUI Design 1}
   \end{figure}
   
   \begin{figure}[H]
   	\centering
-  	\fbox{\includegraphics[width=350pt]{GUI_Screenshots/gui_2.png}}
+  	\fbox{\includegraphics[width=320pt]{GUI_Screenshots/gui_2.png}}
   	\caption{GUI after second sprint, RGB functionality added}
   	\label{fig:GUI Design 2}
   \end{figure}  
   
   \begin{figure}[H]
   	\centering
-  	\fbox{\includegraphics[width=350pt]{GUI_Screenshots/gui_2_dialog.png}}
+  	\fbox{\includegraphics[width=320pt]{GUI_Screenshots/gui_2_dialog.png}}
   	\caption{Grid size selection dialog added}
   	\label{fig:GUI Design 2 dialog}
   \end{figure}
   
   \begin{figure}[H]
   	\centering
-  	\fbox{\includegraphics[width=350pt]{GUI_Screenshots/gui_3_1.png}}
+  	\fbox{\includegraphics[width=320pt]{GUI_Screenshots/gui_3_1.png}}
   	\caption{Color wheel added in sprint 3}
   	\label{fig:GUI Design 3}
   \end{figure}
   
   \begin{figure}[H]
   	\centering
-  	\fbox{\includegraphics[width=350pt]{GUI_Screenshots/gui_3_2.png}}
+  	\fbox{\includegraphics[width=305pt]{GUI_Screenshots/gui_3_2.png}}
   	\caption{Color wheel demo}
   	\label{fig:GUI Design 3 demo}
   \end{figure}
   
   \begin{figure}[H]
   	\centering
-  	\fbox{\includegraphics[width=350pt]{GUI_Screenshots/gui_4.png}}
+  	\fbox{\includegraphics[width=305pt]{GUI_Screenshots/gui_4.png}}
   	\caption{Control buttons moved in sprint 3}
   	\label{fig:GUI Design 4}
   \end{figure}
   
   \begin{figure}[H]
   	\centering
-  	\fbox{\includegraphics[width=350pt]{GUI_Screenshots/gui_5_1.png}}
+  	\fbox{\includegraphics[width=320pt]{GUI_Screenshots/gui_5_1.png}}
   	\caption{Timeline implemented. Default squares now black}
   	\label{fig:GUI Design 5}
   \end{figure}  
   
   \begin{figure}[H]
   	\centering
-  	\fbox{\includegraphics[width=350pt]{GUI_Screenshots/gui_5_3.png}}
+  	\fbox{\includegraphics[width=320pt]{GUI_Screenshots/gui_5_3.png}}
   	\caption{Grid size demo 15x20}
   	\label{fig:GUI Design 5 size demo 1}
   \end{figure} 
   
   \begin{figure}[H]
   	\centering
-  	\fbox{\includegraphics[width=350pt]{GUI_Screenshots/gui_5_4.png}}
+  	\fbox{\includegraphics[width=320pt]{GUI_Screenshots/gui_5_4.png}}
   	\caption{Grid size demo 5x3}
   	\label{fig:GUI Design 5 size demo 2}
   \end{figure} 
   
   \begin{figure}[H]
   	\centering
-  	\fbox{\includegraphics[width=350pt]{GUI_Screenshots/gui_5_2.png}}
+  	\fbox{\includegraphics[width=320pt]{GUI_Screenshots/gui_5_2.png}}
   	\caption{GUI usage demo at the end of sprint 3}
   	\label{fig:GUI Design 5 demo}
   \end{figure}
@@ -322,32 +320,38 @@ stuff
 
 \begin{figure}[H]
 	\centering
-	\fbox{\includegraphics[width=350pt]{UML/UseCase14.png}}
+	\fbox{\includegraphics[width=500pt]{UML/UseCase14.png}}
 	\caption{Scroll everything across entire frame}
 	\label{fig:UC14}
 \end{figure}
 
-  
 \newpage
-\section{Files}
-\subsection{main.cpp file}
-\lstinputlisting{../GoofyLightsEditor/main.cpp}
+\section{GitLog}
+Git log since 2017\-03\-30
+\lstinputlisting[language={}]{gitLog2.log}
 
-\newpage
-\subsection{FrameList.h file}
-\lstinputlisting{../GoofyLightsEditor/FrameList.h}
-\newpage
-\subsection{FrameList.cpp file}
-\lstinputlisting{../GoofyLightsEditor/FrameList.cpp}
 
-\newpage
-\subsection{FrameManipulation.h file}
-\lstinputlisting{../GoofyLightsEditor/FrameManipulation.h}
-\newpage
-\subsection{FrameManipulation.cpp file}
-\lstinputlisting{../GoofyLightsEditor/FrameManipulation.cpp}
 
-\newpage
- Other files here
+\iffalse %Acts like a block comment
+	\newpage
+	\section{Files}
+	\subsection{main.cpp file}
+	\lstinputlisting{../GoofyLightsEditor/main.cpp}
+
+	\newpage
+	\subsection{FrameList.h file}
+	\lstinputlisting{../GoofyLightsEditor/FrameList.h}
+	\newpage
+	\subsection{FrameList.cpp file}
+	\lstinputlisting{../GoofyLightsEditor/FrameList.cpp}
+
+	\newpage
+	\subsection{FrameManipulation.h file}
+	\lstinputlisting{../GoofyLightsEditor/FrameManipulation.h}
+	\newpage
+	\subsection{FrameManipulation.cpp file}
+	\lstinputlisting{../GoofyLightsEditor/FrameManipulation.cpp}
+\fi %end of if block acting like a block comment
+
 
 \end{document}

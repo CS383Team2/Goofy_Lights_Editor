@@ -14,8 +14,8 @@ typedef struct
     //There will only ever be one GridSquare object, for the grid.
     //Each FrameData will however have its own TimelineGrid object, since the timeline will have more than one item
 
-    TimelineGrid **squareData; //fixed -P
-
+    TimelineGrid **squareData;
+    t_RGB** data;  //Frame data
 } t_FrameData;
 
 #endif // FRAMESTRUCTURE_H

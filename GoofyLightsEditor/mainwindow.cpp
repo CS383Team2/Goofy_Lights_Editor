@@ -13,6 +13,8 @@ long FrameID = 0; //-P
 int temp_R, temp_G, temp_B, temp_A; //yeah.... -P
 FrameList frameList(G_ROW,G_COL);
 
+GridSquare *Lcolor = new GridSquare(true);
+GridSquare *Rcolor = new GridSquare(true);
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -26,6 +28,16 @@ MainWindow::MainWindow(QWidget *parent) :
     timelineScene = new QGraphicsScene(this);
     ui->gView_Timeline->setScene(timelineScene); //give the timeline to the graphics view -Paul
 
+    currentcolorsScene = new QGraphicsScene(this);
+    ui->gCurrent_Colors->setScene(currentcolorsScene);
+
+    Lcolor->x = 0;
+    Lcolor->y = 0;
+    Rcolor->x = 0;
+    Rcolor->y = 40;
+
+    currentcolorsScene->addItem(Lcolor);
+    currentcolorsScene->addItem(Rcolor);
     //GridSquare **square = new GridSquare*[G_COL];  //This is now in mainwindow.h -P
     for (int i = 0; i < G_COL; ++i)
     {
@@ -115,6 +127,12 @@ void MainWindow::on_sbox_ValueBlue_editingFinished()
 void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is clicked inside of, lol -P
 {
 
+    Rcolor->square_RGB.setRgb(G_RED_RIGHT, G_GREEN_RIGHT, G_BLUE_RIGHT, 255);
+    Lcolor->square_RGB.setRgb(G_RED, G_GREEN, G_BLUE, 255);
+    Rcolor->update();
+    Lcolor->update();
+    
+    gridToFrameData(); //on every click lol -P
     updateTimeline(); //lol -P
 }
 

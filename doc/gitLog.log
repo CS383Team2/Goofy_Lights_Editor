@@ -1,0 +1,130 @@
+d8d0fcb - Nick Krenowicz, Sun Apr 9 22:33:48 2017 -0700 : Team schedule finder
+4baa9a3 - Nick Krenowicz, Sun Apr 9 22:33:24 2017 -0700 : Master Tex Doc: Gitlog
+b9eaba8 - Kevin Dorscher, Sun Apr 9 19:55:53 2017 -0700 : Master Tex Doc & PDF Update
+cd9db6f - Kevin Dorscher, Sun Apr 9 19:29:05 2017 -0700 : Master Tex Documentation Changes
+7152af0 - Kevin Dorscher, Sun Apr 9 19:23:05 2017 -0700 : Documentation Changes
+5cf9167 - welc2421, Sun Apr 9 19:00:00 2017 -0700 : Current Color Preview
+94e8b76 - welc2421, Sun Apr 9 18:55:30 2017 -0700 : Current Color Preview
+7e793d2 - welc2421, Sun Apr 9 18:53:30 2017 -0700 : Current Color Preview
+3ffd1ca - welc2421, Sun Apr 9 18:52:14 2017 -0700 : Current Color Preview
+925b27a - welc2421, Sun Apr 9 18:51:16 2017 -0700 : Current Color Preview
+c3516b3 - Emma Bateman, Sun Apr 9 18:40:10 2017 -0700 : framedata.durration -> framedata.duration
+c37fc69 - YupHio, Sun Apr 9 13:59:40 2017 -0700 : Tex authors
+f6f7eac - YupHio, Sun Apr 9 13:57:10 2017 -0700 : New Tex author formatting?
+01f7126 - YupHio, Sun Apr 9 13:46:00 2017 -0700 : Tex author formatting
+1ade1d0 - Nick Krenowicz, Sun Apr 9 13:12:39 2017 -0700 : FrameList delete mid minor fix
+7f7e37a - YupHio, Sun Apr 9 13:07:50 2017 -0700 : Tex formatting
+1ddb136 - YupHio, Sun Apr 9 12:50:15 2017 -0700 : Formatting
+27645e3 - YupHio, Sun Apr 9 12:36:46 2017 -0700 : Seg fault comment
+a84f36b - YupHio, Sun Apr 9 12:34:01 2017 -0700 : Added GUI screenshots to Master Tex
+78e4838 - Tim Sonnen, Sun Apr 9 12:33:30 2017 -0700 : Merge pull request #35 from CS383Team2/fileio
+8da54da - tsonnen, Sun Apr 9 12:27:08 2017 -0700 : Merge remote-tracking branch 'origin/master' into fileio
+b43c853 - tsonnen, Sun Apr 9 12:25:24 2017 -0700 : Cleanup and test
+294e6cf - YupHio, Sun Apr 9 12:11:27 2017 -0700 : Finally, static grid spacing
+f849187 - tsonnen, Sun Apr 9 11:47:58 2017 -0700 : Merge branch 'master' into fileio
+c0e9938 - YupHio, Sun Apr 9 11:45:28 2017 -0700 : Slightly better cropping
+90ed600 - YupHio, Sun Apr 9 10:41:45 2017 -0700 : Latest gui
+481358a - YupHio, Sun Apr 9 10:31:49 2017 -0700 : File management
+b5ec046 - YupHio, Sun Apr 9 10:26:06 2017 -0700 : Historical GUI Screenshots
+7162833 - emmabateman, Fri Apr 7 20:38:30 2017 -0700 : Merge pull request #33 from CS383Team2/right/left
+3559c14 - Nick Krenowicz, Fri Apr 7 19:52:59 2017 -0700 : FrameList: Bugfix
+530ad89 - Nick Krenowicz, Fri Apr 7 19:09:48 2017 -0700 : FrameList: Minor renames
+11106da - Nick Krenowicz, Fri Apr 7 18:50:39 2017 -0700 : FrameList: AddNode Middle Update
+09c4899 - Nick Krenowicz, Fri Apr 7 18:24:48 2017 -0700 : FrameList: Delete list update
+7d683f8 - Nick Krenowicz, Fri Apr 7 17:57:17 2017 -0700 : FrameList AddTail update
+52647dd - emmabateman, Fri Apr 7 17:35:29 2017 -0700 : Merge branch 'master' into right/left
+6fc2d6a - Emma Bateman, Fri Apr 7 17:07:51 2017 -0700 : 2 color pallette
+c9cef8a - Nick Krenowicz, Fri Apr 7 16:27:37 2017 -0700 : Doc: Cleanup doc directory
+e4cec55 - Krenowicz, Fri Apr 7 15:33:46 2017 -0700 : Doc: Added tan files and cleanup
+8c8f713 - YupHio, Fri Apr 7 09:09:30 2017 -0700 : Fixed all ambiguous names... :)
+5555462 - YupHio, Fri Apr 7 08:58:11 2017 -0700 : Fixed more widget names
+e8f6503 - YupHio, Fri Apr 7 08:42:57 2017 -0700 : Removed unused R and C from .h files
+0277b8c - Nick Krenowicz, Thu Apr 6 21:36:49 2017 -0700 : Bug fix. main rc
+39a1ac0 - Nick, Thu Apr 6 21:14:32 2017 -0700 : Merge pull request #31 from CS383Team2/Row_Col_Reworks
+cfa2255 - Nick Krenowicz, Thu Apr 6 20:59:47 2017 -0700 : Removed FrameData r/c
+42d162d - Nick Krenowicz, Thu Apr 6 13:02:03 2017 -0700 : Minor update & compile
+f951c05 - Kevin Dorscher, Thu Apr 6 13:02:03 2017 -0700 : Update Goofy_Lights_Editor_Master_Doc.tex
+b75e77e - Kevin Dorscher, Thu Apr 6 12:19:01 2017 -0700 : Images of the GUI design from sprint 1 to now
+62da4a0 - welc2421, Wed Apr 5 19:13:08 2017 -0700 : double click to clear single square
+70eb973 - welc2421, Wed Apr 5 19:11:42 2017 -0700 : added double click to clear a single square
+803bf5f - Nick Krenowicz, Wed Apr 5 18:21:51 2017 -0700 : Doc: Master Doc Changed sizes
+2c8240f - welc2421, Wed Apr 5 16:04:59 2017 -0700 : I corrected my name
+6079165 - Nick Krenowicz, Wed Apr 5 15:59:51 2017 -0700 : Doc: Master Doc added names
+74712c4 - Nick Krenowicz, Wed Apr 5 14:35:23 2017 -0700 : Doc: Master tex document filled
+607d92a - YupHio, Wed Apr 5 13:18:18 2017 -0700 : updateTimeline() lags by 1 click
+703fd32 - Nick Krenowicz, Wed Apr 5 13:15:23 2017 -0700 : Doc: Master tex document
+98966ac - YupHio, Wed Apr 5 12:09:49 2017 -0700 : GUI scaled to 960x700
+76b95ee - YupHio, Wed Apr 5 12:02:35 2017 -0700 : GUI is now 960x768
+42dd1b5 - YupHio, Wed Apr 5 10:02:45 2017 -0700 : AUTO-MAGICALLY SCALED GRID! :)
+90928cd - YupHio, Wed Apr 5 10:02:11 2017 -0700 : Dialogs for help and doc...
+1b9acac - Nick Krenowicz, Wed Apr 5 00:27:13 2017 -0700 : UI Widgit Name Changes 4
+beffff6 - Nick Krenowicz, Wed Apr 5 00:18:52 2017 -0700 : UI Widgit Name Changes 3
+8a344d1 - Nick Krenowicz, Tue Apr 4 23:57:52 2017 -0700 : UI Widgit Name Changes 2
+e24185f - Nick Krenowicz, Tue Apr 4 23:29:47 2017 -0700 : UI Widgit Name Changes
+7fd3274 - YupHio, Tue Apr 4 11:35:47 2017 -0700 : Timeline is coming along.
+6d48c0c - YupHio, Tue Apr 4 11:23:56 2017 -0700 : Timeline alpha sucks, will work soon.
+3c43a53 - YupHio, Tue Apr 4 11:23:14 2017 -0700 : TIMELINE is coming soon...
+34a9472 - YupHio, Tue Apr 4 11:00:55 2017 -0700 : Actually fixed gridToFrameData segfault
+cdcd50e - welc2421, Tue Apr 4 10:46:07 2017 -0700 : Update Function Round 2
+6fff940 - welc2421, Mon Apr 3 22:32:08 2017 -0700 : Added Update Node Functio
+1f132d4 - welc2421, Mon Apr 3 22:30:15 2017 -0700 : Added the Update Node Function
+62652ba - Nick Krenowicz, Mon Apr 3 22:28:07 2017 -0700 : mainwindow: FrameData cleanup
+55e9388 - Nick Krenowicz, Mon Apr 3 22:08:31 2017 -0700 : mainwindow: changed r/c vars to global G_Row/G_Col
+3e14b43 - tsonnen, Mon Apr 3 20:29:42 2017 -0700 : Update load interface. TESTED. Frame ID changes when returning back to calling function.
+ebf7541 - tsonnen, Mon Apr 3 19:38:38 2017 -0700 : Change load file interface UNTESTED
+69f9fae - YupHio, Mon Apr 3 16:01:46 2017 -0700 : Seg Fault "fixed" for R<C
+75bcc84 - YupHio, Mon Apr 3 15:57:49 2017 -0700 : Push
+ca11db9 - YupHio, Mon Apr 3 15:57:35 2017 -0700 : Help->Documentation dialog created
+b7402ac - YupHio, Mon Apr 3 15:49:03 2017 -0700 : Fixed Fill Frame bug. -P
+5da2547 - YupHio, Mon Apr 3 00:33:18 2017 -0700 : Slightly looser grid to fix bugs
+195cfce - YupHio, Mon Apr 3 00:19:37 2017 -0700 : Grid is tight as a drum. NoPen.
+d9d1e23 - YupHio, Sun Apr 2 22:49:29 2017 -0700 : Coding from my cellphone. Working?
+56ede99 - YupHio, Sun Apr 2 17:54:47 2017 -0700 : FrameDataToGrid stitched in
+e603769 - YupHio, Sun Apr 2 17:42:50 2017 -0700 : Clear Frame stitched to FrameData
+ef64526 - YupHio, Sun Apr 2 17:40:09 2017 -0700 : Stitched a FrameData to the GUI grid -P
+829a0d6 - Nick Krenowicz, Sun Apr 2 17:13:45 2017 -0700 : Cleanup: Removed github issues comments from files
+8304bc7 - Tim Sonnen, Sun Apr 2 16:57:44 2017 -0700 : Merge pull request #20 from CS383Team2/fileio
+656c2ac - Nick Krenowicz, Sun Apr 2 16:45:40 2017 -0700 : Merge remote-tracking branch 'origin/master'
+214b4ad - Nick Krenowicz, Sun Apr 2 16:45:08 2017 -0700 : Merge branch 'copyFrame'
+4ef6c77 - YupHio, Sun Apr 2 16:41:28 2017 -0700 : Comment clarity/ Fill Frame
+525f51f - YupHio, Sun Apr 2 16:37:02 2017 -0700 : Removed ALPHA from all code -P
+ff8cf26 - YupHio, Sun Apr 2 16:26:56 2017 -0700 : Clear Frame is now BLACK
+2e6a099 - Nick Krenowicz, Sun Apr 2 16:24:33 2017 -0700 : copyFrame() finalized
+11a1c47 - YupHio, Sun Apr 2 16:21:09 2017 -0700 : copyFrame fixed with error checking
+c196b24 - YupHio, Sun Apr 2 16:14:18 2017 -0700 : copyFrame coded and not tested :)
+f3739f0 - Nick Krenowicz, Sun Apr 2 16:13:49 2017 -0700 : Fixed pointer error and changed copyFrame interface
+fef1693 - YupHio, Sun Apr 2 16:01:03 2017 -0700 : Fill Frame and Clear Frame work great
+4278d3b - tsonnen, Sun Apr 2 16:00:25 2017 -0700 : Merge remote-tracking branch 'origin/master' into fileio
+04426cd - tsonnen, Sun Apr 2 15:51:51 2017 -0700 : Changed nullptr to NULL as nullptr was not compiling.
+2b615f8 - YupHio, Sun Apr 2 15:49:06 2017 -0700 : SmartGit works right?
+83e7221 - YupHio, Sun Apr 2 15:47:35 2017 -0700 : Fill Frame+Clear Frame buttons work on GUI side
+9cb3648 - tsonnen, Sun Apr 2 15:44:30 2017 -0700 : Merge remote-tracking branch 'origin/master' into fileio
+1fbe861 - tsonnen, Sun Apr 2 15:34:29 2017 -0700 : Merge remote-tracking branch 'origin/master' into fileio. Fix FileOperations.cpp error. Commits 38185e0 and aa76ef0 somehow overwrote the previous changes.
+3b6db45 - YupHio, Sun Apr 2 15:29:05 2017 -0700 : Clarification
+87c35d9 - YupHio, Sun Apr 2 15:26:14 2017 -0700 : Testing SmartGit
+1dadec6 - tsonnen, Sun Apr 2 15:25:44 2017 -0700 : Fix overwrite issue. Check commit 38185e0
+f6069d4 - Nick Krenowicz, Sun Apr 2 15:10:17 2017 -0700 : Merge pull request #19 from CS383Team2/fileio
+ca0b44c - Nick Krenowicz, Sun Apr 2 14:53:55 2017 -0700 : Changed copyFrame Interface
+952ee9d - Tim Sonnen, Sun Apr 2 14:28:23 2017 -0700 : Merge pull request #19 from CS383Team2/fileio
+cfa7db6 - Nick Krenowicz, Sun Apr 2 14:19:34 2017 -0700 : CopyFrame() done
+8fec6eb - tsonnen, Sun Apr 2 14:16:07 2017 -0700 : Merge remote-tracking branch 'origin/master' into fileio
+0f4efa3 - Nick Krenowicz, Sun Apr 2 14:14:10 2017 -0700 : copyFrame row/col variables renamed
+1448ab3 - YupHio, Sun Apr 2 14:13:56 2017 -0700 : GUI Version 3.0 -P
+617bf2d - Nick, Sun Apr 2 14:09:04 2017 -0700 : Merge pull request #16 from CS383Team2/Delete_RGB
+1309aad - Nick Krenowicz, Sun Apr 2 14:05:34 2017 -0700 : Moved frames.DeleteList Before "Program end" output
+5effc69 - Nick Krenowicz, Sun Apr 2 14:04:34 2017 -0700 : Minor edits to FrameList.cpp
+621e903 - Nick Krenowicz, Sun Apr 2 13:38:45 2017 -0700 : Merge branch 'master' into Delete_RGB
+b6139f3 - YupHio, Sun Apr 2 13:12:27 2017 -0700 : Colorwheel linked to spinboxes (sorta)(difficult)
+6a3e519 - YupHio, Sun Apr 2 11:54:26 2017 -0700 : The color wheel, IT'S ALIVE!
+83f0ba3 - YupHio, Sun Apr 2 11:18:35 2017 -0700 : What is a color wheel? Oh.
+9bea306 - YupHio, Fri Mar 31 15:00:10 2017 -0700 : Full RGB support! Woohoo
+7059410 - YupHio, Fri Mar 31 14:52:25 2017 -0700 : GridSquares now support RGB, ooooo -P
+4463f47 - YupHio, Fri Mar 31 14:15:44 2017 -0700 : *another* dialog to browse for existing .tan file
+9a1fcd0 - YupHio, Fri Mar 31 14:00:54 2017 -0700 : May want to open an existing file?
+3700fb1 - YupHio, Fri Mar 31 13:55:39 2017 -0700 : Existing project dialog update
+abb520a - YupHio, Fri Mar 31 13:15:47 2017 -0700 : Better grid size dialog
+78cd88f - YupHio, Fri Mar 31 13:02:26 2017 -0700 : Grid size dialog!
+5f6a9da - YupHio, Fri Mar 31 12:19:27 2017 -0700 : Added grid size popup dialog. +extern G_ROW, G_COL
+99b16dd - Nick Krenowicz, Fri Mar 31 00:56:25 2017 -0700 : Update comments for main.cpp test code
+0827459 - Nick Krenowicz, Fri Mar 31 00:48:45 2017 -0700 : Added delete_RGB to FrameList delete methods
+19d0eba - Nick Krenowicz, Fri Mar 31 00:27:19 2017 -0700 : Merge branch 'master' into Delete_RGB
