@@ -10,7 +10,7 @@
 #include <FrameManipulation.h>
 
 long FrameID = 0; //-P
-int temp_R, temp_G, temp_B, temp_A; //yeah.... -P
+QColor temp_RGB; //yeah.... -P
 //FrameList frameList(V_GLOBAL.G_ROW,V_GLOBAL.G_COL);
 
 GridSquare *Lcolor = new GridSquare(true);
@@ -44,6 +44,14 @@ MainWindow::MainWindow(QWidget *parent) :
         gridGridSquare[i] = new GridSquare[V_GLOBAL.G_ROW];
         timelineTimelineGrid[i] = new TimelineGrid[V_GLOBAL.G_ROW];
     }
+
+    //MAIN WINDOW TOO BIG, gonna take the scaling down to 85% -P
+    double max = 0;
+    if(V_GLOBAL.G_COL > V_GLOBAL.G_ROW)
+        max = V_GLOBAL.G_COL;
+    else
+        max = V_GLOBAL.G_ROW;
+    double G_SCALE = ((20.0 / max) * 0.85); //scaled based on a max size of 20x20 -P
 
     int gridScale = 22*G_SCALE;
     int timelineScale = 4*G_SCALE;
@@ -110,25 +118,29 @@ void MainWindow::on_actionOpenProject_triggered()
 void MainWindow::on_sbox_ValueRed_editingFinished()
 {
     //crap -P
-    G_RED = ui->sbox_ValueRed->value();
+    V_GLOBAL.G_LEFT.setRed( ui->sbox_ValueRed->value() ); //allow custom colors via the spinboxes -P
 }
 
 void MainWindow::on_sbox_ValueGreen_editingFinished()
 {
-    G_GREEN = ui->sbox_ValueGreen->value(); //-P
+    V_GLOBAL.G_LEFT.setGreen( ui->sbox_ValueGreen->value() ); //allow custom colors via the spinboxes -P
 }
 
 void MainWindow::on_sbox_ValueBlue_editingFinished()
 {
-    G_BLUE = ui->sbox_ValueBlue->value();
+    V_GLOBAL.G_LEFT.setBlue( ui->sbox_ValueBlue->value() ); //allow custom colors via the spinboxes -P
 }
 
 
 void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is clicked inside of, lol -P
 {
 
-    Rcolor->square_RGB.setRgb(G_RED_RIGHT, G_GREEN_RIGHT, G_BLUE_RIGHT, 255);
-    Lcolor->square_RGB.setRgb(G_RED, G_GREEN, G_BLUE, 255);
+    //Rcolor->square_RGB.setRgb(G_RED_RIGHT, G_GREEN_RIGHT, G_BLUE_RIGHT, 255);
+    //Lcolor->square_RGB.setRgb(G_RED, G_GREEN, G_BLUE, 255);
+
+    Rcolor->square_RGB.setRgb(V_GLOBAL.G_RIGHT.red(), V_GLOBAL.G_RIGHT.green(), V_GLOBAL.G_RIGHT.blue(), 255); //new -P
+    Lcolor->square_RGB.setRgb(V_GLOBAL.G_LEFT.red(), V_GLOBAL.G_LEFT.green(), V_GLOBAL.G_LEFT.blue(), 255); //new -P
+
     Rcolor->update();
     Lcolor->update();
     
@@ -163,20 +175,16 @@ void MainWindow::on_btn_ClearFrame_clicked()
 
 void MainWindow::on_btn_ClearFrame_released() //Clear Frame
 {
-    G_RED = temp_R;
-    G_GREEN = temp_G;
-    G_BLUE = temp_B;
+    V_GLOBAL.G_LEFT = temp_RGB;
 
-    ui->sbox_ValueRed->setValue(G_RED); //-P
-    ui->sbox_ValueGreen->setValue(G_GREEN);
-    ui->sbox_ValueBlue->setValue(G_BLUE); //-P
+    ui->sbox_ValueRed->setValue(V_GLOBAL.G_LEFT.red()); //-P
+    ui->sbox_ValueGreen->setValue(V_GLOBAL.G_LEFT.green());
+    ui->sbox_ValueBlue->setValue(V_GLOBAL.G_LEFT.blue()); //-P
 }
 
 void MainWindow::on_btn_ClearFrame_pressed() //Clear Frame
 {
-    temp_R = G_RED;
-    temp_G = G_GREEN;
-    temp_B = G_BLUE;
+    temp_RGB = V_GLOBAL.G_LEFT;
     //first let's update the GRAPHICAL EYBALL STIMILATION GRID for motivation -P
     for(int x=0; x<V_GLOBAL.G_COL; x++)
     {
@@ -185,9 +193,10 @@ void MainWindow::on_btn_ClearFrame_pressed() //Clear Frame
             gridGridSquare[x][y].Selected = true;
             gridGridSquare[x][y].leftclick = true;
             //BLACK
-            G_RED = 0;
-            G_GREEN = 0;
-            G_BLUE = 0;
+            //G_RED = 0;
+            //G_GREEN = 0;
+            //G_BLUE = 0;
+            V_GLOBAL.G_LEFT = (Qt::black); //new -P
             gridGridSquare[x][y].update(); //Fill that frame son -P
         }
     }

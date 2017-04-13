@@ -13,6 +13,14 @@ TimelineGrid::~TimelineGrid()
 
 QRectF TimelineGrid::boundingRect() const
 {
+    //MAIN WINDOW TOO BIG, gonna take the scaling down to 85% -P
+    double max = 0;
+    if(V_GLOBAL.G_COL > V_GLOBAL.G_ROW)
+        max = V_GLOBAL.G_COL;
+    else
+        max = V_GLOBAL.G_ROW;
+    double G_SCALE = ((20.0 / max) * 0.85); //scaled based on a max size of 20x20 -P
+
     return QRectF(x,y,4*G_SCALE,4*G_SCALE); //x and y position the square before it's painted -P
     //x, y are top left corner -P
 }
@@ -22,7 +30,7 @@ void TimelineGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     QRectF rec = boundingRect();
     QBrush brush(square_RGB);
 
-    square_RGB.setRgb(G_RED, G_GREEN, G_BLUE, 255); //grab the color... -P
+    square_RGB.setRgb(V_GLOBAL.G_LEFT.red(), V_GLOBAL.G_LEFT.green(), V_GLOBAL.G_LEFT.blue(), 255); //grab the color... -P
 
     if(Selected)
     {

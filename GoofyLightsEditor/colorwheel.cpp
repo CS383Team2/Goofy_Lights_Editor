@@ -340,14 +340,18 @@ void ColorWheel::hueChanged(const int &hue)
     repaint();
 
     if (leftclick) {
-        G_RED = current.red(); //-P
-        G_GREEN = current.green();
-        G_BLUE = current.blue(); //-P
+        //G_RED = current.red(); //-P
+        //G_GREEN = current.green();
+        //G_BLUE = current.blue(); //-P
+
+        V_GLOBAL.G_LEFT = current; //switched to QColor -P
     }
     else {
-        G_RED_RIGHT = current.red();
-        G_GREEN_RIGHT = current.green();
-        G_BLUE_RIGHT = current.blue();
+       // G_RED_RIGHT = current.red();
+        //G_GREEN_RIGHT = current.green();
+        //G_BLUE_RIGHT = current.blue();
+
+        V_GLOBAL.G_RIGHT = current; //switched to QColor -P
     }
 
     emit colorChange(current);
@@ -366,14 +370,18 @@ void ColorWheel::svChanged(const QColor &newcolor)
     repaint();
 
     if (leftclick) {
-        G_RED = current.red(); //-P
-        G_GREEN = current.green();
-        G_BLUE = current.blue(); //-P
+        //G_RED = current.red(); //-P
+        //G_GREEN = current.green();
+        //G_BLUE = current.blue(); //-P
+
+        V_GLOBAL.G_LEFT = current; //switched to QColor -P
     }
     else {
-        G_RED_RIGHT = current.red();
-        G_GREEN_RIGHT = current.green();
-        G_BLUE_RIGHT = current.blue();
+       // G_RED_RIGHT = current.red();
+        //G_GREEN_RIGHT = current.green();
+        //G_BLUE_RIGHT = current.blue();
+
+        V_GLOBAL.G_RIGHT = current; //switched to QColor -P
     }
 
 
