@@ -23,9 +23,14 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    GridSquare **gridGridSquare = new GridSquare*[G_COL];  //Type is GridSquare, square is object
-    TimelineGrid **timelineTimelineGrid = new TimelineGrid*[G_COL];  //Type is TimelineGrid, square2 is object
+    GridSquare **gridGridSquare = new GridSquare*[V_GLOBAL.G_ROW];  //Type is GridSquare, square is object
+
+    //TimelineGrid **timelineTimelineGrid = new TimelineGrid*[V_GLOBAL.G_ROW];  //Type is TimelineGrid, square2 is object
+
     t_FrameData FrameData;  // THE frame data (this is in mainwindow.h) -P
+
+    t_FrameData CurrentFrameData;
+
 
     void gridToFrameData();
     void FrameDataToGrid(); //stitching rubbish -P
@@ -53,6 +58,8 @@ private slots:
 
     void on_btn_ClearFrame_pressed();
 
+
+    void on_btn_NewFrame_clicked();
 
 private:
     Ui::MainWindow *ui;

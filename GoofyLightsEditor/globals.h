@@ -1,20 +1,20 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
+#include "FrameList.h"
 
-extern int G_ROW;
-extern int G_COL; //global variables, deal. -P
-extern double G_SCALE; //magical grid scaling feature :) -P
+typedef struct Globals{
 
-extern int G_RED;
-extern int G_GREEN;
-extern int G_BLUE;
-extern int G_RED_RIGHT;
-extern int G_GREEN_RIGHT;
-extern int G_BLUE_RIGHT;
+    int G_ROW;
+    int G_COL;
+    int G_FRAMECOUNT = 1;
 
-extern int G_FRAMECOUNT;
+    QColor G_RIGHT = (Qt::blue); //default to blue jsut for hoots -P
+    QColor G_LEFT = (Qt::red); //default to red to match colorwheel default -P
 
+    FrameList *G_FRAMELIST;
 
-//extern bool set;
+}V_Goofy;
+
+extern V_Goofy V_GLOBAL;
 
 #endif // GLOBALS_H

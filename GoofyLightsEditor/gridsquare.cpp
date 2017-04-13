@@ -23,6 +23,14 @@ GridSquare::~GridSquare()
 
 QRectF GridSquare::boundingRect() const
 {
+    //MAIN WINDOW TOO BIG, gonna take the scaling down to 85% -P
+    double max = 0;
+    if(V_GLOBAL.G_COL > V_GLOBAL.G_ROW)
+        max = V_GLOBAL.G_COL;
+    else
+        max = V_GLOBAL.G_ROW;
+    double G_SCALE = ((20.0 / max) * 0.85); //scaled based on a max size of 20x20 -P
+
     return QRectF(x,y,22*G_SCALE,22*G_SCALE); //x and y position the square before it's painted -P
     //x, y are top left corner -P
 }
@@ -40,8 +48,8 @@ void GridSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
             ClearSquare = false;
         }
         else
-            if (leftclick) square_RGB.setRgb(G_RED, G_GREEN, G_BLUE, 255); //grab the color... -P
-            else  square_RGB.setRgb(G_RED_RIGHT, G_GREEN_RIGHT, G_BLUE_RIGHT, 255);
+            if (leftclick) square_RGB.setRgb(V_GLOBAL.G_LEFT.red(), V_GLOBAL.G_LEFT.green(), V_GLOBAL.G_LEFT.blue(), 255); //grab the color... -P
+            else  square_RGB.setRgb(V_GLOBAL.G_RIGHT.red(), V_GLOBAL.G_RIGHT.green(), V_GLOBAL.G_RIGHT.blue(), 255);
             //QColor(int r, int g, int b, int a = 255) //use this, last argument always 255
 
         brush.setColor(square_RGB); //HELLO RGB COLOR Alpha locked to 255 -green -P
