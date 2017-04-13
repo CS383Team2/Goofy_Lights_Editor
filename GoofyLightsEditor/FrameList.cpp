@@ -226,6 +226,16 @@ t_FrameData * FrameList::AdvanceList(){
     }
 }
 
+/* Sets the row count */
+void FrameList::SetRowCount(int r) {
+    this->row = r;
+}
+
+/* Sets the column count */
+void FrameList::SetColCount(int c){
+    this->col = c;
+}
+
 /* Get the row count */
 int FrameList::GetRowCount(){
     return this->row;

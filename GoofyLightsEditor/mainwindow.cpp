@@ -40,11 +40,13 @@ MainWindow::MainWindow(QWidget *parent) :
     Rcolor->x = 0;
     Rcolor->y = 40;
 
-    theFrames.AddTail(FrameData); //add something? -P
+    theFrames.SetRowCount(V_GLOBAL.G_ROW);        // Update row size in FrameList now that it is defined
+    theFrames.SetColCount(V_GLOBAL.G_COL);        // Update col size in FrameList now that it is defined
+    theFrames.AddTail(FrameData);                 //add something? -P
 
     //CurrentFrameData = theFrames.RetrieveNode_Middle(0); //start at 0, I suppose -P
 
-    CurrentFrameData = theFrames.FirstNode(); //start at 0, I suppose -P
+    CurrentFrameData = theFrames.FirstNode();     //start at 0, I suppose -P
 
     currentcolorsScene->addItem(Lcolor);
     currentcolorsScene->addItem(Rcolor);

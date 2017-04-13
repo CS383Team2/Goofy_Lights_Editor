@@ -79,6 +79,12 @@ public:
     /* Advance one node through the list & return Framedata pointer*/
     t_FrameData * AdvanceList();
 
+    // Sets the row count
+    void SetRowCount(int r);
+
+    // Sets the column count
+    void SetColCount(int c);
+
     // Get the row count
     int GetRowCount();
 
