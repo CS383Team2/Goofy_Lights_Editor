@@ -39,18 +39,18 @@ MainWindow::MainWindow(QWidget *parent) :
     currentcolorsScene->addItem(Lcolor);
     currentcolorsScene->addItem(Rcolor);
     //GridSquare **square = new GridSquare*[V_GLOBAL.G_COL];  //This is now in mainwindow.h -P
-    for (int i = 0; i < V_GLOBAL.G_COL; ++i)
+    for (int i = 0; i < V_GLOBAL.G_ROW; ++i)
     {
-        gridGridSquare[i] = new GridSquare[V_GLOBAL.G_ROW];
-        timelineTimelineGrid[i] = new TimelineGrid[V_GLOBAL.G_ROW];
+        gridGridSquare[i] = new GridSquare[V_GLOBAL.G_COL];
+        timelineTimelineGrid[i] = new TimelineGrid[V_GLOBAL.G_COL];
     }
 
     //MAIN WINDOW TOO BIG, gonna take the scaling down to 85% -P
     double max = 0;
-    if(V_GLOBAL.G_COL > V_GLOBAL.G_ROW)
-        max = V_GLOBAL.G_COL;
-    else
+    if(V_GLOBAL.G_ROW > V_GLOBAL.G_COL)
         max = V_GLOBAL.G_ROW;
+    else
+        max = V_GLOBAL.G_COL;
     double G_SCALE = ((20.0 / max) * 0.85); //scaled based on a max size of 20x20 -P
 
     int gridScale = 22*G_SCALE;
@@ -58,14 +58,14 @@ MainWindow::MainWindow(QWidget *parent) :
     int g_SPACING = 3; //grid spacing woohooo -P
     int t_SPACING = 2; //timeline spacing woohooo -P
 
-    for(int x=0; x<V_GLOBAL.G_COL; x++)
+    for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
-        for(int y=0; y<V_GLOBAL.G_ROW; y++)
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
         {
-            gridGridSquare[x][y].x = (x*gridScale + x*g_SPACING);
-            gridGridSquare[x][y].y = (y*gridScale + y*g_SPACING);
-            timelineTimelineGrid[x][y].x = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
-            timelineTimelineGrid[x][y].y = (y*timelineScale + y*t_SPACING); //will add the magic soon -P
+            gridGridSquare[x][y].y = (x*gridScale + x*g_SPACING);
+            gridGridSquare[x][y].x = (y*gridScale + y*g_SPACING);
+            timelineTimelineGrid[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
+            timelineTimelineGrid[x][y].x = (y*timelineScale + y*t_SPACING); //will add the magic soon -P
             gridScene->addItem(&gridGridSquare[x][y]);
             timelineScene->addItem(&timelineTimelineGrid[x][y]); //timeline testing here -P
         }
@@ -152,9 +152,9 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
 void MainWindow::on_btn_FillFrame_clicked() //Fill Frame
 {
     //first let's update the GRAPHICAL EYBALL STIMILATION GRID for motivation -P
-    for(int x=0; x<V_GLOBAL.G_COL; x++)
+    for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
-        for(int y=0; y<V_GLOBAL.G_ROW; y++)
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
         {
             gridGridSquare[x][y].Selected = true;
             gridGridSquare[x][y].leftclick = true;
@@ -186,9 +186,9 @@ void MainWindow::on_btn_ClearFrame_pressed() //Clear Frame
 {
     temp_RGB = V_GLOBAL.G_LEFT;
     //first let's update the GRAPHICAL EYBALL STIMILATION GRID for motivation -P
-    for(int x=0; x<V_GLOBAL.G_COL; x++)
+    for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
-        for(int y=0; y<V_GLOBAL.G_ROW; y++)
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
         {
             gridGridSquare[x][y].Selected = true;
             gridGridSquare[x][y].leftclick = true;
@@ -208,9 +208,9 @@ void MainWindow::on_btn_ClearFrame_pressed() //Clear Frame
 
 void MainWindow::updateTimeline() //fix the update lag later -P
 {
-    for(int x=0; x<V_GLOBAL.G_COL; x++)
+    for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
-        for(int y=0; y<V_GLOBAL.G_ROW; y++)
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
         {
             timelineTimelineGrid[x][y].square_RGB = gridGridSquare[x][y].square_RGB; //grab the colors from the real grid -P
             timelineTimelineGrid[x][y].update();

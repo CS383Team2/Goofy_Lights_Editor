@@ -28,9 +28,9 @@ QRectF TimelineGrid::boundingRect() const
 void TimelineGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QRectF rec = boundingRect();
-    QBrush brush(square_RGB);
+    QBrush brush(square_RGB); //this get's grabbed from the grid -P
 
-    square_RGB.setRgb(V_GLOBAL.G_LEFT.red(), V_GLOBAL.G_LEFT.green(), V_GLOBAL.G_LEFT.blue(), 255); //grab the color... -P
+    //yeah
 
     if(Selected)
     {
