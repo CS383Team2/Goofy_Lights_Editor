@@ -13,6 +13,10 @@ long FrameID = 0; //-P
 QColor temp_RGB; //yeah.... -P
 //FrameList frameList(V_GLOBAL.G_ROW,V_GLOBAL.G_COL);
 
+FrameList theFrames(V_GLOBAL.G_ROW, V_GLOBAL.G_COL); //HERE LAY THE LINKED LIST -P
+
+int CurrentFrameNum = 0;
+
 GridSquare *Lcolor = new GridSquare(true);
 GridSquare *Rcolor = new GridSquare(true);
 
@@ -36,13 +40,21 @@ MainWindow::MainWindow(QWidget *parent) :
     Rcolor->x = 0;
     Rcolor->y = 40;
 
+    theFrames.AddTail(FrameData);
+
+    //CurrentFrameData = theFrames.RetrieveNode_Middle(0); //start at 0, I suppose -P
+
+    CurrentFrameData = theFrames.FirstNode(); //start at 0, I suppose -P
+
     currentcolorsScene->addItem(Lcolor);
     currentcolorsScene->addItem(Rcolor);
     //GridSquare **square = new GridSquare*[V_GLOBAL.G_COL];  //This is now in mainwindow.h -P
     for (int i = 0; i < V_GLOBAL.G_ROW; ++i)
     {
         gridGridSquare[i] = new GridSquare[V_GLOBAL.G_COL];
-        timelineTimelineGrid[i] = new TimelineGrid[V_GLOBAL.G_COL];
+
+        //timelineTimelineGrid[i] = new TimelineGrid[V_GLOBAL.G_COL]; //old -P
+        CurrentFrameData.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //new $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4 -P
     }
 
     //MAIN WINDOW TOO BIG, gonna take the scaling down to 85% -P
@@ -64,10 +76,10 @@ MainWindow::MainWindow(QWidget *parent) :
         {
             gridGridSquare[x][y].y = (x*gridScale + x*g_SPACING);
             gridGridSquare[x][y].x = (y*gridScale + y*g_SPACING);
-            timelineTimelineGrid[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
-            timelineTimelineGrid[x][y].x = (y*timelineScale + y*t_SPACING); //will add the magic soon -P
+            CurrentFrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
+            CurrentFrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING); //will add the magic soon -P
             gridScene->addItem(&gridGridSquare[x][y]);
-            timelineScene->addItem(&timelineTimelineGrid[x][y]); //timeline testing here -P
+            timelineScene->addItem(&CurrentFrameData.squareData[x][y]); //timeline testing here -P
         }
     }
 
@@ -146,6 +158,10 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
     
     //gridToFrameData(); //on every click lol -P
     updateTimeline(); //lol -P
+
+    theFrames.UpdateNode(CurrentFrameData, CurrentFrameNum);
+
+    theFrames.PrintNode(); //DEBUG IT -P
 }
 
 
@@ -212,8 +228,8 @@ void MainWindow::updateTimeline() //fix the update lag later -P
     {
         for(int y=0; y<V_GLOBAL.G_COL; y++)
         {
-            timelineTimelineGrid[x][y].square_RGB = gridGridSquare[x][y].square_RGB; //grab the colors from the real grid -P
-            timelineTimelineGrid[x][y].update();
+            CurrentFrameData.squareData[x][y].square_RGB = gridGridSquare[x][y].square_RGB; //grab the colors from the real grid -P
+            CurrentFrameData.squareData[x][y].update();
         }
     }
 }

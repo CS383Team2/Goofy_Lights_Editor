@@ -19,7 +19,7 @@ long FrameIDCount = 0;
 TimelineGrid** create_RGB(int r, int c);
 
 int main(int argc, char *argv[])
-{
+{   
     V_GLOBAL.G_COL = 0; //Initialize global rows and columns
     V_GLOBAL.G_ROW = 0;
     QApplication a(argc, argv);
@@ -47,6 +47,7 @@ int main(int argc, char *argv[])
         rgb_data[i] = new TimelineGrid[V_GLOBAL.G_COL];
     }
 
+    /*
     t_FrameData FrameData;  // Local frame data
     FrameList frames(V_GLOBAL.G_ROW, V_GLOBAL.G_COL); // linked list for frame data. r c for print function
     //V_GLOBAL.G_FRAMELIST = &frames;
@@ -119,5 +120,7 @@ int main(int argc, char *argv[])
 
     frames.DeleteList();
     std::cout << "Program end" << std::endl;
+    */
+
     return a.exec();
 }
