@@ -174,8 +174,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
 
     Rcolor->update();
     Lcolor->update();
-    
-    //gridToFrameData(); //on every click lol -P
+
     updateTimeline(); //lol -P
 
     theFrames.UpdateNode(CurrentFrameData, CurrentFrameNum);

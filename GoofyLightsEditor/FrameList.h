@@ -34,6 +34,14 @@ public:
         count = 0;
     }
 
+    // Constructor for empty FrameList
+    FrameList(){
+        head = NULL;
+        row = 0;
+        col = 0;
+        count = 0;
+    }
+
     // Destructor
     ~FrameList(){
       FrameList::DeleteList();
