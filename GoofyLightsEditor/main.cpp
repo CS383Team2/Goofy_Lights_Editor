@@ -11,7 +11,7 @@
 
 V_Goofy V_GLOBAL;
 
-int G_FRAMECOUNT = 0; //hah -P
+//int G_FRAMECOUNT = 0; //hah -P
 
 long FrameIDCount = 0;
 

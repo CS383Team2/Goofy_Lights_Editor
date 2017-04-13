@@ -59,6 +59,8 @@ private slots:
     void on_btn_ClearFrame_pressed();
 
 
+    void on_btn_NewFrame_clicked();
+
 private:
     Ui::MainWindow *ui;
 

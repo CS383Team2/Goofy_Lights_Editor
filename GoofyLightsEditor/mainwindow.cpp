@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
     Rcolor->x = 0;
     Rcolor->y = 40;
 
-    theFrames.AddTail(FrameData);
+    theFrames.AddTail(FrameData); //add something? -P
 
     //CurrentFrameData = theFrames.RetrieveNode_Middle(0); //start at 0, I suppose -P
 
@@ -70,18 +70,37 @@ MainWindow::MainWindow(QWidget *parent) :
     int g_SPACING = 3; //grid spacing woohooo -P
     int t_SPACING = 2; //timeline spacing woohooo -P
 
+    //draw the grid -P
     for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
         for(int y=0; y<V_GLOBAL.G_COL; y++)
         {
             gridGridSquare[x][y].y = (x*gridScale + x*g_SPACING);
             gridGridSquare[x][y].x = (y*gridScale + y*g_SPACING);
-            CurrentFrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
-            CurrentFrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING); //will add the magic soon -P
+            //CurrentFrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
+            //CurrentFrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING); //will add the magic soon -P
             gridScene->addItem(&gridGridSquare[x][y]);
-            timelineScene->addItem(&CurrentFrameData.squareData[x][y]); //timeline testing here -P
+            //timelineScene->addItem(&CurrentFrameData.squareData[x][y]); //timeline testing here -P
         }
     }
+
+    //draw the TIMELINE -P
+    t_FrameData temporary = CurrentFrameData;
+    for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++)
+    {
+        //CurrentFrameData = *(theFrames.RetrieveNode_Middle(i)); //get every node FIX THIS -P
+        for(int x=0; x<V_GLOBAL.G_ROW; x++)
+        {
+            for(int y=0; y<V_GLOBAL.G_COL; y++)
+            {
+                CurrentFrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING) + (i*55); //timeline magic about to happen here -P
+                CurrentFrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING); //will add the magic soon -P
+
+                timelineScene->addItem(&CurrentFrameData.squareData[x][y]); //timeline testing here -P
+            }
+        }
+    }
+    CurrentFrameData = temporary;
 
     ColorWheel *wheel = new ColorWheel;
     QSpinBox *spinbox = new QSpinBox;
@@ -234,3 +253,9 @@ void MainWindow::updateTimeline() //fix the update lag later -P
     }
 }
 
+
+void MainWindow::on_btn_NewFrame_clicked()
+{
+    theFrames.AddTail(CurrentFrameData); //just add a copy of the current frame for debugging -P
+    V_GLOBAL.G_FRAMECOUNT++; //add a frame to the count
+}
