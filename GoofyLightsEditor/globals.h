@@ -1,5 +1,6 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
+#include "FrameList.h"
 
 extern int G_ROW;
 extern int G_COL; //global variables, deal. -P
@@ -13,6 +14,16 @@ extern int G_GREEN_RIGHT;
 extern int G_BLUE_RIGHT;
 
 extern int G_FRAMECOUNT;
+
+typedef struct Globals{
+    int G_ROW;
+    int G_COL;
+    QColor G_RIGHT;
+    QColor G_LEFT;
+    FrameList *G_FRAMELIST;
+}V_Goofy;
+
+extern V_Goofy V_GLOBAL;
 
 
 //extern bool set;

@@ -9,6 +9,7 @@
 #include <globals.h>
 #include <sizedialog.h>
 
+V_Goofy V_GLOBAL;
 int G_COL = 0; //initialize globals -P
 int G_ROW = 0;
 double G_SCALE = 0;
@@ -21,7 +22,6 @@ int G_GREEN_RIGHT = 0;
 int G_BLUE_RIGHT = 0;
 
 int G_FRAMECOUNT = 0; //hah -P
-
 
 long FrameIDCount = 0;
 
