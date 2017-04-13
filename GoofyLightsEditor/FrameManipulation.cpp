@@ -24,8 +24,8 @@ int copyFrame(t_FrameData &copyFrame, t_FrameData origFrame)
     int i, j; // loop control
 
     //Fill rgb_data with data from FrameData
-    for (i = 0; i < G_ROW; i++) {
-        for (j = 0; j < G_COL; j++) {
+    for (i = 0; i < V_GLOBAL.G_ROW; i++) {
+        for (j = 0; j < V_GLOBAL.G_COL; j++) {
             copyFrame.squareData[i][j].square_RGB = origFrame.squareData[i][j].square_RGB;
         }
     }
@@ -44,11 +44,11 @@ int translateFrame(t_FrameData d, int direction)
     //Condition for up, up left, and up right. Uses recursion for left and right translation
     if(direction == D_UP || direction == D_UP_L || direction == D_UP_R){
         temp = d.squareData[0];
-        for(i = 0; i < G_ROW-1; i++){
+        for(i = 0; i < V_GLOBAL.G_ROW-1; i++){
             d.squareData[i] = d.squareData[i+1];
         }
         d.squareData[i] = temp;
-        for(int j = 0; j < G_COL; j++){
+        for(int j = 0; j < V_GLOBAL.G_COL; j++){
             d.squareData[i][j].square_RGB = Qt::black;
 
         }
@@ -60,12 +60,12 @@ int translateFrame(t_FrameData d, int direction)
     }
     //Condition for down, down left, and down right. Uses recursion for left and right translation
     if(direction == D_DWN || direction == D_DWN_L || direction == D_DWN_R){
-        temp = d.squareData[G_ROW-1];
-        for(i = G_ROW-1; i > 0; i--){
+        temp = d.squareData[V_GLOBAL.G_ROW-1];
+        for(i = V_GLOBAL.G_ROW-1; i > 0; i--){
             d.squareData[i] = d.squareData[i-1];
         }
         d.squareData[i] = temp;
-        for(j = 0; j < G_COL; j++){
+        for(j = 0; j < V_GLOBAL.G_COL; j++){
             d.squareData[i][j].square_RGB = Qt::black;
         }
         if(direction == D_DWN_L)
@@ -75,23 +75,23 @@ int translateFrame(t_FrameData d, int direction)
     }
     //Condition for left transition
     if(direction == D_LEFT){
-        for(i = 0; i < G_ROW; i++){
-            for (j = 0; j < G_COL-1; j++){
+        for(i = 0; i < V_GLOBAL.G_ROW; i++){
+            for (j = 0; j < V_GLOBAL.G_COL-1; j++){
                 d.squareData[i][j].square_RGB = d.squareData[i][j+1].square_RGB;
             }
         }
-        for(i = 0; i < G_ROW; i++){
+        for(i = 0; i < V_GLOBAL.G_ROW; i++){
             d.squareData[i][j].square_RGB = Qt::black;
         }
      }
     //Condition for right transition
     if(direction == D_RIGHT){
-        for(i = 0; i < G_ROW; i++){
-            for (j = G_COL-1; j > 0; j--){
+        for(i = 0; i < V_GLOBAL.G_ROW; i++){
+            for (j = V_GLOBAL.G_COL-1; j > 0; j--){
                 d.squareData[i][j].square_RGB = d.squareData[i][j-1].square_RGB;
             }
         }
-        for(i = 0; i < G_ROW; i++){
+        for(i = 0; i < V_GLOBAL.G_ROW; i++){
             d.squareData[i][j].square_RGB = Qt::black;
         }
      }
@@ -109,8 +109,8 @@ int fillFrame(t_FrameData &d, QColor rgb_fill)
         return ERROR;
 
     //Fill data
-    for (i = 0; i < G_ROW; i++) {
-        for (j = 0; j < G_COL; j++) {
+    for (i = 0; i < V_GLOBAL.G_ROW; i++) {
+        for (j = 0; j < V_GLOBAL.G_COL; j++) {
             d.squareData[i][j].square_RGB.setRed(50/*rgb_fill.green()*/);
             d.squareData[i][j].square_RGB.setGreen(50/*rgb_fill.green()*/);
             d.squareData[i][j].square_RGB.setBlue(50/*rgb_fill.blue()*/);

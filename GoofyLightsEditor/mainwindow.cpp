@@ -6,12 +6,12 @@
 #include <QtDebug>
 #include <QWidget>
 #include <sizedialog.h>
-#include <globals.h> //G_ROW and G_COL
+#include <globals.h> //V_GLOBAL.G_ROW and V_GLOBAL.G_COL
 #include <FrameManipulation.h>
 
 long FrameID = 0; //-P
 int temp_R, temp_G, temp_B, temp_A; //yeah.... -P
-FrameList frameList(G_ROW,G_COL);
+//FrameList frameList(V_GLOBAL.G_ROW,V_GLOBAL.G_COL);
 
 GridSquare *Lcolor = new GridSquare(true);
 GridSquare *Rcolor = new GridSquare(true);
@@ -38,11 +38,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     currentcolorsScene->addItem(Lcolor);
     currentcolorsScene->addItem(Rcolor);
-    //GridSquare **square = new GridSquare*[G_COL];  //This is now in mainwindow.h -P
-    for (int i = 0; i < G_COL; ++i)
+    //GridSquare **square = new GridSquare*[V_GLOBAL.G_COL];  //This is now in mainwindow.h -P
+    for (int i = 0; i < V_GLOBAL.G_COL; ++i)
     {
-        gridGridSquare[i] = new GridSquare[G_ROW];
-        timelineTimelineGrid[i] = new TimelineGrid[G_ROW];
+        gridGridSquare[i] = new GridSquare[V_GLOBAL.G_ROW];
+        timelineTimelineGrid[i] = new TimelineGrid[V_GLOBAL.G_ROW];
     }
 
     int gridScale = 22*G_SCALE;
@@ -50,9 +50,9 @@ MainWindow::MainWindow(QWidget *parent) :
     int g_SPACING = 3; //grid spacing woohooo -P
     int t_SPACING = 2; //timeline spacing woohooo -P
 
-    for(int x=0; x<G_COL; x++)
+    for(int x=0; x<V_GLOBAL.G_COL; x++)
     {
-        for(int y=0; y<G_ROW; y++)
+        for(int y=0; y<V_GLOBAL.G_ROW; y++)
         {
             gridGridSquare[x][y].x = (x*gridScale + x*g_SPACING);
             gridGridSquare[x][y].y = (y*gridScale + y*g_SPACING);
@@ -71,9 +71,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     // set grid size
     t_FrameData FrameData;  // THE frame data (this is in mainwindow.h) -P
-    //FrameList frameList(G_ROW, G_COL); // linked list for frame data. r c for print function
+    //FrameList frameList(V_GLOBAL.G_ROW, V_GLOBAL.G_COL); // linked list for frame data. r c for print function
 
-    FrameData.squareData = create_RGB(G_ROW, G_COL);  // Generate new rgb_data arrary
+    FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);  // Generate new rgb_data arrary
 
 
 
@@ -92,7 +92,7 @@ void MainWindow::on_actionSave_As_triggered()
             tr("Save Project"), "",
             tr("Project (*.tan);;All Files (*)"));
 
-    FileOperations::SaveToFile(frameList,fileName);
+    //FileOperations::SaveToFile(frameList,fileName);
     qDebug() << "Returned safely";
 }
 
@@ -102,8 +102,8 @@ void MainWindow::on_actionOpenProject_triggered()
             tr("Open Project"), "",
             tr("Project (*.tan);;All Files (*)"));
 
-    FrameList frameList(G_ROW, G_COL);
-    FileOperations::LoadFromFile(fileName, &frameList);
+    //FrameList frameList(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
+    //FileOperations::LoadFromFile(fileName, &frameList);
 }
 
 
@@ -140,9 +140,9 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
 void MainWindow::on_btn_FillFrame_clicked() //Fill Frame
 {
     //first let's update the GRAPHICAL EYBALL STIMILATION GRID for motivation -P
-    for(int x=0; x<G_COL; x++)
+    for(int x=0; x<V_GLOBAL.G_COL; x++)
     {
-        for(int y=0; y<G_ROW; y++)
+        for(int y=0; y<V_GLOBAL.G_ROW; y++)
         {
             gridGridSquare[x][y].Selected = true;
             gridGridSquare[x][y].leftclick = true;
@@ -178,9 +178,9 @@ void MainWindow::on_btn_ClearFrame_pressed() //Clear Frame
     temp_G = G_GREEN;
     temp_B = G_BLUE;
     //first let's update the GRAPHICAL EYBALL STIMILATION GRID for motivation -P
-    for(int x=0; x<G_COL; x++)
+    for(int x=0; x<V_GLOBAL.G_COL; x++)
     {
-        for(int y=0; y<G_ROW; y++)
+        for(int y=0; y<V_GLOBAL.G_ROW; y++)
         {
             gridGridSquare[x][y].Selected = true;
             gridGridSquare[x][y].leftclick = true;
@@ -199,9 +199,9 @@ void MainWindow::on_btn_ClearFrame_pressed() //Clear Frame
 
 void MainWindow::updateTimeline() //fix the update lag later -P
 {
-    for(int x=0; x<G_COL; x++)
+    for(int x=0; x<V_GLOBAL.G_COL; x++)
     {
-        for(int y=0; y<G_ROW; y++)
+        for(int y=0; y<V_GLOBAL.G_ROW; y++)
         {
             timelineTimelineGrid[x][y].square_RGB = gridGridSquare[x][y].square_RGB; //grab the colors from the real grid -P
             timelineTimelineGrid[x][y].update();

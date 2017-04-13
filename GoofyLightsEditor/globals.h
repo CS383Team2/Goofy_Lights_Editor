@@ -2,8 +2,6 @@
 #define GLOBALS_H
 #include "FrameList.h"
 
-extern int G_ROW;
-extern int G_COL; //global variables, deal. -P
 extern double G_SCALE; //magical grid scaling feature :) -P
 
 extern int G_RED;
