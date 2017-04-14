@@ -43,7 +43,15 @@ MainWindow::MainWindow(QWidget *parent) :
     theFrames.SetRowCount(V_GLOBAL.G_ROW);        // Update row size in FrameList now that it is defined
     theFrames.SetColCount(V_GLOBAL.G_COL);        // Update col size in FrameList now that it is defined
 
-    CurrentFrameData = theFrames.FirstNode();     //start at 0, I suppose -P
+    // Setup very first frame to start with
+    // This 'fristFrameData' might be combined with currentFrameData
+    t_FrameData firstFrameData;
+    firstFrameData.ID = FrameID++;
+    firstFrameData.duration = 5;                  // arbritrary. Link to initial durration in gui
+    firstFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
+    theFrames.AddTail(firstFrameData);            // Put first frame onto the FrameList
+
+    CurrentFrameData = theFrames.FirstNode();     // Get initial frame from the FrameList
 
     currentcolorsScene->addItem(Lcolor);
     currentcolorsScene->addItem(Rcolor);
@@ -154,8 +162,8 @@ void MainWindow::on_sbox_ValueBlue_editingFinished()
 void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is clicked inside of, lol -P
 {
     // Set square to color
-    Rcolor->square_RGB = V_GLOBAL.G_RIGHT;
-    Lcolor->square_RGB = V_GLOBAL.G_LEFT;
+    //Rcolor->square_RGB = V_GLOBAL.G_RIGHT;
+    //Lcolor->square_RGB = V_GLOBAL.G_LEFT;
 
     // Update GUI
     Rcolor->update();
