@@ -23,7 +23,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    GridSquare **gridGridSquare = new GridSquare*[V_GLOBAL.G_ROW];  //Type is GridSquare, square is object
+    GridSquare **gridGridSquare; // = new GridSquare*[V_GLOBAL.G_ROW];  //Type is GridSquare, square is object
 
     //TimelineGrid **timelineTimelineGrid = new TimelineGrid*[V_GLOBAL.G_ROW];  //Type is TimelineGrid, square2 is object
 

@@ -58,15 +58,20 @@ MainWindow::MainWindow(QWidget *parent) :
     currentcolorsScene->addItem(Lcolor);
     currentcolorsScene->addItem(Rcolor);
     //GridSquare **square = new GridSquare*[V_GLOBAL.G_COL];  //This is now in mainwindow.h -P
+    gridGridSquare = new GridSquare*[V_GLOBAL.G_ROW];
     for (int i = 0; i < V_GLOBAL.G_ROW; ++i)
     {
         gridGridSquare[i] = new GridSquare[V_GLOBAL.G_COL];
 
         //timelineTimelineGrid[i] = new TimelineGrid[V_GLOBAL.G_COL]; //old -P
-        CurrentFrameData.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //new $$$$$4 -P
-        FrameData.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //move this? -P
-        FrameData2.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //-P
+        //CurrentFrameData.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //new $$$$$4 -P
+        //FrameData.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //move this? -P
+        //FrameData2.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //-P
     }
+
+    CurrentFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
+    FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
+    FrameData2.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
 
     //MAIN WINDOW TOO BIG, gonna take the scaling down to 85% -P
     double max = 0;
@@ -111,14 +116,15 @@ MainWindow::MainWindow(QWidget *parent) :
     //Draw the timeline! -P
     for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++)
     {
+        TimelineGrid ** tempSquareData = theFrames.RetrieveNode_Middle(i)->squareData;
         for(int x=0; x<V_GLOBAL.G_ROW; x++)
         {
             for(int y=0; y<V_GLOBAL.G_COL; y++)
             {
-                theFrames.RetrieveNode_Middle(i)->squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
-                theFrames.RetrieveNode_Middle(i)->squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*100); // magic -P
+                tempSquareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
+                tempSquareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*100); // magic -P
 
-                timelineScene->addItem(&(theFrames.RetrieveNode_Middle(i)->squareData[x][y])); //timeline painting here -P
+                timelineScene->addItem(&(tempSquareData[x][y])); //timeline painting here -P
             }
         }
     }
