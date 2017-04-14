@@ -53,6 +53,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     CurrentFrameData = theFrames.FirstNode();     // Get initial frame from the FrameList
 
+    //t_FrameData * testptr = theFrames.RetrieveNode_Middle(0); //This is the correct formate -n
+
     currentcolorsScene->addItem(Lcolor);
     currentcolorsScene->addItem(Rcolor);
     //GridSquare **square = new GridSquare*[V_GLOBAL.G_COL];  //This is now in mainwindow.h -P
