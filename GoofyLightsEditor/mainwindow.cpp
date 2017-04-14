@@ -64,7 +64,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
         //timelineTimelineGrid[i] = new TimelineGrid[V_GLOBAL.G_COL]; //old -P
         CurrentFrameData.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //new $$$$$4 -P
-        FrameData.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //-P
+        FrameData.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //move this? -P
         FrameData2.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //-P
     }
 
@@ -88,10 +88,7 @@ MainWindow::MainWindow(QWidget *parent) :
         {
             gridGridSquare[x][y].y = (x*gridScale + x*g_SPACING);
             gridGridSquare[x][y].x = (y*gridScale + y*g_SPACING);
-            //CurrentFrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
-            //CurrentFrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING); //will add the magic soon -P
             gridScene->addItem(&gridGridSquare[x][y]);
-            //timelineScene->addItem(&CurrentFrameData.squareData[x][y]); //timeline testing here -P
         }
     }
 
@@ -109,8 +106,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     theFrames.AddTail(FrameData);
-    theFrames.AddTail(FrameData2); //add two extra frames to timeline, for testing
+    theFrames.AddTail(FrameData2); //add two extra frames to linked list, for testing
 
+    //Draw the timeline! -P
     for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++)
     {
         for(int x=0; x<V_GLOBAL.G_ROW; x++)
@@ -125,16 +123,7 @@ MainWindow::MainWindow(QWidget *parent) :
         }
     }
 
-
-
-
-    //CurrentFrameData = tempFrameData;
-
-    //ColorWheel *wheel = new ColorWheel;
-    //QSpinBox *spinbox = new QSpinBox;
-    //connect(wheel, SIGNAL(colorChange(QColor)), spinbox, SLOT(on_sbox_ValueRed_editingFinished()));
-
-}
+} //end mainwindow
 
 MainWindow::~MainWindow()
 {
