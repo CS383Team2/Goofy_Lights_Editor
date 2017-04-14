@@ -112,15 +112,15 @@ int main(int argc, char *argv[])
     frames.AddTail(newFrame);
 
     // std::cout << "Now printing frames" << std::endl;
-    frames.PrintNode();
-    //FrameList frameList(V_GLOBAL.G_ROW, V_GLOBAL.G);
-    //FileOperations::LoadFromFile("autofill.proj", &frameList);
-    //frameList.PrintNode();
+    frames.PrintNode();*/
+    FrameList frameList;
+    FileOperations::LoadFromFile("autofill.proj", &frameList);
+    frameList.PrintNode();
     //FileOperations::SaveToFile(frames, "autofill.proj");
 
-    frames.DeleteList();
-    std::cout << "Program end" << std::endl;
-    */
+    // frames.DeleteList();
+    // std::cout << "Program end" << std::endl;
+
 
     return a.exec();
 }
