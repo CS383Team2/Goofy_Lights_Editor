@@ -63,15 +63,15 @@ MainWindow::MainWindow(QWidget *parent) :
     {
         gridGridSquare[i] = new GridSquare[V_GLOBAL.G_COL];
 
-        //timelineTimelineGrid[i] = new TimelineGrid[V_GLOBAL.G_COL]; //old -P
-        //CurrentFrameData.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //new $$$$$4 -P
+        tempSquareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //old -P
+        CurrentFrameData.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //new $$$$$4 -P
         //FrameData.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //move this? -P
         //FrameData2.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //-P
     }
 
-    CurrentFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
-    FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
-    FrameData2.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
+    //CurrentFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
+    //FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
+    //FrameData2.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
 
     //MAIN WINDOW TOO BIG, gonna take the scaling down to 85% -P
     double max = 0;
@@ -97,26 +97,19 @@ MainWindow::MainWindow(QWidget *parent) :
         }
     }
 
-    //rubbish test FrameData filling -P
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
+
+    for(int i=0; i<7; i++) //arbitrarily make 7 extra frames here -P
     {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
-        {
-            if(x%2)
-                FrameData.squareData[x][y].square_RGB = (Qt::darkGreen); //just to prove they are different frames
-            if(y==x || y==(x-3) || y==(x+3))
-                FrameData2.squareData[x][y].square_RGB = (Qt::darkCyan);
-        }
+        FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
+        FrameData.squareData[1][i].square_RGB = (Qt::blue); //show that each frame is in fact unique
+        theFrames.AddTail(FrameData);
+        V_GLOBAL.G_FRAMECOUNT++;
     }
-
-
-    theFrames.AddTail(FrameData);
-    theFrames.AddTail(FrameData2); //add two extra frames to linked list, for testing
 
     //Draw the timeline! -P
     for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++)
     {
-        TimelineGrid ** tempSquareData = theFrames.RetrieveNode_Middle(i)->squareData;
+        tempSquareData = theFrames.RetrieveNode_Middle(i)->squareData;
         for(int x=0; x<V_GLOBAL.G_ROW; x++)
         {
             for(int y=0; y<V_GLOBAL.G_COL; y++)
