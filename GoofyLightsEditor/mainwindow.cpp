@@ -64,6 +64,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
         //timelineTimelineGrid[i] = new TimelineGrid[V_GLOBAL.G_COL]; //old -P
         CurrentFrameData.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //new $$$$$4 -P
+        FrameData.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //-P
     }
 
     //MAIN WINDOW TOO BIG, gonna take the scaling down to 85% -P
@@ -94,22 +95,35 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 
     //draw the TIMELINE -P
-    t_FrameData tempFrameData = CurrentFrameData;
-    for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++)
-    {
+    //t_FrameData tempFrameData = CurrentFrameData;
+
+    theFrames.AddTail(FrameData);
+    theFrames.AddTail(FrameData);
+    //theFrames.AddTail(CurrentFrameData);
+    t_FrameData *tempFrameData1;
+    t_FrameData *tempFrameData2;
+    //for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++)
+    //{
         //CurrentFrameData = *(theFrames.RetrieveNode_Middle(i)); //get every node FIX THIS -P
+        tempFrameData1 = theFrames.RetrieveNode_Middle(0); //This is the correct formate -n
+        tempFrameData2 = theFrames.RetrieveNode_Middle(1);
         for(int x=0; x<V_GLOBAL.G_ROW; x++)
         {
             for(int y=0; y<V_GLOBAL.G_COL; y++)
             {
-                CurrentFrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING) + (i*55); //timeline magic about to happen here -P
-                CurrentFrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING); //will add the magic soon -P
+                tempFrameData1->squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
+                tempFrameData1->squareData[x][y].x = (y*timelineScale + y*t_SPACING); //will add the magic soon -P
 
-                timelineScene->addItem(&CurrentFrameData.squareData[x][y]); //timeline testing here -P
+                timelineScene->addItem(&(tempFrameData1->squareData[x][y])); //timeline testing here -P
+
+                tempFrameData2->squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
+                tempFrameData2->squareData[x][y].x = (y*timelineScale + y*t_SPACING) + 100; //will add the magic soon -P
+
+                timelineScene->addItem(&(tempFrameData2->squareData[x][y])); //timeline testing here -P
             }
         }
-    }
-    CurrentFrameData = tempFrameData;
+    //}
+    //CurrentFrameData = tempFrameData;
 
     //ColorWheel *wheel = new ColorWheel;
     //QSpinBox *spinbox = new QSpinBox;
