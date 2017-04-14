@@ -14,8 +14,8 @@
 #define D_DWN_R     8
 
 // Return codes
-#define SUCSSESFUL  0
-#define ERROR       1
+#define RTN_SUCCESSFUL  0
+#define RTN_ERROR       1
 
 
 // Prototypes

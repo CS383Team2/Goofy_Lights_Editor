@@ -19,7 +19,7 @@ int copyFrame(t_FrameData &copyFrame, t_FrameData origFrame)
 {
     // Error checking
     if (origFrame.squareData == NULL)
-        return ERROR;
+        return RTN_ERROR;
 
     int i, j; // loop control
 
@@ -30,7 +30,7 @@ int copyFrame(t_FrameData &copyFrame, t_FrameData origFrame)
         }
     }
 
-    return SUCSSESFUL;
+    return RTN_SUCCESSFUL;
 }
 
 // translates from by a given direction
@@ -96,7 +96,7 @@ int translateFrame(t_FrameData d, int direction)
         }
      }
 
-    return SUCSSESFUL;
+    return RTN_SUCCESSFUL;
 }
 
 // Fills given frame with color. This function is broken and needs work.
@@ -106,7 +106,7 @@ int fillFrame(t_FrameData &d, QColor rgb_fill)
 
     // Error checking
     if (d.squareData == NULL)
-        return ERROR;
+        return RTN_ERROR;
 
     //Fill data
     for (i = 0; i < V_GLOBAL.G_ROW; i++) {
@@ -118,7 +118,7 @@ int fillFrame(t_FrameData &d, QColor rgb_fill)
         }
     }
 
-    return SUCSSESFUL;
+    return RTN_SUCCESSFUL;
 }
 //This also needs some work.
 int fillFrame2(t_FrameData &d, int r, int g, int b)
@@ -128,9 +128,9 @@ int fillFrame2(t_FrameData &d, int r, int g, int b)
     rgb.setGreen(g);
     rgb.setBlue(b);
 
-    // error check if over bounds for type short
+    // Error check if over bounds for type short
     if (r > 255 || g > 255 || b > 255)
-        return ERROR;
+        return RTN_ERROR;
 
     return fillFrame(d, rgb);
 }
