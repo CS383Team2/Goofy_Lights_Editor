@@ -28,6 +28,7 @@ public:
     //TimelineGrid **timelineTimelineGrid = new TimelineGrid*[V_GLOBAL.G_ROW];  //Type is TimelineGrid, square2 is object
 
     t_FrameData FrameData;  // THE frame data (this is in mainwindow.h) -P
+    t_FrameData FrameData2;
 
     t_FrameData CurrentFrameData;
 
