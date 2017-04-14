@@ -111,9 +111,7 @@ int fillFrame(t_FrameData &d, QColor rgb_fill)
     //Fill data
     for (i = 0; i < V_GLOBAL.G_ROW; i++) {
         for (j = 0; j < V_GLOBAL.G_COL; j++) {
-            d.squareData[i][j].square_RGB.setRed(50/*rgb_fill.green()*/);
-            d.squareData[i][j].square_RGB.setGreen(50/*rgb_fill.green()*/);
-            d.squareData[i][j].square_RGB.setBlue(50/*rgb_fill.blue()*/);
+            d.squareData[i][j].square_RGB = rgb_fill;
 
         }
     }
@@ -124,9 +122,7 @@ int fillFrame(t_FrameData &d, QColor rgb_fill)
 int fillFrame2(t_FrameData &d, int r, int g, int b)
 {
     QColor rgb;
-    rgb.setRed(r);
-    rgb.setGreen(g);
-    rgb.setBlue(b);
+    rgb.setRgb(r,g,b,255);
 
     // Error check if over bounds for type short
     if (r > 255 || g > 255 || b > 255)
