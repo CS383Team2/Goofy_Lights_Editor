@@ -189,7 +189,7 @@ t_FrameData * FrameList::RetrieveNode_Middle(int pos){
         if (current != NULL)  // if exists and we are at pos
 		{
 			// Just checking to make sure no bounds have been crossed.
-            rtnVal = &(head -> FrameData);
+            rtnVal = &(current -> FrameData);
             return rtnVal;
 		}
         else                  // If it does not exist and we overran our list size.
