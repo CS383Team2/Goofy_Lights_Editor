@@ -13,6 +13,9 @@ typedef struct Globals{
 
     FrameList *G_FRAMELIST;
 
+    int G_CURRENTFRAME = 0;
+    bool G_TIMELINESELECTED = false;
+
 }V_Goofy;
 
 extern V_Goofy V_GLOBAL;

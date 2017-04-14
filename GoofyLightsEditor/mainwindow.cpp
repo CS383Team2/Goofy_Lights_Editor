@@ -64,6 +64,7 @@ MainWindow::MainWindow(QWidget *parent) :
         gridGridSquare[i] = new GridSquare[V_GLOBAL.G_COL];
 
         tempSquareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //old -P
+        tempSquareData2[i] = new TimelineGrid[V_GLOBAL.G_COL]; //old -P
         CurrentFrameData.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //new $$$$$4 -P
         //FrameData.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //move this? -P
         //FrameData2.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //-P
@@ -86,6 +87,7 @@ MainWindow::MainWindow(QWidget *parent) :
     int g_SPACING = 3; //grid spacing woohooo -P
     int t_SPACING = 2; //timeline spacing woohooo -P
 
+
     //draw the grid -P
     for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
@@ -100,14 +102,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     for(int i=0; i<10; i++) //arbitrarily make 10 extra frames here -P
     {
-        FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
+        FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, i+1); //need i+1 for debugging? -P
         FrameData.squareData[i][i].square_RGB = (Qt::blue); //show that each frame is in fact unique
         theFrames.AddTail(FrameData);
         V_GLOBAL.G_FRAMECOUNT++;
     }
 
     //Draw the timeline! -P
-    for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++)
+    for(int i=1; i < V_GLOBAL.G_FRAMECOUNT; i++)
     {
         tempSquareData = theFrames.RetrieveNode_Middle(i)->squareData;
         for(int x=0; x<V_GLOBAL.G_ROW; x++)
@@ -180,6 +182,34 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
 
     updateTimeline(); //lol -P
     theFrames.PrintNode(); //DEBUG IT -P
+
+
+    //set grid to current frame -P
+    if(V_GLOBAL.G_TIMELINESELECTED == true)
+    {
+        tempSquareData2 = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData; //grab the current frame -P
+        for(int x=0; x<V_GLOBAL.G_ROW; x++)
+        {
+            for(int y=0; y<V_GLOBAL.G_COL; y++)
+            {
+                gridGridSquare[x][y].square_RGB = tempSquareData2[x][y].square_RGB; //give the data to the grid -P
+                gridGridSquare[x][y].update(); //Fill that frame son -P
+            }
+        }
+    }
+    if(V_GLOBAL.G_TIMELINESELECTED == false)
+    {
+        for(int x=0; x<V_GLOBAL.G_ROW; x++)
+        {
+            for(int y=0; y<V_GLOBAL.G_COL; y++)
+            {
+                (theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData)[x][y].square_RGB = gridGridSquare[x][y].square_RGB;
+                (theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData)[x][y].update();
+            }
+        }
+    }
+    // -P
+
 }
 
 

@@ -78,7 +78,11 @@ void GridSquare::mousePressEvent(QGraphicsSceneMouseEvent *event) //-P
     else
         leftclick = true;
     Selected = true;
+
+    V_GLOBAL.G_TIMELINESELECTED = false;
+
     QGraphicsItem::mousePressEvent(event);
+
 
     update(); //repaint the grid whenever a cell is clicked
 }
@@ -88,5 +92,6 @@ void GridSquare::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
     Selected = true;
     ClearSquare = true;
     QGraphicsItem::mouseDoubleClickEvent(event);
+
     update();
 }

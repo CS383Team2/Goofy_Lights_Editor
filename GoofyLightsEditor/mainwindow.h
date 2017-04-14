@@ -29,6 +29,7 @@ public:
 
 
     TimelineGrid ** tempSquareData = new TimelineGrid*[V_GLOBAL.G_ROW];
+    TimelineGrid ** tempSquareData2 = new TimelineGrid*[V_GLOBAL.G_ROW];
 
     t_FrameData FrameData;  // THE frame data (this is in mainwindow.h) -P
 

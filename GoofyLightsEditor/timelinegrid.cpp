@@ -1,5 +1,6 @@
 #include "timelinegrid.h"
 #include <globals.h>
+#include <mainwindow.h>
 
 TimelineGrid::TimelineGrid()
 {
@@ -56,9 +57,14 @@ void TimelineGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 void TimelineGrid::mousePressEvent(QGraphicsSceneMouseEvent *event) //-P
 {
     //Selected = true; //you shall not edit the timeline lol
-    QGraphicsItem::mousePressEvent(event);
+
 
     Selected = true;
+
+    V_GLOBAL.G_CURRENTFRAME = this->timlineFrameNumber; //set the global frame to this frame when it's clicked -P
+    V_GLOBAL.G_TIMELINESELECTED = true;
+
+    QGraphicsItem::mousePressEvent(event);
 
     update(); //repaint the grid whenever a cell is clicked
 }
