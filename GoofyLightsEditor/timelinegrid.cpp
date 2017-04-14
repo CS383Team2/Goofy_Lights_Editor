@@ -58,5 +58,7 @@ void TimelineGrid::mousePressEvent(QGraphicsSceneMouseEvent *event) //-P
     //Selected = true; //you shall not edit the timeline lol
     QGraphicsItem::mousePressEvent(event);
 
+    Selected = true;
+
     update(); //repaint the grid whenever a cell is clicked
 }

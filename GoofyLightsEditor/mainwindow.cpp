@@ -95,11 +95,21 @@ MainWindow::MainWindow(QWidget *parent) :
         }
     }
 
-    //draw the TIMELINE -P
-    //t_FrameData tempFrameData = CurrentFrameData;
+    //rubbish test FrameData filling -P
+    for(int x=0; x<V_GLOBAL.G_ROW; x++)
+    {
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
+        {
+            if(x%2)
+                FrameData.squareData[x][y].square_RGB = (Qt::darkGreen); //just to prove they are different frames
+            if(y==x || y==(x-3) || y==(x+3))
+                FrameData2.squareData[x][y].square_RGB = (Qt::darkCyan);
+        }
+    }
+
 
     theFrames.AddTail(FrameData);
-    theFrames.AddTail(FrameData2);
+    theFrames.AddTail(FrameData2); //add two extra frames to timeline, for testing
 
     for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++)
     {
@@ -108,9 +118,9 @@ MainWindow::MainWindow(QWidget *parent) :
             for(int y=0; y<V_GLOBAL.G_COL; y++)
             {
                 theFrames.RetrieveNode_Middle(i)->squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
-                theFrames.RetrieveNode_Middle(i)->squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*100); //will add the magic soon -P
+                theFrames.RetrieveNode_Middle(i)->squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*100); // magic -P
 
-                timelineScene->addItem(&(theFrames.RetrieveNode_Middle(i)->squareData[x][y])); //timeline testing here -P
+                timelineScene->addItem(&(theFrames.RetrieveNode_Middle(i)->squareData[x][y])); //timeline painting here -P
             }
         }
     }
