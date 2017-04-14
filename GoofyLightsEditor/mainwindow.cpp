@@ -42,9 +42,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     theFrames.SetRowCount(V_GLOBAL.G_ROW);        // Update row size in FrameList now that it is defined
     theFrames.SetColCount(V_GLOBAL.G_COL);        // Update col size in FrameList now that it is defined
-    theFrames.AddTail(FrameData);                 //add something? -P
-
-    //CurrentFrameData = theFrames.RetrieveNode_Middle(0); //start at 0, I suppose -P
 
     CurrentFrameData = theFrames.FirstNode();     //start at 0, I suppose -P
 
@@ -56,7 +53,7 @@ MainWindow::MainWindow(QWidget *parent) :
         gridGridSquare[i] = new GridSquare[V_GLOBAL.G_COL];
 
         //timelineTimelineGrid[i] = new TimelineGrid[V_GLOBAL.G_COL]; //old -P
-        CurrentFrameData.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //new $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4 -P
+        CurrentFrameData.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //new $$$$$4 -P
     }
 
     //MAIN WINDOW TOO BIG, gonna take the scaling down to 85% -P
@@ -108,17 +105,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QSpinBox *spinbox = new QSpinBox;
     //connect(wheel, SIGNAL(colorChange(QColor)), spinbox, SLOT(on_sbox_ValueRed_editingFinished()));
 
-    //Start the FrameData nonsense -P
-    //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-    // set grid size
-    t_FrameData FrameData;  // THE frame data (this is in mainwindow.h) -P
-    //FrameList frameList(V_GLOBAL.G_ROW, V_GLOBAL.G_COL); // linked list for frame data. r c for print function
-
-    FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);  // Generate new rgb_data arrary
-
-
-
-
 }
 
 MainWindow::~MainWindow()
@@ -167,20 +153,15 @@ void MainWindow::on_sbox_ValueBlue_editingFinished()
 
 void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is clicked inside of, lol -P
 {
+    // Set square to color
+    Rcolor->square_RGB = V_GLOBAL.G_RIGHT;
+    Lcolor->square_RGB = V_GLOBAL.G_LEFT;
 
-    //Rcolor->square_RGB.setRgb(G_RED_RIGHT, G_GREEN_RIGHT, G_BLUE_RIGHT, 255);
-    //Lcolor->square_RGB.setRgb(G_RED, G_GREEN, G_BLUE, 255);
-
-    Rcolor->square_RGB.setRgb(V_GLOBAL.G_RIGHT.red(), V_GLOBAL.G_RIGHT.green(), V_GLOBAL.G_RIGHT.blue(), 255); //new -P
-    Lcolor->square_RGB.setRgb(V_GLOBAL.G_LEFT.red(), V_GLOBAL.G_LEFT.green(), V_GLOBAL.G_LEFT.blue(), 255); //new -P
-
+    // Update GUI
     Rcolor->update();
     Lcolor->update();
 
     updateTimeline(); //lol -P
-
-    theFrames.UpdateNode(CurrentFrameData, CurrentFrameNum);
-
     theFrames.PrintNode(); //DEBUG IT -P
 }
 
@@ -203,12 +184,6 @@ void MainWindow::on_btn_FillFrame_clicked() //Fill Frame
     //fillFrame(t_FrameData &d, t_RGB rgb_fill) //do this later -P
 }
 
-void MainWindow::on_btn_ClearFrame_clicked()
-{
-
-
-}
-
 void MainWindow::on_btn_ClearFrame_released() //Clear Frame
 {
     V_GLOBAL.G_LEFT = temp_RGB;
@@ -228,12 +203,8 @@ void MainWindow::on_btn_ClearFrame_pressed() //Clear Frame
         {
             gridGridSquare[x][y].Selected = true;
             gridGridSquare[x][y].leftclick = true;
-            //BLACK
-            //G_RED = 0;
-            //G_GREEN = 0;
-            //G_BLUE = 0;
-            V_GLOBAL.G_LEFT = (Qt::black); //new -P
-            gridGridSquare[x][y].update(); //Fill that frame son -P
+            V_GLOBAL.G_LEFT = (Qt::black);  // set color to black -n
+            gridGridSquare[x][y].update();  //Fill that frame son -P
         }
     }
 
