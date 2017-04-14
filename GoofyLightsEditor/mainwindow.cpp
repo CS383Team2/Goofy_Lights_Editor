@@ -92,7 +92,7 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 
     //draw the TIMELINE -P
-    t_FrameData temporary = CurrentFrameData;
+    t_FrameData tempFrameData = CurrentFrameData;
     for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++)
     {
         //CurrentFrameData = *(theFrames.RetrieveNode_Middle(i)); //get every node FIX THIS -P
@@ -107,10 +107,10 @@ MainWindow::MainWindow(QWidget *parent) :
             }
         }
     }
-    CurrentFrameData = temporary;
+    CurrentFrameData = tempFrameData;
 
-    ColorWheel *wheel = new ColorWheel;
-    QSpinBox *spinbox = new QSpinBox;
+    //ColorWheel *wheel = new ColorWheel;
+    //QSpinBox *spinbox = new QSpinBox;
     //connect(wheel, SIGNAL(colorChange(QColor)), spinbox, SLOT(on_sbox_ValueRed_editingFinished()));
 
 }
