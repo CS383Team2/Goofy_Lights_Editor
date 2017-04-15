@@ -129,7 +129,7 @@ MainWindow::MainWindow(QWidget *parent) :
             for(int y=0; y<V_GLOBAL.G_COL; y++)
             {
                 tempSquareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
-                tempSquareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*100); // magic -P
+                tempSquareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*120); // timeline spacing magic -P
 
                 timelineScene->addItem(&(tempSquareData[x][y])); //timeline painting here -P
             }
