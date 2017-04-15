@@ -100,10 +100,11 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 
 
+    // Debugging: Generate 10 frames with slight differences
     for(int i=0; i<10; i++) //arbitrarily make 10 extra frames here -P
     {
         FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, i+1); //need i+1 for debugging? -P
-        FrameData.squareData[i][i].square_RGB = (Qt::blue); //show that each frame is in fact unique
+        FrameData.squareData[i % V_GLOBAL.G_ROW][i % V_GLOBAL.G_COL].square_RGB = (Qt::blue); //show that each frame is in fact unique
         theFrames.AddTail(FrameData);
         V_GLOBAL.G_FRAMECOUNT++;
     }
