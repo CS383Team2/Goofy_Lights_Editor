@@ -109,6 +109,17 @@ MainWindow::MainWindow(QWidget *parent) :
         V_GLOBAL.G_FRAMECOUNT++;
     }
 
+    //set grid to first frame
+    tempSquareData2 = theFrames.RetrieveNode_Middle(1)->squareData;
+    for(int x=0; x<V_GLOBAL.G_ROW; x++)
+    {
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
+        {
+            gridGridSquare[x][y].square_RGB = tempSquareData2[x][y].square_RGB;
+            gridGridSquare[x][y].update();
+        }
+    }
+
     //Draw the timeline! -P
     for(int i=1; i < V_GLOBAL.G_FRAMECOUNT; i++)
     {
