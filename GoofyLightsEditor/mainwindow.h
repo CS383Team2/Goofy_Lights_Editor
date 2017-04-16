@@ -23,6 +23,15 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    //MAIN WINDOW TOO BIG, gonna take the scaling down to 85% -P
+    double max;
+    double G_SCALE;
+    int gridScale;
+    int timelineScale;
+    int g_SPACING;
+    int t_SPACING;
+
+
     GridSquare **gridGridSquare; // = new GridSquare*[V_GLOBAL.G_ROW];  //Type is GridSquare, square is object
 
     //TimelineGrid **timelineTimelineGrid = new TimelineGrid*[V_GLOBAL.G_ROW];  //Type is TimelineGrid, square2 is object
