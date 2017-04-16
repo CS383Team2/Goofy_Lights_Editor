@@ -167,38 +167,33 @@ void FrameList::DeleteNode_Middle(int pos){
 t_FrameData * FrameList::RetrieveNode_Middle(int pos){
 	int tempCount = 0;
     t_FrameData *rtnVal = NULL;
-	NodePtr temp = head;
+    NodePtr current = head;
+
+    // If list is empty
+    if (head == NULL)
+        return NULL;
 	
 	if (pos == 0)
-	{
-		// return pointer to the head node's FrameData.
-		if (head == NULL)
-		{
-			// no pointer to return Error.
-            		return NULL;
-		}
-		else
-		{
-            *rtnVal = head -> FrameData;
-            return rtnVal;
-		}
+    {
+        rtnVal = &(head -> FrameData);
+        return rtnVal;
 	}
 	else
     {
-        while (tempCount != pos && temp != NULL)
+        while (tempCount != pos && current != NULL)
 		{
 			tempCount++;
-			temp = temp -> next;
+            current = current -> next;
 		}
 			
-		if (temp != NULL)
+        if (current != NULL)  // if exists and we are at pos
 		{
 			// Just checking to make sure no bounds have been crossed.
-            *rtnVal = temp -> FrameData;
+            rtnVal = &(current -> FrameData);
             return rtnVal;
 		}
-		else
-		{
+        else                  // If it does not exist and we overran our list size.
+        {                     // List smaller than pos count
             return NULL;
 		}
 	}

@@ -1,5 +1,6 @@
 #include "timelinegrid.h"
 #include <globals.h>
+#include <mainwindow.h>
 
 TimelineGrid::TimelineGrid()
 {
@@ -21,7 +22,7 @@ QRectF TimelineGrid::boundingRect() const
         max = V_GLOBAL.G_ROW;
     double G_SCALE = ((20.0 / max) * 0.85); //scaled based on a max size of 20x20 -P
 
-    return QRectF(x,y,4*G_SCALE,4*G_SCALE); //x and y position the square before it's painted -P
+    return QRectF(x,y,5*G_SCALE,5*G_SCALE); //x and y position the square before it's painted -P
     //x, y are top left corner -P
 }
 
@@ -56,6 +57,13 @@ void TimelineGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 void TimelineGrid::mousePressEvent(QGraphicsSceneMouseEvent *event) //-P
 {
     //Selected = true; //you shall not edit the timeline lol
+
+
+    Selected = true;
+
+    V_GLOBAL.G_CURRENTFRAME = this->timlineFrameNumber; //set the global frame to this frame when it's clicked -P
+    V_GLOBAL.G_TIMELINESELECTED = true;
+
     QGraphicsItem::mousePressEvent(event);
 
     update(); //repaint the grid whenever a cell is clicked

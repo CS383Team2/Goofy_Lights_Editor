@@ -23,9 +23,22 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    GridSquare **gridGridSquare = new GridSquare*[V_GLOBAL.G_ROW];  //Type is GridSquare, square is object
+    //MAIN WINDOW TOO BIG, gonna take the scaling down to 85% -P
+    double max;
+    double G_SCALE;
+    int gridScale;
+    int timelineScale;
+    int g_SPACING;
+    int t_SPACING;
+
+
+    GridSquare **gridGridSquare; // = new GridSquare*[V_GLOBAL.G_ROW];  //Type is GridSquare, square is object
 
     //TimelineGrid **timelineTimelineGrid = new TimelineGrid*[V_GLOBAL.G_ROW];  //Type is TimelineGrid, square2 is object
+
+
+    TimelineGrid ** tempSquareData = new TimelineGrid*[V_GLOBAL.G_ROW];
+    TimelineGrid ** tempSquareData2 = new TimelineGrid*[V_GLOBAL.G_ROW];
 
     t_FrameData FrameData;  // THE frame data (this is in mainwindow.h) -P
 
@@ -56,8 +69,15 @@ private slots:
 
     void on_btn_ClearFrame_pressed();
 
+    void drawGrid();
 
     void on_btn_NewFrame_clicked();
+
+    void on_btn_DeleteFrame_clicked();
+
+    void on_btn_TransRight_clicked();
+
+    void insertFrame(t_FrameData newFrame);
 
 private:
     Ui::MainWindow *ui;

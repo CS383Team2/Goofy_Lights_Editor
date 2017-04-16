@@ -23,6 +23,8 @@
 // creates a RGB Array and returns a pointer to it.
 TimelineGrid** create_RGB(int r, int c);
 
+TimelineGrid** create_RGB(int r, int c, int frameNumber);
+
 // Takes origional frame and returnes a new copy of it
 int copyFrame(t_FrameData &copyFrame, t_FrameData origFrame);
 

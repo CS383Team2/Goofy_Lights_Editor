@@ -6,12 +6,15 @@ typedef struct Globals{
 
     int G_ROW;
     int G_COL;
-    int G_FRAMECOUNT = 1;
+    int G_FRAMECOUNT = 0;
 
     QColor G_RIGHT = (Qt::blue); //default to blue jsut for hoots -P
     QColor G_LEFT = (Qt::red); //default to red to match colorwheel default -P
 
     FrameList *G_FRAMELIST;
+
+    int G_CURRENTFRAME = 0;
+    bool G_TIMELINESELECTED = false;
 
 }V_Goofy;
 
