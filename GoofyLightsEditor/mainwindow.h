@@ -74,6 +74,10 @@ private slots:
 
     void on_btn_DeleteFrame_clicked();
 
+    void on_btn_TransRight_clicked();
+
+    void insertFrame(t_FrameData newFrame);
+
 private:
     Ui::MainWindow *ui;
 

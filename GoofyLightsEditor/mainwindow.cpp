@@ -248,6 +248,7 @@ void MainWindow::updateTimeline() //fix the update lag later -P
 
 void MainWindow::on_btn_NewFrame_clicked()
 {
+    updateTimeline();
     V_GLOBAL.G_FRAMECOUNT++; //add a frame to the count
     FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, V_GLOBAL.G_FRAMECOUNT); //fix indexing later -P
     //FrameData.squareData[i % V_GLOBAL.G_ROW][i % V_GLOBAL.G_COL].square_RGB = (Qt::blue); //show that each frame is in fact unique
@@ -289,7 +290,7 @@ void MainWindow::on_btn_DeleteFrame_clicked()
 {
     if(V_GLOBAL.G_FRAMECOUNT != 0) //can't delete once there are no frames
     {
-        if(V_GLOBAL.G_CURRENTFRAME == (V_GLOBAL.G_FRAMECOUNT)) // the last frame is being deleted -P
+        if(V_GLOBAL.G_CURRENTFRAME == (V_GLOBAL.G_FRAMECOUNT-1)) // the last frame is being deleted -P
         {
             theFrames.DeleteNode_Middle(V_GLOBAL.G_CURRENTFRAME); //simple
             updateTimeline();
@@ -308,7 +309,21 @@ void MainWindow::on_btn_DeleteFrame_clicked()
                 }
             }
             updateTimeline(); //redraw -P
+            //crap
         }
         V_GLOBAL.G_FRAMECOUNT--; //remove 1 from the framecount -P
     }
+}
+
+void MainWindow::on_btn_TransRight_clicked()
+{
+    t_FrameData transFrameData;
+    transFrameData = *(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME));
+    translateFrame(transFrameData, D_RIGHT);
+    //insertFrame(transFrameData); -P
+}
+
+void MainWindow::insertFrame(t_FrameData newFrame)
+{
+    //do this later lol
 }
