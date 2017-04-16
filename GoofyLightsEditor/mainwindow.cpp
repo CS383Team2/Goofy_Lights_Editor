@@ -198,6 +198,7 @@ void MainWindow::on_btn_FillFrame_clicked() //Fill Frame
     //do this:
 
     //fillFrame(t_FrameData &d, t_RGB rgb_fill) //do this later -P
+    updateTimeline();
 }
 
 void MainWindow::on_btn_ClearFrame_released() //Clear Frame
@@ -227,6 +228,7 @@ void MainWindow::on_btn_ClearFrame_pressed() //Clear Frame
     //do this:
 
     //fillFrame2(FrameData, 0, 0, 0); //not tested yet -P
+    updateTimeline();
 }
 
 void MainWindow::updateTimeline() //fix the update lag later -P
@@ -269,6 +271,7 @@ void MainWindow::on_btn_NewFrame_clicked()
     }
     V_GLOBAL.G_CURRENTFRAME = V_GLOBAL.G_FRAMECOUNT; //fix indexing later -P
 
+    //this sets the current frame you are editing to the new frame: -P
     {
         tempSquareData2 = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData; //grab the current frame -P
         for(int x=0; x<V_GLOBAL.G_ROW; x++)
@@ -280,4 +283,9 @@ void MainWindow::on_btn_NewFrame_clicked()
             }
         }
     }
+}
+
+void MainWindow::on_btn_DeleteFrame_clicked()
+{
+    //delete current frame and FIX INDEXING -P
 }
