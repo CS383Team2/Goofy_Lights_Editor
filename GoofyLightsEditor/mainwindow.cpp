@@ -243,22 +243,6 @@ void MainWindow::updateTimeline() //fix the update lag later -P
             }
         }
     }
-    //draw -P
-    for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++)
-    {
-        tempSquareData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData;
-        //tempSquareData = FrameData.squareData;
-        for(int x=0; x<V_GLOBAL.G_ROW; x++)
-        {
-            for(int y=0; y<V_GLOBAL.G_COL; y++)
-            {
-                tempSquareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
-                tempSquareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
-
-                timelineScene->addItem(&(tempSquareData[x][y])); //timeline painting here -P
-            }
-        }
-    }
 }
 
 
@@ -305,8 +289,7 @@ void MainWindow::on_btn_DeleteFrame_clicked()
 {
     if(V_GLOBAL.G_FRAMECOUNT != 0) //can't delete once there are no frames
     {
-        V_GLOBAL.G_FRAMECOUNT--; //remove 1 from the framecount -P
-        if(V_GLOBAL.G_CURRENTFRAME == (V_GLOBAL.G_FRAMECOUNT+1)) // the last frame is being deleted -P
+        if(V_GLOBAL.G_CURRENTFRAME == (V_GLOBAL.G_FRAMECOUNT)) // the last frame is being deleted -P
         {
             theFrames.DeleteNode_Middle(V_GLOBAL.G_CURRENTFRAME); //simple
             updateTimeline();
@@ -326,5 +309,6 @@ void MainWindow::on_btn_DeleteFrame_clicked()
             }
             updateTimeline(); //redraw -P
         }
+        V_GLOBAL.G_FRAMECOUNT--; //remove 1 from the framecount -P
     }
 }
