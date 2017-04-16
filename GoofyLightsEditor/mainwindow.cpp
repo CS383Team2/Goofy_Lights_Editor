@@ -91,18 +91,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //FrameData2.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
 
 
-
-    //draw the grid -P
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
-    {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
-        {
-            gridGridSquare[x][y].y = (x*gridScale + x*g_SPACING);
-            gridGridSquare[x][y].x = (y*gridScale + y*g_SPACING);
-            gridScene->addItem(&gridGridSquare[x][y]);
-        }
-    }
-
 } //end mainwindow
 
 MainWindow::~MainWindow()
@@ -176,7 +164,6 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
         }
     }
 
-
     updateTimeline(); //lol -P
 
 }
@@ -231,6 +218,20 @@ void MainWindow::on_btn_ClearFrame_pressed() //Clear Frame
     updateTimeline();
 }
 
+void MainWindow::drawGrid()
+{
+    //draw the grid -P
+    for(int x=0; x<V_GLOBAL.G_ROW; x++)
+    {
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
+        {
+            gridGridSquare[x][y].y = (x*gridScale + x*g_SPACING);
+            gridGridSquare[x][y].x = (y*gridScale + y*g_SPACING);
+            gridScene->addItem(&gridGridSquare[x][y]);
+        }
+    }
+}
+
 void MainWindow::updateTimeline() //fix the update lag later -P
 {
     {
@@ -248,6 +249,10 @@ void MainWindow::updateTimeline() //fix the update lag later -P
 
 void MainWindow::on_btn_NewFrame_clicked()
 {
+    if(V_GLOBAL.G_FRAMECOUNT == 0) //if this is the first frame -P
+    {
+        drawGrid(); //draw the grid -P
+    }
     updateTimeline();
     V_GLOBAL.G_FRAMECOUNT++; //add a frame to the count
     FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, V_GLOBAL.G_FRAMECOUNT); //fix indexing later -P

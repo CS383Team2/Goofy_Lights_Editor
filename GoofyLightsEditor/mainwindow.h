@@ -69,6 +69,7 @@ private slots:
 
     void on_btn_ClearFrame_pressed();
 
+    void drawGrid();
 
     void on_btn_NewFrame_clicked();
 
