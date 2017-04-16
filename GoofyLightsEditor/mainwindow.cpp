@@ -105,7 +105,7 @@ void MainWindow::on_actionSave_As_triggered()
             tr("Save Project"), "",
             tr("Project (*.tan);;All Files (*)"));
 
-    //FileOperations::SaveToFile(frameList,fileName);
+    FileOperations::SaveToFile(fileName,theFrames);
     qDebug() << "Returned safely";
 }
 
@@ -115,8 +115,7 @@ void MainWindow::on_actionOpenProject_triggered()
             tr("Open Project"), "",
             tr("Project (*.tan);;All Files (*)"));
 
-    //FrameList frameList(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
-    //FileOperations::LoadFromFile(fileName, &frameList);
+    FileOperations::LoadFromFile(fileName, &theFrames);
 }
 
 

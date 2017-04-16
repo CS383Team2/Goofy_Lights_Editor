@@ -22,7 +22,7 @@
 #define VERSION .3
 
 /* Save the project to a file. There is no predefined file format for this */
-int FileOperations::SaveToFile(FrameList frameList, QString fileName){
+int FileOperations::SaveToFile(QString fileName, FrameList frameList){
     QFile file; /* Load the file and write to it */
     QTime elapsedTime = QTime(0,0,0,0); // Time elapsed in milliseconds
     file.setFileName(fileName);
