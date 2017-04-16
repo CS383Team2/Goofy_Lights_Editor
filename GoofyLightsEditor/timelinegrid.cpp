@@ -22,7 +22,7 @@ QRectF TimelineGrid::boundingRect() const
         max = V_GLOBAL.G_ROW;
     double G_SCALE = ((20.0 / max) * 0.85); //scaled based on a max size of 20x20 -P
 
-    return QRectF(x,y,4*G_SCALE,4*G_SCALE); //x and y position the square before it's painted -P
+    return QRectF(x,y,5*G_SCALE,5*G_SCALE); //x and y position the square before it's painted -P
     //x, y are top left corner -P
 }
 

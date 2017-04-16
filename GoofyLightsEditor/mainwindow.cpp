@@ -20,6 +20,8 @@ int CurrentFrameNum = 0;
 GridSquare *Lcolor = new GridSquare(true);
 GridSquare *Rcolor = new GridSquare(true);
 
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -34,6 +36,20 @@ MainWindow::MainWindow(QWidget *parent) :
 
     currentcolorsScene = new QGraphicsScene(this);
     ui->gCurrent_Colors->setScene(currentcolorsScene);
+
+    //MAIN WINDOW TOO BIG, gonna take the scaling down to 85% -P
+    max = 0;
+    if(V_GLOBAL.G_ROW > V_GLOBAL.G_COL)
+        max = V_GLOBAL.G_ROW;
+    else
+        max = V_GLOBAL.G_COL;
+    G_SCALE = ((20.0 / max) * 0.85); //scaled based on a max size of 20x20 -P
+
+    gridScale = 22*G_SCALE;
+    timelineScale = 4*G_SCALE;
+    g_SPACING = 3; //grid spacing woohooo -P
+    t_SPACING = 2; //timeline spacing woohooo -P
+
 
     Lcolor->x = 0;
     Lcolor->y = 0;
@@ -74,67 +90,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
     //FrameData2.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
 
-    //MAIN WINDOW TOO BIG, gonna take the scaling down to 85% -P
-    double max = 0;
-    if(V_GLOBAL.G_ROW > V_GLOBAL.G_COL)
-        max = V_GLOBAL.G_ROW;
-    else
-        max = V_GLOBAL.G_COL;
-    double G_SCALE = ((20.0 / max) * 0.85); //scaled based on a max size of 20x20 -P
-
-    int gridScale = 22*G_SCALE;
-    int timelineScale = 4*G_SCALE;
-    int g_SPACING = 3; //grid spacing woohooo -P
-    int t_SPACING = 2; //timeline spacing woohooo -P
-
-
-    //draw the grid -P
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
-    {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
-        {
-            gridGridSquare[x][y].y = (x*gridScale + x*g_SPACING);
-            gridGridSquare[x][y].x = (y*gridScale + y*g_SPACING);
-            gridScene->addItem(&gridGridSquare[x][y]);
-        }
-    }
-
-
-    // Debugging: Generate 10 frames with slight differences
-    for(int i=0; i<10; i++) //arbitrarily make 10 extra frames here -P
-    {
-        FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, i+1); //need i+1 for debugging? -P
-        FrameData.squareData[i % V_GLOBAL.G_ROW][i % V_GLOBAL.G_COL].square_RGB = (Qt::blue); //show that each frame is in fact unique
-        theFrames.AddTail(FrameData);
-        V_GLOBAL.G_FRAMECOUNT++;
-    }
-
-    //set grid to first frame
-    tempSquareData2 = theFrames.RetrieveNode_Middle(1)->squareData;
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
-    {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
-        {
-            gridGridSquare[x][y].square_RGB = tempSquareData2[x][y].square_RGB;
-            gridGridSquare[x][y].update();
-        }
-    }
-
-    //Draw the timeline! -P
-    for(int i=1; i < V_GLOBAL.G_FRAMECOUNT; i++)
-    {
-        tempSquareData = theFrames.RetrieveNode_Middle(i)->squareData;
-        for(int x=0; x<V_GLOBAL.G_ROW; x++)
-        {
-            for(int y=0; y<V_GLOBAL.G_COL; y++)
-            {
-                tempSquareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
-                tempSquareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*120); // timeline spacing magic -P
-
-                timelineScene->addItem(&(tempSquareData[x][y])); //timeline painting here -P
-            }
-        }
-    }
 
 } //end mainwindow
 
@@ -192,7 +147,6 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
     Rcolor->update();
     Lcolor->update();
 
-    updateTimeline(); //lol -P
     theFrames.PrintNode(); //DEBUG IT -P
 
 
@@ -209,18 +163,8 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
             }
         }
     }
-    if(V_GLOBAL.G_TIMELINESELECTED == false)
-    {
-        for(int x=0; x<V_GLOBAL.G_ROW; x++)
-        {
-            for(int y=0; y<V_GLOBAL.G_COL; y++)
-            {
-                (theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData)[x][y].square_RGB = gridGridSquare[x][y].square_RGB;
-                (theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData)[x][y].update();
-            }
-        }
-    }
-    // -P
+
+    updateTimeline(); //lol -P
 
 }
 
@@ -241,6 +185,7 @@ void MainWindow::on_btn_FillFrame_clicked() //Fill Frame
     //do this:
 
     //fillFrame(t_FrameData &d, t_RGB rgb_fill) //do this later -P
+    updateTimeline();
 }
 
 void MainWindow::on_btn_ClearFrame_released() //Clear Frame
@@ -270,16 +215,33 @@ void MainWindow::on_btn_ClearFrame_pressed() //Clear Frame
     //do this:
 
     //fillFrame2(FrameData, 0, 0, 0); //not tested yet -P
+    updateTimeline();
 }
 
-void MainWindow::updateTimeline() //fix the update lag later -P
+void MainWindow::drawGrid()
 {
+    //draw the grid -P
     for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
         for(int y=0; y<V_GLOBAL.G_COL; y++)
         {
-            CurrentFrameData.squareData[x][y].square_RGB = gridGridSquare[x][y].square_RGB; //grab the colors from the real grid -P
-            CurrentFrameData.squareData[x][y].update();
+            gridGridSquare[x][y].y = (x*gridScale + x*g_SPACING);
+            gridGridSquare[x][y].x = (y*gridScale + y*g_SPACING);
+            gridScene->addItem(&gridGridSquare[x][y]);
+        }
+    }
+}
+
+void MainWindow::updateTimeline() //fix the update lag later -P
+{
+    {
+        for(int x=0; x<V_GLOBAL.G_ROW; x++)
+        {
+            for(int y=0; y<V_GLOBAL.G_COL; y++)
+            {
+                (theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData)[x][y].square_RGB = gridGridSquare[x][y].square_RGB;
+                (theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData)[x][y].update();
+            }
         }
     }
 }
@@ -287,6 +249,86 @@ void MainWindow::updateTimeline() //fix the update lag later -P
 
 void MainWindow::on_btn_NewFrame_clicked()
 {
-    theFrames.AddTail(CurrentFrameData); //just add a copy of the current frame for debugging -P
+    if(V_GLOBAL.G_FRAMECOUNT == 0) //if this is the first frame -P
+    {
+        drawGrid(); //draw the grid -P
+    }
+    updateTimeline();
     V_GLOBAL.G_FRAMECOUNT++; //add a frame to the count
+    FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, V_GLOBAL.G_FRAMECOUNT); //fix indexing later -P
+    //FrameData.squareData[i % V_GLOBAL.G_ROW][i % V_GLOBAL.G_COL].square_RGB = (Qt::blue); //show that each frame is in fact unique
+    theFrames.AddTail(FrameData);
+
+    //Draw the timeline! -P
+    for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++)
+    {
+        //tempSquareData = theFrames.RetrieveNode_Middle(i)->squareData;
+        tempSquareData = FrameData.squareData;
+        for(int x=0; x<V_GLOBAL.G_ROW; x++)
+        {
+            for(int y=0; y<V_GLOBAL.G_COL; y++)
+            {
+                tempSquareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
+                tempSquareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
+
+                timelineScene->addItem(&(tempSquareData[x][y])); //timeline painting here -P
+            }
+        }
+    }
+    V_GLOBAL.G_CURRENTFRAME = V_GLOBAL.G_FRAMECOUNT; //fix indexing later -P
+
+    //this sets the current frame you are editing to the new frame: -P
+    {
+        tempSquareData2 = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData; //grab the current frame -P
+        for(int x=0; x<V_GLOBAL.G_ROW; x++)
+        {
+            for(int y=0; y<V_GLOBAL.G_COL; y++)
+            {
+                gridGridSquare[x][y].square_RGB = tempSquareData2[x][y].square_RGB; //give the data to the grid -P
+                gridGridSquare[x][y].update(); //Fill that frame son -P
+            }
+        }
+    }
+}
+
+void MainWindow::on_btn_DeleteFrame_clicked()
+{
+    if(V_GLOBAL.G_FRAMECOUNT != 0) //can't delete once there are no frames
+    {
+        if(V_GLOBAL.G_CURRENTFRAME == (V_GLOBAL.G_FRAMECOUNT-1)) // the last frame is being deleted -P
+        {
+            theFrames.DeleteNode_Middle(V_GLOBAL.G_CURRENTFRAME); //simple
+            updateTimeline();
+        }
+        else //Deleting a frame in the middle of the timeline, bugger -P
+        {
+            theFrames.DeleteNode_Middle(V_GLOBAL.G_CURRENTFRAME);
+            for(int i=V_GLOBAL.G_CURRENTFRAME; i<V_GLOBAL.G_FRAMECOUNT; i++) //go through all remaing frames after the deletion -P
+            {
+                for(int x=0; x<V_GLOBAL.G_ROW; x++)
+                {
+                    for(int y=0; y<V_GLOBAL.G_COL; y++)
+                    {
+                        theFrames.RetrieveNode_Middle(i)->squareData[x][y].timlineFrameNumber--; //decrement frame number by 1
+                    }
+                }
+            }
+            updateTimeline(); //redraw -P
+            //crap
+        }
+        V_GLOBAL.G_FRAMECOUNT--; //remove 1 from the framecount -P
+    }
+}
+
+void MainWindow::on_btn_TransRight_clicked()
+{
+    t_FrameData transFrameData;
+    transFrameData = *(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME));
+    translateFrame(transFrameData, D_RIGHT);
+    //insertFrame(transFrameData); -P
+}
+
+void MainWindow::insertFrame(t_FrameData newFrame)
+{
+    //do this later lol
 }
