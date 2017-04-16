@@ -268,4 +268,16 @@ void MainWindow::on_btn_NewFrame_clicked()
         }
     }
     V_GLOBAL.G_CURRENTFRAME = V_GLOBAL.G_FRAMECOUNT; //fix indexing later -P
+
+    {
+        tempSquareData2 = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData; //grab the current frame -P
+        for(int x=0; x<V_GLOBAL.G_ROW; x++)
+        {
+            for(int y=0; y<V_GLOBAL.G_COL; y++)
+            {
+                gridGridSquare[x][y].square_RGB = tempSquareData2[x][y].square_RGB; //give the data to the grid -P
+                gridGridSquare[x][y].update(); //Fill that frame son -P
+            }
+        }
+    }
 }
