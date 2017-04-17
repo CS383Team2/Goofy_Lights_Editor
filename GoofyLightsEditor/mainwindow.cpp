@@ -73,22 +73,18 @@ MainWindow::MainWindow(QWidget *parent) :
 
     currentcolorsScene->addItem(Lcolor);
     currentcolorsScene->addItem(Rcolor);
-    //GridSquare **square = new GridSquare*[V_GLOBAL.G_COL];  //This is now in mainwindow.h -P
+
+    // This generates the memory for these grids
+    /*TimelineGrid ** */ tempSquareData  = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
+    /*TimelineGrid ** */ tempSquareData2 = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
     gridGridSquare = new GridSquare*[V_GLOBAL.G_ROW];
     for (int i = 0; i < V_GLOBAL.G_ROW; ++i)
     {
         gridGridSquare[i] = new GridSquare[V_GLOBAL.G_COL];
-
-        tempSquareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //old -P
-        tempSquareData2[i] = new TimelineGrid[V_GLOBAL.G_COL]; //old -P
-        CurrentFrameData.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //new $$$$$4 -P
-        //FrameData.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //move this? -P
-        //FrameData2.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //-P
     }
 
+    // is this needed? Is it needed if we dont use a first frame above? -n
     //CurrentFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
-    //FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
-    //FrameData2.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
 
 
 } //end mainwindow

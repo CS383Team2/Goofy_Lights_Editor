@@ -31,22 +31,15 @@ public:
     int g_SPACING;
     int t_SPACING;
 
+    GridSquare **gridGridSquare;     //Type is GridSquare, square is object
 
-    GridSquare **gridGridSquare; // = new GridSquare*[V_GLOBAL.G_ROW];  //Type is GridSquare, square is object
+    TimelineGrid ** tempSquareData;  // what is this for?
+    TimelineGrid ** tempSquareData2; // what is this for?
 
-    //TimelineGrid **timelineTimelineGrid = new TimelineGrid*[V_GLOBAL.G_ROW];  //Type is TimelineGrid, square2 is object
-
-
-    TimelineGrid ** tempSquareData = new TimelineGrid*[V_GLOBAL.G_ROW];
-    TimelineGrid ** tempSquareData2 = new TimelineGrid*[V_GLOBAL.G_ROW];
-
-    t_FrameData FrameData;  // THE frame data (this is in mainwindow.h) -P
+    t_FrameData FrameData;           // THE frame data (this is in mainwindow.h) -P
 
     t_FrameData CurrentFrameData;
 
-
-    void gridToFrameData();
-    void FrameDataToGrid(); //stitching rubbish -P
     void updateTimeline();
 
 private slots:
