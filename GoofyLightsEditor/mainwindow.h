@@ -88,6 +88,8 @@ private slots:
 
     void on_btn_TransUpRight_clicked();
 
+    void on_btn_RepeatFrame_clicked();
+
 private:
     Ui::MainWindow *ui;
 

@@ -175,78 +175,6 @@
      <string>Frame Duration</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btn_ScrollLeft">
-    <property name="geometry">
-     <rect>
-      <x>720</x>
-      <y>270</y>
-      <width>41</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Scroll</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_ScrollUp">
-    <property name="geometry">
-     <rect>
-      <x>800</x>
-      <y>200</y>
-      <width>41</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Scroll</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_ScrollRight">
-    <property name="geometry">
-     <rect>
-      <x>880</x>
-      <y>270</y>
-      <width>41</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Scroll</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_ScrollDwn">
-    <property name="geometry">
-     <rect>
-      <x>800</x>
-      <y>350</y>
-      <width>41</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Scroll</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="btn_TransUpLeft">
     <property name="geometry">
      <rect>
@@ -476,7 +404,7 @@
     <property name="geometry">
      <rect>
       <x>760</x>
-      <y>400</y>
+      <y>370</y>
       <width>121</width>
       <height>25</height>
      </rect>
@@ -725,7 +653,7 @@
      <x>0</x>
      <y>0</y>
      <width>960</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuSuper_Animator_Window">
