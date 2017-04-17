@@ -312,7 +312,7 @@ void MainWindow::on_btn_DeleteFrame_clicked()
                 {
                     for(int y=0; y<V_GLOBAL.G_COL; y++)
                     {
-                        theFrames.RetrieveNode_Middle(i)->squareData[x][y].timlineFrameNumber--; //decrement frame number by 1
+                        theFrames.RetrieveNode_Middle(i)->squareData[x][y].timelineFrameNumber--; //decrement frame number by 1
                     }
                 }
             }

@@ -61,7 +61,7 @@ void TimelineGrid::mousePressEvent(QGraphicsSceneMouseEvent *event) //-P
 
     Selected = true;
 
-    V_GLOBAL.G_CURRENTFRAME = this->timlineFrameNumber; //set the global frame to this frame when it's clicked -P
+    V_GLOBAL.G_CURRENTFRAME = this->timelineFrameNumber; //set the global frame to this frame when it's clicked -P
     V_GLOBAL.G_TIMELINESELECTED = true;
 
     QGraphicsItem::mousePressEvent(event);

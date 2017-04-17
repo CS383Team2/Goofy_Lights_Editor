@@ -22,7 +22,7 @@ TimelineGrid** create_RGB(int r, int c, int frameNumber)
     {
         for(int j=0; j<c; j++)
         {
-            arr[i][j].timlineFrameNumber = frameNumber; //apply the frame number to every timelinesquare lol -P
+            arr[i][j].timelineFrameNumber = frameNumber; //apply the frame number to every timelinesquare lol -P
         }
     }
 
