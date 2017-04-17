@@ -282,20 +282,19 @@ void MainWindow::on_btn_NewFrame_clicked()
     V_GLOBAL.G_CURRENTFRAME = V_GLOBAL.G_FRAMECOUNT; //fix indexing later -P
 
     //this sets the current frame you are editing to the new frame: -P
+
+    t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
+    for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
-        tempSquareData2 = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData; //grab the current frame -P
-        for(int x=0; x<V_GLOBAL.G_ROW; x++)
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
         {
-            for(int y=0; y<V_GLOBAL.G_COL; y++)
-            {
-                gridGridSquare[x][y].square_RGB = tempSquareData2[x][y].square_RGB; //give the data to the grid -P
-                gridGridSquare[x][y].update(); //Fill that frame son -P
-            }
+            gridGridSquare[x][y].square_RGB = (*tempFrameData).squareData[x][y].square_RGB; //give the data to the grid -P
+            gridGridSquare[x][y].update(); //Fill that frame son -P
         }
     }
 
     //show duration of new frame
-    ui->dsbox_FrameDur->setValue(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->duration);
+    ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
 }
 
 void MainWindow::on_btn_DeleteFrame_clicked()
@@ -629,31 +628,39 @@ void MainWindow::on_btn_TransUpRight_clicked()
 void MainWindow::on_btn_RepeatFrame_clicked()
 {
     on_btn_NewFrame_clicked();
-    t_FrameData transFrameData;
-    transFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
-    //transFrameData = *(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1));
+    t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
+    t_FrameData *tempFrameData_prev    = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1); //grab the previous frame
+    t_FrameData newFrameData;                                                // New frame
+    newFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);    // Allocate new frame
+
+// Change implementation to this. First need to update copyFrame to use pointers to t_FrameData
+//ref    int copyFrame(t_FrameData &copyFrame, t_FrameData origFrame);
+    //copyFrame(transFrameData, tempFrameData_current);
+
+
+    // copy prev frame into transFrameData
     for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
         for(int y=0; y<V_GLOBAL.G_COL; y++)
         {
-            transFrameData.squareData[x][y].square_RGB = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1)->squareData[x][y].square_RGB;
+            newFrameData.squareData[x][y].square_RGB = (*tempFrameData_prev).squareData[x][y].square_RGB;
         }
     }
+    // copy transFrameData into current frame
     for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
         for(int y=0; y<V_GLOBAL.G_COL; y++)
         {
-            theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData[x][y].square_RGB = transFrameData.squareData[x][y].square_RGB;
+            (*tempFrameData_current).squareData[x][y].square_RGB = newFrameData.squareData[x][y].square_RGB;
         }
     }
+    // copy transFrameData into gridGridSquare
+    for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
-        for(int x=0; x<V_GLOBAL.G_ROW; x++)
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
         {
-            for(int y=0; y<V_GLOBAL.G_COL; y++)
-            {
-                gridGridSquare[x][y].square_RGB = (theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData)[x][y].square_RGB;
-                gridGridSquare[x][y].update();
-            }
+            gridGridSquare[x][y].square_RGB = (*tempFrameData_current).squareData[x][y].square_RGB;
+            gridGridSquare[x][y].update();
         }
     }
 }
