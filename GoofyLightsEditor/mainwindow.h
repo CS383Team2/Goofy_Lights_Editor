@@ -81,6 +81,20 @@ private slots:
 
     void on_dsbox_FrameDur_valueChanged(double arg1);
 
+    void on_btn_TransUP_clicked();
+
+    void on_btn_TransLeft_clicked();
+
+    void on_btn_TransDwn_clicked();
+
+    void on_btn_TransDwnRight_clicked();
+
+    void on_btn_TransDwnLeft_clicked();
+
+    void on_btn_TransUpLeft_clicked();
+
+    void on_btn_TransUpRight_clicked();
+
 private:
     Ui::MainWindow *ui;
 
