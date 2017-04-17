@@ -129,18 +129,22 @@
 
 \tableofcontents
 
+
 \section{About this Project}
 This project is a alteration of the Tower Lights Project done in previous semesters for Cs 383 at the University of Idaho. The end goal of this project is to create an editor for the Goofy Glasses. goofy glasses are a creation of the University of Idaho computer science department, goofy glasses are normal sun glasses, with RGB LED lighting, and a transmitter to send and receive data to turn the LED's on each pair of glasses on or off, as well as change the color the glasses are currently displaying. The editor we (team 2) are creating will be able to set specific coloring patterns for all of the goofy glasses at once. The general idea behind this is to create a grid with individual squares, where each square represents a single pair of goofy glasses. The user will then be able to create frames, and make a slide show of frames, and transmit the data from the slide show to the goofy glasses to create a scene. 
 
-\section{Design process}
+\subsection{Design process}
 The general outline of the development process can be simplified into three basic steps. Our first order of business was to start developing back-end functionality for the use cases specified (see appendix). Secondly, we created a basic GUI template to visualize layout, and speculate where extra functionality may be needed. Lastly, our focus was placed on integrating the back-end functionality we created with the GUI to bring everything together.
 
-\subsection{Problems encountered}
+\section{Sprint 1 \& 2}
+\subsubsection{Problems encountered}
 Some of the issues we have encountered as a team are presented below. Originally we created a set of global variables, that almost every function would need access to such as, row\#, col\#, and RGB data. This worked great for testing purposes, but has created scoping issues for future updates. We are currently working on changing all of the global variables previously mentioned into local variables. We are currently working on altering our existing functions to deal with this scope change from global to local. We also originally created a RGB type, and are now altering this to an already existing Qt RGB type called Qcolor. Lastly, we are currently considering data flow, and how data will be used be in our goofy lights editor, we have discussed creating some data flow diagrams to help visualize this process.
 
 
-\vspace{20pt}
-\section{Figures}
+
+
+\subsection{Figures}
+\subsubsection{Gui Screenshots}
   
   \begin{figure}[H]
   	\centering
@@ -221,13 +225,10 @@ Some of the issues we have encountered as a team are presented below. Originally
   \end{figure}
   
   
-\newpage
-\subsection{Timeline}
-% the language={} disables language colorings
-\lstinputlisting[language={}]{Timeline2.txt}
+
 
 \newpage
-\section{UML Diagrams}
+\subsubsection{UML Diagrams}
 
 \begin{figure}[H]
 	\centering
@@ -326,10 +327,57 @@ Some of the issues we have encountered as a team are presented below. Originally
 \end{figure}
 
 \newpage
-\section{GitLog}
-Git log since 2017\-03\-30
-\lstinputlisting[language={}]{gitLog2.log}
+\subsection{Timeline sprint 2}
+% the language={} disables language colorings
+\lstinputlisting[language={}]{Timeline_sprint_2.txt}
 
+\newpage
+\subsection{GitLog during sprint 2}
+Git log since 2017\-03\-30
+\lstinputlisting[language={}]{gitLog_sprint_2.log}
+
+\newpage
+\section{Sprint 3}
+
+\subsection{Work done and problems encountered}
+For this sprint in out Goofy Lights Editor we covered a lot of needed basic functionality additions, as well as resolved some issues we created with sprint 2, the summary of these changes can be found below. The main additions our group added to the Goofy Lights Editor in sprint 3, were mostly related to the changes in scope of our variables from local to global, and adding our time line to the GUI. Paul did most of the work for the addition of the time line, and it's .functionality. After we had a working time line, we added extra functionality to some of the pre-existing button we already had displayed in our GUI. This allowed us to test our new time line multiple times for correctness. We did run into a small issue with figuring out how to go about adding and updating the time line frames to match the grid that is currently being edited. A few of our team members set up a "code review" for some needed clarification on some of the GUI functions, as well as discussed how to fix the small issue with the time line mentioned above. The only other major issue we ran into this sprint, that was carried over from sprint 2, was scoping changes. We changed a lot of our local variables that were being used in multiple functions to a global scope for ease of access.
+
+\subsection{Timeline sprint 3}
+% the language={} disables language colorings
+%\lstinputlisting[language={}]{Timeline_sprint_3.txt}
+Our time line for sprint 3 has almost stayed the same since the last sprint. 
+Original sprint 3 time line:
+Solidify GUI Layout (buttons, sliders, sizes, ect.)\\
+
+\noindent Updated Sprint 3 time line:\\
+\indent Recent Color Palette \\
+\indent Alter adding to the time line (linked list)\\
+\indent Integration of existing code into GUI\\
+
+\newpage
+\subsection{Sprint 3 figures}
+Gui Screenshots
+
+\subsubsection{Sprint 3 GUI images}
+
+  \begin{figure}[H]
+  	\centering
+  	%\fbox{\includegraphics[width=320pt]{GUI_Screenshots/timeline.png}}
+  	\caption{GUI Layout, beginning of sprint 3}
+  	\label{fig:GUI Design Start Sprint 3}
+  \end{figure}
+  
+    \begin{figure}[H]
+  	\centering
+  	%\fbox{\includegraphics[width=320pt]{GUI_Screenshots/timeline.png}}
+  	\caption{GUI Layout, beginning of sprint 3}
+  	\label{fig:GUI Design Start Sprint 3}
+  \end{figure}
+
+\newpage
+\subsection{GitLog during sprint 3}
+Git log since April 11th, 2017
+%\lstinputlisting[language={}]{gitLog_sprint_3.log}
 
 
 \iffalse %Acts like a block comment
