@@ -79,6 +79,8 @@ private slots:
 
     void insertFrame(t_FrameData newFrame);
 
+    void on_dsbox_FrameDur_valueChanged(double arg1);
+
 private:
     Ui::MainWindow *ui;
 

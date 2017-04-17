@@ -162,6 +162,8 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
                 gridGridSquare[x][y].update(); //Fill that frame son -P
             }
         }
+        //show duration of current frame
+        ui->dsbox_FrameDur->setValue(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->duration);
     }
 
     updateTimeline(); //lol -P
@@ -234,14 +236,12 @@ void MainWindow::drawGrid()
 
 void MainWindow::updateTimeline() //fix the update lag later -P
 {
+    for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
-        for(int x=0; x<V_GLOBAL.G_ROW; x++)
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
         {
-            for(int y=0; y<V_GLOBAL.G_COL; y++)
-            {
-                (theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData)[x][y].square_RGB = gridGridSquare[x][y].square_RGB;
-                (theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData)[x][y].update();
-            }
+            (theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData)[x][y].square_RGB = gridGridSquare[x][y].square_RGB;
+            (theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData)[x][y].update();
         }
     }
 }
@@ -289,6 +289,9 @@ void MainWindow::on_btn_NewFrame_clicked()
             }
         }
     }
+
+    //show duration of new frame
+    ui->dsbox_FrameDur->setValue(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->duration);
 }
 
 void MainWindow::on_btn_DeleteFrame_clicked()
@@ -331,4 +334,13 @@ void MainWindow::on_btn_TransRight_clicked()
 void MainWindow::insertFrame(t_FrameData newFrame)
 {
     //do this later lol
+}
+
+void MainWindow::on_dsbox_FrameDur_valueChanged(double arg1)
+{
+    if (V_GLOBAL.G_CURRENTFRAME > 0)
+    {
+        theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->duration = arg1;
+        std::cout << V_GLOBAL.G_CURRENTFRAME << endl << theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->duration << endl;
+    }
 }

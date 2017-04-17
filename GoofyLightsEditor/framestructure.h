@@ -8,7 +8,7 @@
 typedef struct
 {
     unsigned long ID = 0;         // Unique ID of frame. Static once generated.
-    unsigned int duration;   // Frame Duration in MS
+    double duration = 0.2;   // Frame Duration in MS
 
     //GridSquare **squareData;  //Frame data    WRONG -P
     //There will only ever be one GridSquare object, for the grid.
