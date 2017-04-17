@@ -30,6 +30,13 @@ int FileOperations::SaveToFile(QString fileName, FrameList frameList){
         QTextStream stream(&file); /* Stream that writes to the file */
 
         stream << VERSION << endl;
+
+        /* Dummy values for custom colors */
+        stream << "0" << endl;
+        stream << "0" << endl;
+        stream << "0" << endl;
+
+        /* Print the size of the frame list */
         stream << frameList.Size() << " "
                << frameList.GetRowCount() << " "
                << frameList.GetColCount() << endl;
@@ -127,6 +134,7 @@ int FileOperations::LoadFromFile(QString fileName, FrameList * frameList){
         frameData.ID            = currentElement;
 
         (*frameList).AddTail(frameData);
+        std::cout << (*frameList).IsEmpty() << std::endl;
         // std::cout << "Current FrameList" << std::endl;
         // tmpFrameList.PrintNode();
         // std::cout << currentElement << std::endl;

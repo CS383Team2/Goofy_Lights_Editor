@@ -143,7 +143,7 @@
      <string>Play/Pause</string>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="dsbox_FramDur">
+   <widget class="QDoubleSpinBox" name="dsbox_FrameDur">
     <property name="geometry">
      <rect>
       <x>220</x>
@@ -725,7 +725,7 @@
      <x>0</x>
      <y>0</y>
      <width>960</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuSuper_Animator_Window">

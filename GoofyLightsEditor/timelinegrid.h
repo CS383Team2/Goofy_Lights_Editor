@@ -22,7 +22,7 @@ public:
     int x = 0; //drawing locations -P
     int y = 0;
 
-    int timlineFrameNumber = 0;
+    int timelineFrameNumber = 0;
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event); //need to know when the things are clicked on -P

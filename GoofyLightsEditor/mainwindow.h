@@ -31,22 +31,15 @@ public:
     int g_SPACING;
     int t_SPACING;
 
+    GridSquare **gridGridSquare;     //Type is GridSquare, square is object
 
-    GridSquare **gridGridSquare; // = new GridSquare*[V_GLOBAL.G_ROW];  //Type is GridSquare, square is object
+    TimelineGrid ** tempSquareData;  // what is this for?
+    TimelineGrid ** tempSquareData2; // what is this for?
 
-    //TimelineGrid **timelineTimelineGrid = new TimelineGrid*[V_GLOBAL.G_ROW];  //Type is TimelineGrid, square2 is object
-
-
-    TimelineGrid ** tempSquareData = new TimelineGrid*[V_GLOBAL.G_ROW];
-    TimelineGrid ** tempSquareData2 = new TimelineGrid*[V_GLOBAL.G_ROW];
-
-    t_FrameData FrameData;  // THE frame data (this is in mainwindow.h) -P
+    t_FrameData FrameData;           // THE frame data (this is in mainwindow.h) -P
 
     t_FrameData CurrentFrameData;
 
-
-    void gridToFrameData();
-    void FrameDataToGrid(); //stitching rubbish -P
     void updateTimeline();
 
 private slots:
@@ -78,6 +71,22 @@ private slots:
     void on_btn_TransRight_clicked();
 
     void insertFrame(t_FrameData newFrame);
+
+    void on_dsbox_FrameDur_valueChanged(double arg1);
+
+    void on_btn_TransUP_clicked();
+
+    void on_btn_TransLeft_clicked();
+
+    void on_btn_TransDwn_clicked();
+
+    void on_btn_TransDwnRight_clicked();
+
+    void on_btn_TransDwnLeft_clicked();
+
+    void on_btn_TransUpLeft_clicked();
+
+    void on_btn_TransUpRight_clicked();
 
 private:
     Ui::MainWindow *ui;

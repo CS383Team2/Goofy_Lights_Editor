@@ -73,22 +73,18 @@ MainWindow::MainWindow(QWidget *parent) :
 
     currentcolorsScene->addItem(Lcolor);
     currentcolorsScene->addItem(Rcolor);
-    //GridSquare **square = new GridSquare*[V_GLOBAL.G_COL];  //This is now in mainwindow.h -P
+
+    // This generates the memory for these grids
+    /*TimelineGrid ** */ tempSquareData  = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
+    /*TimelineGrid ** */ tempSquareData2 = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
     gridGridSquare = new GridSquare*[V_GLOBAL.G_ROW];
     for (int i = 0; i < V_GLOBAL.G_ROW; ++i)
     {
         gridGridSquare[i] = new GridSquare[V_GLOBAL.G_COL];
-
-        tempSquareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //old -P
-        tempSquareData2[i] = new TimelineGrid[V_GLOBAL.G_COL]; //old -P
-        CurrentFrameData.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //new $$$$$4 -P
-        //FrameData.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //move this? -P
-        //FrameData2.squareData[i] = new TimelineGrid[V_GLOBAL.G_COL]; //-P
     }
 
+    // is this needed? Is it needed if we dont use a first frame above? -n
     //CurrentFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
-    //FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
-    //FrameData2.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
 
 
 } //end mainwindow
@@ -115,7 +111,17 @@ void MainWindow::on_actionOpenProject_triggered()
             tr("Open Project"), "",
             tr("Project (*.tan);;All Files (*)"));
 
-    FileOperations::LoadFromFile(fileName, &theFrames);
+    if(FileOperations::LoadFromFile(fileName, &theFrames) == -1){
+        std::cout << "Failed to open" << std::endl;
+    }
+
+    theFrames.PrintNode();
+
+    V_GLOBAL.G_CURRENTFRAME = theFrames.Size() - 1;
+    V_GLOBAL.G_FRAMECOUNT = theFrames.Size();
+    V_GLOBAL.G_COL = theFrames.GetColCount();
+    V_GLOBAL.G_ROW = theFrames.GetRowCount();
+    updateTimeline();
 }
 
 
@@ -161,6 +167,8 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
                 gridGridSquare[x][y].update(); //Fill that frame son -P
             }
         }
+        //show duration of current frame
+        ui->dsbox_FrameDur->setValue(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->duration);
     }
 
     updateTimeline(); //lol -P
@@ -233,14 +241,12 @@ void MainWindow::drawGrid()
 
 void MainWindow::updateTimeline() //fix the update lag later -P
 {
+    for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
-        for(int x=0; x<V_GLOBAL.G_ROW; x++)
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
         {
-            for(int y=0; y<V_GLOBAL.G_COL; y++)
-            {
-                (theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData)[x][y].square_RGB = gridGridSquare[x][y].square_RGB;
-                (theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData)[x][y].update();
-            }
+            (theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData)[x][y].square_RGB = gridGridSquare[x][y].square_RGB;
+            (theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData)[x][y].update();
         }
     }
 }
@@ -288,6 +294,9 @@ void MainWindow::on_btn_NewFrame_clicked()
             }
         }
     }
+
+    //show duration of new frame
+    ui->dsbox_FrameDur->setValue(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->duration);
 }
 
 void MainWindow::on_btn_DeleteFrame_clicked()
@@ -308,7 +317,7 @@ void MainWindow::on_btn_DeleteFrame_clicked()
                 {
                     for(int y=0; y<V_GLOBAL.G_COL; y++)
                     {
-                        theFrames.RetrieveNode_Middle(i)->squareData[x][y].timlineFrameNumber--; //decrement frame number by 1
+                        theFrames.RetrieveNode_Middle(i)->squareData[x][y].timelineFrameNumber--; //decrement frame number by 1
                     }
                 }
             }
@@ -321,13 +330,275 @@ void MainWindow::on_btn_DeleteFrame_clicked()
 
 void MainWindow::on_btn_TransRight_clicked()
 {
+    on_btn_NewFrame_clicked();
     t_FrameData transFrameData;
-    transFrameData = *(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME));
-    translateFrame(transFrameData, D_RIGHT);
-    //insertFrame(transFrameData); -P
+    transFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
+    //transFrameData = *(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1));
+    for(int x=0; x<V_GLOBAL.G_ROW; x++)
+    {
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
+        {
+            transFrameData.squareData[x][y].square_RGB = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1)->squareData[x][y].square_RGB;
+        }
+    }
+
+    translateFrame(transFrameData, D_RIGHT);for(int x=0; x<V_GLOBAL.G_ROW; x++)
+    {
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
+        {
+            theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData[x][y].square_RGB = transFrameData.squareData[x][y].square_RGB;
+        }
+    }
+    {
+        for(int x=0; x<V_GLOBAL.G_ROW; x++)
+        {
+            for(int y=0; y<V_GLOBAL.G_COL; y++)
+            {
+                gridGridSquare[x][y].square_RGB = (theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData)[x][y].square_RGB;
+                gridGridSquare[x][y].update();
+            }
+        }
+    }
 }
 
 void MainWindow::insertFrame(t_FrameData newFrame)
 {
     //do this later lol
+}
+
+void MainWindow::on_dsbox_FrameDur_valueChanged(double arg1)
+{
+    if (V_GLOBAL.G_CURRENTFRAME > 0)
+        theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->duration = arg1;
+}
+
+void MainWindow::on_btn_TransUP_clicked()
+{
+    on_btn_NewFrame_clicked();
+    t_FrameData transFrameData;
+    transFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
+    //transFrameData = *(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1));
+    for(int x=0; x<V_GLOBAL.G_ROW; x++)
+    {
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
+        {
+            transFrameData.squareData[x][y].square_RGB = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1)->squareData[x][y].square_RGB;
+        }
+    }
+
+    translateFrame(transFrameData, D_UP);for(int x=0; x<V_GLOBAL.G_ROW; x++)
+    {
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
+        {
+            theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData[x][y].square_RGB = transFrameData.squareData[x][y].square_RGB;
+        }
+    }
+    {
+        for(int x=0; x<V_GLOBAL.G_ROW; x++)
+        {
+            for(int y=0; y<V_GLOBAL.G_COL; y++)
+            {
+                gridGridSquare[x][y].square_RGB = (theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData)[x][y].square_RGB;
+                gridGridSquare[x][y].update();
+            }
+        }
+    }
+}
+
+void MainWindow::on_btn_TransLeft_clicked()
+{
+    on_btn_NewFrame_clicked();
+    t_FrameData transFrameData;
+    transFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
+    //transFrameData = *(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1));
+    for(int x=0; x<V_GLOBAL.G_ROW; x++)
+    {
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
+        {
+            transFrameData.squareData[x][y].square_RGB = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1)->squareData[x][y].square_RGB;
+        }
+    }
+
+    translateFrame(transFrameData, D_LEFT);for(int x=0; x<V_GLOBAL.G_ROW; x++)
+    {
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
+        {
+            theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData[x][y].square_RGB = transFrameData.squareData[x][y].square_RGB;
+        }
+    }
+    {
+        for(int x=0; x<V_GLOBAL.G_ROW; x++)
+        {
+            for(int y=0; y<V_GLOBAL.G_COL; y++)
+            {
+                gridGridSquare[x][y].square_RGB = (theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData)[x][y].square_RGB;
+                gridGridSquare[x][y].update();
+            }
+        }
+    }
+}
+
+void MainWindow::on_btn_TransDwn_clicked()
+{
+    on_btn_NewFrame_clicked();
+    t_FrameData transFrameData;
+    transFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
+    //transFrameData = *(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1));
+    for(int x=0; x<V_GLOBAL.G_ROW; x++)
+    {
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
+        {
+            transFrameData.squareData[x][y].square_RGB = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1)->squareData[x][y].square_RGB;
+        }
+    }
+
+    translateFrame(transFrameData, D_DWN);for(int x=0; x<V_GLOBAL.G_ROW; x++)
+    {
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
+        {
+            theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData[x][y].square_RGB = transFrameData.squareData[x][y].square_RGB;
+        }
+    }
+    {
+        for(int x=0; x<V_GLOBAL.G_ROW; x++)
+        {
+            for(int y=0; y<V_GLOBAL.G_COL; y++)
+            {
+                gridGridSquare[x][y].square_RGB = (theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData)[x][y].square_RGB;
+                gridGridSquare[x][y].update();
+            }
+        }
+    }
+}
+
+void MainWindow::on_btn_TransDwnRight_clicked()
+{
+    on_btn_NewFrame_clicked();
+    t_FrameData transFrameData;
+    transFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
+    //transFrameData = *(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1));
+    for(int x=0; x<V_GLOBAL.G_ROW; x++)
+    {
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
+        {
+            transFrameData.squareData[x][y].square_RGB = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1)->squareData[x][y].square_RGB;
+        }
+    }
+
+    translateFrame(transFrameData, D_DWN_R);for(int x=0; x<V_GLOBAL.G_ROW; x++)
+    {
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
+        {
+            theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData[x][y].square_RGB = transFrameData.squareData[x][y].square_RGB;
+        }
+    }
+    {
+        for(int x=0; x<V_GLOBAL.G_ROW; x++)
+        {
+            for(int y=0; y<V_GLOBAL.G_COL; y++)
+            {
+                gridGridSquare[x][y].square_RGB = (theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData)[x][y].square_RGB;
+                gridGridSquare[x][y].update();
+            }
+        }
+    }
+}
+
+void MainWindow::on_btn_TransDwnLeft_clicked()
+{
+    on_btn_NewFrame_clicked();
+    t_FrameData transFrameData;
+    transFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
+    //transFrameData = *(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1));
+    for(int x=0; x<V_GLOBAL.G_ROW; x++)
+    {
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
+        {
+            transFrameData.squareData[x][y].square_RGB = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1)->squareData[x][y].square_RGB;
+        }
+    }
+
+    translateFrame(transFrameData, D_DWN_L);for(int x=0; x<V_GLOBAL.G_ROW; x++)
+    {
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
+        {
+            theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData[x][y].square_RGB = transFrameData.squareData[x][y].square_RGB;
+        }
+    }
+    {
+        for(int x=0; x<V_GLOBAL.G_ROW; x++)
+        {
+            for(int y=0; y<V_GLOBAL.G_COL; y++)
+            {
+                gridGridSquare[x][y].square_RGB = (theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData)[x][y].square_RGB;
+                gridGridSquare[x][y].update();
+            }
+        }
+    }
+}
+
+void MainWindow::on_btn_TransUpLeft_clicked()
+{
+    on_btn_NewFrame_clicked();
+    t_FrameData transFrameData;
+    transFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
+    //transFrameData = *(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1));
+    for(int x=0; x<V_GLOBAL.G_ROW; x++)
+    {
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
+        {
+            transFrameData.squareData[x][y].square_RGB = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1)->squareData[x][y].square_RGB;
+        }
+    }
+
+    translateFrame(transFrameData, D_UP_L);for(int x=0; x<V_GLOBAL.G_ROW; x++)
+    {
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
+        {
+            theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData[x][y].square_RGB = transFrameData.squareData[x][y].square_RGB;
+        }
+    }
+    {
+        for(int x=0; x<V_GLOBAL.G_ROW; x++)
+        {
+            for(int y=0; y<V_GLOBAL.G_COL; y++)
+            {
+                gridGridSquare[x][y].square_RGB = (theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData)[x][y].square_RGB;
+                gridGridSquare[x][y].update();
+            }
+        }
+    }
+}
+
+void MainWindow::on_btn_TransUpRight_clicked()
+{
+    on_btn_NewFrame_clicked();
+    t_FrameData transFrameData;
+    transFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
+    //transFrameData = *(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1));
+    for(int x=0; x<V_GLOBAL.G_ROW; x++)
+    {
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
+        {
+            transFrameData.squareData[x][y].square_RGB = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1)->squareData[x][y].square_RGB;
+        }
+    }
+
+    translateFrame(transFrameData, D_UP_R);for(int x=0; x<V_GLOBAL.G_ROW; x++)
+    {
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
+        {
+            theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData[x][y].square_RGB = transFrameData.squareData[x][y].square_RGB;
+        }
+    }
+    {
+        for(int x=0; x<V_GLOBAL.G_ROW; x++)
+        {
+            for(int y=0; y<V_GLOBAL.G_COL; y++)
+            {
+                gridGridSquare[x][y].square_RGB = (theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData)[x][y].square_RGB;
+                gridGridSquare[x][y].update();
+            }
+        }
+    }
 }
