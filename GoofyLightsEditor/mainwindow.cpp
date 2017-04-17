@@ -75,8 +75,6 @@ MainWindow::MainWindow(QWidget *parent) :
     currentcolorsScene->addItem(Rcolor);
 
     // This generates the memory for these grids
-    /*TimelineGrid ** */ tempSquareData  = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
-    /*TimelineGrid ** */ tempSquareData2 = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
     gridGridSquare = new GridSquare*[V_GLOBAL.G_ROW];
     for (int i = 0; i < V_GLOBAL.G_ROW; ++i)
     {
@@ -311,11 +309,12 @@ void MainWindow::on_btn_DeleteFrame_clicked()
             theFrames.DeleteNode_Middle(V_GLOBAL.G_CURRENTFRAME);
             for(int i=V_GLOBAL.G_CURRENTFRAME+1; i<V_GLOBAL.G_FRAMECOUNT; i++) //go through all remaing frames after the deletion -P
             {
+                t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(i);   //grab the this frame
                 for(int x=0; x<V_GLOBAL.G_ROW; x++)
                 {
                     for(int y=0; y<V_GLOBAL.G_COL; y++)
                     {
-                        theFrames.RetrieveNode_Middle(i)->squareData[x][y].timelineFrameNumber--; //decrement frame number by 1
+                        (*tempFrameData).squareData[x][y].timelineFrameNumber--; //decrement frame number by 1
                     }
                 }
             }
@@ -327,16 +326,15 @@ void MainWindow::on_btn_DeleteFrame_clicked()
     //Redraw the timeline! -P
     for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++)
     {
-        tempSquareData = theFrames.RetrieveNode_Middle(i)->squareData;
-        //tempSquareData = FrameData.squareData;
+        t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(i);   //grab the this frame
         for(int x=0; x<V_GLOBAL.G_ROW; x++)
         {
             for(int y=0; y<V_GLOBAL.G_COL; y++)
             {
-                tempSquareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
-                tempSquareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
+                (*tempFrameData).squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
+                (*tempFrameData).squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
 
-                timelineScene->addItem(&(tempSquareData[x][y])); //timeline painting here -P
+                timelineScene->addItem(&((*tempFrameData).squareData[x][y])); //timeline painting here -P
             }
         }
     }

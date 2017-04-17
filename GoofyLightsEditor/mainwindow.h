@@ -32,12 +32,7 @@ public:
     int t_SPACING;
 
     GridSquare **gridGridSquare;     //Type is GridSquare, square is object
-
-    TimelineGrid ** tempSquareData;  // what is this for?
-    TimelineGrid ** tempSquareData2; // what is this for?
-
     t_FrameData FrameData;           // THE frame data (this is in mainwindow.h) -P
-
     t_FrameData CurrentFrameData;
 
     void updateTimeline();
