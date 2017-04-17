@@ -101,7 +101,7 @@ void MainWindow::on_actionSave_As_triggered()
             tr("Save Project"), "",
             tr("Project (*.tan);;All Files (*)"));
 
-    //FileOperations::SaveToFile(frameList,fileName);
+    FileOperations::SaveToFile(fileName,theFrames);
     qDebug() << "Returned safely";
 }
 
@@ -111,8 +111,17 @@ void MainWindow::on_actionOpenProject_triggered()
             tr("Open Project"), "",
             tr("Project (*.tan);;All Files (*)"));
 
-    //FrameList frameList(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
-    //FileOperations::LoadFromFile(fileName, &frameList);
+    if(FileOperations::LoadFromFile(fileName, &theFrames) == -1){
+        std::cout << "Failed to open" << std::endl;
+    }
+
+    theFrames.PrintNode();
+
+    V_GLOBAL.G_CURRENTFRAME = theFrames.Size() - 1;
+    V_GLOBAL.G_FRAMECOUNT = theFrames.Size();
+    V_GLOBAL.G_COL = theFrames.GetColCount();
+    V_GLOBAL.G_ROW = theFrames.GetRowCount();
+    updateTimeline();
 }
 
 

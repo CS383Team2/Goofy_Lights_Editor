@@ -22,7 +22,7 @@
 #define VERSION .3
 
 /* Save the project to a file. There is no predefined file format for this */
-int FileOperations::SaveToFile(FrameList frameList, QString fileName){
+int FileOperations::SaveToFile(QString fileName, FrameList frameList){
     QFile file; /* Load the file and write to it */
     QTime elapsedTime = QTime(0,0,0,0); // Time elapsed in milliseconds
     file.setFileName(fileName);
@@ -30,6 +30,13 @@ int FileOperations::SaveToFile(FrameList frameList, QString fileName){
         QTextStream stream(&file); /* Stream that writes to the file */
 
         stream << VERSION << endl;
+
+        /* Dummy values for custom colors */
+        stream << "0" << endl;
+        stream << "0" << endl;
+        stream << "0" << endl;
+
+        /* Print the size of the frame list */
         stream << frameList.Size() << " "
                << frameList.GetRowCount() << " "
                << frameList.GetColCount() << endl;
@@ -64,7 +71,9 @@ int FileOperations::SaveToFile(FrameList frameList, QString fileName){
         return 0;
 }
 
-/* Load a project from a file. */
+/* Load a project from a file. We can use the pointer passed in and
+ * modify it directly to fix destructor errors
+ */
 int FileOperations::LoadFromFile(QString fileName, FrameList * frameList){
     QFile file;
     file.setFileName(fileName);
@@ -75,12 +84,13 @@ int FileOperations::LoadFromFile(QString fileName, FrameList * frameList){
     QTextStream fileContents(&file);
     QString version = fileContents.readLine();
 
-    QStringList currLineList = fileContents.readLine().split(" ");
-    while(currLineList.count() > 3){
-        currLineList = fileContents.readLine().split(" ");
+    /* Skip the Custom Color */
+    for(int i = 0; i < 3; i++){
+        QString tmpLine = fileContents.readLine();
     }
+
     /* Get the frame size from the file */
-    QStringList frameInfo = currLineList;
+    QStringList frameInfo = fileContents.readLine().split(" ", QString::SkipEmptyParts);
 
     // qDebug() << frameInfo << endl;
 
@@ -89,7 +99,7 @@ int FileOperations::LoadFromFile(QString fileName, FrameList * frameList){
     int col         = frameInfo[2].toInt();
 
     /* Initialize the frame list */
-    FrameList tmpFrameList = FrameList(row, col);
+    (*frameList) = FrameList(row, col);
 
     int currentElement = 0;
     QString startTime = fileContents.readLine();
@@ -109,29 +119,31 @@ int FileOperations::LoadFromFile(QString fileName, FrameList * frameList){
             // qDebug() << rowValues << endl;
             int j = 0;
             for(int k = 0; k < rowValues.size(); k += 3){
-                data[i][j].square_RGB.setRed(rowValues[k].toShort());
-                data[i][j].square_RGB.setGreen(rowValues[k + 1].toShort());
-                data[i][j].square_RGB.setBlue(rowValues[k + 2].toShort());
+                data[i][j].square_RGB.setRed(rowValues[k].toInt());
+                data[i][j].square_RGB.setGreen(rowValues[k + 1].toInt());
+                data[i][j].square_RGB.setBlue(rowValues[k + 2].toInt());
                 j++;
             }
         }
-        frameData.squareData      = data;
-        QString timeStr     = fileContents.readLine();
+        frameData.squareData    = data;
+        QString timeStr         = fileContents.readLine();
         QTime time;
-        time                = QTime::fromString(timeStr, "mm:ss.zzz");
-        nextTime            = time;
-        frameData.duration = currTime.msecsTo(nextTime);
-        frameData.ID        = currentElement;
-        tmpFrameList.AddTail(frameData);
+        time                    = QTime::fromString(timeStr, "mm:ss.zzz");
+        nextTime                = time;
+        frameData.duration      = currTime.msecsTo(nextTime);
+        frameData.ID            = currentElement;
+
+        (*frameList).AddTail(frameData);
+        std::cout << (*frameList).IsEmpty() << std::endl;
         // std::cout << "Current FrameList" << std::endl;
         // tmpFrameList.PrintNode();
         // std::cout << currentElement << std::endl;
         currentElement++;
     }
     file.close();
-    frameList = &tmpFrameList;          // frameList pointer = address of tmpFrameList
-    //std::cout << "Function Print\n";
-    tmpFrameList.PrintNode();
-    (*frameList).PrintNode();
+    // (*frameList) = tmpFrameList;          // frameList data = data of tmpFrameList
+    // std::cout << "Function Print\n";
+    // tmpFrameList.PrintNode();
+    // (*frameList).PrintNode();
     return 1;
 }
