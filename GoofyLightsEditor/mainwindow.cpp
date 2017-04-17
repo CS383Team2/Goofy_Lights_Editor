@@ -311,7 +311,7 @@ void MainWindow::on_btn_DeleteFrame_clicked()
         else //Deleting a frame in the middle of the timeline, bugger -P
         {
             theFrames.DeleteNode_Middle(V_GLOBAL.G_CURRENTFRAME);
-            for(int i=V_GLOBAL.G_CURRENTFRAME; i<V_GLOBAL.G_FRAMECOUNT; i++) //go through all remaing frames after the deletion -P
+            for(int i=V_GLOBAL.G_CURRENTFRAME+1; i<V_GLOBAL.G_FRAMECOUNT; i++) //go through all remaing frames after the deletion -P
             {
                 for(int x=0; x<V_GLOBAL.G_ROW; x++)
                 {
@@ -325,6 +325,22 @@ void MainWindow::on_btn_DeleteFrame_clicked()
             //crap
         }
         V_GLOBAL.G_FRAMECOUNT--; //remove 1 from the framecount -P
+    }
+    //Redraw the timeline! -P
+    for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++)
+    {
+        tempSquareData = theFrames.RetrieveNode_Middle(i)->squareData;
+        //tempSquareData = FrameData.squareData;
+        for(int x=0; x<V_GLOBAL.G_ROW; x++)
+        {
+            for(int y=0; y<V_GLOBAL.G_COL; y++)
+            {
+                tempSquareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
+                tempSquareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
+
+                timelineScene->addItem(&(tempSquareData[x][y])); //timeline painting here -P
+            }
+        }
     }
 }
 
