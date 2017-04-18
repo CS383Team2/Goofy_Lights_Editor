@@ -343,9 +343,25 @@ void MainWindow::on_btn_DeleteFrame_clicked()
 void MainWindow::on_btn_TransRight_clicked()
 {
     on_btn_NewFrame_clicked();
+//ref    //t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(i);   //grab the this frame
     t_FrameData transFrameData;
     transFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
     //transFrameData = *(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1));
+
+    //==== My Version ========================================
+    // Create new frame space
+    t_FrameData newFrameData;
+    newFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
+    // Get current frame
+    t_FrameData *tempFrameData_Current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the this frame
+    // Copy current Frame Into new frame
+    copyFrame(newFrameData, tempFrameData_Current);
+    // Translate newframe by direction
+    translateFrame(newFrameData, D_RIGHT);
+
+    //========================================================
+
+    // copy prev frame into transFrameData
     for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
         for(int y=0; y<V_GLOBAL.G_COL; y++)
@@ -355,6 +371,7 @@ void MainWindow::on_btn_TransRight_clicked()
     }
 
     translateFrame(transFrameData, D_RIGHT);
+    // copy transFrameData into current frameData
     for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
         for(int y=0; y<V_GLOBAL.G_COL; y++)
@@ -362,6 +379,7 @@ void MainWindow::on_btn_TransRight_clicked()
             theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData[x][y].square_RGB = transFrameData.squareData[x][y].square_RGB;
         }
     }
+    // copyt current frame into gridGridSquare
     {
         for(int x=0; x<V_GLOBAL.G_ROW; x++)
         {
