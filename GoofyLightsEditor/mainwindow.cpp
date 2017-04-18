@@ -85,6 +85,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //CurrentFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
 
 
+    drawGrid();
+    updateTimeline();
+
 } //end mainwindow
 
 MainWindow::~MainWindow()
@@ -251,10 +254,6 @@ void MainWindow::updateTimeline() //fix the update lag later -P
 
 void MainWindow::on_btn_NewFrame_clicked()
 {
-    if(V_GLOBAL.G_FRAMECOUNT == 0) //if this is the first frame -P
-    {
-        drawGrid(); //draw the grid -P
-    }
     updateTimeline();
     V_GLOBAL.G_FRAMECOUNT++; //add a frame to the count
     FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, V_GLOBAL.G_FRAMECOUNT); //fix indexing later -P
