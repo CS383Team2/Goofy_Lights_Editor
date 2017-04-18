@@ -33,7 +33,8 @@ SOURCES += main.cpp\
     colorwheel.cpp \
     docdialog.cpp \
     timelinegrid.cpp \
-    helpdialog.cpp
+    helpdialog.cpp \
+    player.cpp
 
 HEADERS  += mainwindow.h \
     framestructure.h \
@@ -46,9 +47,11 @@ HEADERS  += mainwindow.h \
     colorwheel.h \
     docdialog.h \
     timelinegrid.h \
-    helpdialog.h
+    helpdialog.h \
+    player.h
 
 FORMS    += mainwindow.ui \
     sizedialog.ui \
     docdialog.ui \
-    helpdialog.ui
+    helpdialog.ui \
+    player.ui
