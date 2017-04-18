@@ -152,6 +152,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
 
     theFrames.PrintNode(); //DEBUG IT -P
 
+    updateTimeline(); //lol -P
 
     //set grid to current frame -P
     if(V_GLOBAL.G_TIMELINESELECTED == true)
@@ -168,9 +169,6 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
         //show duration of current frame
         ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
     }
-
-    updateTimeline(); //lol -P
-
 }
 
 
