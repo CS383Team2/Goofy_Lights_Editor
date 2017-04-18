@@ -15,17 +15,12 @@ TimelineGrid** create_RGB(int r, int c)
 TimelineGrid** create_RGB(int r, int c, int frameNumber)
 {
     TimelineGrid** arr = new TimelineGrid*[r];
-    for(int i = 0; i < r; ++i)
+    for(int i = 0; i < r; ++i) {
         arr[i] = new TimelineGrid[c];
-
-    for(int i = 0; i < r; ++i)
-    {
-        for(int j=0; j<c; j++)
-        {
+        for(int j=0; j<c; j++) {
             arr[i][j].timelineFrameNumber = frameNumber; //apply the frame number to every timelinesquare lol -P
         }
     }
-
     return arr;
 }
 
