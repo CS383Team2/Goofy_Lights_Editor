@@ -342,52 +342,29 @@ void MainWindow::on_btn_DeleteFrame_clicked()
 
 void MainWindow::on_btn_TransRight_clicked()
 {
+    // Get previous Frame for the purpose of copying later
+    t_FrameData *tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
+
+    // on_btn_NewFrame creates new node & adds to framelist. Then updates G_CURRENTFRAME to new frame
     on_btn_NewFrame_clicked();
-//ref    //t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(i);   //grab the this frame
-    t_FrameData transFrameData;
-    transFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
-    //transFrameData = *(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1));
 
-    //==== My Version ========================================
-    // Create new frame space
-    t_FrameData newFrameData;
-    newFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
-    // Get current frame
-    t_FrameData *tempFrameData_Current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the this frame
-    // Copy current Frame Into new frame
-    copyFrame(newFrameData, tempFrameData_Current);
+    // Get current new Frame
+    t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);       //grab the current frame
+
+    // Copy prev Frame Into current new frame. Arguments have to be pointers
+    copyFrame(tempFrameData_current, tempFrameData_prev);
+
     // Translate newframe by direction
-    translateFrame(newFrameData, D_RIGHT);
+    // needs fixing. translateFrame needs to be pointer bassed. Refer to copyFrame()
+//fix    //translateFrame(tempFrameData_current, D_RIGHT);
 
-    //========================================================
-
-    // copy prev frame into transFrameData
+    // copy current frame into gridGridSquare
     for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
         for(int y=0; y<V_GLOBAL.G_COL; y++)
         {
-            transFrameData.squareData[x][y].square_RGB = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1)->squareData[x][y].square_RGB;
-        }
-    }
-
-    translateFrame(transFrameData, D_RIGHT);
-    // copy transFrameData into current frameData
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
-    {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
-        {
-            theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData[x][y].square_RGB = transFrameData.squareData[x][y].square_RGB;
-        }
-    }
-    // copyt current frame into gridGridSquare
-    {
-        for(int x=0; x<V_GLOBAL.G_ROW; x++)
-        {
-            for(int y=0; y<V_GLOBAL.G_COL; y++)
-            {
-                gridGridSquare[x][y].square_RGB = (theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData)[x][y].square_RGB;
-                gridGridSquare[x][y].update();
-            }
+            gridGridSquare[x][y].square_RGB = (*tempFrameData_current).squareData[x][y].square_RGB;
+            gridGridSquare[x][y].update();
         }
     }
 }

@@ -26,7 +26,7 @@ TimelineGrid** create_RGB(int r, int c);
 TimelineGrid** create_RGB(int r, int c, int frameNumber);
 
 // Takes origional frame and returnes a new copy of it
-int copyFrame(t_FrameData &copyFrame, t_FrameData origFrame);
+int copyFrame(t_FrameData *copyFrame, t_FrameData *origFrame);
 
 // translates from by a given direction
 int translateFrame(t_FrameData d, int direction);
