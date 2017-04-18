@@ -74,6 +74,8 @@ void FrameList::AddNode_Middle(t_FrameData x, int pos){
     // indexing scheme to start at 0 to n where n == items in linked list
     // Node 0 is the head of the list while node (count - 1) is the tail
     int tempCount = 0;
+	unsigned int timeLinePos = 0;				// variable to store the nodes position in the time line, and adjust all successive time line positions after inserting a node in the list.
+	int i = 0;									// For loop counter.
     
     NodePtr current = head;
     NodePtr insert = new Node;
@@ -84,24 +86,49 @@ void FrameList::AddNode_Middle(t_FrameData x, int pos){
     if (head == NULL)
     {
         head = insert;
+		//insert -> FrameData.Position = timeLinePos;
     }
-
     else if (pos == 0)
     {
+		//timeLinePos = head -> FrameData.ID;
+
         insert -> next = head;
         insert -> prev = NULL;
         head  -> prev = insert;
         head = insert;
+		
+		current = head;
+		timeLinePos = 0;
+		current -> FrameData.Position = timeLinePos;
+		while (current -> next != NULL)
+		{
+			current = current -> next;
+			timeLinePos = timeLinePos + 1;
+			current -> FrameData.Position = timeLinePos;
+		}
+		
         this->count++;
         return;
     }
+	else if (pos > count)								// if pos > count, ADD NODE to the TAIL of the list, as pos is any number greater than the number of nodes in the linked list.
+	{
+		while (current -> next != NULL)
+		{
+			current = current -> next;
+		}
+		timeLinePos = (current -> FrameData.Position) + 1;
+		current -> next = insert;
+		insert -> prev = current;
+		insert -> FrameData.Position = timeLinePos;
+	}
     else
     {
-        while (tempCount != pos-1 && current != NULL)
+        while (tempCount != pos - 1 && current != NULL)
         {
             current = current -> next;
             tempCount++;
         }
+		timeLinePos = current -> FrameData.Position;
         insert -> next = current -> next;
         // Adjustment of previous pointer for addition of node x
         if (current -> next != NULL)
@@ -109,11 +136,18 @@ void FrameList::AddNode_Middle(t_FrameData x, int pos){
             NodePtr p = current -> next;
             p -> prev = insert;
         }
-        // else if current -> next == null then insert == null above
+        // else if current -> next == null then insert == null (from above)
 
         // Adjustment of prev pointer for node added at position x
         current -> next = insert;
         insert -> prev = current;
+		
+		while (current -> next != NULL)
+		{
+			current = current -> next;					// current is equal to insert (the new node) on the first iteration
+			timeLinePos = timeLinePos + 1;
+			current -> FrameData.Position = timeLinePos;
+		}
 
         this->count++;
         return;
@@ -122,25 +156,62 @@ void FrameList::AddNode_Middle(t_FrameData x, int pos){
 
 void FrameList::DeleteNode_Middle(int pos){
     
+	unsigned int timeLinePos = 0;					// variable used to updte the nodes position in the time line after a node is deleted.
+    int i = 0;                              // For loop counter.
+	
+    NodePtr current = head;
+
     if (head == NULL){
         // Error list is empty, do nothing and return.
         return;
     }
-    
-    NodePtr current = head;
+	
+	if (pos > count)						// Return error, can't delete any mode greater then the total number of nodes in the linked list.
+    {
+		return;
+	}
+	else if (pos == count)					// Delete the tail node and return.
+	{
+		for (i = 0; i <= pos - 1 &&  current != NULL; i++)
+		{
+			current = current -> next;
+		}
+		NodePtr p = current -> next;
+		current -> next = NULL;
+		// Delete attached RGB structures here.
+		delete(p);
+		return;
+	}
     
     if (pos == 0){
         // Delete the head node.
+		// Current = head here.
+		
         head = current -> next;
         if (head != NULL)
+		{
             head -> prev = NULL;
-        // Delete Attached RGB structure here 
+		}
+		
+        // Delete Attached RGB structure here
+		timeLinePos = current -> FrameData.Position;
         delete(current);
+		
+		current = head;
+		current -> FrameData.Position = timeLinePos;
+		
+		while (current -> next != NULL)
+		{
+			current = current -> next;
+			timeLinePos = timeLinePos + 1;
+			current -> FrameData.Position = timeLinePos;
+		}
+		
         this->count--;
         return;
     }
     
-    for (int i = 0; current != NULL && i < pos - 1; i++){
+    for (i = 0; current != NULL && i <= pos - 1; i++){
         current = current -> next;
     }
     
@@ -148,15 +219,27 @@ void FrameList::DeleteNode_Middle(int pos){
         // the position given is greater than total number of nodes in the list.
         return;
     }
+	i = 0;
     
     // if this point has been reached and the function has not returned, current -> next holds
     // the node to be deleted from the list.
     NodePtr p = current -> next -> next;
     // Adjustment of previous pointers.
     p -> prev = current;
+	
+	//timeLinePos = current -> FrameData.Position;					// Assign timeLinePos, to adjust the time line positions of all successive nodes.
+	
     // Delete Attached RGB Structure here
     delete (current -> next);
     current -> next = p;
+	
+	// Unique Frame Id adjustments done after a node is deleted.
+	while (current -> next != NULL)
+	{
+		current = current -> next;
+		//timeLinePos = timeLinePos + 1;
+		//current -> FrameData.Position = timeLinePos;
+	}
     this->count--;
     return;
 }

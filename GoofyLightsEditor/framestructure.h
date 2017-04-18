@@ -7,8 +7,9 @@
 // Frame data
 typedef struct
 {
-    unsigned long ID = 0;         // Unique ID of frame. Static once generated.
-    double duration = 0.2;   // Frame Duration in MS
+    unsigned long ID = 0;				// Unique ID of frame. Static once generated.
+	unsigned int Position = 0;			// Each Frames position in the time line, starting with (Head Nodes Position = 0)	
+    double duration = 0.2;	   			// Frame Duration in MS
 
     //GridSquare **squareData;  //Frame data    WRONG -P
     //There will only ever be one GridSquare object, for the grid.
