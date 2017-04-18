@@ -133,14 +133,14 @@
    <widget class="QPushButton" name="btn_PlayPause">
     <property name="geometry">
      <rect>
-      <x>850</x>
+      <x>810</x>
       <y>580</y>
-      <width>89</width>
+      <width>131</width>
       <height>25</height>
      </rect>
     </property>
     <property name="text">
-     <string>Play/Pause</string>
+     <string>Play Animation</string>
     </property>
    </widget>
    <widget class="QDoubleSpinBox" name="dsbox_FrameDur">
@@ -333,7 +333,7 @@
    <widget class="QLabel" name="label_8">
     <property name="geometry">
      <rect>
-      <x>740</x>
+      <x>700</x>
       <y>610</y>
       <width>111</width>
       <height>17</height>
@@ -346,7 +346,7 @@
    <widget class="QDoubleSpinBox" name="dsbox_CurrTime">
     <property name="geometry">
      <rect>
-      <x>740</x>
+      <x>700</x>
       <y>580</y>
       <width>101</width>
       <height>26</height>
