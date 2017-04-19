@@ -169,6 +169,32 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
         }
         //show duration of current frame
         ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
+
+        //draw red square around frame -P
+
+        QPen redPen;
+        QPen clearPen;
+        QColor clear;
+        clear.setRgb(211,215,207,255);
+        redPen.setColor(Qt::red);
+        redPen.setWidth(4);
+        clearPen.setColor(clear);
+        clearPen.setWidth(4);
+
+        //int redSpacingX = V_GLOBAL.G_COL*timelineScale + V_GLOBAL.G_COL*t_SPACING + 30;
+        int redSpacingX = 110;
+        int redSizeX = V_GLOBAL.G_COL*timelineScale + V_GLOBAL.G_COL*t_SPACING + 20;
+        int redSizeY = V_GLOBAL.G_ROW*timelineScale + V_GLOBAL.G_ROW*t_SPACING + 20;
+
+        //timelineScene->clear();
+        for(int i=0;i<V_GLOBAL.G_FRAMECOUNT;i++)
+        {
+            timelineScene->addRect((((i)*redSpacingX)-10),(-10),redSizeX,redSizeY,clearPen,(Qt::NoBrush));
+        }
+
+        timelineScene->addRect((((V_GLOBAL.G_CURRENTFRAME-1)*redSpacingX)-10),(-10),redSizeX,redSizeY,redPen,(Qt::NoBrush));
+        drawTimeline();
+        //P
     }
 
     updateTimeline(); //lol -P
@@ -260,6 +286,8 @@ void MainWindow::on_btn_NewFrame_clicked()
     //FrameData.squareData[i % V_GLOBAL.G_ROW][i % V_GLOBAL.G_COL].square_RGB = (Qt::blue); //show that each frame is in fact unique
     theFrames.AddTail(FrameData);
 
+    drawTimeline();
+    /*
     //Draw the timeline! -P
     for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++)
     {
@@ -274,6 +302,7 @@ void MainWindow::on_btn_NewFrame_clicked()
             }
         }
     }
+    */
     V_GLOBAL.G_CURRENTFRAME = V_GLOBAL.G_FRAMECOUNT; //fix indexing later -P
 
     //this sets the current frame you are editing to the new frame: -P
@@ -616,6 +645,23 @@ void MainWindow::on_btn_RepeatFrame_clicked()
         {
             gridGridSquare[x][y].square_RGB = (*tempFrameData_current).squareData[x][y].square_RGB;
             gridGridSquare[x][y].update();
+        }
+    }
+}
+
+void MainWindow::drawTimeline()
+{
+    for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++)
+    {
+        for(int x=0; x<V_GLOBAL.G_ROW; x++)
+        {
+            for(int y=0; y<V_GLOBAL.G_COL; y++)
+            {
+                FrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
+                FrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
+
+                timelineScene->addItem(&(FrameData.squareData[x][y])); //timeline painting here -P
+            }
         }
     }
 }

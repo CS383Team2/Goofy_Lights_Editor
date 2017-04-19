@@ -31,9 +31,11 @@ public:
     int g_SPACING;
     int t_SPACING;
 
+
     GridSquare **gridGridSquare;     //Type is GridSquare, square is object
     t_FrameData FrameData;           // THE frame data (this is in mainwindow.h) -P
     t_FrameData CurrentFrameData;
+    QRect redSquare; //in .h -P
 
     void updateTimeline();
 
@@ -84,6 +86,11 @@ private slots:
     void on_btn_TransUpRight_clicked();
 
     void on_btn_RepeatFrame_clicked();
+
+    void drawTimeline();
+
+    //void drawRedSquare();
+
 
 private:
     Ui::MainWindow *ui;
