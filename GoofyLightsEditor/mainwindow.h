@@ -92,6 +92,8 @@ private slots:
     //void drawRedSquare();
 
 
+    void on_btn_PlayPause_clicked();
+
 private:
     Ui::MainWindow *ui;
 

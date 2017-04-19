@@ -15,6 +15,11 @@ public:
     explicit Player(QWidget *parent = 0);
     ~Player();
 
+private slots:
+    void on_Btn_close_clicked();
+
+    void on_pushButton_clicked();
+
 private:
     Ui::Player *ui;
 };
