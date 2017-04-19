@@ -64,6 +64,12 @@ public:
     // If pos == 0 this refers to the head node, and
     // If pos == count - 1 this refers to the tail node.
     void DeleteNode_Middle(int pos);
+	
+	// Added this function to do all of the time line adjustments in a stand alone function.
+	// This function will be called from the AddNode_Middle(), and DeleteNode_Middle(), before return.
+	// This function iterates through the FrameList and updates the Time Line Position index(s)
+	// after every add or delete.
+	void UpdateTimeLine();
 
     // retrieve node at given position x.
     // If pos == 0 this refers to the head node and,
