@@ -8,6 +8,7 @@
 #include <sizedialog.h>
 #include <globals.h> //V_GLOBAL.G_ROW and V_GLOBAL.G_COL
 #include <FrameManipulation.h>
+#include <player.h>
 
 long FrameID = 0; //-P
 QColor temp_RGB; //yeah.... -P
@@ -673,4 +674,12 @@ void MainWindow::drawTimeline()
             }
         }
     }
+}
+
+void MainWindow::on_btn_PlayPause_clicked()
+{
+    Player dialog2;
+    dialog2.setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint); //You will NOT exit this window your way -P
+    dialog2.setModal(true); //YOU SHALL NOT CLICK OUTSIDE OF THIS WINDOW -P
+    dialog2.exec(); //execute pls -P
 }
