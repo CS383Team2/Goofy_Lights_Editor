@@ -51,7 +51,7 @@ int copyFrame(t_FrameData *copyFrame, t_FrameData *origFrame)
 }
 
 // translates from by a given direction
-int translateFrame(t_FrameData d, int direction)
+int translateFrame(t_FrameData *d, int direction)
 {
     int i = 0; //counters
     int j = 0;
@@ -60,13 +60,13 @@ int translateFrame(t_FrameData d, int direction)
 
     //Condition for up, up left, and up right. Uses recursion for left and right translation
     if(direction == D_UP || direction == D_UP_L || direction == D_UP_R){
-        temp = d.squareData[0];
+        temp = d->squareData[0];
         for(i = 0; i < V_GLOBAL.G_ROW-1; i++){
-            d.squareData[i] = d.squareData[i+1];
+            d->squareData[i] = d->squareData[i+1];
         }
-        d.squareData[i] = temp;
+        d->squareData[i] = temp;
         for(int j = 0; j < V_GLOBAL.G_COL; j++){
-            d.squareData[i][j].square_RGB = Qt::black;
+            d->squareData[i][j].square_RGB = Qt::black;
 
         }
         if(direction == D_UP_L)
@@ -77,13 +77,13 @@ int translateFrame(t_FrameData d, int direction)
     }
     //Condition for down, down left, and down right. Uses recursion for left and right translation
     if(direction == D_DWN || direction == D_DWN_L || direction == D_DWN_R){
-        temp = d.squareData[V_GLOBAL.G_ROW-1];
+        temp = d->squareData[V_GLOBAL.G_ROW-1];
         for(i = V_GLOBAL.G_ROW-1; i > 0; i--){
-            d.squareData[i] = d.squareData[i-1];
+            d->squareData[i] = d->squareData[i-1];
         }
-        d.squareData[i] = temp;
+        d->squareData[i] = temp;
         for(j = 0; j < V_GLOBAL.G_COL; j++){
-            d.squareData[i][j].square_RGB = Qt::black;
+            d->squareData[i][j].square_RGB = Qt::black;
         }
         if(direction == D_DWN_L)
             translateFrame(d, D_LEFT);
@@ -94,22 +94,22 @@ int translateFrame(t_FrameData d, int direction)
     if(direction == D_LEFT){
         for(i = 0; i < V_GLOBAL.G_ROW; i++){
             for (j = 0; j < V_GLOBAL.G_COL-1; j++){
-                d.squareData[i][j].square_RGB = d.squareData[i][j+1].square_RGB;
+                d->squareData[i][j].square_RGB = d->squareData[i][j+1].square_RGB;
             }
         }
         for(i = 0; i < V_GLOBAL.G_ROW; i++){
-            d.squareData[i][j].square_RGB = Qt::black;
+            d->squareData[i][j].square_RGB = Qt::black;
         }
      }
     //Condition for right transition
     if(direction == D_RIGHT){
         for(i = 0; i < V_GLOBAL.G_ROW; i++){
             for (j = V_GLOBAL.G_COL-1; j > 0; j--){
-                d.squareData[i][j].square_RGB = d.squareData[i][j-1].square_RGB;
+                d->squareData[i][j].square_RGB = d->squareData[i][j-1].square_RGB;
             }
         }
         for(i = 0; i < V_GLOBAL.G_ROW; i++){
-            d.squareData[i][j].square_RGB = Qt::black;
+            d->squareData[i][j].square_RGB = Qt::black;
         }
      }
 

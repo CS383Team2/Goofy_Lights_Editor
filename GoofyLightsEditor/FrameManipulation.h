@@ -29,7 +29,7 @@ TimelineGrid** create_RGB(int r, int c, int frameNumber);
 int copyFrame(t_FrameData *copyFrame, t_FrameData *origFrame);
 
 // translates from by a given direction
-int translateFrame(t_FrameData d, int direction);
+int translateFrame(t_FrameData *d, int direction);
 
 // Fills given frame with color
 int fillFrame(t_FrameData &d, QColor rgb_fill);
