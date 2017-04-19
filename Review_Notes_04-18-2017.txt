@@ -1,0 +1,112 @@
+Some notes at different places in the code.
+Some changes, fixes, questions, typos, and cleanups
+
+== FrameManipulation.h=====
+space
+	https://github.com/CS383Team2/Goofy_Lights_Editor/blob/master/GoofyLightsEditor/FrameManipulation.h#L27
+
+convert fillFrame to use pointers instead of pass by reference for consistancy
+	https://github.com/CS383Team2/Goofy_Lights_Editor/blob/master/GoofyLightsEditor/FrameManipulation.h#L35
+
+spelling frame in comment
+	https://github.com/CS383Team2/Goofy_Lights_Editor/blob/master/GoofyLightsEditor/FrameManipulation.h#L35
+
+
+Remove frameNumber from FrameData.squaregrid class
+	Position data to be moved to FrameData.position
+
+
+Use for(int i = 0)  style. since it's used everywhere else
+	https://github.com/CS383Team2/Goofy_Lights_Editor/blob/master/GoofyLightsEditor/FrameManipulation.cpp#L36
+
+
+== main window.h=====
+var rename max to something discriptive  max_window_size, windowMax...
+	https://github.com/CS383Team2/Goofy_Lights_Editor/blob/master/GoofyLightsEditor/FrameManipulation.cpp#L36
+	https://github.com/CS383Team2/Goofy_Lights_Editor/blob/master/GoofyLightsEditor/mainwindow.cpp#L41
+
+remove space
+	https://github.com/CS383Team2/Goofy_Lights_Editor/blob/master/GoofyLightsEditor/FrameManipulation.cpp#L36
+
+Add short /*description*/ for every method. What does this do?
+	https://github.com/CS383Team2/Goofy_Lights_Editor/blob/master/GoofyLightsEditor/FrameManipulation.cpp#L40
+
+
+== main window.cpp=====
+Program startup: curent frame  = theFrames.Size() - 1 ??
+	https://github.com/CS383Team2/Goofy_Lights_Editor/blob/master/GoofyLightsEditor/mainwindow.cpp#L41
+
+Generally lines 121-124 are setting V_Global baised on what's set in the LinkedList. Is that what we want? stable?
+
+Move this block of code to new function for filling gridGridSquare
+	https://github.com/CS383Team2/Goofy_Lights_Editor/blob/master/GoofyLightsEditor/mainwindow.cpp#L41
+
+Change on_btn_ClearFrame to be consistant with fillFrame
+	convert to clicked?
+	https://github.com/CS383Team2/Goofy_Lights_Editor/blob/master/GoofyLightsEditor/mainwindow.cpp#L197
+	Also where is temp_RGB defined. If both pressed & released are combined temp_RGB can be brought into local scope.
+
+Rename updateTimeline to updateTimelineElement. This updates a single 'frame' in Timeline
+	May be reworked if we combine classes together. Then update should just be updating a single pointer to the FrameData
+	https://github.com/CS383Team2/Goofy_Lights_Editor/blob/master/GoofyLightsEditor/mainwindow.cpp#L244
+
+on_btn_NewFrame_clicked
+	Remove comment
+	shttps://github.com/CS383Team2/Goofy_Lights_Editor/blob/master/GoofyLightsEditor/mainwindow.cpp#L260
+
+	Remove silly comments
+	https://github.com/CS383Team2/Goofy_Lights_Editor/blob/master/GoofyLightsEditor/mainwindow.cpp#L260
+
+	Setting currentFrame to V_GLOBAL.G_FRAMECOUNT?
+	https://github.com/CS383Team2/Goofy_Lights_Editor/blob/master/GoofyLightsEditor/mainwindow.cpp#L277
+
+
+on_btn_Trans* _clicked functions
+	compress some comments and remove some. Ex copyFrame comment & translateFrame comment
+	replace gridGridSquare update to function
+
+Update RepeatFrame to use copyFrame()
+	Also replace gridGridSquare update to function
+
+	
+=== main.cpp ==================================
+Remove comments & compress whitespace
+	https://github.com/CS383Team2/Goofy_Lights_Editor/blob/master/GoofyLightsEditor/main.cpp#L14
+	https://github.com/CS383Team2/Goofy_Lights_Editor/blob/master/GoofyLightsEditor/main.cpp#L14
+
+Add std::cout<< "Program end" << std:: endl; just before return a.exec()
+
+Remove TimelineGrid reference. I dont believe this is used. scoped only to main. not externed in globals
+	https://github.com/CS383Team2/Goofy_Lights_Editor/blob/master/GoofyLightsEditor/main.cpp#L19
+
+Remove FrameIDCount  not used?
+	https://github.com/CS383Team2/Goofy_Lights_Editor/blob/master/GoofyLightsEditor/main.cpp#L19
+
+
+
+=== framestructure.h ==================================
+
+remove comments
+	https://github.com/CS383Team2/Goofy_Lights_Editor/blob/master/GoofyLightsEditor/framestructure.h#L4
+	remove line 14-18
+
+For consistancy throughout program change to unsignd ints
+	https://github.com/CS383Team2/Goofy_Lights_Editor/blob/master/GoofyLightsEditor/framestructure.h#L4
+
+	
+=== globals.h ==================================
+For consistancy. use unsigned int 
+	https://github.com/CS383Team2/Goofy_Lights_Editor/blob/master/GoofyLightsEditor/globals.h#L9
+	https://github.com/CS383Team2/Goofy_Lights_Editor/blob/master/GoofyLightsEditor/globals.h#L16
+
+Add FrameList *G_HISTORYLIST for future functionality
+Possibly *G_LIBRARYLIST ??
+
+
+
+
+
+
+
+
+
