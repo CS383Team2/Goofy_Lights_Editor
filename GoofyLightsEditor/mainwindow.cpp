@@ -68,6 +68,12 @@ MainWindow::MainWindow(QWidget *parent) :
     firstFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
     theFrames.AddTail(firstFrameData);            // Put first frame onto the FrameList
 
+
+    //V_GLOBAL.G_FRAMELIST->SetColCount(V_GLOBAL.G_COL);
+    //V_GLOBAL.G_FRAMELIST->SetRowCount(V_GLOBAL.G_ROW);
+    V_GLOBAL.G_FRAMELIST = &theFrames;
+
+
     CurrentFrameData = theFrames.FirstNode();     // Get initial frame from the FrameList
 
     //t_FrameData * testptr = theFrames.RetrieveNode_Middle(0); //This is the correct formate -n
@@ -93,6 +99,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    for (int i = 0; i < V_GLOBAL.G_ROW; ++i)
+    {
+        delete [] gridGridSquare[i];
+    }
+
     delete ui;
     exit(0); //WHOA fixed the SIGABRT on Linux -P
 }

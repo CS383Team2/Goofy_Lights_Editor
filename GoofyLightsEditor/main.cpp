@@ -15,6 +15,7 @@ V_Goofy V_GLOBAL;
 
 long FrameIDCount = 0;
 
+
 // creates the dynamic RGB array
 TimelineGrid** create_RGB(int r, int c);
 
