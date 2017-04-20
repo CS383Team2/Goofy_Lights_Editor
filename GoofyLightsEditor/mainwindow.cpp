@@ -215,50 +215,35 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
 
 void MainWindow::on_btn_FillFrame_clicked() //Fill Frame
 {
-    //first let's update the GRAPHICAL EYBALL STIMILATION GRID for motivation -P
+    t_FrameData *currentFrameFill = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
+
+    fillFrame(currentFrameFill, Lcolor->square_RGB); //do this later -P
+
     for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
         for(int y=0; y<V_GLOBAL.G_COL; y++)
         {
-            gridGridSquare[x][y].Selected = true;
-            gridGridSquare[x][y].leftclick = true;
-            gridGridSquare[x][y].update(); //Fill that frame son -P
+            gridGridSquare[x][y].square_RGB = currentFrameFill->squareData[x][y].square_RGB;
+            gridGridSquare[x][y].update();
         }
     }
-
-    //do this:
-
-    //fillFrame(t_FrameData &d, t_RGB rgb_fill) //do this later -P
     updateTimeline();
 }
 
-void MainWindow::on_btn_ClearFrame_released() //Clear Frame
+void MainWindow::on_btn_ClearFrame_clicked() //Clear Frame
 {
-    V_GLOBAL.G_LEFT = temp_RGB;
+    t_FrameData *currentFrameFill = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
 
-    ui->sbox_ValueRed->setValue(V_GLOBAL.G_LEFT.red()); //-P
-    ui->sbox_ValueGreen->setValue(V_GLOBAL.G_LEFT.green());
-    ui->sbox_ValueBlue->setValue(V_GLOBAL.G_LEFT.blue()); //-P
-}
+    fillFrame(currentFrameFill, Qt::black);
 
-void MainWindow::on_btn_ClearFrame_pressed() //Clear Frame
-{
-    temp_RGB = V_GLOBAL.G_LEFT;
-    //first let's update the GRAPHICAL EYBALL STIMILATION GRID for motivation -P
     for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
         for(int y=0; y<V_GLOBAL.G_COL; y++)
         {
-            gridGridSquare[x][y].Selected = true;
-            gridGridSquare[x][y].leftclick = true;
-            V_GLOBAL.G_LEFT = (Qt::black);  // set color to black -n
-            gridGridSquare[x][y].update();  //Fill that frame son -P
+            gridGridSquare[x][y].square_RGB = currentFrameFill->squareData[x][y].square_RGB;
+            gridGridSquare[x][y].update();
         }
     }
-
-    //do this:
-
-    //fillFrame2(FrameData, 0, 0, 0); //not tested yet -P
     updateTimeline();
 }
 
