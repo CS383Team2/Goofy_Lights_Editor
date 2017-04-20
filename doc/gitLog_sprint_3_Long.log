@@ -1,0 +1,655 @@
+commit 3f07ea4edb01e52456468412badbb3ce4b3f4bba
+Author: gjcarter <cart8282@vandals.uidaho.edu>
+Date:   Wed Apr 19 18:04:30 2017 -0700
+
+    Updated fill frame and clear frame buttons to use our fillFrame function.
+
+commit 506097b281e93b8d335f265efc488434056874bc
+Author: gjcarter <cart8282@vandals.uidaho.edu>
+Date:   Wed Apr 19 18:02:15 2017 -0700
+
+    Updated fillFrame functions to use pointers for FrameData.
+
+commit a82a18c3aa73673570c3042959161c986a1eb11b
+Author: YupHio <yuphio@gmail.com>
+Date:   Wed Apr 19 17:46:29 2017 -0700
+
+    Playback basically works
+
+commit 7b5b8c8b9edadd25598fbc15b22b0f438bcd627b
+Merge: c07c5a7 5442687
+Author: Kevin Dorscher <kevindorscher@yahoo.com>
+Date:   Wed Apr 19 16:13:29 2017 -0700
+
+    Merge remote-tracking branch 'origin/master' into Time-Line-Position-Rework
+
+commit c07c5a7a21c065da5fe610064d127e357bef3316
+Author: Kevin Dorscher <kevindorscher@yahoo.com>
+Date:   Wed Apr 19 16:12:58 2017 -0700
+
+    Updated Time Line Positions to be its own function.
+    
+    UpdateTimeLine() function added. This function will be called from AddNode_Middle() and DeleteNode_Middle() functions to update the time line every time a node is added or deleted from the linked list.
+
+commit 5442687db06c54ad4ed82ebf26532ae373e4b095
+Author: YupHio <yuphio@gmail.com>
+Date:   Wed Apr 19 15:08:41 2017 -0700
+
+    Player window started (button works)
+
+commit a81257a3610668de73d1aa505b8fcd076d20ef2d
+Author: YupHio <yuphio@gmail.com>
+Date:   Wed Apr 19 14:21:28 2017 -0700
+
+    Red Square works
+
+commit 1cc170e2c0af99a5ea920ae56ef7c2983185e30d
+Author: YupHio <yuphio@gmail.com>
+Date:   Wed Apr 19 13:21:35 2017 -0700
+
+    Red Square started
+
+commit d4de72a7e67f8c70cbb7417fb1e73e3e670d292f
+Author: Nick Krenowicz <kren5141@vandals.uidaho.edu>
+Date:   Tue Apr 18 20:50:53 2017 -0700
+
+    Review Notes
+    
+    Added some review notes at different places in the code.
+
+commit 93abdce985e7751fcb7ab118f3e2066f005842c5
+Author: Nick Krenowicz <kren5141@vandals.uidaho.edu>
+Date:   Tue Apr 18 10:16:45 2017 -0700
+
+    Quick optimize of create_RGB with framenumber.
+       Removed loop and combined with current loop.
+
+commit 05faa4db6ac00340f76b65e600f78220133491b8
+Author: gjcarter <cart8282@vandals.uidaho.edu>
+Date:   Tue Apr 18 17:25:23 2017 -0700
+
+    Fixed translateFrame to take a pointer as an argument. Also cleaned up other translate button functions to match the cleaner version.
+
+commit 8fcc12b9af7b3c6994c7843b2cbc9f9e8292cd95
+Author: Kevin Dorscher <kevindorscher@yahoo.com>
+Date:   Tue Apr 18 15:51:10 2017 -0700
+
+    Time Line Position Update
+    
+    Changed the "AddNode_Middle()" and "DeleteNode_Middle()" functions to update the unsigned int time position everytime a node is added or deleted from the linked list
+
+commit c48ff0e781cfc8cda40a1c107deadf5773526c65
+Author: Nick Krenowicz <kren5141@vandals.uidaho.edu>
+Date:   Tue Apr 18 14:41:38 2017 -0700
+
+    Master doc update
+    
+    Fixed some spellings and formating
+    Renamed some screenshots to be consistent with other names
+
+commit 19fb068e91c13da46a787b065dc5539c619fca0d
+Author: Nick Krenowicz <kren5141@vandals.uidaho.edu>
+Date:   Tue Apr 18 09:52:59 2017 -0700
+
+    Draw grid for first node at program start
+
+commit c6485882dc4203b773cf4b2635a7c297d19ca7d9
+Author: YupHio <yuphio@gmail.com>
+Date:   Tue Apr 18 09:34:53 2017 -0700
+
+    Ooops, click lose bug still there
+
+commit 462ad1e3c9d5b93d01d026a8e1ca459e0471d218
+Author: YupHio <yuphio@gmail.com>
+Date:   Tue Apr 18 09:04:34 2017 -0700
+
+    Fixed bug where fill frame gets lost in a click
+
+commit dc2be91a50821a474ba01ad721456cac12ebaf35
+Author: YupHio <yuphio@gmail.com>
+Date:   Tue Apr 18 09:00:20 2017 -0700
+
+    Play button
+
+commit 55f66da00013837edf0ae437daf33e2d411c2ae8
+Author: YupHio <yuphio@gmail.com>
+Date:   Tue Apr 18 08:26:53 2017 -0700
+
+    Play window started
+
+commit 8fb17945062c3093d8e89e488761b82903756707
+Author: Nick Krenowicz <kren5141@vandals.uidaho.edu>
+Date:   Mon Apr 17 23:58:00 2017 -0700
+
+    Translate rework 2 & copyFrame update
+    
+    Updated copyFrame to pass pointers instead of objects.
+
+commit 267299cde49787b3997f8ecf935f6de990325c03
+Author: Nick Krenowicz <kren5141@vandals.uidaho.edu>
+Date:   Mon Apr 17 21:39:47 2017 -0700
+
+    Translate Rework
+
+commit 4c64aaec06fb981d718d334fea77736b73f8d970
+Author: Nick Krenowicz <kren5141@vandals.uidaho.edu>
+Date:   Mon Apr 17 16:52:59 2017 -0700
+
+    More of the same
+    
+    Finally Removed global tempSquareData's
+
+commit 44a2c1beac41dbd3dd453595d6467c2fca58b40d
+Author: Nick Krenowicz <kren5141@vandals.uidaho.edu>
+Date:   Mon Apr 17 16:30:10 2017 -0700
+
+    Mainwindow consistancy work
+    
+    Removed retrieveMiddel call from every loop.
+    simplified code
+    better var names
+
+commit bebdb05f256b41c318698d8d5b8c2029b059c2db
+Author: Nick Krenowicz <kren5141@vandals.uidaho.edu>
+Date:   Mon Apr 17 16:06:48 2017 -0700
+
+    Mainwindow retreiveframe rework
+    
+    optimized where framedata is optained.
+    Began moving tempSquareData to local scops
+
+commit 9464924b34f787e641b433c60ca6d351f8b66fd4
+Author: YupHio <yuphio@gmail.com>
+Date:   Mon Apr 17 11:47:41 2017 -0700
+
+    Delete Frame still needs some work
+
+commit d5d235fc2b1ca4a599b6bd08d03812aee8eaf342
+Author: YupHio <yuphio@gmail.com>
+Date:   Mon Apr 17 11:40:25 2017 -0700
+
+    Repeat Frame button implemented
+
+commit ad0b81b96147ef80e90773cfcb9f62c9bef29da0
+Merge: aeacfa7 ef2a9a8
+Author: Tim Sonnen <tsonnen@users.noreply.github.com>
+Date:   Mon Apr 17 01:27:48 2017 -0700
+
+    Merge pull request #40 from CS383Team2/fileSegFaultFix
+    
+    File Seg Fault Fix
+
+commit ef2a9a8be6c658f2c6efba536e3c572cacb217fd
+Merge: 97ef48f aeacfa7
+Author: tsonnen <tsonnen67@gmail.com>
+Date:   Mon Apr 17 01:16:34 2017 -0700
+
+    Merge remote-tracking branch 'origin/master' into fileSegFaultFix
+
+commit aeacfa73983f871ad9228f615c80e73126504cab
+Author: Nick Krenowicz <n2143@hotmail.com>
+Date:   Mon Apr 17 00:02:57 2017 -0700
+
+    Mainwindow cleanup & rework
+    
+    Removed comments and functions no longer being used.
+    Moved memory allocation out of headerfile
+    Converted memory allocation to use create_RGB function
+
+commit 9cb4f2fc5a7ddfd8e4dcf6d019d06f87eb516364
+Author: Kevin Dorscher <kevindorscher@yahoo.com>
+Date:   Mon Apr 17 00:02:17 2017 -0700
+
+    More GUI Screenshots from sprint 3
+    
+    saved as a .jpg as texmaker is having issues with the uppercase .PNG extension.
+
+commit 9740eafb99715f6e9cc21b127abd5159bc89f8ae
+Author: Nick Krenowicz <n2143@hotmail.com>
+Date:   Sun Apr 16 21:41:55 2017 -0700
+
+    main cleanup & removed test code
+    
+    Removed test code
+    removed some non functional code.
+    Expanded comments
+
+commit f9f507df5df2a54ccc58c9985a74060347567057
+Author: Kevin Dorscher <kevindorscher@yahoo.com>
+Date:   Sun Apr 16 20:25:26 2017 -0700
+
+    GUI_3_2_04-16-2017
+    
+    GUI screenshot, Format:
+    GUI_Sprint#_Screenshot#_DATE
+
+commit abed5826c53f4f44c6975033d52329c9696d40ec
+Merge: b07f7be bcba9d8
+Author: Nick Krenowicz <kren5141@vandals.uidaho.edu>
+Date:   Sun Apr 16 20:08:01 2017 -0700
+
+    Merge branch 'Doc_MasterDoc_Rework'
+
+commit bcba9d803f371906daad6f961149028e3022c250
+Author: Kevin Dorscher <kevindorscher@yahoo.com>
+Date:   Sun Apr 16 20:06:07 2017 -0700
+
+    Sprint 3 Info added to master doc
+
+commit b07f7bed6b95a7dd2dc0562ca48d71717bbda993
+Merge: 48a5fb7 ddbe113
+Author: Emma Bateman <emmalbateman@gmail.com>
+Date:   Sun Apr 16 19:21:07 2017 -0700
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       GoofyLightsEditor/mainwindow.cpp
+    #       GoofyLightsEditor/mainwindow.h
+
+commit 48a5fb78e93dd11f887cfabd9fa6cae25bf2b4bc
+Author: Emma Bateman <emmalbateman@gmail.com>
+Date:   Sun Apr 16 19:13:24 2017 -0700
+
+    timlineFrameNumer -> timelineFrameNumber
+    
+    old name was just bugging me
+
+commit ddbe113732a8f9458a8bd4e4ea6ac19aa8f7cdca
+Author: YupHio <yuphio@gmail.com>
+Date:   Sun Apr 16 18:44:31 2017 -0700
+
+    All translate buttons work
+
+commit 1059107f0fa8c1d30935e3542bcd7ec1315743a5
+Author: Emma Bateman <emmalbateman@gmail.com>
+Date:   Sun Apr 16 18:40:04 2017 -0700
+
+    frame duration
+    
+    >added functionality to "Frame Duration" box so that it edits the
+    duration value of type t_FrameData
+    >changed type of duration from int to double
+
+commit 0892c7e602d4a19466cb4311a2aed08e702e0b44
+Author: YupHio <yuphio@gmail.com>
+Date:   Sun Apr 16 18:36:02 2017 -0700
+
+    Translate Right button now works :)
+
+commit 97ef48fc88e0984f0323f9735250fbee6e6c4759
+Author: tsonnen <tsonnen67@gmail.com>
+Date:   Sun Apr 16 13:56:55 2017 -0700
+
+    Integrate save/load
+
+commit 0e97eb43d62de79d391a33e369341c4595edd9c2
+Merge: a6ec5d7 87dbf9e
+Author: tsonnen <tsonnen67@gmail.com>
+Date:   Sun Apr 16 13:14:35 2017 -0700
+
+    Merge remote-tracking branch 'origin/master' into fileSegFaultFix
+
+commit 87dbf9e8271901ccb0dd6fa01647ba73b5e8df64
+Author: YupHio <yuphio@gmail.com>
+Date:   Sun Apr 16 12:55:49 2017 -0700
+
+    Fixed merge error
+
+commit 9732e31635f07d68f4c59c4d0fe66d32654441c6
+Merge: 6356d8c 45c0c7d
+Author: YupHio <yuphio@gmail.com>
+Date:   Sun Apr 16 12:52:11 2017 -0700
+
+    Merge pull request #38 from CS383Team2/MultiFrameReview
+    
+    Multi frame review
+
+commit 45c0c7df7e0781ecb697605d427dee43af61ac29
+Merge: 2d0aea7 6356d8c
+Author: YupHio <yuphio@gmail.com>
+Date:   Sun Apr 16 12:51:56 2017 -0700
+
+    Merge branch 'master' into MultiFrameReview
+
+commit 2d0aea7286a2f45e74711ebbe2b9e0f83f2c61a7
+Author: YupHio <yuphio@gmail.com>
+Date:   Sun Apr 16 12:35:46 2017 -0700
+
+    Start with zero frames and no grid
+
+commit 59976d71595eceb83c202f63cb023d676b883de8
+Author: YupHio <yuphio@gmail.com>
+Date:   Sun Apr 16 12:28:31 2017 -0700
+
+    New Frame updates timeline, fixes lost click
+
+commit 37c5f2f561de103b4e9f4595132f79690e61b37d
+Author: YupHio <yuphio@gmail.com>
+Date:   Sun Apr 16 11:34:16 2017 -0700
+
+    Delete Frame button does NOT work yet
+
+commit d31dacb15ec3b9701bd0b0a27efa63e2af054d50
+Author: YupHio <yuphio@gmail.com>
+Date:   Sun Apr 16 11:26:42 2017 -0700
+
+    Delete Node button almost sorta works
+
+commit fefc90c1b5bf6885e0e3b60a99e3b5dc556c5eae
+Author: YupHio <yuphio@gmail.com>
+Date:   Sun Apr 16 11:10:08 2017 -0700
+
+    Fixed a FillFrame/ClearFrame bug
+
+commit e8753bb24781835336b2dc718de2a65f9f4542e2
+Author: YupHio <yuphio@gmail.com>
+Date:   Sun Apr 16 11:00:03 2017 -0700
+
+    New Frame button makes current frame the new frame
+
+commit 5aba45bc202a26ece2cd346c64f18c2dd884d3c4
+Author: YupHio <yuphio@gmail.com>
+Date:   Sun Apr 16 10:54:18 2017 -0700
+
+    New Frame button implemented :)
+
+commit 6356d8c312ceb42bfc18774b03b82712d377b714
+Author: YupHio <yuphio@gmail.com>
+Date:   Sat Apr 15 07:09:11 2017 -0700
+
+    Timeline frame spacing fixed
+
+commit a07ba44b2acebe6b5fb183e46b1c44cb2de995f5
+Author: Emma Bateman <emmalbateman@gmail.com>
+Date:   Sat Apr 15 00:46:06 2017 -0700
+
+    start with first frame on grid
+
+commit 9d346b061847a9933e7feb6ce94c455143575c95
+Merge: 516c1ba cdbf74e
+Author: Nick Krenowicz <n2143@hotmail.com>
+Date:   Fri Apr 14 19:00:56 2017 -0700
+
+    Merge branch 'master' into MultiFrameReview
+
+commit 516c1bad00b8248c9517cb8fafaa26efcfb1f327
+Author: Nick Krenowicz <n2143@hotmail.com>
+Date:   Fri Apr 14 18:54:54 2017 -0700
+
+    Fixed test code to not segfault with grid size under 10.
+    
+    used a modulus with row/col so its not going overbounds
+
+commit dcbac29a5f090ee7c26b7e4176deb8a1b3a965ce
+Author: YupHio <yuphio@gmail.com>
+Date:   Fri Apr 14 16:52:21 2017 -0700
+
+    You can now select which frame to edit
+
+commit c5e7c0152236b0d01294ab9e6e699218667c1e94
+Author: YupHio <yuphio@gmail.com>
+Date:   Fri Apr 14 15:12:29 2017 -0700
+
+    10
+
+commit c88d205719bef1af043f237aad269b4c2862c865
+Author: YupHio <yuphio@gmail.com>
+Date:   Fri Apr 14 15:11:32 2017 -0700
+
+    corner to corner cool
+
+commit b07bfef951f9cf1c31ba9e68f92e7db103b6ca72
+Author: YupHio <yuphio@gmail.com>
+Date:   Fri Apr 14 15:10:18 2017 -0700
+
+    Timeline Scroll demo
+
+commit d3c859f6fdf36d7aeb0ddabf378da04d8b1ca90f
+Author: YupHio <yuphio@gmail.com>
+Date:   Fri Apr 14 15:08:18 2017 -0700
+
+    Solved object uniqueness problem
+
+commit a250a04868a5d6e689475f3cf2f42774c99b3d2e
+Author: Nick Krenowicz <kren5141@vandals.uidaho.edu>
+Date:   Fri Apr 14 13:27:41 2017 -0700
+
+    Mainwindow: MultiFrame Review
+    
+    With kevin & Paul
+
+commit 660efdbd1c82af28b358a5743e60c049c8e2beed
+Author: YupHio <yuphio@gmail.com>
+Date:   Fri Apr 14 12:41:32 2017 -0700
+
+    Cleaned
+
+commit 5f507b4e293975c7ca3e2c74d0882ddf598576e6
+Author: YupHio <yuphio@gmail.com>
+Date:   Fri Apr 14 12:01:50 2017 -0700
+
+    Comment clarity and pretty test colors
+
+commit db253049c96be05da7cddcca7fdbf34f0d98e30c
+Author: YupHio <yuphio@gmail.com>
+Date:   Fri Apr 14 11:16:21 2017 -0700
+
+    finally more than one frame
+
+commit 344f2b8f61753f1ef8b747cac4f115034a95132f
+Author: YupHio <yuphio@gmail.com>
+Date:   Fri Apr 14 11:14:22 2017 -0700
+
+    Fixed palette and 3rd frame
+
+commit 3451bc9cb6c9bfedc2816bb6bc1b0c619c84a91c
+Author: YupHio <yuphio@gmail.com>
+Date:   Fri Apr 14 11:02:04 2017 -0700
+
+    2 frames on timeline, finally.
+
+commit c9585eb8e5a02290f206d88393449c17b22079f1
+Author: Nick Krenowicz <kren5141@vandals.uidaho.edu>
+Date:   Fri Apr 14 10:44:09 2017 -0700
+
+    FraemFrameList: Retrieve frame fix 2
+    
+    This is why you dont blindly copy paste
+
+commit 0c3818fb2252cd0dcf4eec1ce6c019bb03ecb6a6
+Author: Nick Krenowicz <kren5141@vandals.uidaho.edu>
+Date:   Fri Apr 14 10:40:08 2017 -0700
+
+    FrameList: Retrieve frame fix
+    
+    Pointer errors
+    Also slightly rewrote method to be clearer.
+    Renamed temp to current to be consistant with other methods.
+
+commit a6ec5d755aac9bea2c3339383b872bb98183e3b0
+Author: tsonnen <tsonnen67@gmail.com>
+Date:   Fri Apr 14 03:09:39 2017 -0700
+
+    Load file seg fault fix
+
+commit cdbf74ef08f4e4249cc53a6f8d78561b370fc92f
+Author: tsonnen <tsonnen67@gmail.com>
+Date:   Fri Apr 14 02:34:12 2017 -0700
+
+    Add availability
+
+commit eb5a78a74140991f6a5ff0250acc3277af63f66d
+Author: Nick Krenowicz <n2143@hotmail.com>
+Date:   Thu Apr 13 22:57:32 2017 -0700
+
+    Mainwindow: temp FrameData variable rename
+
+commit 95e51a1a1b322a94eced231878793e9cebe6e821
+Author: gjcarter <cart8282@vandals.uidaho.edu>
+Date:   Thu Apr 13 22:08:43 2017 -0700
+
+    Fillframe and fillframe2 corrected to use QColor variables.
+
+commit e1fa64ab93e58b828a804f87678b40afdf68af22
+Author: Nick Krenowicz <n2143@hotmail.com>
+Date:   Thu Apr 13 22:02:33 2017 -0700
+
+    Return Code update
+    
+    For celerity and to get ride of some of the compiler warnings
+
+commit 625f94f8f1280787fa91e214f469eed3c4be20e3
+Author: Nick Krenowicz <n2143@hotmail.com>
+Date:   Thu Apr 13 21:53:40 2017 -0700
+
+    First Frame
+    
+    Fixed bug from last commit where I accidentally uncommented 2 lines.
+
+commit 57a24962aeea7e7abeff9394a00601126dd4becc
+Author: Nick Krenowicz <n2143@hotmail.com>
+Date:   Thu Apr 13 21:30:08 2017 -0700
+
+    MainWindow Cleanup
+    
+    mousePressEvent: Removed theFrames.updateNode
+      Not being used. Data is updated directly.
+      Also cleaned up square_RGB color assignment
+    
+    Removed: on_btn_ClearFrame_clicked()  Not being used.
+    
+    Removed first FrameList AddTail()   This was adding an undefined FrameData to the linked list.
+    
+    Removed FrameList test code or Non functional code
+
+commit 2f0ca2a5d3158c79129e3a84e3da3563ec66bef7
+Author: Nick Krenowicz <kren5141@vandals.uidaho.edu>
+Date:   Thu Apr 13 13:35:33 2017 -0700
+
+    FrameList Added methods to update internal row,col
+    
+    This will allow defining FrameList without needing to define row col.
+    Later row cal can be updated when the grid size has been determined.
+    
+    Added Methods to mainwindow
+
+commit 5cc9f7e19fdd1ed9bf7c309df9802cdb0f3f2977
+Author: Nick Krenowicz <kren5141@vandals.uidaho.edu>
+Date:   Thu Apr 13 13:24:02 2017 -0700
+
+    Reverted: Removed blank FrameList constructor
+    
+    Removed framelist() and changed calls back to frameList(row, col). (reverted from commit 9eb43c0ae36d136a8c0cc9b76159d9f553135eb0)
+
+commit 7cf5facab41ae780f4abb2bc418c9829256ade47
+Merge: 7dd46f8 171d1a8
+Author: Nick Krenowicz <kren5141@vandals.uidaho.edu>
+Date:   Thu Apr 13 13:06:35 2017 -0700
+
+    Merge branch 'Implementing-square-objects-into-FrameData' into Implementing/FrameList_Advancement
+    
+    # Conflicts:
+    #       GoofyLightsEditor/main.cpp
+
+commit 171d1a80856f3198102516d24845c3f6b6adae8d
+Author: YupHio <yuphio@gmail.com>
+Date:   Thu Apr 13 12:52:59 2017 -0700
+
+    Multiple frames in timeline. Send help.
+
+commit 649c4232b6a7aba26415281f73e5f3c14366c730
+Author: YupHio <yuphio@gmail.com>
+Date:   Thu Apr 13 12:21:37 2017 -0700
+
+    Timelinegrid now accessed through linked list
+
+commit 618f85707ba440395fb84e7e8553cd7c8f706149
+Author: YupHio <yuphio@gmail.com>
+Date:   Thu Apr 13 11:11:35 2017 -0700
+
+    Swapped ROW and COL in objects
+
+commit ec68d6e357ad1c54da331070fbba4f8ee87f2756
+Author: YupHio <yuphio@gmail.com>
+Date:   Thu Apr 13 11:01:04 2017 -0700
+
+    Deleted ALL global variables :)
+
+commit 60527270c0d2355fd8f49b3f88c1cea85abb3548
+Author: gjcarter <cart8282@vandals.uidaho.edu>
+Date:   Wed Apr 12 23:48:40 2017 -0700
+
+    Changed global row and columns throughout code to match new global struct. Commented out some FileIO code as it was causing some seg faults and isn't currently working with the changes.
+
+commit b6a59fd724e1d8070fa06530c47078c9ea604756
+Author: gjcarter <cart8282@vandals.uidaho.edu>
+Date:   Wed Apr 12 22:34:17 2017 -0700
+
+    Updated availability
+
+commit c761a192448a3963d97801cfcf68d46404792d4e
+Author: gjcarter <joemama781@gmail.com>
+Date:   Wed Apr 12 22:24:16 2017 -0700
+
+    Added global structure containing global row and columns, left and right palette colors, and framelist pointer.
+
+commit 091779fb87f0f78598e5a4b35fa96c6ec0574eac
+Author: Kevin Dorscher <kevindorscher@yahoo.com>
+Date:   Wed Apr 12 19:55:21 2017 -0700
+
+    Updated Team Schedule (Kevin)
+    
+    Updated the team schedual with the times I am avaliable.
+
+commit 2e82c1f458961c24663463299b2d3b3c76b80631
+Merge: 66d2ff3 176f3a5
+Author: Emma Bateman <emmalbateman@gmail.com>
+Date:   Wed Apr 12 18:37:46 2017 -0700
+
+    schedule
+
+commit 176f3a5f6cc50a0b54cee404061e20a57113742d
+Author: welc2421 <welc2421@vandals.uidaho.edu>
+Date:   Wed Apr 12 12:27:56 2017 -0700
+
+    Add files via upload
+
+commit 7dd46f88a1b985e1e18a1498dcdec00e502deca1
+Author: Nick Krenowicz <n2143@hotmail.com>
+Date:   Tue Apr 11 22:52:53 2017 -0700
+
+    FileOp: advancement fix & pointer debugging
+    
+    Still trying to figure out how to pass the frameList back to the parent function
+
+commit 02d356b02019889b2e4b1e46257554dfd45b2834
+Author: Nick Krenowicz <kren5141@vandals.uidaho.edu>
+Date:   Tue Apr 11 20:41:02 2017 -0700
+
+    FrameList Advance upgrade
+    
+    Changed advance pointer to not change head. Thats Bad
+    Because of change in interaction, I changed this to return a pointer to the frameData.
+    
+    Updated FrameOperations to use this new function.
+
+commit 9eb43c0ae36d136a8c0cc9b76159d9f553135eb0
+Author: Nick Krenowicz <kren5141@vandals.uidaho.edu>
+Date:   Tue Apr 11 19:56:55 2017 -0700
+
+    Removed blank FrameList constructor
+    
+    Removed framelist() and changed calls back to frameList(row, col).
+
+commit cdb33bcb3eeca644a914c615f5aa0b52d9bc6972
+Merge: 8908b7e efb2fef
+Author: Nick Krenowicz <kren5141@vandals.uidaho.edu>
+Date:   Tue Apr 11 19:54:37 2017 -0700
+
+    Merge branch 'master' into Implementing-square-objects-into-FrameData
+    
+    # Conflicts:
+    #       GoofyLightsEditor/framestructure.h
+    #       GoofyLightsEditor/main.cpp
+    #       GoofyLightsEditor/mainwindow.cpp

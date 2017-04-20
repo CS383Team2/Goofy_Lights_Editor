@@ -1,0 +1,114 @@
+* 3f07ea4 - gjcarter, Wed Apr 19 18:04:30 2017 -0700 : Updated fill frame and clear frame buttons to use our fillFrame function.
+* 506097b - gjcarter, Wed Apr 19 18:02:15 2017 -0700 : Updated fillFrame functions to use pointers for FrameData.
+* a82a18c - YupHio, Wed Apr 19 17:58:57 2017 -0700 : Playback basically works
+*   7b5b8c8 - Kevin Dorscher, Wed Apr 19 16:13:29 2017 -0700 : Merge remote-tracking branch 'origin/master' into Time-Line-Position-Rework
+|\  
+| * 5442687 - YupHio, Wed Apr 19 15:08:41 2017 -0700 : Player window started (button works)
+* | c07c5a7 - Kevin Dorscher, Wed Apr 19 16:12:58 2017 -0700 : Updated Time Line Positions to be its own function.
+|/  
+* a81257a - YupHio, Wed Apr 19 14:21:28 2017 -0700 : Red Square works
+* 1cc170e - YupHio, Wed Apr 19 13:21:35 2017 -0700 : Red Square started
+* d4de72a - Nick Krenowicz, Tue Apr 18 20:51:12 2017 -0700 : Review Notes
+* 93abdce - Nick Krenowicz, Tue Apr 18 18:30:31 2017 -0700 : Quick optimize of create_RGB with framenumber.    Removed loop and combined with current loop.
+* 05faa4d - gjcarter, Tue Apr 18 17:25:23 2017 -0700 : Fixed translateFrame to take a pointer as an argument. Also cleaned up other translate button functions to match the cleaner version.
+* 8fcc12b - Kevin Dorscher, Tue Apr 18 15:51:10 2017 -0700 : Time Line Position Update
+* c48ff0e - Nick Krenowicz, Tue Apr 18 14:41:38 2017 -0700 : Master doc update
+* 19fb068 - Nick Krenowicz, Tue Apr 18 09:52:59 2017 -0700 : Draw grid for first node at program start
+* c648588 - YupHio, Tue Apr 18 09:34:53 2017 -0700 : Ooops, click lose bug still there
+* 462ad1e - YupHio, Tue Apr 18 09:04:34 2017 -0700 : Fixed bug where fill frame gets lost in a click
+* dc2be91 - YupHio, Tue Apr 18 09:00:20 2017 -0700 : Play button
+* 55f66da - YupHio, Tue Apr 18 08:26:53 2017 -0700 : Play window started
+* 8fb1794 - Nick Krenowicz, Mon Apr 17 23:58:00 2017 -0700 : Translate rework 2 & copyFrame update
+* 267299c - Nick Krenowicz, Mon Apr 17 21:39:47 2017 -0700 : Translate Rework
+* 4c64aae - Nick Krenowicz, Mon Apr 17 16:52:59 2017 -0700 : More of the same
+* 44a2c1b - Nick Krenowicz, Mon Apr 17 16:30:10 2017 -0700 : Mainwindow consistancy work
+* bebdb05 - Nick Krenowicz, Mon Apr 17 16:07:19 2017 -0700 : Mainwindow retreiveframe rework
+* 9464924 - YupHio, Mon Apr 17 11:47:41 2017 -0700 : Delete Frame still needs some work
+* d5d235f - YupHio, Mon Apr 17 11:40:25 2017 -0700 : Repeat Frame button implemented
+*   ad0b81b - Tim Sonnen, Mon Apr 17 01:27:48 2017 -0700 : Merge pull request #40 from CS383Team2/fileSegFaultFix
+|\  
+| *   ef2a9a8 - tsonnen, Mon Apr 17 01:16:34 2017 -0700 : Merge remote-tracking branch 'origin/master' into fileSegFaultFix
+| |\  
+| |/  
+|/|   
+* | aeacfa7 - Nick Krenowicz, Mon Apr 17 00:03:06 2017 -0700 : Mainwindow cleanup & rework
+* | 9cb4f2f - Kevin Dorscher, Mon Apr 17 00:02:17 2017 -0700 : More GUI Screenshots from sprint 3
+* | 9740eaf - Nick Krenowicz, Sun Apr 16 21:42:07 2017 -0700 : main cleanup & removed test code
+* | f9f507d - Kevin Dorscher, Sun Apr 16 20:25:26 2017 -0700 : GUI_3_2_04-16-2017
+* |   abed582 - Nick Krenowicz, Sun Apr 16 20:08:01 2017 -0700 : Merge branch 'Doc_MasterDoc_Rework'
+|\ \  
+| * | bcba9d8 - Kevin Dorscher, Sun Apr 16 20:06:07 2017 -0700 : Sprint 3 Info added to master doc
+|  /  
+* |   b07f7be - Emma Bateman, Sun Apr 16 19:21:07 2017 -0700 : Merge remote-tracking branch 'origin/master'
+|\ \  
+| * | ddbe113 - YupHio, Sun Apr 16 18:44:31 2017 -0700 : All translate buttons work
+| * | 0892c7e - YupHio, Sun Apr 16 18:36:02 2017 -0700 : Translate Right button now works :)
+* | | 48a5fb7 - Emma Bateman, Sun Apr 16 19:13:24 2017 -0700 : timlineFrameNumer -> timelineFrameNumber
+* | | 1059107 - Emma Bateman, Sun Apr 16 18:40:04 2017 -0700 : frame duration
+|/ /  
+| * 97ef48f - tsonnen, Sun Apr 16 13:56:55 2017 -0700 : Integrate save/load
+| *   0e97eb4 - tsonnen, Sun Apr 16 13:14:35 2017 -0700 : Merge remote-tracking branch 'origin/master' into fileSegFaultFix
+| |\  
+| |/  
+|/|   
+* | 87dbf9e - YupHio, Sun Apr 16 12:55:49 2017 -0700 : Fixed merge error
+* |   9732e31 - YupHio, Sun Apr 16 12:52:11 2017 -0700 : Merge pull request #38 from CS383Team2/MultiFrameReview
+|\ \  
+| * \   45c0c7d - YupHio, Sun Apr 16 12:51:56 2017 -0700 : Merge branch 'master' into MultiFrameReview
+| |\ \  
+| |/ /  
+|/| |   
+* | | 6356d8c - YupHio, Sat Apr 15 07:09:11 2017 -0700 : Timeline frame spacing fixed
+* | | a07ba44 - Emma Bateman, Sat Apr 15 00:46:06 2017 -0700 : start with first frame on grid
+| * | 2d0aea7 - YupHio, Sun Apr 16 12:35:46 2017 -0700 : Start with zero frames and no grid
+| * | 59976d7 - YupHio, Sun Apr 16 12:28:31 2017 -0700 : New Frame updates timeline, fixes lost click
+| * | 37c5f2f - YupHio, Sun Apr 16 11:34:16 2017 -0700 : Delete Frame button does NOT work yet
+| * | d31dacb - YupHio, Sun Apr 16 11:26:42 2017 -0700 : Delete Node button almost sorta works
+| * | fefc90c - YupHio, Sun Apr 16 11:10:08 2017 -0700 : Fixed a FillFrame/ClearFrame bug
+| * | e8753bb - YupHio, Sun Apr 16 11:00:03 2017 -0700 : New Frame button makes current frame the new frame
+| * | 5aba45b - YupHio, Sun Apr 16 10:54:18 2017 -0700 : New Frame button implemented :)
+|/ /  
+* |   9d346b0 - Nick Krenowicz, Fri Apr 14 19:00:56 2017 -0700 : Merge branch 'master' into MultiFrameReview
+|\ \  
+| * | cdbf74e - tsonnen, Fri Apr 14 02:34:12 2017 -0700 : Add availability
+| * | b6a59fd - gjcarter, Wed Apr 12 22:34:17 2017 -0700 : Updated availability
+| * | 091779f - Kevin Dorscher, Wed Apr 12 19:55:21 2017 -0700 : Updated Team Schedule (Kevin)
+| * | 2e82c1f - Emma Bateman, Wed Apr 12 18:37:46 2017 -0700 : schedule
+| * | 176f3a5 - welc2421, Wed Apr 12 12:27:56 2017 -0700 : Add files via upload
+|  /  
+* | 516c1ba - Nick Krenowicz, Fri Apr 14 18:54:54 2017 -0700 : Fixed test code to not segfault with grid size under 10.
+* | dcbac29 - YupHio, Fri Apr 14 16:52:21 2017 -0700 : You can now select which frame to edit
+* | c5e7c01 - YupHio, Fri Apr 14 15:12:29 2017 -0700 : 10
+* | c88d205 - YupHio, Fri Apr 14 15:11:32 2017 -0700 : corner to corner cool
+* | b07bfef - YupHio, Fri Apr 14 15:10:18 2017 -0700 : Timeline Scroll demo
+* | d3c859f - YupHio, Fri Apr 14 15:08:18 2017 -0700 : Solved object uniqueness problem
+* | a250a04 - Nick Krenowicz, Fri Apr 14 13:27:41 2017 -0700 : Mainwindow: MultiFrame Review
+* | 660efdb - YupHio, Fri Apr 14 12:41:32 2017 -0700 : Cleaned
+* | 5f507b4 - YupHio, Fri Apr 14 12:01:50 2017 -0700 : Comment clarity and pretty test colors
+* | db25304 - YupHio, Fri Apr 14 11:16:21 2017 -0700 : finally more than one frame
+* | 344f2b8 - YupHio, Fri Apr 14 11:14:22 2017 -0700 : Fixed palette and 3rd frame
+* | 3451bc9 - YupHio, Fri Apr 14 11:02:04 2017 -0700 : 2 frames on timeline, finally.
+* | c9585eb - Nick Krenowicz, Fri Apr 14 10:44:09 2017 -0700 : FraemFrameList: Retrieve frame fix 2
+* | 0c3818f - Nick Krenowicz, Fri Apr 14 10:40:08 2017 -0700 : FrameList: Retrieve frame fix
+| * a6ec5d7 - tsonnen, Fri Apr 14 03:09:39 2017 -0700 : Load file seg fault fix
+|/  
+* eb5a78a - Nick Krenowicz, Thu Apr 13 22:57:32 2017 -0700 : Mainwindow: temp FrameData variable rename
+* 95e51a1 - gjcarter, Thu Apr 13 22:08:43 2017 -0700 : Fillframe and fillframe2 corrected to use QColor variables.
+* e1fa64a - Nick Krenowicz, Thu Apr 13 22:02:33 2017 -0700 : Return Code update
+* 625f94f - Nick Krenowicz, Thu Apr 13 21:53:40 2017 -0700 : First Frame
+* 57a2496 - Nick Krenowicz, Thu Apr 13 21:36:22 2017 -0700 : MainWindow Cleanup
+* 2f0ca2a - Nick Krenowicz, Thu Apr 13 13:44:13 2017 -0700 : FrameList Added methods to update internal row,col
+* 5cc9f7e - Nick Krenowicz, Thu Apr 13 13:26:31 2017 -0700 : Reverted: Removed blank FrameList constructor
+*   7cf5fac - Nick Krenowicz, Thu Apr 13 13:06:35 2017 -0700 : Merge branch 'Implementing-square-objects-into-FrameData' into Implementing/FrameList_Advancement
+|\  
+| * 171d1a8 - YupHio, Thu Apr 13 12:52:59 2017 -0700 : Multiple frames in timeline. Send help.
+| * 649c423 - YupHio, Thu Apr 13 12:21:37 2017 -0700 : Timelinegrid now accessed through linked list
+| * 618f857 - YupHio, Thu Apr 13 11:11:35 2017 -0700 : Swapped ROW and COL in objects
+| * ec68d6e - YupHio, Thu Apr 13 11:01:04 2017 -0700 : Deleted ALL global variables :)
+| * 6052727 - gjcarter, Wed Apr 12 23:48:40 2017 -0700 : Changed global row and columns throughout code to match new global struct. Commented out some FileIO code as it was causing some seg faults and isn't currently working with the changes.
+| * c761a19 - gjcarter, Wed Apr 12 22:24:16 2017 -0700 : Added global structure containing global row and columns, left and right palette colors, and framelist pointer.
+* | 7dd46f8 - Nick Krenowicz, Tue Apr 11 22:52:53 2017 -0700 : FileOp: advancement fix & pointer debugging
+* | 02d356b - Nick Krenowicz, Tue Apr 11 20:41:02 2017 -0700 : FrameList Advance upgrade
+|/  
+* 9eb43c0 - Nick Krenowicz, Tue Apr 11 19:56:55 2017 -0700 : Removed blank FrameList constructor
+* cdb33bc - Nick Krenowicz, Tue Apr 11 19:54:37 2017 -0700 : Merge branch 'master' into Implementing-square-objects-into-FrameData
