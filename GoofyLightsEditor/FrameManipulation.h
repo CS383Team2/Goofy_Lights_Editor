@@ -32,7 +32,7 @@ int copyFrame(t_FrameData *copyFrame, t_FrameData *origFrame);
 int translateFrame(t_FrameData *d, int direction);
 
 // Fills given frame with color
-int fillFrame(t_FrameData &d, QColor rgb_fill);
-int fillFrame2(t_FrameData &d, int r, int g, int b);
+int fillFrame(t_FrameData *d, QColor rgb_fill);
+int fillFrame2(t_FrameData *d, int r, int g, int b);
 
 #endif // FRAMEMANIPULATION_H

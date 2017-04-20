@@ -112,18 +112,18 @@ int translateFrame(t_FrameData *d, int direction)
 }
 
 // Fills given frame with color. This function is broken and needs work.
-int fillFrame(t_FrameData &d, QColor rgb_fill)
+int fillFrame(t_FrameData *d, QColor rgb_fill)
 {
     int i, j; // loop control
 
     // Error checking
-    if (d.squareData == NULL)
+    if (d->squareData == NULL)
         return RTN_ERROR;
 
     //Fill data
     for (i = 0; i < V_GLOBAL.G_ROW; i++) {
         for (j = 0; j < V_GLOBAL.G_COL; j++) {
-            d.squareData[i][j].square_RGB = rgb_fill;
+            d->squareData[i][j].square_RGB = rgb_fill;
 
         }
     }
@@ -131,7 +131,7 @@ int fillFrame(t_FrameData &d, QColor rgb_fill)
     return RTN_SUCCESSFUL;
 }
 //This also needs some work.
-int fillFrame2(t_FrameData &d, int r, int g, int b)
+int fillFrame2(t_FrameData *d, int r, int g, int b)
 {
     QColor rgb;
     rgb.setRgb(r,g,b,255);
