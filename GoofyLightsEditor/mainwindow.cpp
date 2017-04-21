@@ -359,7 +359,7 @@ void MainWindow::on_btn_DeleteFrame_clicked()
         V_GLOBAL.G_FRAMECOUNT--; //remove 1 from the framecount -P
     }
     //Redraw the timeline! -P
-    for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++)
+    for(int i=V_GLOBAL.G_CURRENTFRAME-1; i < V_GLOBAL.G_FRAMECOUNT; i++) //start from current frame, avoid lag -P
     {
         t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(i);   //grab the this frame
         for(int x=0; x<V_GLOBAL.G_ROW; x++)
@@ -660,7 +660,7 @@ void MainWindow::on_btn_RepeatFrame_clicked()
 
 void MainWindow::drawTimeline()
 {
-    for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++)
+    for(int i=V_GLOBAL.G_CURRENTFRAME-1; i < V_GLOBAL.G_FRAMECOUNT; i++) //start at current frame to avoid the lag -P
     {
         for(int x=0; x<V_GLOBAL.G_ROW; x++)
         {
