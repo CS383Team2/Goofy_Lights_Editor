@@ -15,7 +15,7 @@ long FrameID = 0; //-P
 QColor temp_RGB; //yeah.... -P
 //FrameList frameList(V_GLOBAL.G_ROW,V_GLOBAL.G_COL);
 
-FrameList theFrames(V_GLOBAL.G_ROW, V_GLOBAL.G_COL); //HERE LAY THE LINKED LIST -P
+FrameList theFrames = FrameList(V_GLOBAL.G_ROW, V_GLOBAL.G_COL); //HERE LAY THE LINKED LIST -P
 
 int CurrentFrameNum = 0;
 
@@ -70,9 +70,30 @@ MainWindow::MainWindow(QWidget *parent) :
     theFrames.AddTail(firstFrameData);            // Put first frame onto the FrameList
 
 
-    //V_GLOBAL.G_FRAMELIST->SetColCount(V_GLOBAL.G_COL);
-    //V_GLOBAL.G_FRAMELIST->SetRowCount(V_GLOBAL.G_ROW);
-    V_GLOBAL.G_FRAMELIST = &theFrames;
+    // V_GLOBAL.G_FRAMELIST->SetColCount(V_GLOBAL.G_COL);
+    // V_GLOBAL.G_FRAMELIST->SetRowCount(V_GLOBAL.G_ROW);
+    // V_GLOBAL.G_FRAMELIST = &theFrames;
+
+    // theFrames = FrameList((*(V_GLOBAL.G_FRAMELIST)));
+    theFrames.DeleteList();
+    theFrames.SetColCount((*(V_GLOBAL.G_FRAMELIST)).GetColCount());
+    theFrames.SetRowCount((*(V_GLOBAL.G_FRAMELIST)).GetRowCount());
+
+    int i;
+    for(i = 0; i < V_GLOBAL.G_FRAMECOUNT; i++){
+        t_FrameData tempFrameData = (*((*(V_GLOBAL.G_FRAMELIST)).RetrieveNode_Middle(i)));
+        theFrames.AddTail(tempFrameData);
+    }
+//    t_FrameData * frameDataPtr = (*(V_GLOBAL.G_FRAMELIST)).AdvanceList(); // grab first FrameDataPtr
+//    while (frameDataPtr != NULL) {                  // If list is empty FrameDataPtr will be null
+//        t_FrameData frameData;
+//        frameData.squareData = (*frameDataPtr).squareData;
+//        frameData.duration = (*frameDataPtr).duration;
+//        frameData.ID = (*frameDataPtr).ID;
+//        frameData.Position = (*frameDataPtr).Position;
+//        theFrames.AddTail(frameData);
+//        frameDataPtr = (*(V_GLOBAL.G_FRAMELIST)).AdvanceList(); // grab next FrameDataPtr
+//    }
 
 
     CurrentFrameData = theFrames.FirstNode();     // Get initial frame from the FrameList
@@ -133,7 +154,7 @@ void MainWindow::on_actionOpenProject_triggered()
 
     theFrames.PrintNode();
 
-    V_GLOBAL.G_CURRENTFRAME = 0;
+    V_GLOBAL.G_CURRENTFRAME = 2;
     V_GLOBAL.G_FRAMECOUNT = theFrames.Size();
     V_GLOBAL.G_COL = theFrames.GetColCount();
     V_GLOBAL.G_ROW = theFrames.GetRowCount();
@@ -323,6 +344,12 @@ void MainWindow::on_btn_NewFrame_clicked()
     //this sets the current frame you are editing to the new frame: -P
 
     t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
+
+    // Error handling if borks itself adding a frame.
+    if(tempFrameData == NULL){
+        QMessageBox::information(0,"error","FAILED TO ADD FRAME");
+        return;
+    }
     for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
         for(int y=0; y<V_GLOBAL.G_COL; y++)

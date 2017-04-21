@@ -486,3 +486,18 @@ void FrameList::UpdateNode(t_FrameData d, int position)
       }
    return;
 }
+
+int FrameList::CopyFrameList(FrameList frameList){
+    this->DeleteList();
+    this->SetColCount(frameList.GetColCount());
+    this->SetRowCount(frameList.GetRowCount());
+
+    t_FrameData * frameDataPtr = frameList.AdvanceList(); // grab first FrameDataPtr
+    while (frameDataPtr != NULL) {                  // If list is empty FrameDataPtr will be null
+        t_FrameData frameData = *frameDataPtr;      // Dereference pointer
+        this->AddTail(frameData);
+        frameDataPtr = frameList.AdvanceList(); // grab next FrameDataPtr
+    }
+
+    return 1;
+}

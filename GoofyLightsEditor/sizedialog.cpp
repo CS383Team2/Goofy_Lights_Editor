@@ -49,9 +49,9 @@ void SizeDialog::on_btn_Browse_clicked()
     FileOperations::LoadFromFile(fileName, &frameList);
 
     /* Copy data from frameList into global frame list
-     * and update globals */`
+     * and update globals */
     V_GLOBAL.G_FRAMELIST = new FrameList(frameList);
-    (*(V_GLOBAL.G_FRAMELIST)).PrintNode();
+
     V_GLOBAL.G_CURRENTFRAME = 0;
     V_GLOBAL.G_FRAMECOUNT = (*(V_GLOBAL.G_FRAMELIST)).Size();
     V_GLOBAL.G_COL = (*(V_GLOBAL.G_FRAMELIST)).GetColCount();

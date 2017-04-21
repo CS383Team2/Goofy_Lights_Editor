@@ -101,5 +101,8 @@ public:
 	    
     // Updates frame data
     void UpdateNode(t_FrameData d, int position);
+
+    // Copies frameList into current frameList
+    int CopyFrameList(FrameList frameList);
 };
 #endif
