@@ -277,13 +277,13 @@ void MainWindow::updateTimeline() //fix the update lag later -P
 
 void MainWindow::on_btn_NewFrame_clicked()
 {
-    updateTimeline();
+    //updateTimeline();
     V_GLOBAL.G_FRAMECOUNT++; //add a frame to the count
     FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, V_GLOBAL.G_FRAMECOUNT); //fix indexing later -P
     //FrameData.squareData[i % V_GLOBAL.G_ROW][i % V_GLOBAL.G_COL].square_RGB = (Qt::blue); //show that each frame is in fact unique
-    theFrames.AddTail(FrameData);
+    theFrames.AddNode_Middle(FrameData, V_GLOBAL.G_CURRENTFRAME+1);
 
-    V_GLOBAL.G_CURRENTFRAME = V_GLOBAL.G_FRAMECOUNT; //fix indexing later -P
+    V_GLOBAL.G_CURRENTFRAME = V_GLOBAL.G_CURRENTFRAME+1; //fix indexing later -P
 
     //draw red square around frame -P
 
@@ -308,7 +308,11 @@ void MainWindow::on_btn_NewFrame_clicked()
     }
 
     timelineScene->addRect((((V_GLOBAL.G_CURRENTFRAME-1)*redSpacingX)-10),(-10),redSizeX,redSizeY,redPen,(Qt::NoBrush));
+
     drawTimeline();
+    refreshTimeline();
+
+
     //P
 
     //this sets the current frame you are editing to the new frame: -P
@@ -322,6 +326,7 @@ void MainWindow::on_btn_NewFrame_clicked()
             gridGridSquare[x][y].update(); //Fill that frame son -P
         }
     }
+
 
     //show duration of new frame
     ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
@@ -664,12 +669,28 @@ void MainWindow::drawTimeline()
        for(int y=0; y<V_GLOBAL.G_COL; y++)
        {
            FrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
-           FrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
-
+           FrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P 
            timelineScene->addItem(&(FrameData.squareData[x][y])); //timeline painting here -P
        }
      }
 
+}
+
+void MainWindow::refreshTimeline()
+{
+    for(int i= V_GLOBAL.G_CURRENTFRAME; i < V_GLOBAL.G_FRAMECOUNT; i++)
+        {
+            for(int x=0; x<V_GLOBAL.G_ROW; x++)
+            {
+                for(int y=0; y<V_GLOBAL.G_COL; y++)
+                {
+                    FrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
+                    FrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
+
+                    //timelineScene->addItem(&(FrameData.squareData[x][y])); //timeline painting here -P
+                }
+            }
+        }
 }
 
 void MainWindow::on_btn_PlayPause_clicked()
