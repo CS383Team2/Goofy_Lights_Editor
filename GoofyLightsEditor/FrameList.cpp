@@ -12,6 +12,32 @@
 
 using namespace std;
 
+FrameList::FrameList(int r, int c){
+    head = NULL;
+    row = r;
+    col = c;
+    count = 0;
+}
+
+FrameList::FrameList(FrameList * frameList){
+    this->SetColCount((*frameList).GetColCount());
+    this->SetRowCount((*frameList).GetRowCount());
+    t_FrameData * frameDataPtr = (*frameList).AdvanceList(); // grab first FrameDataPtr
+    while (frameDataPtr != NULL) {                  // If list is empty FrameDataPtr will be null
+        t_FrameData frameData = *frameDataPtr;      // Dereference pointer
+        this->AddTail(frameData);
+        frameDataPtr = (*frameList).AdvanceList(); // grab next FrameDataPtr
+    }
+}
+
+// Constructor for empty FrameList
+FrameList::FrameList(){
+    head = NULL;
+    row = 0;
+    col = 0;
+    count = 0;
+}
+
 /* Add an item to the end of the list*/
 void FrameList::AddTail( t_FrameData n ){
     NodePtr p;

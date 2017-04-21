@@ -26,21 +26,14 @@ private:
     int count;
 
 public:
+    /* Constructors moved to the source file to comply with standards -T */
     // Constructor
-    FrameList(int r, int c){
-        head = NULL;
-        row = r;
-        col = c;
-        count = 0;
-    }
+    FrameList(int r, int c);
+
+    FrameList(FrameList * frameList);
 
     // Constructor for empty FrameList
-    FrameList(){
-        head = NULL;
-        row = 0;
-        col = 0;
-        count = 0;
-    }
+    FrameList();
 
     // Destructor
     ~FrameList(){

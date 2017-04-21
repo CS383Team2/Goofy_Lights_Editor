@@ -130,10 +130,12 @@ void MainWindow::on_actionOpenProject_triggered()
 
     theFrames.PrintNode();
 
-    V_GLOBAL.G_CURRENTFRAME = theFrames.Size() - 1;
+    V_GLOBAL.G_CURRENTFRAME = 0;
     V_GLOBAL.G_FRAMECOUNT = theFrames.Size();
     V_GLOBAL.G_COL = theFrames.GetColCount();
     V_GLOBAL.G_ROW = theFrames.GetRowCount();
+
+    drawGrid();
     updateTimeline();
 }
 
@@ -254,6 +256,7 @@ void MainWindow::drawGrid()
     {
         for(int y=0; y<V_GLOBAL.G_COL; y++)
         {
+            std::cout << x << " " << y << std::endl;
             gridGridSquare[x][y].y = (x*gridScale + x*g_SPACING);
             gridGridSquare[x][y].x = (y*gridScale + y*g_SPACING);
             gridScene->addItem(&gridGridSquare[x][y]);
