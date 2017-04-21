@@ -205,7 +205,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
         }
 
         timelineScene->addRect((((V_GLOBAL.G_CURRENTFRAME-1)*redSpacingX)-10),(-10),redSizeX,redSizeY,redPen,(Qt::NoBrush));
-        drawTimeline();
+        //drawTimeline(); Commented out as it was causing a bug and seems uneeded
         //P
     }
 
@@ -657,19 +657,19 @@ void MainWindow::on_btn_RepeatFrame_clicked()
 
 void MainWindow::drawTimeline()
 {
-    for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++)
-    {
-        for(int x=0; x<V_GLOBAL.G_ROW; x++)
-        {
-            for(int y=0; y<V_GLOBAL.G_COL; y++)
-            {
-                FrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
-                FrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
 
-                timelineScene->addItem(&(FrameData.squareData[x][y])); //timeline painting here -P
-            }
-        }
-    }
+    int i = V_GLOBAL.G_CURRENTFRAME-1;
+    for(int x=0; x<V_GLOBAL.G_ROW; x++)
+    {
+       for(int y=0; y<V_GLOBAL.G_COL; y++)
+       {
+           FrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
+           FrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
+
+           timelineScene->addItem(&(FrameData.squareData[x][y])); //timeline painting here -P
+       }
+     }
+
 }
 
 void MainWindow::on_btn_PlayPause_clicked()
