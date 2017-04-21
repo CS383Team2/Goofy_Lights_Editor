@@ -65,9 +65,11 @@ MainWindow::MainWindow(QWidget *parent) :
     // This 'fristFrameData' might be combined with currentFrameData
     t_FrameData firstFrameData;
     firstFrameData.ID = FrameID++;
-    firstFrameData.duration = 5;                  // arbritrary. Link to initial durration in gui
+    firstFrameData.duration = 0.20;                  // arbritrary. Link to initial durration in gui
     firstFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
     theFrames.AddTail(firstFrameData);            // Put first frame onto the FrameList
+    V_GLOBAL.G_FRAMECOUNT++;
+    V_GLOBAL.G_CURRENTFRAME++;
 
 
     //V_GLOBAL.G_FRAMELIST->SetColCount(V_GLOBAL.G_COL);
@@ -76,6 +78,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     CurrentFrameData = theFrames.FirstNode();     // Get initial frame from the FrameList
+    FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, V_GLOBAL.G_FRAMECOUNT);
+    FrameData.squareData = theFrames.FirstNode().squareData;
 
     //t_FrameData * testptr = theFrames.RetrieveNode_Middle(0); //This is the correct formate -n
 
@@ -93,10 +97,37 @@ MainWindow::MainWindow(QWidget *parent) :
     //CurrentFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
 
 
-    //drawGrid();
-    //updateTimeline();
+    drawGrid();
+    updateTimeline();
+    //draw blue square around frame -P
 
-    on_btn_NewFrame_clicked(); //pseudo-fix for first frame not showing on timeline, fix the bug
+    QPen redPen;
+    QPen clearPen;
+    QColor clear;
+    clear.setRgb(211,215,207,255);
+    redPen.setColor(Qt::blue); //lol, not even red anymore -P
+    redPen.setWidth(4);
+    clearPen.setColor(clear);
+    clearPen.setWidth(4);
+
+    //int redSpacingX = V_GLOBAL.G_COL*timelineScale + V_GLOBAL.G_COL*t_SPACING + 30;
+    int redSpacingX = 110;
+    int redSizeX = V_GLOBAL.G_COL*timelineScale + V_GLOBAL.G_COL*t_SPACING + 20;
+    int redSizeY = V_GLOBAL.G_ROW*timelineScale + V_GLOBAL.G_ROW*t_SPACING + 20;
+
+    //timelineScene->clear();
+    for(int i=0;i<V_GLOBAL.G_FRAMECOUNT;i++)
+    {
+        timelineScene->addRect((((i)*redSpacingX)-10),(-10),redSizeX,redSizeY,clearPen,(Qt::NoBrush));
+    }
+    if(V_GLOBAL.G_CURRENTFRAME == 0)
+        timelineScene->addRect((((V_GLOBAL.G_CURRENTFRAME)*redSpacingX)-10),(-10),redSizeX,redSizeY,redPen,(Qt::NoBrush));
+    else
+        timelineScene->addRect((((V_GLOBAL.G_CURRENTFRAME-1)*redSpacingX)-10),(-10),redSizeX,redSizeY,redPen,(Qt::NoBrush));
+    drawTimeline();
+
+
+    //on_btn_NewFrame_clicked(); //pseudo-fix for first frame not showing on timeline, fix the bug
 
 } //end mainwindow
 
@@ -160,6 +191,7 @@ void MainWindow::on_sbox_ValueBlue_editingFinished()
 
 void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is clicked inside of, lol -P
 {
+    qApp->processEvents(); //Extremely OP weapon, fixes all lag, use with caution -P
     // Set square to color
     Rcolor->square_RGB = V_GLOBAL.G_RIGHT;
     Lcolor->square_RGB = V_GLOBAL.G_LEFT;
@@ -173,7 +205,9 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
     //set grid to current frame -P
     if(V_GLOBAL.G_TIMELINESELECTED == true)
     {
-        t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
+        if(V_GLOBAL.G_CURRENTFRAME > 0)
+        {
+        t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1);   //grab the current frame
         for(int x=0; x<V_GLOBAL.G_ROW; x++)
         {
             for(int y=0; y<V_GLOBAL.G_COL; y++)
@@ -182,8 +216,25 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
                 gridGridSquare[x][y].update(); //Fill that frame son -P
             }
         }
+
         //show duration of current frame
         ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
+        }
+        else
+        {
+            t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
+            for(int x=0; x<V_GLOBAL.G_ROW; x++)
+            {
+                for(int y=0; y<V_GLOBAL.G_COL; y++)
+                {
+                    gridGridSquare[x][y].square_RGB = (*tempFrameData).squareData[x][y].square_RGB; //give the data to the grid -P
+                    gridGridSquare[x][y].update(); //Fill that frame son -P
+                }
+            }
+
+            //show duration of current frame
+            ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
+        }
 
         //draw red square around frame -P
 
@@ -206,15 +257,18 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
         {
             timelineScene->addRect((((i)*redSpacingX)-10),(-10),redSizeX,redSizeY,clearPen,(Qt::NoBrush));
         }
-
-        timelineScene->addRect((((V_GLOBAL.G_CURRENTFRAME-1)*redSpacingX)-10),(-10),redSizeX,redSizeY,redPen,(Qt::NoBrush));
+        if(V_GLOBAL.G_CURRENTFRAME == 0)
+            timelineScene->addRect((((V_GLOBAL.G_CURRENTFRAME)*redSpacingX)-10),(-10),redSizeX,redSizeY,redPen,(Qt::NoBrush));
+        else
+            timelineScene->addRect((((V_GLOBAL.G_CURRENTFRAME-1)*redSpacingX)-10),(-10),redSizeX,redSizeY,redPen,(Qt::NoBrush));
         drawTimeline();
         //P
     }
 
-    qApp->processEvents(); //Extremely OP weapon, fixes all lag, use with caution -P
 
     updateTimeline(); //lol -P
+
+    qApp->processEvents(); //Extremely OP weapon, fixes all lag, use with caution -P
 }
 
 
@@ -268,13 +322,28 @@ void MainWindow::drawGrid()
 
 void MainWindow::updateTimeline() //fix the update lag later -P
 {
-    t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
+    if(V_GLOBAL.G_CURRENTFRAME > 0)
     {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
+        t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1);   //grab the current frame
+        for(int x=0; x<V_GLOBAL.G_ROW; x++)
         {
-            (*tempFrameData).squareData[x][y].square_RGB = gridGridSquare[x][y].square_RGB;
-            (*tempFrameData).squareData[x][y].update();
+            for(int y=0; y<V_GLOBAL.G_COL; y++)
+            {
+                (*tempFrameData).squareData[x][y].square_RGB = gridGridSquare[x][y].square_RGB;
+                (*tempFrameData).squareData[x][y].update();
+            }
+        }
+    }
+    else
+    {
+        t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(0);   //grab the current frame
+        for(int x=0; x<V_GLOBAL.G_ROW; x++)
+        {
+            for(int y=0; y<V_GLOBAL.G_COL; y++)
+            {
+                (*tempFrameData).squareData[x][y].square_RGB = gridGridSquare[x][y].square_RGB;
+                (*tempFrameData).squareData[x][y].update();
+            }
         }
     }
 }
@@ -319,7 +388,7 @@ void MainWindow::on_btn_NewFrame_clicked()
 
     //this sets the current frame you are editing to the new frame: -P
 
-    t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
+    t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1);   //grab the current frame
     for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
         for(int y=0; y<V_GLOBAL.G_COL; y++)
@@ -385,20 +454,28 @@ void MainWindow::insertFrame(t_FrameData newFrame)
 
 void MainWindow::on_dsbox_FrameDur_valueChanged(double arg1)
 {
-    if (V_GLOBAL.G_CURRENTFRAME > 0)
-        theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->duration = arg1;
+    if (V_GLOBAL.G_CURRENTFRAME > 1)
+        theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1)->duration = arg1;
 }
 
 void MainWindow::on_btn_TransUP_clicked()
 {
     // Get previous Frame for the purpose of copying later
-    t_FrameData *tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
+    t_FrameData *tempFrameData_prev;
+    if(V_GLOBAL.G_CURRENTFRAME > 0)
+        tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1);  //grab the previous frame
+    else
+        tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
 
     // on_btn_NewFrame creates new node & adds to framelist. Then updates G_CURRENTFRAME to new frame
     on_btn_NewFrame_clicked();
 
     // Get current new Frame
-    t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);       //grab the current frame
+    t_FrameData *tempFrameData_current;
+    if(V_GLOBAL.G_CURRENTFRAME > 0)
+        tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1);       //grab the current frame
+    else
+        tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);       //grab the current frame
 
     // Copy prev Frame Into current new frame. Arguments have to be pointers
     copyFrame(tempFrameData_current, tempFrameData_prev);
@@ -416,18 +493,27 @@ void MainWindow::on_btn_TransUP_clicked()
             gridGridSquare[x][y].update();
         }
     }
+    updateTimeline();
 }
 
 void MainWindow::on_btn_TransRight_clicked()
 {
     // Get previous Frame for the purpose of copying later
-    t_FrameData *tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
+    t_FrameData *tempFrameData_prev;
+    if(V_GLOBAL.G_CURRENTFRAME > 0)
+        tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1);  //grab the previous frame
+    else
+        tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
 
     // on_btn_NewFrame creates new node & adds to framelist. Then updates G_CURRENTFRAME to new frame
     on_btn_NewFrame_clicked();
 
     // Get current new Frame
-    t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);       //grab the current frame
+    t_FrameData *tempFrameData_current;
+    if(V_GLOBAL.G_CURRENTFRAME > 0)
+        tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1);       //grab the current frame
+    else
+        tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);       //grab the current frame
 
     // Copy prev Frame Into current new frame. Arguments have to be pointers
     copyFrame(tempFrameData_current, tempFrameData_prev);
@@ -450,13 +536,21 @@ void MainWindow::on_btn_TransRight_clicked()
 void MainWindow::on_btn_TransLeft_clicked()
 {
     // Get previous Frame for the purpose of copying later
-    t_FrameData *tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
+    t_FrameData *tempFrameData_prev;
+    if(V_GLOBAL.G_CURRENTFRAME > 0)
+        tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1);  //grab the previous frame
+    else
+        tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
 
     // on_btn_NewFrame creates new node & adds to framelist. Then updates G_CURRENTFRAME to new frame
     on_btn_NewFrame_clicked();
 
     // Get current new Frame
-    t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);       //grab the current frame
+    t_FrameData *tempFrameData_current;
+    if(V_GLOBAL.G_CURRENTFRAME > 0)
+        tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1);       //grab the current frame
+    else
+        tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);       //grab the current frame
 
     // Copy prev Frame Into current new frame. Arguments have to be pointers
     copyFrame(tempFrameData_current, tempFrameData_prev);
@@ -479,13 +573,21 @@ void MainWindow::on_btn_TransLeft_clicked()
 void MainWindow::on_btn_TransDwn_clicked()
 {
     // Get previous Frame for the purpose of copying later
-    t_FrameData *tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
+    t_FrameData *tempFrameData_prev;
+    if(V_GLOBAL.G_CURRENTFRAME > 0)
+        tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1);  //grab the previous frame
+    else
+        tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
 
     // on_btn_NewFrame creates new node & adds to framelist. Then updates G_CURRENTFRAME to new frame
     on_btn_NewFrame_clicked();
 
     // Get current new Frame
-    t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);       //grab the current frame
+    t_FrameData *tempFrameData_current;
+    if(V_GLOBAL.G_CURRENTFRAME > 0)
+        tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1);       //grab the current frame
+    else
+        tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);       //grab the current frame
 
     // Copy prev Frame Into current new frame. Arguments have to be pointers
     copyFrame(tempFrameData_current, tempFrameData_prev);
@@ -508,14 +610,21 @@ void MainWindow::on_btn_TransDwn_clicked()
 void MainWindow::on_btn_TransDwnRight_clicked()
 {
     // Get previous Frame for the purpose of copying later
-    t_FrameData *tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
+    t_FrameData *tempFrameData_prev;
+    if(V_GLOBAL.G_CURRENTFRAME > 0)
+        tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1);  //grab the previous frame
+    else
+        tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
 
     // on_btn_NewFrame creates new node & adds to framelist. Then updates G_CURRENTFRAME to new frame
     on_btn_NewFrame_clicked();
 
     // Get current new Frame
-    t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);       //grab the current frame
-
+    t_FrameData *tempFrameData_current;
+    if(V_GLOBAL.G_CURRENTFRAME > 0)
+        tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1);       //grab the current frame
+    else
+        tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);       //grab the current frame
     // Copy prev Frame Into current new frame. Arguments have to be pointers
     copyFrame(tempFrameData_current, tempFrameData_prev);
 
@@ -537,13 +646,21 @@ void MainWindow::on_btn_TransDwnRight_clicked()
 void MainWindow::on_btn_TransDwnLeft_clicked()
 {
     // Get previous Frame for the purpose of copying later
-    t_FrameData *tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
+    t_FrameData *tempFrameData_prev;
+    if(V_GLOBAL.G_CURRENTFRAME > 0)
+        tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1);  //grab the previous frame
+    else
+        tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
 
     // on_btn_NewFrame creates new node & adds to framelist. Then updates G_CURRENTFRAME to new frame
     on_btn_NewFrame_clicked();
 
     // Get current new Frame
-    t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);       //grab the current frame
+    t_FrameData *tempFrameData_current;
+    if(V_GLOBAL.G_CURRENTFRAME > 0)
+        tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1);       //grab the current frame
+    else
+        tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);       //grab the current frame
 
     // Copy prev Frame Into current new frame. Arguments have to be pointers
     copyFrame(tempFrameData_current, tempFrameData_prev);
@@ -566,13 +683,21 @@ void MainWindow::on_btn_TransDwnLeft_clicked()
 void MainWindow::on_btn_TransUpLeft_clicked()
 {
     // Get previous Frame for the purpose of copying later
-    t_FrameData *tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
+    t_FrameData *tempFrameData_prev;
+    if(V_GLOBAL.G_CURRENTFRAME > 0)
+        tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1);  //grab the previous frame
+    else
+        tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
 
     // on_btn_NewFrame creates new node & adds to framelist. Then updates G_CURRENTFRAME to new frame
     on_btn_NewFrame_clicked();
 
     // Get current new Frame
-    t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);       //grab the current frame
+    t_FrameData *tempFrameData_current;
+    if(V_GLOBAL.G_CURRENTFRAME > 0)
+        tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1);       //grab the current frame
+    else
+        tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);       //grab the current frame
 
     // Copy prev Frame Into current new frame. Arguments have to be pointers
     copyFrame(tempFrameData_current, tempFrameData_prev);
@@ -595,13 +720,21 @@ void MainWindow::on_btn_TransUpLeft_clicked()
 void MainWindow::on_btn_TransUpRight_clicked()
 {
     // Get previous Frame for the purpose of copying later
-    t_FrameData *tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
+    t_FrameData *tempFrameData_prev;
+    if(V_GLOBAL.G_CURRENTFRAME > 0)
+        tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1);  //grab the previous frame
+    else
+        tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
 
     // on_btn_NewFrame creates new node & adds to framelist. Then updates G_CURRENTFRAME to new frame
     on_btn_NewFrame_clicked();
 
     // Get current new Frame
-    t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);       //grab the current frame
+    t_FrameData *tempFrameData_current;
+    if(V_GLOBAL.G_CURRENTFRAME > 0)
+        tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1);       //grab the current frame
+    else
+        tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);       //grab the current frame
 
     // Copy prev Frame Into current new frame. Arguments have to be pointers
     copyFrame(tempFrameData_current, tempFrameData_prev);
@@ -623,11 +756,24 @@ void MainWindow::on_btn_TransUpRight_clicked()
 
 void MainWindow::on_btn_RepeatFrame_clicked()
 {
-    on_btn_NewFrame_clicked();
-    t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
-    t_FrameData *tempFrameData_prev    = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1); //grab the previous frame
     t_FrameData newFrameData;                                                // New frame
     newFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);    // Allocate new frame
+
+    t_FrameData *tempFrameData_prev;
+    if(V_GLOBAL.G_CURRENTFRAME > 0)
+        tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1);  //grab the previous frame
+    else
+        tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
+
+    // on_btn_NewFrame creates new node & adds to framelist. Then updates G_CURRENTFRAME to new frame
+    on_btn_NewFrame_clicked();
+
+    // Get current new Frame
+    t_FrameData *tempFrameData_current;
+    if(V_GLOBAL.G_CURRENTFRAME > 0)
+        tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1);       //grab the current frame
+    else
+        tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);       //grab the current frame
 
 // Change implementation to this. First need to update copyFrame to use pointers to t_FrameData
 //ref    int copyFrame(t_FrameData &copyFrame, t_FrameData origFrame);
