@@ -294,7 +294,7 @@ void MainWindow::on_btn_NewFrame_clicked()
     QPen clearPen;
     QColor clear;
     clear.setRgb(211,215,207,255);
-    redPen.setColor(Qt::red);
+    redPen.setColor(Qt::blue);
     redPen.setWidth(4);
     clearPen.setColor(clear);
     clearPen.setWidth(4);
