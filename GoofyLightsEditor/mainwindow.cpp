@@ -358,7 +358,7 @@ void MainWindow::on_btn_NewFrame_clicked()
     //FrameData.squareData[i % V_GLOBAL.G_ROW][i % V_GLOBAL.G_COL].square_RGB = (Qt::blue); //show that each frame is in fact unique
     theFrames.AddTail(FrameData);
 
-    V_GLOBAL.G_CURRENTFRAME = V_GLOBAL.G_FRAMECOUNT; //fix indexing later -P
+    V_GLOBAL.G_CURRENTFRAME++; //fix indexing later -P
 
     //draw red square around frame -P
 
