@@ -9,6 +9,7 @@
 #include <globals.h> //V_GLOBAL.G_ROW and V_GLOBAL.G_COL
 #include <FrameManipulation.h>
 #include <player.h>
+#include <QApplication> //OP weapon -P
 
 long FrameID = 0; //-P
 QColor temp_RGB; //yeah.... -P
@@ -188,7 +189,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
         QPen clearPen;
         QColor clear;
         clear.setRgb(211,215,207,255);
-        redPen.setColor(Qt::red);
+        redPen.setColor(Qt::blue); //lol, not even red anymore -P
         redPen.setWidth(4);
         clearPen.setColor(clear);
         clearPen.setWidth(4);
@@ -208,6 +209,8 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
         drawTimeline();
         //P
     }
+
+    qApp->processEvents(); //Extremely OP weapon, fixes all lag, use with caution -P
 
     updateTimeline(); //lol -P
 }

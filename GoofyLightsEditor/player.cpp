@@ -2,14 +2,7 @@
 #include "ui_player.h"
 #include <globals.h>
 #include <QThread>
-
-class Sleeper : public QThread
-{
-public:
-    static void usleep(unsigned long usecs){QThread::usleep(usecs);}
-    static void msleep(unsigned long msecs){QThread::msleep(msecs);}
-    static void sleep(unsigned long secs){QThread::sleep(secs);}
-};
+#include <QApplication> //OP weapon -P
 
 Player::Player(QWidget *parent) :
     QDialog(parent),
@@ -118,4 +111,5 @@ void Player::drawGrid()
             gridScene->addItem(&gridGridSquare[x][y]);
         }
     }
+    qApp->processEvents(); //Extremely OP weapon, fixes all lag, use with caution -P
 }
