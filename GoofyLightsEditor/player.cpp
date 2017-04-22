@@ -34,7 +34,7 @@ Player::Player(QWidget *parent) :
 
     if(V_GLOBAL.G_FRAMECOUNT > 0)
     {
-        t_FrameData *tempFrameData = V_GLOBAL.G_FRAMELIST->RetrieveNode_Middle(1);   //grab the first frame
+        t_FrameData *tempFrameData = V_GLOBAL.G_FRAMELIST->RetrieveNode_Middle(0);   //grab the first frame
         for(int x=0; x<V_GLOBAL.G_ROW; x++)
         {
             for(int y=0; y<V_GLOBAL.G_COL; y++)
@@ -69,7 +69,7 @@ void Player::on_pushButton_clicked()
     {
         t_FrameData *tempFrameData;
         //loop
-        for(int i=1;i<=V_GLOBAL.G_FRAMECOUNT; i++)
+        for(int i=0;i<=V_GLOBAL.G_FRAMECOUNT-1; i++)
         {
             tempFrameData = V_GLOBAL.G_FRAMELIST->RetrieveNode_Middle(i);   //grab the first frame
             for(int x=0; x<V_GLOBAL.G_ROW; x++)
