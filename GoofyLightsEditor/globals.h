@@ -11,7 +11,7 @@ typedef struct Globals{
     QColor G_RIGHT = (Qt::blue); //default to blue jsut for hoots -P
     QColor G_LEFT = (Qt::red); //default to red to match colorwheel default -P
 
-    FrameList *G_FRAMELIST;
+    FrameList * G_FRAMELIST = new FrameList();
 
     int G_CURRENTFRAME = 0;
     bool G_TIMELINESELECTED = false;

@@ -70,18 +70,18 @@ MainWindow::MainWindow(QWidget *parent) :
     theFrames.AddTail(firstFrameData);            // Put first frame onto the FrameList
 
 
-    //V_GLOBAL.G_FRAMELIST->SetColCount(V_GLOBAL.G_COL);
-    //V_GLOBAL.G_FRAMELIST->SetRowCount(V_GLOBAL.G_ROW);
-    V_GLOBAL.G_FRAMELIST = &theFrames;
+    // V_GLOBAL.G_FRAMELIST->SetColCount(V_GLOBAL.G_COL);
+    // V_GLOBAL.G_FRAMELIST->SetRowCount(V_GLOBAL.G_ROW);
+    // V_GLOBAL.G_FRAMELIST = &theFrames;
 
     theFrames.DeleteList();
-    theFrames.SetColCount((*(V_GLOBAL.G_FRAMELIST)).GetColCount());
-    theFrames.SetRowCount((*(V_GLOBAL.G_FRAMELIST)).GetRowCount());
+    theFrames.SetColCount(V_GLOBAL.G_FRAMELIST->GetColCount());
+    theFrames.SetRowCount(V_GLOBAL.G_FRAMELIST->GetRowCount());
 
     int i;
     for(i = 0; i < V_GLOBAL.G_FRAMECOUNT; i++){
         t_FrameData tempFrameData;
-        tempFrameData = (*(V_GLOBAL.G_FRAMELIST)).FirstNode();
+        tempFrameData = (*(V_GLOBAL.G_FRAMELIST->RetrieveNode_Middle(i)));
         theFrames.AddTail(tempFrameData);
     }
 
@@ -769,7 +769,6 @@ void MainWindow::on_btn_RepeatFrame_clicked()
     t_FrameData newFrameData;                                                // New frame
     newFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);    // Allocate new frame
 
-    t_FrameData *tempFrameData_prev;
     if(V_GLOBAL.G_CURRENTFRAME > 0)
         tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1);  //grab the previous frame
     else
@@ -778,8 +777,6 @@ void MainWindow::on_btn_RepeatFrame_clicked()
     // on_btn_NewFrame creates new node & adds to framelist. Then updates G_CURRENTFRAME to new frame
     on_btn_NewFrame_clicked();
 
-    // Get current new Frame
-    t_FrameData *tempFrameData_current;
     if(V_GLOBAL.G_CURRENTFRAME > 0)
         tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1);       //grab the current frame
     else
