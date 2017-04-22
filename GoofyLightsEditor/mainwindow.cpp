@@ -81,7 +81,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     int i;
     for(i = 0; i < V_GLOBAL.G_FRAMECOUNT; i++){
-        t_FrameData tempFrameData = (*((*(V_GLOBAL.G_FRAMELIST)).RetrieveNode_Middle(i)));
+        t_FrameData tempFrameData;
+        tempFrameData = (*(V_GLOBAL.G_FRAMELIST)).FirstNode();
         theFrames.AddTail(tempFrameData);
     }
 //    t_FrameData * frameDataPtr = (*(V_GLOBAL.G_FRAMELIST)).AdvanceList(); // grab first FrameDataPtr

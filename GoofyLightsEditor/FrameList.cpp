@@ -22,11 +22,9 @@ FrameList::FrameList(int r, int c){
 FrameList::FrameList(FrameList * frameList){
     this->SetColCount((*frameList).GetColCount());
     this->SetRowCount((*frameList).GetRowCount());
-    t_FrameData * frameDataPtr = (*frameList).AdvanceList(); // grab first FrameDataPtr
-    while (frameDataPtr != NULL) {                  // If list is empty FrameDataPtr will be null
-        t_FrameData frameData = *frameDataPtr;      // Dereference pointer
-        this->AddTail(frameData);
-        frameDataPtr = (*frameList).AdvanceList(); // grab next FrameDataPtr
+    for(int i = 0; i < (*frameList).Size(); i++){
+       t_FrameData * frameDataPtr = (*frameList).RetrieveNode_Middle(i);
+       this->AddNode_Middle((*frameDataPtr), i);
     }
 }
 

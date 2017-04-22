@@ -100,6 +100,8 @@ int FileOperations::LoadFromFile(QString fileName, FrameList * frameList){
 
     /* Initialize the frame list */
     (*frameList) = FrameList(row, col);
+    (*frameList).SetColCount(col);
+    (*frameList).SetRowCount(row);
 
     int currentElement = 0;
     QString startTime = fileContents.readLine();

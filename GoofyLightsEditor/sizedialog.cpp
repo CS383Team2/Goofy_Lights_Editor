@@ -53,9 +53,9 @@ void SizeDialog::on_btn_Browse_clicked()
     V_GLOBAL.G_FRAMELIST = new FrameList(frameList);
 
     V_GLOBAL.G_CURRENTFRAME = 0;
-    V_GLOBAL.G_FRAMECOUNT = (*(V_GLOBAL.G_FRAMELIST)).Size();
-    V_GLOBAL.G_COL = (*(V_GLOBAL.G_FRAMELIST)).GetColCount();
-    V_GLOBAL.G_ROW = (*(V_GLOBAL.G_FRAMELIST)).GetRowCount();
+    V_GLOBAL.G_FRAMECOUNT   = (*(V_GLOBAL.G_FRAMELIST)).Size();
+    V_GLOBAL.G_COL          = (*(V_GLOBAL.G_FRAMELIST)).GetColCount();
+    V_GLOBAL.G_ROW          = (*(V_GLOBAL.G_FRAMELIST)).GetRowCount();
 
     // Update UI info
     ui->sbox_Col->setValue(V_GLOBAL.G_COL);
