@@ -3,6 +3,7 @@
  * Import export .tan for production
  */
 
+#include "globals.h"
 #include "FileOperations.h"
 #include "FrameManipulation.h"
 #include "FrameList.h"
@@ -61,7 +62,7 @@ int FileOperations::SaveToFile(QString fileName, FrameList frameList){
                 }
                 stream << endl;
             }
-            elapsedTime = elapsedTime.addMSecs(frameData.duration);
+            elapsedTime = elapsedTime.addSecs(frameData.duration);
             frameDataPtr = frameList.AdvanceList(); // grab next FrameDataPtr
         }
         file.close();
@@ -76,6 +77,7 @@ int FileOperations::SaveToFile(QString fileName, FrameList frameList){
  */
 int FileOperations::LoadFromFile(QString fileName, FrameList * frameList){
     QFile file;
+    V_GLOBAL.G_FILENAME = fileName;
     file.setFileName(fileName);
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){
         QMessageBox::information(0,"error",file.errorString());
@@ -132,7 +134,7 @@ int FileOperations::LoadFromFile(QString fileName, FrameList * frameList){
         QTime time;
         time                    = QTime::fromString(timeStr, "mm:ss.zzz");
         nextTime                = time;
-        frameData.duration      = currTime.msecsTo(nextTime);
+        frameData.duration      = currTime.secsTo(nextTime);
         frameData.ID            = currentElement;
 
         (*frameList).AddTail(frameData);

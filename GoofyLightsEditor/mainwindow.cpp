@@ -63,12 +63,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Setup very first frame to start with
     // This 'fristFrameData' might be combined with currentFrameData
-    t_FrameData firstFrameData;
-    firstFrameData.ID = FrameID++;
-    firstFrameData.duration = 5;                  // arbritrary. Link to initial durration in gui
-    firstFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
-    theFrames.AddTail(firstFrameData);            // Put first frame onto the FrameList
 
+
+    /* Global filename is only set in loading */
     if(V_GLOBAL.G_FILENAME != NULL){
         theFrames.DeleteList();
         theFrames.SetColCount(V_GLOBAL.G_FRAMELIST->GetColCount());
@@ -80,13 +77,21 @@ MainWindow::MainWindow(QWidget *parent) :
             tempFrameData = (*(V_GLOBAL.G_FRAMELIST->RetrieveNode_Middle(i)));
             theFrames.AddTail(tempFrameData);
         }
+        theFrames.PrintNode();
     }
     else{
+        t_FrameData firstFrameData;
+        firstFrameData.ID           = FrameID++;
+        firstFrameData.duration     = 5;                  // arbritrary. Link to initial durration in gui
+        firstFrameData.squareData   = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
+        theFrames.AddTail(firstFrameData);            // Put first frame onto the FrameList
+
         V_GLOBAL.G_FRAMELIST->SetColCount(V_GLOBAL.G_COL);
         V_GLOBAL.G_FRAMELIST->SetRowCount(V_GLOBAL.G_ROW);
         V_GLOBAL.G_FRAMELIST = &theFrames;
-
     }
+
+    V_GLOBAL.G_CURRENTFRAME = 0; // Start at the beginning
 
     CurrentFrameData = theFrames.FirstNode();     // Get initial frame from the FrameList
 
@@ -107,6 +112,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     drawGrid();
     on_btn_NewFrame_clicked(); //pseudo-fix for first frame not showing on timeline, fix the bug
+    // updateTimeline();
+    // drawTimeline();
+
 
 } //end mainwindow
 
@@ -294,19 +302,7 @@ void MainWindow::updateTimeline() //fix the update lag later -P
     }
 }
 
-
-void MainWindow::on_btn_NewFrame_clicked()
-{
-    drawGrid();
-    updateTimeline();
-    V_GLOBAL.G_FRAMECOUNT++; //add a frame to the count
-    FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, V_GLOBAL.G_FRAMECOUNT); //fix indexing later -P
-    //FrameData.squareData[i % V_GLOBAL.G_ROW][i % V_GLOBAL.G_COL].square_RGB = (Qt::blue); //show that each frame is in fact unique
-    theFrames.AddTail(FrameData);
-
-    V_GLOBAL.G_CURRENTFRAME = V_GLOBAL.G_FRAMECOUNT; //fix indexing later -P
-
-    //draw red square around frame -P
+void MainWindow::drawSelectBox(){
 
     QPen redPen;
     QPen clearPen;
@@ -328,8 +324,26 @@ void MainWindow::on_btn_NewFrame_clicked()
         timelineScene->addRect((((i)*redSpacingX)-10),(-10),redSizeX,redSizeY,clearPen,(Qt::NoBrush));
     }
 
+
     timelineScene->addRect((((V_GLOBAL.G_CURRENTFRAME-1)*redSpacingX)-10),(-10),redSizeX,redSizeY,redPen,(Qt::NoBrush));
     drawTimeline();
+}
+
+void MainWindow::on_btn_NewFrame_clicked()
+{
+    drawGrid();
+    updateTimeline();
+    V_GLOBAL.G_FRAMECOUNT++; //add a frame to the count
+    FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, V_GLOBAL.G_FRAMECOUNT); //fix indexing later -P
+    //FrameData.squareData[i % V_GLOBAL.G_ROW][i % V_GLOBAL.G_COL].square_RGB = (Qt::blue); //show that each frame is in fact unique
+    theFrames.AddTail(FrameData);
+
+    V_GLOBAL.G_CURRENTFRAME = V_GLOBAL.G_FRAMECOUNT; //fix indexing later -P
+
+    //draw red square around frame -P
+
+    drawSelectBox();
+
     //P
 
     //this sets the current frame you are editing to the new frame: -P

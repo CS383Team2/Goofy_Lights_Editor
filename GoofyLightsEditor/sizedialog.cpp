@@ -47,7 +47,6 @@ void SizeDialog::on_btn_Browse_clicked()
 
     FrameList frameList;
     FileOperations::LoadFromFile(fileName, &(frameList));
-    V_GLOBAL.G_FILENAME = fileName;
 
     /* Copy data from frameList into global frame list
      * and update globals */

@@ -87,6 +87,8 @@ private slots:
 
     void drawTimeline();
 
+    void drawSelectBox();
+
     //void drawRedSquare();
 
 

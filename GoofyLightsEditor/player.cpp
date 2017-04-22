@@ -83,7 +83,7 @@ void Player::on_pushButton_clicked()
             drawGrid();
             //sleep
             update();
-            Sleeper::msleep((tempFrameData->duration)*1000);
+            Sleeper::msleep((tempFrameData->duration) * 1000);
         }
         /*
         tempFrameData = V_GLOBAL.G_FRAMELIST->RetrieveNode_Middle(1);   //grab the first frame
