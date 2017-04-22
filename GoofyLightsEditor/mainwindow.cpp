@@ -69,20 +69,23 @@ MainWindow::MainWindow(QWidget *parent) :
     firstFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
     theFrames.AddTail(firstFrameData);            // Put first frame onto the FrameList
 
+    if(V_GLOBAL.G_FILENAME != NULL){
+        theFrames.DeleteList();
+        theFrames.SetColCount(V_GLOBAL.G_FRAMELIST->GetColCount());
+        theFrames.SetRowCount(V_GLOBAL.G_FRAMELIST->GetRowCount());
 
-    // V_GLOBAL.G_FRAMELIST->SetColCount(V_GLOBAL.G_COL);
-    // V_GLOBAL.G_FRAMELIST->SetRowCount(V_GLOBAL.G_ROW);
-    // V_GLOBAL.G_FRAMELIST = &theFrames;
+        int i;
+        for(i = 0; i < V_GLOBAL.G_FRAMECOUNT; i++){
+            t_FrameData tempFrameData;
+            tempFrameData = (*(V_GLOBAL.G_FRAMELIST->RetrieveNode_Middle(i)));
+            theFrames.AddTail(tempFrameData);
+        }
+    }
+    else{
+        V_GLOBAL.G_FRAMELIST->SetColCount(V_GLOBAL.G_COL);
+        V_GLOBAL.G_FRAMELIST->SetRowCount(V_GLOBAL.G_ROW);
+        V_GLOBAL.G_FRAMELIST = &theFrames;
 
-    theFrames.DeleteList();
-    theFrames.SetColCount(V_GLOBAL.G_FRAMELIST->GetColCount());
-    theFrames.SetRowCount(V_GLOBAL.G_FRAMELIST->GetRowCount());
-
-    int i;
-    for(i = 0; i < V_GLOBAL.G_FRAMECOUNT; i++){
-        t_FrameData tempFrameData;
-        tempFrameData = (*(V_GLOBAL.G_FRAMELIST->RetrieveNode_Middle(i)));
-        theFrames.AddTail(tempFrameData);
     }
 
     CurrentFrameData = theFrames.FirstNode();     // Get initial frame from the FrameList
@@ -276,13 +279,18 @@ void MainWindow::drawGrid()
 void MainWindow::updateTimeline() //fix the update lag later -P
 {
     t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
-    {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
+    if(tempFrameData != NULL){
+        for(int x=0; x<V_GLOBAL.G_ROW; x++)
         {
-            (*tempFrameData).squareData[x][y].square_RGB = gridGridSquare[x][y].square_RGB;
-            (*tempFrameData).squareData[x][y].update();
+            for(int y=0; y<V_GLOBAL.G_COL; y++)
+            {
+                (*tempFrameData).squareData[x][y].square_RGB = gridGridSquare[x][y].square_RGB;
+                (*tempFrameData).squareData[x][y].update();
+            }
         }
+    }
+    else{
+        QMessageBox::information(0,"error", "Could not grab first frame!\n Failed to update time line");
     }
 }
 
@@ -327,17 +335,23 @@ void MainWindow::on_btn_NewFrame_clicked()
     //this sets the current frame you are editing to the new frame: -P
 
     t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
-    {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
+    if(tempFrameData != NULL){
+        for(int x=0; x<V_GLOBAL.G_ROW; x++)
         {
-            gridGridSquare[x][y].square_RGB = (*tempFrameData).squareData[x][y].square_RGB; //give the data to the grid -P
-            gridGridSquare[x][y].update(); //Fill that frame son -P
+            for(int y=0; y<V_GLOBAL.G_COL; y++)
+            {
+                gridGridSquare[x][y].square_RGB = (*tempFrameData).squareData[x][y].square_RGB; //give the data to the grid -P
+                gridGridSquare[x][y].update(); //Fill that frame son -P
+            }
         }
-    }
 
-    //show duration of new frame
-    ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
+
+        //show duration of new frame
+        ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
+    }
+    else{
+        QMessageBox::information(0,"error", "Could not grab first frame!\n Failed to draw new frame");
+    }
 }
 
 void MainWindow::on_btn_DeleteFrame_clicked()

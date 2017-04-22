@@ -16,6 +16,8 @@ typedef struct Globals{
     int G_CURRENTFRAME = 0;
     bool G_TIMELINESELECTED = false;
 
+    QString G_FILENAME = QString();
+
 }V_Goofy;
 
 extern V_Goofy V_GLOBAL;
