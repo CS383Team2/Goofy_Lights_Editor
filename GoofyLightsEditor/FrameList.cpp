@@ -20,10 +20,10 @@ FrameList::FrameList(int r, int c){
 }
 
 FrameList::FrameList(FrameList * frameList){
-    this->SetColCount((*frameList).GetColCount());
-    this->SetRowCount((*frameList).GetRowCount());
-    for(int i = 0; i < (*frameList).Size(); i++){
-       t_FrameData * frameDataPtr = (*frameList).RetrieveNode_Middle(i);
+    this->SetColCount(frameList->GetColCount());
+    this->SetRowCount(frameList->GetRowCount());
+    for(int i = 0; i < frameList->Size(); i++){
+       t_FrameData * frameDataPtr = frameList->RetrieveNode_Middle(i);
        this->AddNode_Middle((*frameDataPtr), i);
     }
 }

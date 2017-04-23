@@ -10,6 +10,8 @@
 #include <FrameManipulation.h>
 #include <player.h>
 #include <QApplication> //OP weapon -P
+#include <docdialog.h>
+#include <helpdialog.h>
 
 long FrameID = 0; //-P
 QColor temp_RGB; //yeah.... -P
@@ -63,6 +65,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Setup very first frame to start with
     // This 'fristFrameData' might be combined with currentFrameData
+    t_FrameData firstFrameData;
+    firstFrameData.ID = FrameID++;
+    firstFrameData.duration = 5;                  // arbritrary. Link to initial durration in gui
+    firstFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
+    theFrames.AddTail(firstFrameData);            // Put first frame onto the FrameList
 
 
     /* Global filename is only set in loading */
@@ -112,9 +119,17 @@ MainWindow::MainWindow(QWidget *parent) :
 
     drawGrid();
     on_btn_NewFrame_clicked(); //pseudo-fix for first frame not showing on timeline, fix the bug
-    // updateTimeline();
-    // drawTimeline();
 
+
+    //here are some tooltips, perhaps make a function to toggle them on/off:
+    ui->btn_NewFrame->setToolTip("Adds a new frame right after this current frame."); //fancy tool tips for detail -P
+    ui->btn_DeleteFrame->setToolTip("Deletes the currently selected frame.");
+    ui->btn_CopyFrame->setToolTip("Copies the currently selected frame to the clipboard.");
+    ui->btn_ClearFrame->setToolTip("Clears every square in the current frame.");
+    ui->btn_FillFrame->setToolTip("Fills every square in the current frame with the currently celected color.");
+    ui->btn_PasteFrame->setToolTip("Pastes the frame from the clipboard into the currently selected frame.");
+    ui->btn_PlayPause->setToolTip("Plays the entire animation from start to finish"); //fix this later -P
+    ui->btn_RepeatFrame->setToolTip("Make a copy of this frame and insert it as the next frame.");
 
 } //end mainwindow
 
@@ -135,9 +150,7 @@ void MainWindow::on_actionSave_As_triggered()
             tr("Save Project"), "",
             tr("Project (*.tan);;All Files (*)"));
 
-    theFrames.PrintNode();
-    FileOperations::SaveToFile(fileName, &theFrames);
-    theFrames.PrintNode();
+    FileOperations::SaveToFile(fileName,theFrames);
     qDebug() << "Returned safely";
 }
 
@@ -304,7 +317,17 @@ void MainWindow::updateTimeline() //fix the update lag later -P
     }
 }
 
-void MainWindow::drawSelectBox(){
+
+void MainWindow::on_btn_NewFrame_clicked()
+{
+    V_GLOBAL.G_FRAMECOUNT++; //add a frame to the count
+    FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, V_GLOBAL.G_FRAMECOUNT); //fix indexing later -P
+    //FrameData.squareData[i % V_GLOBAL.G_ROW][i % V_GLOBAL.G_COL].square_RGB = (Qt::blue); //show that each frame is in fact unique
+    theFrames.AddTail(FrameData);
+
+    V_GLOBAL.G_CURRENTFRAME = V_GLOBAL.G_FRAMECOUNT; //fix indexing later -P
+
+    //draw red square around frame -P
 
     QPen redPen;
     QPen clearPen;
@@ -326,27 +349,8 @@ void MainWindow::drawSelectBox(){
         timelineScene->addRect((((i)*redSpacingX)-10),(-10),redSizeX,redSizeY,clearPen,(Qt::NoBrush));
     }
 
-
     timelineScene->addRect((((V_GLOBAL.G_CURRENTFRAME-1)*redSpacingX)-10),(-10),redSizeX,redSizeY,redPen,(Qt::NoBrush));
     drawTimeline();
-}
-
-void MainWindow::on_btn_NewFrame_clicked()
-{
-    drawGrid();
-    updateTimeline();
-    V_GLOBAL.G_FRAMECOUNT++; //add a frame to the count
-    FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, V_GLOBAL.G_FRAMECOUNT); //fix indexing later -P
-    FrameData.ID = FrameID++;
-    //FrameData.squareData[i % V_GLOBAL.G_ROW][i % V_GLOBAL.G_COL].square_RGB = (Qt::blue); //show that each frame is in fact unique
-    theFrames.AddTail(FrameData);
-
-    V_GLOBAL.G_CURRENTFRAME = V_GLOBAL.G_FRAMECOUNT; //fix indexing later -P
-
-    //draw red square around frame -P
-
-    drawSelectBox();
-
     //P
 
     //this sets the current frame you are editing to the new frame: -P
@@ -722,4 +726,59 @@ void MainWindow::on_btn_PlayPause_clicked()
     dialog2.setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint); //You will NOT exit this window your way -P
     dialog2.setModal(true); //YOU SHALL NOT CLICK OUTSIDE OF THIS WINDOW -P
     dialog2.exec(); //execute pls -P
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+    //pop the help dialog -P
+    helpdialog dialog2;
+    dialog2.setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint); //You will NOT exit this window your way -P
+    dialog2.setModal(true); //YOU SHALL NOT CLICK OUTSIDE OF THIS WINDOW -P
+    dialog2.exec(); //execute pls -P
+}
+
+void MainWindow::on_actionDocumentation_triggered()
+{
+    //pop the doc dialog -P
+    docdialog dialog2;
+    dialog2.setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint); //You will NOT exit this window your way -P
+    dialog2.setModal(true); //YOU SHALL NOT CLICK OUTSIDE OF THIS WINDOW -P
+    dialog2.exec(); //execute pls -P
+}
+
+void MainWindow::on_actionPlay_All_triggered()
+{
+    on_btn_PlayPause_clicked();
+}
+
+void MainWindow::on_actionSave_2_triggered()
+{
+    //File -> Save menu clicked
+    //Put some code here to save the project -P
+}
+
+void MainWindow::on_actionNew_Project_triggered()
+{
+    //File -> New Project menu clicked
+    //create new project -P
+}
+
+void MainWindow::on_actionClear_Frame_triggered()
+{
+    on_btn_ClearFrame_clicked(); //from menu -P
+}
+
+void MainWindow::on_actionFill_Frame_triggered()
+{
+    on_btn_FillFrame_clicked(); //from menu -P
+}
+
+void MainWindow::on_actionNew_Frame_triggered()
+{
+    on_btn_NewFrame_clicked(); //from menu -P
+}
+
+void MainWindow::on_actionDelete_Frame_triggered()
+{
+    on_btn_DeleteFrame_clicked(); //from menu -P
 }

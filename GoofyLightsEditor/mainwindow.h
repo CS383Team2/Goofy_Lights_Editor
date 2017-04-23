@@ -39,6 +39,8 @@ public:
 
     void updateTimeline();
 
+    void initializeEntireTimeline(); //for Tim's file I/O -P
+
 private slots:
     void on_actionSave_As_triggered();
 
@@ -91,8 +93,25 @@ private slots:
 
     //void drawRedSquare();
 
-
     void on_btn_PlayPause_clicked();
+
+    void on_actionAbout_triggered(); //Nick, check this out
+
+    void on_actionDocumentation_triggered();
+
+    void on_actionPlay_All_triggered();
+
+    void on_actionSave_2_triggered();
+
+    void on_actionNew_Project_triggered();
+
+    void on_actionClear_Frame_triggered();
+
+    void on_actionFill_Frame_triggered();
+
+    void on_actionNew_Frame_triggered();
+
+    void on_actionDelete_Frame_triggered();
 
 private:
     Ui::MainWindow *ui;
