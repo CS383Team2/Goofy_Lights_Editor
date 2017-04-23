@@ -89,8 +89,6 @@ private slots:
 
     void drawTimeline();
 
-    void drawSelectBox();
-
     //void drawRedSquare();
 
     void on_btn_PlayPause_clicked();

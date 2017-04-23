@@ -85,6 +85,7 @@ MainWindow::MainWindow(QWidget *parent) :
             theFrames.AddTail(tempFrameData);
         }
         theFrames.PrintNode();
+        initializeEntireTimeline();
     }
     else{
         t_FrameData firstFrameData;
@@ -150,7 +151,7 @@ void MainWindow::on_actionSave_As_triggered()
             tr("Save Project"), "",
             tr("Project (*.tan);;All Files (*)"));
 
-    FileOperations::SaveToFile(fileName,theFrames);
+    FileOperations::SaveToFile(fileName,&theFrames);
     qDebug() << "Returned safely";
 }
 
@@ -314,6 +315,24 @@ void MainWindow::updateTimeline() //fix the update lag later -P
     }
     else{
         QMessageBox::information(0,"error", "Could not grab first frame!\n Failed to update time line");
+    }
+}
+
+void MainWindow::initializeEntireTimeline() //try this one Tim -P
+{
+    for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++) //loop through ALL? the frames -P
+    {
+        FrameData.squareData = theFrames.RetrieveNode_Middle(i+1)->squareData; //grabe every frame
+        for(int x=0; x<V_GLOBAL.G_ROW; x++)
+        {
+            for(int y=0; y<V_GLOBAL.G_COL; y++)
+            {
+                FrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
+                FrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
+
+                timelineScene->addItem(&(FrameData.squareData[x][y])); //timeline painting here -P
+            }
+        }
     }
 }
 
