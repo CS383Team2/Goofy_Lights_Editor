@@ -71,6 +71,9 @@ private slots:
 
     void on_dsbox_FrameDur_valueChanged(double arg1);
 
+    // This Does the actual translation work
+    void ProcessTranslateFrame(int DIR);
+
     void on_btn_TransUP_clicked();
 
     void on_btn_TransLeft_clicked();
