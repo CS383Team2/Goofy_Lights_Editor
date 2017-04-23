@@ -90,7 +90,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //CurrentFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
 
     drawGrid();
-    on_btn_NewFrame_clicked(); //pseudo-fix for first frame not showing on timeline, fix the bug
+    createFirstFrame(); //pseudo-fix for first frame not showing on timeline, fix the bug
 
 
     //here are some tooltips, perhaps make a function to toggle them on/off:
