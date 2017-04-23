@@ -109,6 +109,10 @@ private slots:
 
     void on_actionDelete_Frame_triggered();
 
+    void on_actionAdd_100_Frames_triggered();
+
+    void on_actionPrint_Frames_triggered();
+
 private:
     Ui::MainWindow *ui;
 

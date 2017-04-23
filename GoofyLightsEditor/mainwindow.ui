@@ -656,7 +656,7 @@
      <x>0</x>
      <y>0</y>
      <width>960</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuSuper_Animator_Window">
@@ -691,10 +691,19 @@
     <addaction name="actionAbout"/>
     <addaction name="actionDocumentation"/>
    </widget>
+   <widget class="QMenu" name="menuDebug">
+    <property name="title">
+     <string>Debug</string>
+    </property>
+    <addaction name="actionAdd_100_Frames"/>
+    <addaction name="actionDelete_All_Frames"/>
+    <addaction name="actionPrint_Frames"/>
+   </widget>
    <addaction name="menuSuper_Animator_Window"/>
    <addaction name="menuEdit"/>
    <addaction name="menuPlay"/>
    <addaction name="menuHelp"/>
+   <addaction name="menuDebug"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -774,6 +783,21 @@
   <action name="actionDelete_Frame">
    <property name="text">
     <string>Delete Frame</string>
+   </property>
+  </action>
+  <action name="actionAdd_100_Frames">
+   <property name="text">
+    <string>Add 100 Frames</string>
+   </property>
+  </action>
+  <action name="actionDelete_All_Frames">
+   <property name="text">
+    <string>Delete All Frames</string>
+   </property>
+  </action>
+  <action name="actionPrint_Frames">
+   <property name="text">
+    <string>Print Frames</string>
    </property>
   </action>
  </widget>

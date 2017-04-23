@@ -130,8 +130,6 @@ void MainWindow::on_actionOpenProject_triggered()
         std::cout << "Failed to open" << std::endl;
     }
 
-    theFrames.PrintNode();
-
     V_GLOBAL.G_CURRENTFRAME = theFrames.Size() - 1;
     V_GLOBAL.G_FRAMECOUNT = theFrames.Size();
     V_GLOBAL.G_COL = theFrames.GetColCount();
@@ -166,8 +164,6 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
     // Update GUI
     Rcolor->update();
     Lcolor->update();
-
-    theFrames.PrintNode(); //DEBUG IT -P
 
     //set grid to current frame -P
     if(V_GLOBAL.G_TIMELINESELECTED == true)
@@ -718,6 +714,8 @@ void MainWindow::on_actionNew_Project_triggered()
     //create new project -P
 }
 
+// ==== Edit Menue ====
+
 void MainWindow::on_actionClear_Frame_triggered()
 {
     on_btn_ClearFrame_clicked(); //from menu -P
@@ -736,4 +734,22 @@ void MainWindow::on_actionNew_Frame_triggered()
 void MainWindow::on_actionDelete_Frame_triggered()
 {
     on_btn_DeleteFrame_clicked(); //from menu -P
+}
+
+// ==== Debug menu ====
+void MainWindow::on_actionAdd_100_Frames_triggered()
+{
+    std::cout << "Creating 100 frames" << std::endl;
+    for (int i = 0; i < 100; i++) {
+        on_btn_NewFrame_clicked(); // create new frame.
+        // making each frame unique is a bit expensive
+        t_FrameData * tempFD = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
+        fillFrame2(tempFD, rand()%255, rand()%255, rand()%255);
+    }
+}
+
+void MainWindow::on_actionPrint_Frames_triggered()
+{
+    std::cout << "Printing out all frames" << std::endl;
+    theFrames.PrintNode();
 }
