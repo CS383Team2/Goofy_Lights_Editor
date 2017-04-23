@@ -400,6 +400,39 @@ void MainWindow::on_btn_NewFrame_clicked()
 
 void MainWindow::on_btn_DeleteFrame_clicked()
 {
+	
+	unsigned int TimePositionIndex = 0;
+	
+        if (V_GLOBAL.G_FRAMECOUNT == 1)
+		{
+            on_btn_ClearFrame_clicked();
+            return;
+            //drawGrid();
+            //updateTimeline();
+		}
+        else if (V_GLOBAL.G_CURRENTFRAME == V_GLOBAL.G_FRAMECOUNT)
+        {
+            t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
+            TimePositionIndex = tempFrameData -> Position;
+
+            theFrames.DeleteNode_Middle(TimePositionIndex + (V_GLOBAL.G_CURRENTFRAME));
+            V_GLOBAL.G_FRAMECOUNT = V_GLOBAL.G_FRAMECOUNT - 1;
+            //return;
+        }
+        else if (V_GLOBAL.G_FRAMECOUNT != 1 && V_GLOBAL.G_CURRENTFRAME < V_GLOBAL.G_FRAMECOUNT)
+		{
+            t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
+			TimePositionIndex = tempFrameData -> Position;
+            //TimePositionIndex = TimePositionIndex + 1;
+
+            theFrames.DeleteNode_Middle(TimePositionIndex);
+            V_GLOBAL.G_FRAMECOUNT = V_GLOBAL.G_FRAMECOUNT - 1;
+			
+            //drawGrid();
+            //updateTimeline();
+		}
+	
+/*
     if(V_GLOBAL.G_FRAMECOUNT != 0) //can't delete once there are no frames
     {
         if(V_GLOBAL.G_CURRENTFRAME == (V_GLOBAL.G_FRAMECOUNT-1)) // the last frame is being deleted -P
@@ -426,8 +459,14 @@ void MainWindow::on_btn_DeleteFrame_clicked()
         }
         V_GLOBAL.G_FRAMECOUNT--; //remove 1 from the framecount -P
     }
+*/
+/*
     //Redraw the timeline! -P
+<<<<<<< Fixing_add_frame
     for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++)
+=======
+    for(int i=V_GLOBAL.G_CURRENTFRAME; i < V_GLOBAL.G_FRAMECOUNT; i++) //start from current frame, avoid lag -P
+>>>>>>> Delete Frame MOSTLY Working
     {
         t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(i);   //grab the this frame
         for(int x=0; x<V_GLOBAL.G_ROW; x++)
@@ -441,6 +480,9 @@ void MainWindow::on_btn_DeleteFrame_clicked()
             }
         }
     }
+    //updateTimeline();
+    //drawGrid();
+*/
 }
 
 void MainWindow::insertFrame(t_FrameData newFrame)
