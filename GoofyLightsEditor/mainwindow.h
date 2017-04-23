@@ -24,7 +24,7 @@ public:
     ~MainWindow();
 
     //MAIN WINDOW TOO BIG, gonna take the scaling down to 85% -P
-    double max;
+    double max_size;
     double G_SCALE;
     int gridScale;
     int timelineScale;
@@ -38,6 +38,8 @@ public:
     QRect redSquare; //in .h -P
 
     void updateTimeline();
+
+    void initializeEntireTimeline(); //for Tim's file I/O -P
 
 private slots:
     void on_actionSave_As_triggered();
@@ -70,6 +72,9 @@ private slots:
 
     void on_dsbox_FrameDur_valueChanged(double arg1);
 
+    // This Does the actual translation work
+    void ProcessTranslateFrame(int DIR);
+
     void on_btn_TransUP_clicked();
 
     void on_btn_TransLeft_clicked();
@@ -92,8 +97,29 @@ private slots:
 
     //void drawRedSquare();
 
-
     void on_btn_PlayPause_clicked();
+
+    void on_actionAbout_triggered(); //Nick, check this out
+
+    void on_actionDocumentation_triggered();
+
+    void on_actionPlay_All_triggered();
+
+    void on_actionSave_2_triggered();
+
+    void on_actionNew_Project_triggered();
+
+    void on_actionClear_Frame_triggered();
+
+    void on_actionFill_Frame_triggered();
+
+    void on_actionNew_Frame_triggered();
+
+    void on_actionDelete_Frame_triggered();
+
+    void on_actionAdd_100_Frames_triggered();
+
+    void on_actionPrint_Frames_triggered();
 
 private:
     Ui::MainWindow *ui;

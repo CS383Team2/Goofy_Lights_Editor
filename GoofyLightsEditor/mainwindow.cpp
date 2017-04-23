@@ -9,8 +9,11 @@
 #include <globals.h> //V_GLOBAL.G_ROW and V_GLOBAL.G_COL
 #include <FrameManipulation.h>
 #include <player.h>
+#include <QApplication> //OP weapon -P
+#include <docdialog.h>
+#include <helpdialog.h>
 
-long FrameID = 0; //-P
+int FrameID = 0; //-P
 QColor temp_RGB; //yeah.... -P
 //FrameList frameList(V_GLOBAL.G_ROW,V_GLOBAL.G_COL);
 
@@ -39,12 +42,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->gCurrent_Colors->setScene(currentcolorsScene);
 
     //MAIN WINDOW TOO BIG, gonna take the scaling down to 85% -P
-    max = 0;
+    max_size = 0;
     if(V_GLOBAL.G_ROW > V_GLOBAL.G_COL)
-        max = V_GLOBAL.G_ROW;
+        max_size = V_GLOBAL.G_ROW;
     else
-        max = V_GLOBAL.G_COL;
-    G_SCALE = ((20.0 / max) * 0.85); //scaled based on a max size of 20x20 -P
+        max_size = V_GLOBAL.G_COL;
+    G_SCALE = ((20.0 / max_size) * 0.85); //scaled based on a max size of 20x20 -P
 
     gridScale = 22*G_SCALE;
     timelineScale = 4*G_SCALE;
@@ -59,6 +62,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     theFrames.SetRowCount(V_GLOBAL.G_ROW);        // Update row size in FrameList now that it is defined
     theFrames.SetColCount(V_GLOBAL.G_COL);        // Update col size in FrameList now that it is defined
+    V_GLOBAL.G_FRAMELIST = &theFrames;            // Attach FrameList to Global structure
 
    /* // Setup very first frame to start with
     // This 'fristFrameData' might be combined with currentFrameData
@@ -67,12 +71,6 @@ MainWindow::MainWindow(QWidget *parent) :
     firstFrameData.duration = 5;                  // arbritrary. Link to initial durration in gui
     firstFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
     theFrames.AddTail(firstFrameData);            // Put first frame onto the FrameList*/
-
-
-    //V_GLOBAL.G_FRAMELIST->SetColCount(V_GLOBAL.G_COL);
-    //V_GLOBAL.G_FRAMELIST->SetRowCount(V_GLOBAL.G_ROW);
-    V_GLOBAL.G_FRAMELIST = &theFrames;
-
 
     //CurrentFrameData = theFrames.FirstNode();     // Get initial frame from the FrameList
 
@@ -91,9 +89,19 @@ MainWindow::MainWindow(QWidget *parent) :
     // is this needed? Is it needed if we dont use a first frame above? -n
     //CurrentFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
 
-
     drawGrid();
-    createFirstFrame();
+    on_btn_NewFrame_clicked(); //pseudo-fix for first frame not showing on timeline, fix the bug
+
+
+    //here are some tooltips, perhaps make a function to toggle them on/off:
+    ui->btn_NewFrame->setToolTip("Adds a new frame right after this current frame."); //fancy tool tips for detail -P
+    ui->btn_DeleteFrame->setToolTip("Deletes the currently selected frame.");
+    ui->btn_CopyFrame->setToolTip("Copies the currently selected frame to the clipboard.");
+    ui->btn_ClearFrame->setToolTip("Clears every square in the current frame.");
+    ui->btn_FillFrame->setToolTip("Fills every square in the current frame with the currently celected color.");
+    ui->btn_PasteFrame->setToolTip("Pastes the frame from the clipboard into the currently selected frame.");
+    ui->btn_PlayPause->setToolTip("Plays the entire animation from start to finish"); //fix this later -P
+    ui->btn_RepeatFrame->setToolTip("Make a copy of this frame and insert it as the next frame.");
 
 } //end mainwindow
 
@@ -127,8 +135,6 @@ void MainWindow::on_actionOpenProject_triggered()
     if(FileOperations::LoadFromFile(fileName, &theFrames) == -1){
         std::cout << "Failed to open" << std::endl;
     }
-
-    theFrames.PrintNode();
 
     V_GLOBAL.G_CURRENTFRAME = theFrames.Size() - 1;
     V_GLOBAL.G_FRAMECOUNT = theFrames.Size();
@@ -165,8 +171,6 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
     Rcolor->update();
     Lcolor->update();
 
-    theFrames.PrintNode(); //DEBUG IT -P
-
     //set grid to current frame -P
     if(V_GLOBAL.G_TIMELINESELECTED == true)
     {
@@ -188,7 +192,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
         QPen clearPen;
         QColor clear;
         clear.setRgb(211,215,207,255);
-        redPen.setColor(Qt::red);
+        redPen.setColor(Qt::blue); //lol, not even red anymore -P
         redPen.setWidth(4);
         clearPen.setColor(clear);
         clearPen.setWidth(4);
@@ -208,6 +212,9 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
         //drawTimeline(); Commented out as it was causing a bug and seems uneeded
         //P
     }
+
+
+    qApp->processEvents(); //Extremely OP weapon, fixes all lag, use with caution -P
 
     updateTimeline(); //lol -P
 }
@@ -345,7 +352,7 @@ void MainWindow::on_btn_NewFrame_clicked()
     QPen clearPen;
     QColor clear;
     clear.setRgb(211,215,207,255);
-    redPen.setColor(Qt::red);
+    redPen.setColor(Qt::blue);
     redPen.setWidth(4);
     clearPen.setColor(clear);
     clearPen.setWidth(4);
@@ -384,6 +391,11 @@ void MainWindow::on_btn_NewFrame_clicked()
 
     //show duration of new frame
     ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
+
+    //Scroll -P
+    qApp->processEvents();
+    ui->gView_Timeline->horizontalScrollBar()->setValue(( ui->gView_Timeline->horizontalScrollBar()->maximum()));
+    //Keep timeline scrolled all the way to the RIGHT -P
 }
 
 void MainWindow::on_btn_DeleteFrame_clicked()
@@ -442,7 +454,7 @@ void MainWindow::on_dsbox_FrameDur_valueChanged(double arg1)
         theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->duration = arg1;
 }
 
-void MainWindow::on_btn_TransUP_clicked()
+void MainWindow::ProcessTranslateFrame(int DIR)
 {
     // Get previous Frame for the purpose of copying later
     t_FrameData *tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
@@ -458,7 +470,7 @@ void MainWindow::on_btn_TransUP_clicked()
 
     // Translate newframe by direction
 
-    translateFrame(tempFrameData_current, D_UP);
+    translateFrame(tempFrameData_current, DIR);
 
     // copy current frame into gridGridSquare
     for(int x=0; x<V_GLOBAL.G_ROW; x++)
@@ -469,209 +481,46 @@ void MainWindow::on_btn_TransUP_clicked()
             gridGridSquare[x][y].update();
         }
     }
+}
+
+void MainWindow::on_btn_TransUP_clicked()
+{
+    MainWindow::ProcessTranslateFrame(D_UP);
 }
 
 void MainWindow::on_btn_TransRight_clicked()
 {
-    // Get previous Frame for the purpose of copying later
-    t_FrameData *tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
-
-    // on_btn_NewFrame creates new node & adds to framelist. Then updates G_CURRENTFRAME to new frame
-    on_btn_NewFrame_clicked();
-
-    // Get current new Frame
-    t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);       //grab the current frame
-
-    // Copy prev Frame Into current new frame. Arguments have to be pointers
-    copyFrame(tempFrameData_current, tempFrameData_prev);
-
-    // Translate newframe by direction
-
-    translateFrame(tempFrameData_current, D_RIGHT);
-
-    // copy current frame into gridGridSquare
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
-    {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
-        {
-            gridGridSquare[x][y].square_RGB = (*tempFrameData_current).squareData[x][y].square_RGB;
-            gridGridSquare[x][y].update();
-        }
-    }
+    MainWindow::ProcessTranslateFrame(D_RIGHT);
 }
 
 void MainWindow::on_btn_TransLeft_clicked()
 {
-    // Get previous Frame for the purpose of copying later
-    t_FrameData *tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
-
-    // on_btn_NewFrame creates new node & adds to framelist. Then updates G_CURRENTFRAME to new frame
-    on_btn_NewFrame_clicked();
-
-    // Get current new Frame
-    t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);       //grab the current frame
-
-    // Copy prev Frame Into current new frame. Arguments have to be pointers
-    copyFrame(tempFrameData_current, tempFrameData_prev);
-
-    // Translate newframe by direction
-
-    translateFrame(tempFrameData_current, D_LEFT);
-
-    // copy current frame into gridGridSquare
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
-    {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
-        {
-            gridGridSquare[x][y].square_RGB = (*tempFrameData_current).squareData[x][y].square_RGB;
-            gridGridSquare[x][y].update();
-        }
-    }
+    MainWindow::ProcessTranslateFrame(D_LEFT);
 }
 
 void MainWindow::on_btn_TransDwn_clicked()
 {
-    // Get previous Frame for the purpose of copying later
-    t_FrameData *tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
-
-    // on_btn_NewFrame creates new node & adds to framelist. Then updates G_CURRENTFRAME to new frame
-    on_btn_NewFrame_clicked();
-
-    // Get current new Frame
-    t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);       //grab the current frame
-
-    // Copy prev Frame Into current new frame. Arguments have to be pointers
-    copyFrame(tempFrameData_current, tempFrameData_prev);
-
-    // Translate newframe by direction
-
-    translateFrame(tempFrameData_current, D_DWN);
-
-    // copy current frame into gridGridSquare
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
-    {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
-        {
-            gridGridSquare[x][y].square_RGB = (*tempFrameData_current).squareData[x][y].square_RGB;
-            gridGridSquare[x][y].update();
-        }
-    }
+    MainWindow::ProcessTranslateFrame(D_DWN);
 }
 
 void MainWindow::on_btn_TransDwnRight_clicked()
 {
-    // Get previous Frame for the purpose of copying later
-    t_FrameData *tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
-
-    // on_btn_NewFrame creates new node & adds to framelist. Then updates G_CURRENTFRAME to new frame
-    on_btn_NewFrame_clicked();
-
-    // Get current new Frame
-    t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);       //grab the current frame
-
-    // Copy prev Frame Into current new frame. Arguments have to be pointers
-    copyFrame(tempFrameData_current, tempFrameData_prev);
-
-    // Translate newframe by direction
-
-    translateFrame(tempFrameData_current, D_DWN_R);
-
-    // copy current frame into gridGridSquare
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
-    {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
-        {
-            gridGridSquare[x][y].square_RGB = (*tempFrameData_current).squareData[x][y].square_RGB;
-            gridGridSquare[x][y].update();
-        }
-    }
+    MainWindow::ProcessTranslateFrame(D_DWN_R);
 }
 
 void MainWindow::on_btn_TransDwnLeft_clicked()
 {
-    // Get previous Frame for the purpose of copying later
-    t_FrameData *tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
-
-    // on_btn_NewFrame creates new node & adds to framelist. Then updates G_CURRENTFRAME to new frame
-    on_btn_NewFrame_clicked();
-
-    // Get current new Frame
-    t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);       //grab the current frame
-
-    // Copy prev Frame Into current new frame. Arguments have to be pointers
-    copyFrame(tempFrameData_current, tempFrameData_prev);
-
-    // Translate newframe by direction
-
-    translateFrame(tempFrameData_current, D_DWN_L);
-
-    // copy current frame into gridGridSquare
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
-    {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
-        {
-            gridGridSquare[x][y].square_RGB = (*tempFrameData_current).squareData[x][y].square_RGB;
-            gridGridSquare[x][y].update();
-        }
-    }
+    MainWindow::ProcessTranslateFrame(D_DWN_L);
 }
 
 void MainWindow::on_btn_TransUpLeft_clicked()
 {
-    // Get previous Frame for the purpose of copying later
-    t_FrameData *tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
-
-    // on_btn_NewFrame creates new node & adds to framelist. Then updates G_CURRENTFRAME to new frame
-    on_btn_NewFrame_clicked();
-
-    // Get current new Frame
-    t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);       //grab the current frame
-
-    // Copy prev Frame Into current new frame. Arguments have to be pointers
-    copyFrame(tempFrameData_current, tempFrameData_prev);
-
-    // Translate newframe by direction
-
-    translateFrame(tempFrameData_current, D_UP_L);
-
-    // copy current frame into gridGridSquare
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
-    {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
-        {
-            gridGridSquare[x][y].square_RGB = (*tempFrameData_current).squareData[x][y].square_RGB;
-            gridGridSquare[x][y].update();
-        }
-    }
+    MainWindow::ProcessTranslateFrame(D_UP_L);
 }
 
 void MainWindow::on_btn_TransUpRight_clicked()
 {
-    // Get previous Frame for the purpose of copying later
-    t_FrameData *tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
-
-    // on_btn_NewFrame creates new node & adds to framelist. Then updates G_CURRENTFRAME to new frame
-    on_btn_NewFrame_clicked();
-
-    // Get current new Frame
-    t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);       //grab the current frame
-
-    // Copy prev Frame Into current new frame. Arguments have to be pointers
-    copyFrame(tempFrameData_current, tempFrameData_prev);
-
-    // Translate newframe by direction
-
-    translateFrame(tempFrameData_current, D_UP_R);
-
-    // copy current frame into gridGridSquare
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
-    {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
-        {
-            gridGridSquare[x][y].square_RGB = (*tempFrameData_current).squareData[x][y].square_RGB;
-            gridGridSquare[x][y].update();
-        }
-    }
+    MainWindow::ProcessTranslateFrame(D_UP_R);
 }
 
 void MainWindow::on_btn_RepeatFrame_clicked()
@@ -753,4 +602,79 @@ void MainWindow::on_btn_PlayPause_clicked()
     dialog2.setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint); //You will NOT exit this window your way -P
     dialog2.setModal(true); //YOU SHALL NOT CLICK OUTSIDE OF THIS WINDOW -P
     dialog2.exec(); //execute pls -P
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+    //pop the help dialog -P
+    helpdialog dialog2;
+    dialog2.setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint); //You will NOT exit this window your way -P
+    dialog2.setModal(true); //YOU SHALL NOT CLICK OUTSIDE OF THIS WINDOW -P
+    dialog2.exec(); //execute pls -P
+}
+
+void MainWindow::on_actionDocumentation_triggered()
+{
+    //pop the doc dialog -P
+    docdialog dialog2;
+    dialog2.setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint); //You will NOT exit this window your way -P
+    dialog2.setModal(true); //YOU SHALL NOT CLICK OUTSIDE OF THIS WINDOW -P
+    dialog2.exec(); //execute pls -P
+}
+
+void MainWindow::on_actionPlay_All_triggered()
+{
+    on_btn_PlayPause_clicked();
+}
+
+void MainWindow::on_actionSave_2_triggered()
+{
+    //File -> Save menu clicked
+    //Put some code here to save the project -P
+}
+
+void MainWindow::on_actionNew_Project_triggered()
+{
+    //File -> New Project menu clicked
+    //create new project -P
+}
+
+// ==== Edit Menue ====
+
+void MainWindow::on_actionClear_Frame_triggered()
+{
+    on_btn_ClearFrame_clicked(); //from menu -P
+}
+
+void MainWindow::on_actionFill_Frame_triggered()
+{
+    on_btn_FillFrame_clicked(); //from menu -P
+}
+
+void MainWindow::on_actionNew_Frame_triggered()
+{
+    on_btn_NewFrame_clicked(); //from menu -P
+}
+
+void MainWindow::on_actionDelete_Frame_triggered()
+{
+    on_btn_DeleteFrame_clicked(); //from menu -P
+}
+
+// ==== Debug menu ====
+void MainWindow::on_actionAdd_100_Frames_triggered()
+{
+    std::cout << "Creating 100 frames" << std::endl;
+    for (int i = 0; i < 100; i++) {
+        on_btn_NewFrame_clicked(); // create new frame.
+        // making each frame unique is a bit expensive
+        t_FrameData * tempFD = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
+        fillFrame2(tempFD, rand()%255, rand()%255, rand()%255);
+    }
+}
+
+void MainWindow::on_actionPrint_Frames_triggered()
+{
+    std::cout << "Printing out all frames" << std::endl;
+    theFrames.PrintNode();
 }

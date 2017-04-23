@@ -29,7 +29,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Grid Size!</string>
+   <string>Goofy Grid Size</string>
   </property>
   <property name="sizeGripEnabled">
    <bool>false</bool>

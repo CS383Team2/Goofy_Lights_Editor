@@ -11,14 +11,6 @@
 
 V_Goofy V_GLOBAL;
 
-//int G_FRAMECOUNT = 0; //hah -P
-
-long FrameIDCount = 0;
-
-
-// creates the dynamic RGB array
-TimelineGrid** create_RGB(int r, int c);
-
 int main(int argc, char *argv[])
 {   
     V_GLOBAL.G_COL = 0; //Initialize global rows and columns
@@ -30,10 +22,9 @@ int main(int argc, char *argv[])
     dialog1.setModal(true); //YOU SHALL NOT CLICK OUTSIDE OF THIS WINDOW -P
     dialog1.exec(); //execute pls -P
 
-    //read in a file here probably -P
-
     MainWindow w;
     w.show();
 
+    std::cout<< "Program end" << std:: endl;
     return a.exec();
 }

@@ -15,6 +15,11 @@ public:
     explicit helpdialog(QWidget *parent = 0);
     ~helpdialog();
 
+private slots:
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
 private:
     Ui::helpdialog *ui;
 };
