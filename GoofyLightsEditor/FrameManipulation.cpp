@@ -33,11 +33,9 @@ int copyFrame(t_FrameData *copyFrame, t_FrameData *origFrame)
     if ((*origFrame).squareData == NULL)
         return RTN_ERROR;
 
-    int i, j; // loop control
-
     //Fill rgb_data with data from FrameData
-    for (i = 0; i < V_GLOBAL.G_ROW; i++) {
-        for (j = 0; j < V_GLOBAL.G_COL; j++) {
+    for (int i = 0; i < V_GLOBAL.G_ROW; i++) {
+        for (int j = 0; j < V_GLOBAL.G_COL; j++) {
             (*copyFrame).squareData[i][j].square_RGB = (*origFrame).squareData[i][j].square_RGB;
         }
     }

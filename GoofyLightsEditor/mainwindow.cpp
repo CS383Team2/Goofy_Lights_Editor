@@ -42,12 +42,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->gCurrent_Colors->setScene(currentcolorsScene);
 
     //MAIN WINDOW TOO BIG, gonna take the scaling down to 85% -P
-    max = 0;
+    max_size = 0;
     if(V_GLOBAL.G_ROW > V_GLOBAL.G_COL)
-        max = V_GLOBAL.G_ROW;
+        max_size = V_GLOBAL.G_ROW;
     else
-        max = V_GLOBAL.G_COL;
-    G_SCALE = ((20.0 / max) * 0.85); //scaled based on a max size of 20x20 -P
+        max_size = V_GLOBAL.G_COL;
+    G_SCALE = ((20.0 / max_size) * 0.85); //scaled based on a max size of 20x20 -P
 
     gridScale = 22*G_SCALE;
     timelineScale = 4*G_SCALE;
@@ -62,6 +62,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     theFrames.SetRowCount(V_GLOBAL.G_ROW);        // Update row size in FrameList now that it is defined
     theFrames.SetColCount(V_GLOBAL.G_COL);        // Update col size in FrameList now that it is defined
+    V_GLOBAL.G_FRAMELIST = &theFrames;            // Attach FrameList to Global structure
 
     // Setup very first frame to start with
     // This 'fristFrameData' might be combined with currentFrameData
@@ -70,12 +71,6 @@ MainWindow::MainWindow(QWidget *parent) :
     firstFrameData.duration = 5;                  // arbritrary. Link to initial durration in gui
     firstFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
     theFrames.AddTail(firstFrameData);            // Put first frame onto the FrameList
-
-
-    //V_GLOBAL.G_FRAMELIST->SetColCount(V_GLOBAL.G_COL);
-    //V_GLOBAL.G_FRAMELIST->SetRowCount(V_GLOBAL.G_ROW);
-    V_GLOBAL.G_FRAMELIST = &theFrames;
-
 
     CurrentFrameData = theFrames.FirstNode();     // Get initial frame from the FrameList
 
@@ -309,7 +304,6 @@ void MainWindow::on_btn_NewFrame_clicked()
 {
     V_GLOBAL.G_FRAMECOUNT++; //add a frame to the count
     FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, V_GLOBAL.G_FRAMECOUNT); //fix indexing later -P
-    //FrameData.squareData[i % V_GLOBAL.G_ROW][i % V_GLOBAL.G_COL].square_RGB = (Qt::blue); //show that each frame is in fact unique
     theFrames.AddTail(FrameData);
 
     V_GLOBAL.G_CURRENTFRAME = V_GLOBAL.G_FRAMECOUNT; //fix indexing later -P

@@ -24,7 +24,7 @@ public:
     ~MainWindow();
 
     //MAIN WINDOW TOO BIG, gonna take the scaling down to 85% -P
-    double max;
+    double max_size;
     double G_SCALE;
     int gridScale;
     int timelineScale;
