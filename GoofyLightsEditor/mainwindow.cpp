@@ -97,6 +97,17 @@ MainWindow::MainWindow(QWidget *parent) :
     drawGrid();
     on_btn_NewFrame_clicked(); //pseudo-fix for first frame not showing on timeline, fix the bug
 
+
+    //here are some tooltips, perhaps make a function to toggle them on/off:
+    ui->btn_NewFrame->setToolTip("Adds a new frame right after this current frame."); //fancy tool tips for detail -P
+    ui->btn_DeleteFrame->setToolTip("Deletes the currently selected frame.");
+    ui->btn_CopyFrame->setToolTip("Copies the currently selected frame to the clipboard.");
+    ui->btn_ClearFrame->setToolTip("Clears every square in the current frame.");
+    ui->btn_FillFrame->setToolTip("Fills every square in the current frame with the currently celected color.");
+    ui->btn_PasteFrame->setToolTip("Pastes the frame from the clipboard into the currently selected frame.");
+    ui->btn_PlayPause->setToolTip("Plays the entire animation from start to finish"); //fix this later -P
+    ui->btn_RepeatFrame->setToolTip("Make a copy of this frame and insert it as the next frame.");
+
 } //end mainwindow
 
 MainWindow::~MainWindow()
@@ -270,6 +281,24 @@ void MainWindow::updateTimeline() //fix the update lag later -P
         {
             (*tempFrameData).squareData[x][y].square_RGB = gridGridSquare[x][y].square_RGB;
             (*tempFrameData).squareData[x][y].update();
+        }
+    }
+}
+
+void MainWindow::initializeEntireTimeline() //try this one Tim -P
+{
+    for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++) //loop through ALL? the frames -P
+    {
+        FrameData.squareData = theFrames.RetrieveNode_Middle(i+1)->squareData; //grabe every frame
+        for(int x=0; x<V_GLOBAL.G_ROW; x++)
+        {
+            for(int y=0; y<V_GLOBAL.G_COL; y++)
+            {
+                FrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
+                FrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
+
+                timelineScene->addItem(&(FrameData.squareData[x][y])); //timeline painting here -P
+            }
         }
     }
 }

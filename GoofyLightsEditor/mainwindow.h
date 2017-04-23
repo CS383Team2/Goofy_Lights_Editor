@@ -39,6 +39,8 @@ public:
 
     void updateTimeline();
 
+    void initializeEntireTimeline(); //for Tim's file I/O -P
+
 private slots:
     void on_actionSave_As_triggered();
 
