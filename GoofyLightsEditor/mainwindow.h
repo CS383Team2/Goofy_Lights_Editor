@@ -89,8 +89,13 @@ private slots:
 
     //void drawRedSquare();
 
-
     void on_btn_PlayPause_clicked();
+
+    void on_actionAbout_triggered(); //Nick, check this out
+
+    void on_actionDocumentation_triggered();
+
+    void on_actionPlay_All_triggered();
 
 private:
     Ui::MainWindow *ui;

@@ -10,6 +10,8 @@
 #include <FrameManipulation.h>
 #include <player.h>
 #include <QApplication> //OP weapon -P
+#include <docdialog.h>
+#include <helpdialog.h>
 
 long FrameID = 0; //-P
 QColor temp_RGB; //yeah.... -P
@@ -679,4 +681,27 @@ void MainWindow::on_btn_PlayPause_clicked()
     dialog2.setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint); //You will NOT exit this window your way -P
     dialog2.setModal(true); //YOU SHALL NOT CLICK OUTSIDE OF THIS WINDOW -P
     dialog2.exec(); //execute pls -P
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+    //pop the help dialog -P
+    helpdialog dialog2;
+    dialog2.setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint); //You will NOT exit this window your way -P
+    dialog2.setModal(true); //YOU SHALL NOT CLICK OUTSIDE OF THIS WINDOW -P
+    dialog2.exec(); //execute pls -P
+}
+
+void MainWindow::on_actionDocumentation_triggered()
+{
+    //pop the doc dialog -P
+    docdialog dialog2;
+    dialog2.setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint); //You will NOT exit this window your way -P
+    dialog2.setModal(true); //YOU SHALL NOT CLICK OUTSIDE OF THIS WINDOW -P
+    dialog2.exec(); //execute pls -P
+}
+
+void MainWindow::on_actionPlay_All_triggered()
+{
+    on_btn_PlayPause_clicked();
 }
