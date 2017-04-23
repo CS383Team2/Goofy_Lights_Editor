@@ -97,6 +97,17 @@ MainWindow::MainWindow(QWidget *parent) :
     drawGrid();
     on_btn_NewFrame_clicked(); //pseudo-fix for first frame not showing on timeline, fix the bug
 
+
+    //here are some tooltips, perhaps make a function to toggle them on/off:
+    ui->btn_NewFrame->setToolTip("Adds a new frame right after this current frame."); //fancy tool tips for detail -P
+    ui->btn_DeleteFrame->setToolTip("Deletes the currently selected frame.");
+    ui->btn_CopyFrame->setToolTip("Copies the currently selected frame to the clipboard.");
+    ui->btn_ClearFrame->setToolTip("Clears every square in the current frame.");
+    ui->btn_FillFrame->setToolTip("Fills every square in the current frame with the currently celected color.");
+    ui->btn_PasteFrame->setToolTip("Pastes the frame from the clipboard into the currently selected frame.");
+    ui->btn_PlayPause->setToolTip("Plays the entire animation from start to finish"); //fix this later -P
+    ui->btn_RepeatFrame->setToolTip("Make a copy of this frame and insert it as the next frame.");
+
 } //end mainwindow
 
 MainWindow::~MainWindow()
