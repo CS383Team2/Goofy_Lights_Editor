@@ -218,6 +218,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
         //P
     }
 
+
     qApp->processEvents(); //Extremely OP weapon, fixes all lag, use with caution -P
 
     updateTimeline(); //lol -P
@@ -353,6 +354,11 @@ void MainWindow::on_btn_NewFrame_clicked()
 
     //show duration of new frame
     ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
+
+    //Scroll -P
+    qApp->processEvents();
+    ui->gView_Timeline->horizontalScrollBar()->setValue(( ui->gView_Timeline->horizontalScrollBar()->maximum()));
+    //Keep timeline scrolled all the way to the RIGHT -P
 }
 
 void MainWindow::on_btn_DeleteFrame_clicked()
