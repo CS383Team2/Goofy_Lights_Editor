@@ -701,9 +701,9 @@
    </widget>
    <addaction name="menuSuper_Animator_Window"/>
    <addaction name="menuEdit"/>
+   <addaction name="menuDebug"/>
    <addaction name="menuPlay"/>
    <addaction name="menuHelp"/>
-   <addaction name="menuDebug"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">

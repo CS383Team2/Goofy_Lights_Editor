@@ -13,7 +13,7 @@
 #include <docdialog.h>
 #include <helpdialog.h>
 
-long FrameID = 0; //-P
+int FrameID = 0; //-P
 QColor temp_RGB; //yeah.... -P
 //FrameList frameList(V_GLOBAL.G_ROW,V_GLOBAL.G_COL);
 
