@@ -135,7 +135,9 @@ void MainWindow::on_actionSave_As_triggered()
             tr("Save Project"), "",
             tr("Project (*.tan);;All Files (*)"));
 
-    FileOperations::SaveToFile(fileName,theFrames);
+    theFrames.PrintNode();
+    FileOperations::SaveToFile(fileName, &theFrames);
+    theFrames.PrintNode();
     qDebug() << "Returned safely";
 }
 
@@ -335,6 +337,7 @@ void MainWindow::on_btn_NewFrame_clicked()
     updateTimeline();
     V_GLOBAL.G_FRAMECOUNT++; //add a frame to the count
     FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, V_GLOBAL.G_FRAMECOUNT); //fix indexing later -P
+    FrameData.ID = FrameID++;
     //FrameData.squareData[i % V_GLOBAL.G_ROW][i % V_GLOBAL.G_COL].square_RGB = (Qt::blue); //show that each frame is in fact unique
     theFrames.AddTail(FrameData);
 

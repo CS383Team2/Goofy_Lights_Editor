@@ -23,7 +23,7 @@
 #define VERSION .3
 
 /* Save the project to a file. There is no predefined file format for this */
-int FileOperations::SaveToFile(QString fileName, FrameList frameList){
+int FileOperations::SaveToFile(QString fileName, FrameList * frameList){
     QFile file; /* Load the file and write to it */
     QTime elapsedTime = QTime(0,0,0,0); // Time elapsed in milliseconds
     file.setFileName(fileName);
@@ -38,24 +38,24 @@ int FileOperations::SaveToFile(QString fileName, FrameList frameList){
         stream << "0" << endl;
 
         /* Print the size of the frame list */
-        stream << frameList.Size() << " "
-               << frameList.GetRowCount() << " "
-               << frameList.GetColCount() << endl;
+        stream << frameList->Size() << " "
+               << frameList->GetRowCount() << " "
+               << frameList->GetColCount() << endl;
 
         /* If the frameList is empty */
-        if(frameList.Size() == 0)
+        if(frameList->Size() == 0)
             return 0;
 
-        frameList.AdvanceListReset();                   // Reset internal advancement pointer to head
-        t_FrameData * frameDataPtr = frameList.AdvanceList(); // grab first FrameDataPtr
+        frameList->AdvanceListReset();                   // Reset internal advancement pointer to head
+        t_FrameData * frameDataPtr = frameList->AdvanceList(); // grab first FrameDataPtr
         while (frameDataPtr != NULL) {                  // If list is empty FrameDataPtr will be null
             t_FrameData frameData = *frameDataPtr;      // Dereference pointer
 
             // stream << frameData.ID << endl;
             stream << elapsedTime.toString("mm:ss.zzz") << endl;
 
-            for(int i = 0; i < frameList.GetRowCount(); i++){
-                for(int j = 0; j < frameList.GetColCount(); j++){
+            for(int i = 0; i < frameList->GetRowCount(); i++){
+                for(int j = 0; j < frameList->GetColCount(); j++){
                     stream << frameData.squareData[i][j].square_RGB.red() << " "
                            << frameData.squareData[i][j].square_RGB.green() << " "
                            << frameData.squareData[i][j].square_RGB.blue() << " ";
@@ -63,7 +63,7 @@ int FileOperations::SaveToFile(QString fileName, FrameList frameList){
                 stream << endl;
             }
             elapsedTime = elapsedTime.addSecs(frameData.duration);
-            frameDataPtr = frameList.AdvanceList(); // grab next FrameDataPtr
+            frameDataPtr = frameList->AdvanceList(); // grab next FrameDataPtr
         }
         file.close();
         return 1;
@@ -102,8 +102,8 @@ int FileOperations::LoadFromFile(QString fileName, FrameList * frameList){
 
     /* Initialize the frame list */
     (*frameList) = FrameList(row, col);
-    (*frameList).SetColCount(col);
-    (*frameList).SetRowCount(row);
+    frameList->SetColCount(col);
+    frameList->SetRowCount(row);
 
     int currentElement = 0;
     QString startTime = fileContents.readLine();
@@ -137,8 +137,7 @@ int FileOperations::LoadFromFile(QString fileName, FrameList * frameList){
         frameData.duration      = currTime.secsTo(nextTime);
         frameData.ID            = currentElement;
 
-        (*frameList).AddTail(frameData);
-        std::cout << (*frameList).IsEmpty() << std::endl;
+        frameList->AddTail(frameData);
         // std::cout << "Current FrameList" << std::endl;
         // tmpFrameList.PrintNode();
         // std::cout << currentElement << std::endl;
