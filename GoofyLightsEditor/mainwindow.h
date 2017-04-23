@@ -97,6 +97,18 @@ private slots:
 
     void on_actionPlay_All_triggered();
 
+    void on_actionSave_2_triggered();
+
+    void on_actionNew_Project_triggered();
+
+    void on_actionClear_Frame_triggered();
+
+    void on_actionFill_Frame_triggered();
+
+    void on_actionNew_Frame_triggered();
+
+    void on_actionDelete_Frame_triggered();
+
 private:
     Ui::MainWindow *ui;
 

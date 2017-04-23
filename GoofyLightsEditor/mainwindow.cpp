@@ -705,3 +705,35 @@ void MainWindow::on_actionPlay_All_triggered()
 {
     on_btn_PlayPause_clicked();
 }
+
+void MainWindow::on_actionSave_2_triggered()
+{
+    //File -> Save menu clicked
+    //Put some code here to save the project -P
+}
+
+void MainWindow::on_actionNew_Project_triggered()
+{
+    //File -> New Project menu clicked
+    //create new project -P
+}
+
+void MainWindow::on_actionClear_Frame_triggered()
+{
+    on_btn_ClearFrame_clicked(); //from menu -P
+}
+
+void MainWindow::on_actionFill_Frame_triggered()
+{
+    on_btn_FillFrame_clicked(); //from menu -P
+}
+
+void MainWindow::on_actionNew_Frame_triggered()
+{
+    on_btn_NewFrame_clicked(); //from menu -P
+}
+
+void MainWindow::on_actionDelete_Frame_triggered()
+{
+    on_btn_DeleteFrame_clicked(); //from menu -P
+}
