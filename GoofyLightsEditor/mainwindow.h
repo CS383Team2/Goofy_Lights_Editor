@@ -44,7 +44,6 @@ private slots:
 
     void on_actionOpenProject_triggered();
 
-
     void on_sbox_ValueRed_editingFinished();
 
     void on_sbox_ValueGreen_editingFinished();
@@ -58,6 +57,8 @@ private slots:
     void on_btn_ClearFrame_clicked();
 
     void drawGrid();
+
+    void createFirstFrame();
 
     void on_btn_NewFrame_clicked();
 
