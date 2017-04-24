@@ -137,6 +137,7 @@ int FileOperations::LoadFromFile(QString fileName, FrameList * frameList){
         double duration         = (currTime.msecsTo(nextTime))/1000.0;
         frameData.duration      = duration;
         frameData.ID            = currentElement;
+        frameData.Position      = currentElement;
 
         frameList->AddTail(frameData);
         // std::cout << "Current FrameList" << std::endl;
