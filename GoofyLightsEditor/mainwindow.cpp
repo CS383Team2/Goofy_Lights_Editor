@@ -15,7 +15,6 @@
 
 int FrameID = 0; //-P
 QColor temp_RGB; //yeah.... -P
-//FrameList frameList(V_GLOBAL.G_ROW,V_GLOBAL.G_COL);
 
 FrameList theFrames(V_GLOBAL.G_ROW, V_GLOBAL.G_COL); //HERE LAY THE LINKED LIST -P
 
@@ -72,10 +71,6 @@ MainWindow::MainWindow(QWidget *parent) :
     firstFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
     theFrames.AddTail(firstFrameData);            // Put first frame onto the FrameList
 
-    CurrentFrameData = theFrames.FirstNode();     // Get initial frame from the FrameList
-
-    //t_FrameData * testptr = theFrames.RetrieveNode_Middle(0); //This is the correct formate -n
-
     currentcolorsScene->addItem(Lcolor);
     currentcolorsScene->addItem(Rcolor);
 
@@ -85,9 +80,6 @@ MainWindow::MainWindow(QWidget *parent) :
     {
         gridGridSquare[i] = new GridSquare[V_GLOBAL.G_COL];
     }
-
-    // is this needed? Is it needed if we dont use a first frame above? -n
-    //CurrentFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
 
     drawGrid();
     on_btn_NewFrame_clicked(); //pseudo-fix for first frame not showing on timeline, fix the bug
