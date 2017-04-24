@@ -12,6 +12,7 @@
 #include <QApplication> //OP weapon -P
 #include <docdialog.h>
 #include <helpdialog.h>
+#include "gridsquarewrapper.h"
 
 int FrameID = 0; //-P
 QColor temp_RGB; //yeah.... -P
@@ -22,6 +23,8 @@ int CurrentFrameNum = 0;
 
 GridSquare *Lcolor = new GridSquare(true);
 GridSquare *Rcolor = new GridSquare(true);
+
+gridsquarewrapper mainGrid;
 
 
 
@@ -74,14 +77,11 @@ MainWindow::MainWindow(QWidget *parent) :
     currentcolorsScene->addItem(Lcolor);
     currentcolorsScene->addItem(Rcolor);
 
-    // This generates the memory for these grids
-    gridGridSquare = new GridSquare*[V_GLOBAL.G_ROW];
-    for (int i = 0; i < V_GLOBAL.G_ROW; ++i)
-    {
-        gridGridSquare[i] = new GridSquare[V_GLOBAL.G_COL];
-    }
 
-    drawGrid();
+    mainGrid.generate();  // Generate memory space
+    mainGrid.setScene(gridScene);
+    mainGrid.drawGrid();
+
     on_btn_NewFrame_clicked(); //pseudo-fix for first frame not showing on timeline, fix the bug
 
 
@@ -99,11 +99,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-    for (int i = 0; i < V_GLOBAL.G_ROW; ++i)
-    {
-        delete [] gridGridSquare[i];
-    }
-
     delete ui;
     exit(0); //WHOA fixed the SIGABRT on Linux -P
 }
@@ -236,14 +231,7 @@ void MainWindow::copyCurrentFrameData_into_gridGridSquare()
 //This copies the given frame to the GridSquare editing window with provided frame
 void MainWindow::copyCurrentFrameData_into_gridGridSquare(t_FrameData *CurrentFrame)
 {
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
-    {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
-        {
-            gridGridSquare[x][y].square_RGB = (*CurrentFrame).squareData[x][y].square_RGB; //give the data to the grid -P
-            gridGridSquare[x][y].update(); //Fill that frame son -P
-        }
-    }
+    mainGrid.loadFrame(CurrentFrame);
 }
 
 void MainWindow::drawGrid()
@@ -267,7 +255,8 @@ void MainWindow::updateTimeline() //fix the update lag later -P
     {
         for(int y=0; y<V_GLOBAL.G_COL; y++)
         {
-            (*tempFrameData).squareData[x][y].square_RGB = gridGridSquare[x][y].square_RGB;
+            //(*tempFrameData).squareData[x][y].square_RGB = gridGridSquare[x][y].square_RGB;
+            (*tempFrameData).squareData[x][y].square_RGB = mainGrid.gridSquareData[x][y].square_RGB;
             (*tempFrameData).squareData[x][y].update();
         }
     }
