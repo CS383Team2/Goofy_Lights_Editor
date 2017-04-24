@@ -295,7 +295,7 @@ void MainWindow::createFirstFrame()
     QPen clearPen;
     QColor clear;
     clear.setRgb(211,215,207,255);
-    redPen.setColor(Qt::red);
+    redPen.setColor(Qt::blue);
     redPen.setWidth(4);
     clearPen.setColor(clear);
     clearPen.setWidth(4);
@@ -344,6 +344,10 @@ void MainWindow::on_btn_NewFrame_clicked()
     //FrameData.squareData[i % V_GLOBAL.G_ROW][i % V_GLOBAL.G_COL].square_RGB = (Qt::blue); //show that each frame is in fact unique
     theFrames.AddNode_Middle(FrameData, V_GLOBAL.G_CURRENTFRAME);
 
+    drawTimeline();
+    refreshTimeline();
+
+
 
 
     //draw red square around frame -P
@@ -369,10 +373,6 @@ void MainWindow::on_btn_NewFrame_clicked()
     }
 
     timelineScene->addRect((((V_GLOBAL.G_CURRENTFRAME)*redSpacingX)-10),(-10),redSizeX,redSizeY,redPen,(Qt::NoBrush));
-
-    drawTimeline();
-    refreshTimeline();
-
 
     //P
 
@@ -583,6 +583,7 @@ void MainWindow::refreshTimeline()
 {
     for(int i= V_GLOBAL.G_CURRENTFRAME; i < V_GLOBAL.G_FRAMECOUNT; i++)
         {
+            FrameData.squareData = theFrames.RetrieveNode_Middle(i)->squareData; //grabe every frame
             for(int x=0; x<V_GLOBAL.G_ROW; x++)
             {
                 for(int y=0; y<V_GLOBAL.G_COL; y++)
@@ -590,7 +591,7 @@ void MainWindow::refreshTimeline()
                     FrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
                     FrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
 
-                    //timelineScene->addItem(&(FrameData.squareData[x][y])); //timeline painting here -P
+                    timelineScene->addItem(&(FrameData.squareData[x][y])); //timeline painting here -P
                 }
             }
         }
