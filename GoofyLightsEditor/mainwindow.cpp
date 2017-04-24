@@ -162,7 +162,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
     if(V_GLOBAL.G_TIMELINESELECTED == true)
     {
         t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
-        MainWindow::copyCurrentFrameData_into_gridGridSquare(tempFrameData);
+        mainGrid.loadFrame(tempFrameData); // copy frame into editing grid
         //show duration of current frame
         ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
 
@@ -206,7 +206,7 @@ void MainWindow::on_btn_FillFrame_clicked() //Fill Frame
 
     fillFrame(currentFrameFill, Lcolor->square_RGB); //do this later -P
 
-    MainWindow::copyCurrentFrameData_into_gridGridSquare(currentFrameFill);
+    mainGrid.loadFrame(currentFrameFill); // copy frame into editing grid
     updateTimeline();
 }
 
@@ -216,36 +216,8 @@ void MainWindow::on_btn_ClearFrame_clicked() //Clear Frame
 
     fillFrame(currentFrameFill, Qt::black);
 
-    MainWindow::copyCurrentFrameData_into_gridGridSquare(currentFrameFill);
+    mainGrid.loadFrame(currentFrameFill); // copy frame into editing grid
     updateTimeline();
-}
-
-
-//This copies the given frame to the GridSquare editing window
-void MainWindow::copyCurrentFrameData_into_gridGridSquare()
-{
-    t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
-    MainWindow::copyCurrentFrameData_into_gridGridSquare(tempFrameData);
-}
-
-//This copies the given frame to the GridSquare editing window with provided frame
-void MainWindow::copyCurrentFrameData_into_gridGridSquare(t_FrameData *CurrentFrame)
-{
-    mainGrid.loadFrame(CurrentFrame);
-}
-
-void MainWindow::drawGrid()
-{
-    //draw the grid -P
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
-    {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
-        {
-            gridGridSquare[x][y].y = (x*gridScale + x*g_SPACING);
-            gridGridSquare[x][y].x = (y*gridScale + y*g_SPACING);
-            gridScene->addItem(&gridGridSquare[x][y]);
-        }
-    }
 }
 
 void MainWindow::updateTimeline() //fix the update lag later -P
@@ -315,11 +287,11 @@ void MainWindow::on_btn_NewFrame_clicked()
     drawTimeline();
     //P
 
-    MainWindow::copyCurrentFrameData_into_gridGridSquare();
+    t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
+    mainGrid.loadFrame(tempFrameData_current); // copy frame into editing grid
 
     //show duration of new frame
-    t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
-    ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
+    ui->dsbox_FrameDur->setValue((*tempFrameData_current).duration);
 
     //Scroll -P
     qApp->processEvents();
@@ -396,7 +368,7 @@ void MainWindow::ProcessTranslateFrame(int DIR)
     copyFrame(tempFrameData_current, tempFrameData_prev);                    // Copy prev Frame Into current new frame.
     translateFrame(tempFrameData_current, DIR);                              // Translate newframe by direction
 
-    MainWindow::copyCurrentFrameData_into_gridGridSquare(tempFrameData_current);
+    mainGrid.loadFrame(tempFrameData_current); // copy frame into editing grid
 }
 
 void MainWindow::on_btn_TransUP_clicked()
@@ -468,7 +440,7 @@ void MainWindow::on_btn_RepeatFrame_clicked()
             (*tempFrameData_current).squareData[x][y].square_RGB = newFrameData.squareData[x][y].square_RGB;
         }
     }
-    MainWindow::copyCurrentFrameData_into_gridGridSquare(tempFrameData_current);
+    mainGrid.loadFrame(tempFrameData_current); // copy frame into editing grid
 }
 
 void MainWindow::drawTimeline()
@@ -596,7 +568,7 @@ void MainWindow::on_actionAdd_100_Frames_triggered()
 
 
         t_FrameData *tempFrameData_Current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
-        MainWindow::copyCurrentFrameData_into_gridGridSquare(tempFrameData_Current);
+        mainGrid.loadFrame(tempFrameData_Current); // copy frame into editing grid
 
         //show duration of new frame
         ui->dsbox_FrameDur->setValue((*tempFrameData_Current).duration);

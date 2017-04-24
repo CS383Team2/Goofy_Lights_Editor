@@ -38,10 +38,6 @@ public:
     QRect redSquare; //in .h -P
 
     void updateTimeline();
-    void copyCurrentFrameData_into_gridGridSquare();
-    // For when current frame is already known
-    void copyCurrentFrameData_into_gridGridSquare(t_FrameData *CurrentFrame);
-
     void initializeEntireTimeline(); //for Tim's file I/O -P
 
 private slots:
@@ -61,8 +57,6 @@ private slots:
     void on_btn_FillFrame_clicked();
 
     void on_btn_ClearFrame_clicked();
-
-    void drawGrid();
 
     void on_btn_NewFrame_clicked();
 
