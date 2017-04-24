@@ -410,16 +410,16 @@ void MainWindow::on_btn_DeleteFrame_clicked()
             //drawGrid();
             //updateTimeline();
 		}
-        else if (V_GLOBAL.G_CURRENTFRAME == V_GLOBAL.G_FRAMECOUNT)
+        else if (V_GLOBAL.G_CURRENTFRAME == V_GLOBAL.G_FRAMECOUNT - 1)
         {
             t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
             TimePositionIndex = tempFrameData -> Position;
 
-            theFrames.DeleteNode_Middle(TimePositionIndex + (V_GLOBAL.G_CURRENTFRAME));
+            theFrames.DeleteNode_Middle(V_GLOBAL.G_FRAMECOUNT);
             V_GLOBAL.G_FRAMECOUNT = V_GLOBAL.G_FRAMECOUNT - 1;
             //return;
         }
-        else if (V_GLOBAL.G_FRAMECOUNT != 1 && V_GLOBAL.G_CURRENTFRAME < V_GLOBAL.G_FRAMECOUNT)
+        else //if (V_GLOBAL.G_FRAMECOUNT != 1 && V_GLOBAL.G_CURRENTFRAME < V_GLOBAL.G_FRAMECOUNT)
 		{
             t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
 			TimePositionIndex = tempFrameData -> Position;
@@ -431,7 +431,26 @@ void MainWindow::on_btn_DeleteFrame_clicked()
             //drawGrid();
             //updateTimeline();
 		}
-	
+
+/*
+ * Supposed to draw the timeline, but this isn't working for me at the moment.
+ * -Kevin 04-23-17 8:55pm
+ *
+        for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++) //loop through ALL? the frames -P
+        {
+            t_FrameData *tmpFrameData = theFrames.RetrieveNode_Middle(i); //grab every frame
+            for(int x=0; x<V_GLOBAL.G_ROW; x++)
+            {
+                for(int y=0; y<V_GLOBAL.G_COL; y++)
+                {
+                    tmpFrameData->squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
+                    tmpFrameData->squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
+
+                    timelineScene->addItem(&(tmpFrameData->squareData[x][y])); //timeline painting here -P
+                }
+            }
+        }
+*/
 /*
     if(V_GLOBAL.G_FRAMECOUNT != 0) //can't delete once there are no frames
     {
