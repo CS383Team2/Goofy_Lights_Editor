@@ -38,6 +38,7 @@ public:
     QRect redSquare; //in .h -P
 
     void updateTimeline();
+    void copyCurrentFrameData_into_gridGridSquare();
 
     void initializeEntireTimeline(); //for Tim's file I/O -P
 

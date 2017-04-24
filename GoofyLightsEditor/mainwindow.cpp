@@ -246,6 +246,21 @@ void MainWindow::on_btn_ClearFrame_clicked() //Clear Frame
     updateTimeline();
 }
 
+
+//This copies the given frame to the GridSquare editing window
+void MainWindow::copyCurrentFrameData_into_gridGridSquare()
+{
+    t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
+    for(int x=0; x<V_GLOBAL.G_ROW; x++)
+    {
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
+        {
+            gridGridSquare[x][y].square_RGB = (*tempFrameData).squareData[x][y].square_RGB; //give the data to the grid -P
+            gridGridSquare[x][y].update(); //Fill that frame son -P
+        }
+    }
+}
+
 void MainWindow::drawGrid()
 {
     //draw the grid -P
@@ -326,19 +341,10 @@ void MainWindow::on_btn_NewFrame_clicked()
     drawTimeline();
     //P
 
-    //this sets the current frame you are editing to the new frame: -P
-
-    t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
-    {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
-        {
-            gridGridSquare[x][y].square_RGB = (*tempFrameData).squareData[x][y].square_RGB; //give the data to the grid -P
-            gridGridSquare[x][y].update(); //Fill that frame son -P
-        }
-    }
+    MainWindow::copyCurrentFrameData_into_gridGridSquare();
 
     //show duration of new frame
+    t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
     ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
 
     //Scroll -P
@@ -416,15 +422,7 @@ void MainWindow::ProcessTranslateFrame(int DIR)
     copyFrame(tempFrameData_current, tempFrameData_prev);                    // Copy prev Frame Into current new frame.
     translateFrame(tempFrameData_current, DIR);                              // Translate newframe by direction
 
-    // copy current frame into gridGridSquare
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
-    {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
-        {
-            gridGridSquare[x][y].square_RGB = (*tempFrameData_current).squareData[x][y].square_RGB;
-            gridGridSquare[x][y].update();
-        }
-    }
+    MainWindow::copyCurrentFrameData_into_gridGridSquare();
 }
 
 void MainWindow::on_btn_TransUP_clicked()
@@ -496,15 +494,7 @@ void MainWindow::on_btn_RepeatFrame_clicked()
             (*tempFrameData_current).squareData[x][y].square_RGB = newFrameData.squareData[x][y].square_RGB;
         }
     }
-    // copy transFrameData into gridGridSquare
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
-    {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
-        {
-            gridGridSquare[x][y].square_RGB = (*tempFrameData_current).squareData[x][y].square_RGB;
-            gridGridSquare[x][y].update();
-        }
-    }
+    MainWindow::copyCurrentFrameData_into_gridGridSquare();
 }
 
 void MainWindow::drawTimeline()
@@ -632,17 +622,10 @@ void MainWindow::on_actionAdd_100_Frames_triggered()
 
         //this sets the current frame you are editing to the new frame: -P
 
-        t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
-        for(int x=0; x<V_GLOBAL.G_ROW; x++)
-        {
-            for(int y=0; y<V_GLOBAL.G_COL; y++)
-            {
-                gridGridSquare[x][y].square_RGB = (*tempFrameData).squareData[x][y].square_RGB; //give the data to the grid -P
-                gridGridSquare[x][y].update(); //Fill that frame son -P
-            }
-        }
+        MainWindow::copyCurrentFrameData_into_gridGridSquare();
 
         //show duration of new frame
+        t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
         ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
 
         //Scroll -P
