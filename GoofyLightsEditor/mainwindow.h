@@ -39,6 +39,8 @@ public:
 
     void updateTimeline();
     void copyCurrentFrameData_into_gridGridSquare();
+    // For when current frame is already known
+    void copyCurrentFrameData_into_gridGridSquare(t_FrameData *CurrentFrame);
 
     void initializeEntireTimeline(); //for Tim's file I/O -P
 
