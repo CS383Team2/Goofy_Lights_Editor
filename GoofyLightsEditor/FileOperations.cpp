@@ -107,6 +107,7 @@ int FileOperations::LoadFromFile(QString fileName, FrameList * frameList){
 
     int currentElement = 0;
     QString startTime = fileContents.readLine();
+    QRegExp rx("(\\.|\\:)");
     QTime currTime = QTime::fromString(startTime, "mm:ss.zzz");
     QTime nextTime = QTime(0,0,0,0);
     while(!fileContents.atEnd() && currentElement < numElements){
@@ -130,11 +131,11 @@ int FileOperations::LoadFromFile(QString fileName, FrameList * frameList){
             }
         }
         frameData.squareData    = data;
-        QString timeStr         = fileContents.readLine();
-        QTime time;
-        time                    = QTime::fromString(timeStr, "mm:ss.zzz");
+        QString timeStr    = fileContents.readLine();
+        QTime time              = QTime::fromString(timeStr, "mm:ss.zzz");
         nextTime                = time;
-        frameData.duration      = currTime.secsTo(nextTime);
+        double duration         = (currTime.msecsTo(nextTime))/1000.0;
+        frameData.duration      = duration;
         frameData.ID            = currentElement;
 
         frameList->AddTail(frameData);

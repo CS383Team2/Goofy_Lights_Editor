@@ -24,7 +24,7 @@ public:
     ~MainWindow();
 
     //MAIN WINDOW TOO BIG, gonna take the scaling down to 85% -P
-    double max;
+    double max_size;
     double G_SCALE;
     int gridScale;
     int timelineScale;
@@ -71,6 +71,9 @@ private slots:
 
     void on_dsbox_FrameDur_valueChanged(double arg1);
 
+    // This Does the actual translation work
+    void ProcessTranslateFrame(int DIR);
+
     void on_btn_TransUP_clicked();
 
     void on_btn_TransLeft_clicked();
@@ -110,6 +113,10 @@ private slots:
     void on_actionNew_Frame_triggered();
 
     void on_actionDelete_Frame_triggered();
+
+    void on_actionAdd_100_Frames_triggered();
+
+    void on_actionPrint_Frames_triggered();
 
 private:
     Ui::MainWindow *ui;
