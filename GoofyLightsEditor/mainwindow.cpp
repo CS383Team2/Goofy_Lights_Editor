@@ -452,7 +452,7 @@ void MainWindow::on_btn_TransUpRight_clicked()
 
 void MainWindow::on_btn_RepeatFrame_clicked()
 {
-    on_btn_NewFrame_clicked();
+/*    on_btn_NewFrame_clicked();
     t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
     t_FrameData *tempFrameData_prev    = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1); //grab the previous frame
     t_FrameData newFrameData;                                                // New frame
@@ -480,6 +480,9 @@ void MainWindow::on_btn_RepeatFrame_clicked()
         }
     }
     MainWindow::copyCurrentFrameData_into_gridGridSquare(tempFrameData_current);
+*/
+    on_btn_CopyFrame_clicked();
+    on_btn_PasteFrame_clicked();
 }
 
 void MainWindow::drawTimeline()
@@ -622,4 +625,29 @@ void MainWindow::on_actionPrint_Frames_triggered()
 {
     std::cout << "Printing out all frames" << std::endl;
     theFrames.PrintNode();
+}
+
+void MainWindow::on_btn_CopyFrame_clicked()
+{
+    clipboard = *(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME));
+    clipboard_empty = false;
+}
+
+void MainWindow::on_btn_PasteFrame_clicked()
+{
+    if (clipboard_empty) return;
+    else
+    {
+        on_btn_NewFrame_clicked();
+        for (int i = 0; i < V_GLOBAL.G_ROW; i++)
+        {
+            for (int j = 0; j < V_GLOBAL.G_COL; j++)
+            {
+                theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData[i][j].square_RGB = clipboard.squareData[i][j].square_RGB;
+            }
+        }
+        ui->dsbox_FrameDur->setValue(clipboard.duration);
+        MainWindow::copyCurrentFrameData_into_gridGridSquare(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME));
+        updateTimeline();
+    }
 }
