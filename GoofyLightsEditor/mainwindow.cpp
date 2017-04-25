@@ -20,10 +20,10 @@ FrameList theFrames(V_GLOBAL.G_ROW, V_GLOBAL.G_COL); //HERE LAY THE LINKED LIST 
 
 int CurrentFrameNum = 0;
 
-GridSquare *Lcolor = new GridSquare(true);
-GridSquare *Rcolor = new GridSquare(true);
+PaletteSquare *Lcolor = new PaletteSquare(0,0,Qt::red);
+PaletteSquare *Rcolor = new PaletteSquare(0,32.5,Qt::blue);
 
-
+Palette *currentPalette = new Palette;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -40,6 +40,9 @@ MainWindow::MainWindow(QWidget *parent) :
     currentcolorsScene = new QGraphicsScene(this);
     ui->gCurrent_Colors->setScene(currentcolorsScene);
 
+    paletteScene = new QGraphicsScene(this);
+    ui->gPalette->setScene(paletteScene);
+
     //MAIN WINDOW TOO BIG, gonna take the scaling down to 85% -P
     max_size = 0;
     if(V_GLOBAL.G_ROW > V_GLOBAL.G_COL)
@@ -52,12 +55,6 @@ MainWindow::MainWindow(QWidget *parent) :
     timelineScale = 4*G_SCALE;
     g_SPACING = 3; //grid spacing woohooo -P
     t_SPACING = 2; //timeline spacing woohooo -P
-
-
-    Lcolor->x = 0;
-    Lcolor->y = 0;
-    Rcolor->x = 0;
-    Rcolor->y = 40;
 
     theFrames.SetRowCount(V_GLOBAL.G_ROW);        // Update row size in FrameList now that it is defined
     theFrames.SetColCount(V_GLOBAL.G_COL);        // Update col size in FrameList now that it is defined
@@ -84,6 +81,10 @@ MainWindow::MainWindow(QWidget *parent) :
     drawGrid();
     on_btn_NewFrame_clicked(); //pseudo-fix for first frame not showing on timeline, fix the bug
 
+    currentPalette->insertColor(V_GLOBAL.G_LEFT);
+    currentPalette->insertColor(V_GLOBAL.G_RIGHT);
+
+    drawPalette();
 
     //here are some tooltips, perhaps make a function to toggle them on/off:
     ui->btn_NewFrame->setToolTip("Adds a new frame right after this current frame."); //fancy tool tips for detail -P
@@ -162,6 +163,12 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
     // Update GUI
     Rcolor->update();
     Lcolor->update();
+
+    currentPalette->insertColor(V_GLOBAL.G_LEFT);
+    currentPalette->insertColor(V_GLOBAL.G_RIGHT);
+    drawPalette();
+
+    setCursor(Qt::ArrowCursor);
 
     //set grid to current frame -P
     if(V_GLOBAL.G_TIMELINESELECTED == true)
@@ -649,5 +656,30 @@ void MainWindow::on_btn_PasteFrame_clicked()
         ui->dsbox_FrameDur->setValue(clipboard.duration);
         MainWindow::copyCurrentFrameData_into_gridGridSquare(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME));
         updateTimeline();
+    }
+}
+
+void MainWindow::on_EyeDropper_clicked()
+{
+    setCursor(Qt::CrossCursor);
+    V_GLOBAL.EyeDropper = true;
+}
+
+void MainWindow::drawPalette()
+{
+    QColor temp;
+    for (int x = 0; x < currentPalette->getNumColors(); x++)
+    {
+        temp = currentPalette->getColor(x);
+        if(x < 4)
+        {
+            PaletteSquare *Top = new PaletteSquare((x*32.5), 0, temp);
+            paletteScene->addItem(Top);
+        }
+        else
+        {
+            PaletteSquare *Bottom = new PaletteSquare(((x-4)*32.5),32.5,temp);
+            paletteScene->addItem(Bottom);
+        }
     }
 }

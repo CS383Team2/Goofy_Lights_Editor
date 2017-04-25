@@ -6,6 +6,8 @@
 #include <QtGui>
 #include <QtWidgets>
 #include <gridsquare.h>
+#include <palettesquare.h>
+#include <palette.h>
 #include "FrameList.h"
 #include <colorwheel.h>
 #include <globals.h>
@@ -127,6 +129,10 @@ private slots:
 
     void on_btn_PasteFrame_clicked();
 
+    void on_EyeDropper_clicked();
+
+    void drawPalette();
+
 private:
     Ui::MainWindow *ui;
 
@@ -135,6 +141,8 @@ private:
     QGraphicsScene *timelineScene; //timeline -P
 
     QGraphicsScene *currentcolorsScene;
+
+    QGraphicsScene *paletteScene;
 
     void createActions();
 };
