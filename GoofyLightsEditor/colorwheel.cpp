@@ -8,7 +8,6 @@
 #include <QtCore/qmath.h>
 #include <QDebug>
 #include <globals.h> //RGB -P
-#include <mainwindow.h>
 
 ColorWheel::ColorWheel(QWidget *parent) :
     QWidget(parent),

@@ -2,10 +2,6 @@
 #include "mainwindow.h"
 #include <QApplication>
 
-#include "framestructure.h"
-#include "FrameList.h"
-#include "FrameManipulation.h"
-#include "FileOperations.h"
 #include <globals.h>
 #include <sizedialog.h>
 

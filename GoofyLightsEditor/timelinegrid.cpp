@@ -1,6 +1,5 @@
 #include "timelinegrid.h"
 #include <globals.h>
-#include <mainwindow.h>
 
 TimelineGrid::TimelineGrid()
 {
