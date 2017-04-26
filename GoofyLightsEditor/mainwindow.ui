@@ -294,8 +294,8 @@
    <widget class="QPushButton" name="btn_PasteFrame">
     <property name="geometry">
      <rect>
-      <x>390</x>
-      <y>630</y>
+      <x>500</x>
+      <y>600</y>
       <width>101</width>
       <height>25</height>
      </rect>
@@ -416,7 +416,7 @@
    <widget class="QSpinBox" name="sbox_ValueRed">
     <property name="geometry">
      <rect>
-      <x>537</x>
+      <x>540</x>
       <y>220</y>
       <width>51</width>
       <height>26</height>
@@ -432,7 +432,7 @@
    <widget class="QSpinBox" name="sbox_ValueGreen">
     <property name="geometry">
      <rect>
-      <x>537</x>
+      <x>540</x>
       <y>250</y>
       <width>51</width>
       <height>26</height>
@@ -687,7 +687,7 @@
      <x>0</x>
      <y>0</y>
      <width>960</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuSuper_Animator_Window">

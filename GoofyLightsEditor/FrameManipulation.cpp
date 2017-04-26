@@ -40,6 +40,9 @@ int copyFrame(t_FrameData *copyFrame, t_FrameData *origFrame)
         }
     }
 
+    //copy duration
+    copyFrame->duration = origFrame->duration;
+
     return RTN_SUCCESSFUL;
 }
 

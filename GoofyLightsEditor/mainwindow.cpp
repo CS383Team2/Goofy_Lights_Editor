@@ -278,6 +278,8 @@ void MainWindow::updateTimeline() //fix the update lag later -P
             (*tempFrameData).squareData[x][y].update();
         }
     }
+
+    ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
 }
 
 void MainWindow::initializeEntireTimeline() //try this one Tim -P
@@ -415,6 +417,8 @@ void MainWindow::ProcessTranslateFrame(int DIR)
     translateFrame(tempFrameData_current, DIR);                              // Translate newframe by direction
 
     MainWindow::copyCurrentFrameData_into_gridGridSquare(tempFrameData_current);
+
+    updateTimeline();
 }
 
 void MainWindow::on_btn_TransUP_clicked()
