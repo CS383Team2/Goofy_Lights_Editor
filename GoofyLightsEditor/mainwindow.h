@@ -6,6 +6,8 @@
 #include <QtGui>
 #include <QtWidgets>
 #include <gridsquare.h>
+#include <palettesquare.h>
+#include <palette.h>
 #include "FrameList.h"
 #include <colorwheel.h>
 #include <globals.h>
@@ -35,6 +37,8 @@ public:
     GridSquare **gridGridSquare;     //Type is GridSquare, square is object
     t_FrameData FrameData;           // THE frame data (this is in mainwindow.h) -P
     t_FrameData CurrentFrameData;
+    t_FrameData clipboard;
+    bool clipboard_empty = true;
     QRect redSquare; //in .h -P
 
     void updateTimeline();
@@ -121,6 +125,14 @@ private slots:
 
     void on_actionPrint_Frames_triggered();
 
+    void on_btn_CopyFrame_clicked();
+
+    void on_btn_PasteFrame_clicked();
+
+    void on_EyeDropper_clicked();
+
+    void drawPalette();
+
 private:
     Ui::MainWindow *ui;
 
@@ -129,6 +141,8 @@ private:
     QGraphicsScene *timelineScene; //timeline -P
 
     QGraphicsScene *currentcolorsScene;
+
+    QGraphicsScene *paletteScene;
 
     void createActions();
 };
