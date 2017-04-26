@@ -449,7 +449,6 @@ void MainWindow::on_btn_RepeatFrame_clicked()
 */
     on_btn_CopyFrame_clicked();
     on_btn_PasteFrame_clicked();
-    mainGrid.loadFrame(tempFrameData_current); // copy frame into editing grid
 }
 
 void MainWindow::drawTimeline()
@@ -602,19 +601,14 @@ void MainWindow::on_btn_CopyFrame_clicked()
 
 void MainWindow::on_btn_PasteFrame_clicked()
 {
+    t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
     if (clipboard_empty) return;
     else
     {
         on_btn_NewFrame_clicked();
-        for (int i = 0; i < V_GLOBAL.G_ROW; i++)
-        {
-            for (int j = 0; j < V_GLOBAL.G_COL; j++)
-            {
-                theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData[i][j].square_RGB = clipboard.squareData[i][j].square_RGB;
-            }
-        }
+        copyFrame(tempFrameData_current, &clipboard);
         ui->dsbox_FrameDur->setValue(clipboard.duration);
-        MainWindow::copyCurrentFrameData_into_gridGridSquare(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME));
+        mainGrid.loadFrame(tempFrameData_current); // copy frame into editing grid
         updateTimeline();
     }
 }
