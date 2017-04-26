@@ -91,7 +91,7 @@ private slots:
 
     void on_btn_RepeatFrame_clicked();
 
-    void drawTimeline();
+    void drawFrame();
 
     void refreshTimeline();
 

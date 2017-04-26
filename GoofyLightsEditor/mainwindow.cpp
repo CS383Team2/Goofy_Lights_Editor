@@ -54,7 +54,6 @@ MainWindow::MainWindow(QWidget *parent) :
     g_SPACING = 3; //grid spacing woohooo -P
     t_SPACING = 2; //timeline spacing woohooo -P
 
-
     Lcolor->x = 0;
     Lcolor->y = 0;
     Rcolor->x = 0;
@@ -91,7 +90,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     drawGrid();
     createFirstFrame(); //pseudo-fix for first frame not showing on timeline, fix the bug
-
 
     //here are some tooltips, perhaps make a function to toggle them on/off:
     ui->btn_NewFrame->setToolTip("Adds a new frame right after this current frame."); //fancy tool tips for detail -P
@@ -143,7 +141,6 @@ void MainWindow::on_actionOpenProject_triggered()
     updateTimeline();
 }
 
-
 void MainWindow::on_sbox_ValueRed_editingFinished()
 {
     //crap -P
@@ -159,7 +156,6 @@ void MainWindow::on_sbox_ValueBlue_editingFinished()
 {
     V_GLOBAL.G_LEFT.setBlue( ui->sbox_ValueBlue->value() ); //allow custom colors via the spinboxes -P
 }
-
 
 void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is clicked inside of, lol -P
 {
@@ -209,8 +205,6 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
         }
 
         timelineScene->addRect((((V_GLOBAL.G_CURRENTFRAME)*redSpacingX)-10),(-10),redSizeX,redSizeY,redPen,(Qt::NoBrush));
-        //drawTimeline(); Commented out as it was causing a bug and seems uneeded
-        //P
     }
 
 
@@ -218,7 +212,6 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
 
     updateTimeline(); //lol -P
 }
-
 
 void MainWindow::on_btn_FillFrame_clicked() //Fill Frame
 {
@@ -286,11 +279,10 @@ void MainWindow::createFirstFrame()
     //updateTimeline();
     FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, 0); //fix indexing later -P
     V_GLOBAL.G_FRAMECOUNT++;
-    //FrameData.squareData[i % V_GLOBAL.G_ROW][i % V_GLOBAL.G_COL].square_RGB = (Qt::blue); //show that each frame is in fact unique
     theFrames.AddTail(FrameData);
+    drawFrame();
 
     //draw red square around frame -P
-
     QPen redPen;
     QPen clearPen;
     QColor clear;
@@ -310,17 +302,9 @@ void MainWindow::createFirstFrame()
     {
         timelineScene->addRect((((i)*redSpacingX)-10),(-10),redSizeX,redSizeY,clearPen,(Qt::NoBrush));
     }
-
     timelineScene->addRect((((V_GLOBAL.G_CURRENTFRAME)*redSpacingX)-10),(-10),redSizeX,redSizeY,redPen,(Qt::NoBrush));
 
-    drawTimeline();
-    //refreshTimeline();
-
-
-    //P
-
     //this sets the current frame you are editing to the new frame: -P
-
     t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
     for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
@@ -330,8 +314,6 @@ void MainWindow::createFirstFrame()
             gridGridSquare[x][y].update(); //Fill that frame son -P
         }
     }
-
-
     //show duration of new frame
     ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
 }
@@ -344,14 +326,11 @@ void MainWindow::on_btn_NewFrame_clicked()
     //FrameData.squareData[i % V_GLOBAL.G_ROW][i % V_GLOBAL.G_COL].square_RGB = (Qt::blue); //show that each frame is in fact unique
     theFrames.AddNode_Middle(FrameData, V_GLOBAL.G_CURRENTFRAME);
 
-    drawTimeline();
-    refreshTimeline();
-
-
-
+    drawFrame();
+    if(V_GLOBAL.G_CURRENTFRAME < V_GLOBAL.G_FRAMECOUNT-1)//Only refresh the list if the current frame being added is in the middle
+        refreshTimeline();
 
     //draw red square around frame -P
-
     QPen redPen;
     QPen clearPen;
     QColor clear;
@@ -371,13 +350,9 @@ void MainWindow::on_btn_NewFrame_clicked()
     {
         timelineScene->addRect((((i)*redSpacingX)-10),(-10),redSizeX,redSizeY,clearPen,(Qt::NoBrush));
     }
-
     timelineScene->addRect((((V_GLOBAL.G_CURRENTFRAME)*redSpacingX)-10),(-10),redSizeX,redSizeY,redPen,(Qt::NoBrush));
 
-    //P
-
     //this sets the current frame you are editing to the new frame: -P
-
     t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
     for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
@@ -387,7 +362,6 @@ void MainWindow::on_btn_NewFrame_clicked()
             gridGridSquare[x][y].update(); //Fill that frame son -P
         }
     }
-
 
     //show duration of new frame
     ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
@@ -469,7 +443,6 @@ void MainWindow::ProcessTranslateFrame(int DIR)
     copyFrame(tempFrameData_current, tempFrameData_prev);
 
     // Translate newframe by direction
-
     translateFrame(tempFrameData_current, DIR);
 
     // copy current frame into gridGridSquare
@@ -563,9 +536,9 @@ void MainWindow::on_btn_RepeatFrame_clicked()
     }
 }
 
-void MainWindow::drawTimeline()
+//Draws and adds new frame to timeline
+void MainWindow::drawFrame()
 {
-
     int i = V_GLOBAL.G_CURRENTFRAME;
     for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
@@ -579,19 +552,19 @@ void MainWindow::drawTimeline()
 
 }
 
+//Function that goes through the timeline and updates/moves frames for a frame being added in the middle of the list
 void MainWindow::refreshTimeline()
 {
-    for(int i= V_GLOBAL.G_CURRENTFRAME; i < V_GLOBAL.G_FRAMECOUNT; i++)
+    for(int i= V_GLOBAL.G_CURRENTFRAME+1; i < V_GLOBAL.G_FRAMECOUNT; i++)
         {
             FrameData.squareData = theFrames.RetrieveNode_Middle(i)->squareData; //grabe every frame
             for(int x=0; x<V_GLOBAL.G_ROW; x++)
             {
                 for(int y=0; y<V_GLOBAL.G_COL; y++)
                 {
+                    FrameData.squareData[x][y].timelineFrameNumber = i;
                     FrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
                     FrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
-
-                    timelineScene->addItem(&(FrameData.squareData[x][y])); //timeline painting here -P
                 }
             }
         }
