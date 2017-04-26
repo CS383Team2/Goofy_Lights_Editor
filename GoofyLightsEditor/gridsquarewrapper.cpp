@@ -36,6 +36,13 @@ void gridsquarewrapper::generate()
 
 void gridsquarewrapper::loadFrame(t_FrameData *frameData)
 {
+    if (frameData == 0) {
+        QMessageBox msgError;
+            msgError.setText("gridsquareWrapper frameData null"),
+            msgError.exec();
+        return;
+    }
+
     for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
         for(int y=0; y<V_GLOBAL.G_COL; y++)

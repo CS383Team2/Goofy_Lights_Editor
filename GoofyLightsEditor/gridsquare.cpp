@@ -79,6 +79,8 @@ void GridSquare::mousePressEvent(QGraphicsSceneMouseEvent *event) //-P
             V_GLOBAL.G_RIGHT = square_RGB;
         }
         V_GLOBAL.EyeDropper = false;
+
+        QGraphicsItem::mousePressEvent(event); //send click up the chain, fixed one click lag -P
         return;
     }
 
