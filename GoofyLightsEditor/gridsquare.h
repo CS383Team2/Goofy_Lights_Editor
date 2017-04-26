@@ -10,7 +10,6 @@ class GridSquare : public QGraphicsItem //inherit the public methods of QGraphic
 {
 public:
     GridSquare();
-    GridSquare(bool if_palette);
     ~GridSquare();
 
     QRectF boundingRect() const; //MUST have a bounding rectangle for each square -P
@@ -22,7 +21,6 @@ public:
     bool Selected; //is this square selected? -P
     bool ClearSquare;
     bool leftclick;
-    bool Palette;
 
     int x = 0; //drawing locations -P
     int y = 0;

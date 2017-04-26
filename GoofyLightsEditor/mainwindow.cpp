@@ -15,16 +15,15 @@
 
 int FrameID = 0; //-P
 QColor temp_RGB; //yeah.... -P
-//FrameList frameList(V_GLOBAL.G_ROW,V_GLOBAL.G_COL);
 
 FrameList theFrames(V_GLOBAL.G_ROW, V_GLOBAL.G_COL); //HERE LAY THE LINKED LIST -P
 
 int CurrentFrameNum = 0;
 
-GridSquare *Lcolor = new GridSquare(true);
-GridSquare *Rcolor = new GridSquare(true);
+PaletteSquare *Lcolor = new PaletteSquare(0,0,Qt::red);
+PaletteSquare *Rcolor = new PaletteSquare(0,32.5,Qt::blue);
 
-
+Palette *currentPalette = new Palette;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -41,6 +40,9 @@ MainWindow::MainWindow(QWidget *parent) :
     currentcolorsScene = new QGraphicsScene(this);
     ui->gCurrent_Colors->setScene(currentcolorsScene);
 
+    paletteScene = new QGraphicsScene(this);
+    ui->gPalette->setScene(paletteScene);
+
     //MAIN WINDOW TOO BIG, gonna take the scaling down to 85% -P
     max_size = 0;
     if(V_GLOBAL.G_ROW > V_GLOBAL.G_COL)
@@ -53,11 +55,6 @@ MainWindow::MainWindow(QWidget *parent) :
     timelineScale = 4*G_SCALE;
     g_SPACING = 3; //grid spacing woohooo -P
     t_SPACING = 2; //timeline spacing woohooo -P
-
-    Lcolor->x = 0;
-    Lcolor->y = 0;
-    Rcolor->x = 0;
-    Rcolor->y = 40;
 
     theFrames.SetRowCount(V_GLOBAL.G_ROW);        // Update row size in FrameList now that it is defined
     theFrames.SetColCount(V_GLOBAL.G_COL);        // Update col size in FrameList now that it is defined
@@ -84,9 +81,6 @@ MainWindow::MainWindow(QWidget *parent) :
     {
         gridGridSquare[i] = new GridSquare[V_GLOBAL.G_COL];
     }
-
-    // is this needed? Is it needed if we dont use a first frame above? -n
-    //CurrentFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
 
     drawGrid();
     createFirstFrame(); //pseudo-fix for first frame not showing on timeline, fix the bug
@@ -167,18 +161,17 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
     Rcolor->update();
     Lcolor->update();
 
+    currentPalette->insertColor(V_GLOBAL.G_LEFT);
+    currentPalette->insertColor(V_GLOBAL.G_RIGHT);
+    drawPalette();
+
+    setCursor(Qt::ArrowCursor);
+
     //set grid to current frame -P
     if(V_GLOBAL.G_TIMELINESELECTED == true)
     {
         t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
-        for(int x=0; x<V_GLOBAL.G_ROW; x++)
-        {
-            for(int y=0; y<V_GLOBAL.G_COL; y++)
-            {
-                gridGridSquare[x][y].square_RGB = (*tempFrameData).squareData[x][y].square_RGB; //give the data to the grid -P
-                gridGridSquare[x][y].update(); //Fill that frame son -P
-            }
-        }
+        MainWindow::copyCurrentFrameData_into_gridGridSquare(tempFrameData);
         //show duration of current frame
         ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
 
@@ -219,14 +212,7 @@ void MainWindow::on_btn_FillFrame_clicked() //Fill Frame
 
     fillFrame(currentFrameFill, Lcolor->square_RGB); //do this later -P
 
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
-    {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
-        {
-            gridGridSquare[x][y].square_RGB = currentFrameFill->squareData[x][y].square_RGB;
-            gridGridSquare[x][y].update();
-        }
-    }
+    MainWindow::copyCurrentFrameData_into_gridGridSquare(currentFrameFill);
     updateTimeline();
 }
 
@@ -236,15 +222,29 @@ void MainWindow::on_btn_ClearFrame_clicked() //Clear Frame
 
     fillFrame(currentFrameFill, Qt::black);
 
+    MainWindow::copyCurrentFrameData_into_gridGridSquare(currentFrameFill);
+    updateTimeline();
+}
+
+
+//This copies the given frame to the GridSquare editing window
+void MainWindow::copyCurrentFrameData_into_gridGridSquare()
+{
+    t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
+    MainWindow::copyCurrentFrameData_into_gridGridSquare(tempFrameData);
+}
+
+//This copies the given frame to the GridSquare editing window with provided frame
+void MainWindow::copyCurrentFrameData_into_gridGridSquare(t_FrameData *CurrentFrame)
+{
     for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
         for(int y=0; y<V_GLOBAL.G_COL; y++)
         {
-            gridGridSquare[x][y].square_RGB = currentFrameFill->squareData[x][y].square_RGB;
-            gridGridSquare[x][y].update();
+            gridGridSquare[x][y].square_RGB = (*CurrentFrame).squareData[x][y].square_RGB; //give the data to the grid -P
+            gridGridSquare[x][y].update(); //Fill that frame son -P
         }
     }
-    updateTimeline();
 }
 
 void MainWindow::drawGrid()
@@ -272,6 +272,8 @@ void MainWindow::updateTimeline() //fix the update lag later -P
             (*tempFrameData).squareData[x][y].update();
         }
     }
+
+    ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
 }
 
 void MainWindow::createFirstFrame()
@@ -352,18 +354,10 @@ void MainWindow::on_btn_NewFrame_clicked()
     }
     timelineScene->addRect((((V_GLOBAL.G_CURRENTFRAME)*redSpacingX)-10),(-10),redSizeX,redSizeY,redPen,(Qt::NoBrush));
 
-    //this sets the current frame you are editing to the new frame: -P
-    t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
-    {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
-        {
-            gridGridSquare[x][y].square_RGB = (*tempFrameData).squareData[x][y].square_RGB; //give the data to the grid -P
-            gridGridSquare[x][y].update(); //Fill that frame son -P
-        }
-    }
+    MainWindow::copyCurrentFrameData_into_gridGridSquare();
 
     //show duration of new frame
+    t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
     ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
 
     //Scroll -P
@@ -431,29 +425,19 @@ void MainWindow::on_dsbox_FrameDur_valueChanged(double arg1)
 void MainWindow::ProcessTranslateFrame(int DIR)
 {
     // Get previous Frame for the purpose of copying later
-    t_FrameData *tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);  //grab the previous frame
+    t_FrameData *tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the previous frame
 
     // on_btn_NewFrame creates new node & adds to framelist. Then updates G_CURRENTFRAME to new frame
     on_btn_NewFrame_clicked();
 
-    // Get current new Frame
-    t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);       //grab the current frame
+    t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME); // Get current new Frame
 
-    // Copy prev Frame Into current new frame. Arguments have to be pointers
-    copyFrame(tempFrameData_current, tempFrameData_prev);
+    copyFrame(tempFrameData_current, tempFrameData_prev);                    // Copy prev Frame Into current new frame.
+    translateFrame(tempFrameData_current, DIR);                              // Translate newframe by direction
 
-    // Translate newframe by direction
-    translateFrame(tempFrameData_current, DIR);
+    MainWindow::copyCurrentFrameData_into_gridGridSquare(tempFrameData_current);
 
-    // copy current frame into gridGridSquare
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
-    {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
-        {
-            gridGridSquare[x][y].square_RGB = (*tempFrameData_current).squareData[x][y].square_RGB;
-            gridGridSquare[x][y].update();
-        }
-    }
+    updateTimeline();
 }
 
 void MainWindow::on_btn_TransUP_clicked()
@@ -498,7 +482,7 @@ void MainWindow::on_btn_TransUpRight_clicked()
 
 void MainWindow::on_btn_RepeatFrame_clicked()
 {
-    on_btn_NewFrame_clicked();
+/*    on_btn_NewFrame_clicked();
     t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
     t_FrameData *tempFrameData_prev    = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1); //grab the previous frame
     t_FrameData newFrameData;                                                // New frame
@@ -525,15 +509,10 @@ void MainWindow::on_btn_RepeatFrame_clicked()
             (*tempFrameData_current).squareData[x][y].square_RGB = newFrameData.squareData[x][y].square_RGB;
         }
     }
-    // copy transFrameData into gridGridSquare
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
-    {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
-        {
-            gridGridSquare[x][y].square_RGB = (*tempFrameData_current).squareData[x][y].square_RGB;
-            gridGridSquare[x][y].update();
-        }
-    }
+    MainWindow::copyCurrentFrameData_into_gridGridSquare(tempFrameData_current);
+*/
+    on_btn_CopyFrame_clicked();
+    on_btn_PasteFrame_clicked();
 }
 
 //Draws and adds new frame to timeline
@@ -657,16 +636,108 @@ void MainWindow::on_actionDelete_Frame_triggered()
 void MainWindow::on_actionAdd_100_Frames_triggered()
 {
     std::cout << "Creating 100 frames" << std::endl;
+    // manually create the 100 frames.
     for (int i = 0; i < 100; i++) {
-        on_btn_NewFrame_clicked(); // create new frame.
-        // making each frame unique is a bit expensive
-        t_FrameData * tempFD = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
-        fillFrame2(tempFD, rand()%255, rand()%255, rand()%255);
+        t_FrameData newFrame;
+        newFrame.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, V_GLOBAL.G_FRAMECOUNT++);
+        fillFrame2(&newFrame, rand()%255, rand()%255, rand()%255);  // Random frame color
+        theFrames.AddTail(newFrame);
     }
+
+    // Redraw everything.
+    // code below copied from on_btn_NewFrame_clicked. Except drawTimeline line
+        V_GLOBAL.G_CURRENTFRAME = V_GLOBAL.G_FRAMECOUNT; //fix indexing later -P
+
+        //draw red square around frame -P
+
+        QPen redPen;
+        QPen clearPen;
+        QColor clear;
+        clear.setRgb(211,215,207,255);
+        redPen.setColor(Qt::blue);
+        redPen.setWidth(4);
+        clearPen.setColor(clear);
+        clearPen.setWidth(4);
+
+        int redSpacingX = 110;
+        int redSizeX = V_GLOBAL.G_COL*timelineScale + V_GLOBAL.G_COL*t_SPACING + 20;
+        int redSizeY = V_GLOBAL.G_ROW*timelineScale + V_GLOBAL.G_ROW*t_SPACING + 20;
+
+        for(int i=0;i<V_GLOBAL.G_FRAMECOUNT;i++)
+        {
+            timelineScene->addRect((((i)*redSpacingX)-10),(-10),redSizeX,redSizeY,clearPen,(Qt::NoBrush));
+        }
+
+        timelineScene->addRect((((V_GLOBAL.G_CURRENTFRAME-1)*redSpacingX)-10),(-10),redSizeX,redSizeY,redPen,(Qt::NoBrush));
+        drawTimeline();
+        //P
+        initializeEntireTimeline();
+
+
+        t_FrameData *tempFrameData_Current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
+        MainWindow::copyCurrentFrameData_into_gridGridSquare(tempFrameData_Current);
+
+        //show duration of new frame
+        ui->dsbox_FrameDur->setValue((*tempFrameData_Current).duration);
+
+        //Scroll -P
+        qApp->processEvents();
+        ui->gView_Timeline->horizontalScrollBar()->setValue(( ui->gView_Timeline->horizontalScrollBar()->maximum()));
+        //Keep timeline scrolled all the way to the RIGHT -P
 }
 
 void MainWindow::on_actionPrint_Frames_triggered()
 {
     std::cout << "Printing out all frames" << std::endl;
     theFrames.PrintNode();
+}
+
+void MainWindow::on_btn_CopyFrame_clicked()
+{
+    clipboard = *(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME));
+    clipboard_empty = false;
+}
+
+void MainWindow::on_btn_PasteFrame_clicked()
+{
+    if (clipboard_empty) return;
+    else
+    {
+        on_btn_NewFrame_clicked();
+        for (int i = 0; i < V_GLOBAL.G_ROW; i++)
+        {
+            for (int j = 0; j < V_GLOBAL.G_COL; j++)
+            {
+                theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME)->squareData[i][j].square_RGB = clipboard.squareData[i][j].square_RGB;
+            }
+        }
+        ui->dsbox_FrameDur->setValue(clipboard.duration);
+        MainWindow::copyCurrentFrameData_into_gridGridSquare(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME));
+        updateTimeline();
+    }
+}
+
+void MainWindow::on_EyeDropper_clicked()
+{
+    setCursor(Qt::CrossCursor);
+    V_GLOBAL.EyeDropper = true;
+}
+
+void MainWindow::drawPalette()
+{
+    QColor temp;
+    for (int x = 0; x < currentPalette->getNumColors(); x++)
+    {
+        temp = currentPalette->getColor(x);
+        if(x < 4)
+        {
+            PaletteSquare *Top = new PaletteSquare((x*32.5), 0, temp);
+            paletteScene->addItem(Top);
+        }
+        else
+        {
+            PaletteSquare *Bottom = new PaletteSquare(((x-4)*32.5),32.5,temp);
+            paletteScene->addItem(Bottom);
+        }
+    }
 }
