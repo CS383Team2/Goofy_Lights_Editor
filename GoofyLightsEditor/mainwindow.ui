@@ -433,7 +433,7 @@
     <property name="geometry">
      <rect>
       <x>537</x>
-      <y>260</y>
+      <y>250</y>
       <width>51</width>
       <height>26</height>
      </rect>
@@ -448,8 +448,8 @@
    <widget class="QSpinBox" name="sbox_ValueBlue">
     <property name="geometry">
      <rect>
-      <x>537</x>
-      <y>300</y>
+      <x>540</x>
+      <y>280</y>
       <width>51</width>
       <height>26</height>
      </rect>
@@ -478,7 +478,7 @@
     <property name="geometry">
      <rect>
       <x>600</x>
-      <y>270</y>
+      <y>260</y>
       <width>67</width>
       <height>17</height>
      </rect>
@@ -491,7 +491,7 @@
     <property name="geometry">
      <rect>
       <x>600</x>
-      <y>310</y>
+      <y>290</y>
       <width>67</width>
       <height>17</height>
      </rect>
@@ -509,35 +509,6 @@
       <height>171</height>
      </rect>
     </property>
-   </widget>
-   <widget class="QFrame" name="frame">
-    <property name="geometry">
-     <rect>
-      <x>550</x>
-      <y>350</y>
-      <width>131</width>
-      <height>81</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-    <widget class="QLabel" name="label">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>30</y>
-       <width>111</width>
-       <height>17</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Recent Colors</string>
-     </property>
-    </widget>
    </widget>
    <widget class="QPushButton" name="btn_InsertShape">
     <property name="geometry">
@@ -606,9 +577,9 @@
     <property name="geometry">
      <rect>
       <x>480</x>
-      <y>340</y>
-      <width>51</width>
-      <height>91</height>
+      <y>320</y>
+      <width>41</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="palette">
@@ -649,6 +620,66 @@
      </palette>
     </property>
    </widget>
+   <widget class="QGraphicsView" name="gPalette">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>320</y>
+      <width>151</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="palette">
+     <palette>
+      <active>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>211</red>
+          <green>215</green>
+          <blue>207</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </active>
+      <inactive>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>211</red>
+          <green>215</green>
+          <blue>207</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </inactive>
+      <disabled>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>240</red>
+          <green>240</green>
+          <blue>240</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </disabled>
+     </palette>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="EyeDropper">
+    <property name="geometry">
+     <rect>
+      <x>480</x>
+      <y>400</y>
+      <width>201</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Eye Dropper</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -656,7 +687,7 @@
      <x>0</x>
      <y>0</y>
      <width>960</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuSuper_Animator_Window">

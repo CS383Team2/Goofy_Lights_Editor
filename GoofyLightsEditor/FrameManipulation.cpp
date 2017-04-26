@@ -53,38 +53,28 @@ int translateFrame(t_FrameData *d, int direction)
 
     //Condition for up, up left, and up right. Uses recursion for left and right translation
     if(direction == D_UP || direction == D_UP_L || direction == D_UP_R){
-        temp = d->squareData[0];
-        for(i = 0; i < V_GLOBAL.G_ROW-1; i++){
-            d->squareData[i] = d->squareData[i+1];
+        for(i = 0; i < V_GLOBAL.G_ROW; i++){
+            for (j = 0; j < V_GLOBAL.G_COL-1; j++){
+                d->squareData[j][i].square_RGB = d->squareData[j+1][i].square_RGB;
+            }
         }
-        d->squareData[i] = temp;
-        for(int j = 0; j < V_GLOBAL.G_COL; j++){
-            d->squareData[i][j].square_RGB = Qt::black;
-
+        for(i = 0; i < V_GLOBAL.G_ROW; i++){
+            d->squareData[j][i].square_RGB = Qt::black;
         }
-        if(direction == D_UP_L)
-            translateFrame(d, D_LEFT);
-        if(direction == D_UP_R)
-            translateFrame(d, D_RIGHT);
-
     }
     //Condition for down, down left, and down right. Uses recursion for left and right translation
     if(direction == D_DWN || direction == D_DWN_L || direction == D_DWN_R){
-        temp = d->squareData[V_GLOBAL.G_ROW-1];
-        for(i = V_GLOBAL.G_ROW-1; i > 0; i--){
-            d->squareData[i] = d->squareData[i-1];
+        for(i = 0; i < V_GLOBAL.G_ROW; i++){
+            for (j = V_GLOBAL.G_COL-1; j > 0; j--){
+                d->squareData[j][i].square_RGB = d->squareData[j-1][i].square_RGB;
+            }
         }
-        d->squareData[i] = temp;
-        for(j = 0; j < V_GLOBAL.G_COL; j++){
-            d->squareData[i][j].square_RGB = Qt::black;
+        for(i = 0; i < V_GLOBAL.G_ROW; i++){
+            d->squareData[j][i].square_RGB = Qt::black;
         }
-        if(direction == D_DWN_L)
-            translateFrame(d, D_LEFT);
-        if(direction == D_DWN_R)
-            translateFrame(d, D_RIGHT);
     }
     //Condition for left transition
-    if(direction == D_LEFT){
+    if(direction == D_LEFT || direction == D_UP_L || direction == D_DWN_L){
         for(i = 0; i < V_GLOBAL.G_ROW; i++){
             for (j = 0; j < V_GLOBAL.G_COL-1; j++){
                 d->squareData[i][j].square_RGB = d->squareData[i][j+1].square_RGB;
@@ -95,7 +85,7 @@ int translateFrame(t_FrameData *d, int direction)
         }
      }
     //Condition for right transition
-    if(direction == D_RIGHT){
+    if(direction == D_RIGHT || direction == D_UP_R || direction == D_DWN_R){
         for(i = 0; i < V_GLOBAL.G_ROW; i++){
             for (j = V_GLOBAL.G_COL-1; j > 0; j--){
                 d->squareData[i][j].square_RGB = d->squareData[i][j-1].square_RGB;

@@ -35,7 +35,9 @@ SOURCES += main.cpp\
     timelinegrid.cpp \
     helpdialog.cpp \
     player.cpp \
-    gridsquarewrapper.cpp
+    gridsquarewrapper.cpp \
+    palette.cpp \
+    palettesquare.cpp
 
 HEADERS  += mainwindow.h \
     framestructure.h \
@@ -50,7 +52,9 @@ HEADERS  += mainwindow.h \
     timelinegrid.h \
     helpdialog.h \
     player.h \
-    gridsquarewrapper.h
+    gridsquarewrapper.h \
+    palette.h \
+    palettesquare.h
 
 FORMS    += mainwindow.ui \
     sizedialog.ui \
