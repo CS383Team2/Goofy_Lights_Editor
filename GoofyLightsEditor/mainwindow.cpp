@@ -60,18 +60,6 @@ MainWindow::MainWindow(QWidget *parent) :
     theFrames.SetColCount(V_GLOBAL.G_COL);        // Update col size in FrameList now that it is defined
     V_GLOBAL.G_FRAMELIST = &theFrames;            // Attach FrameList to Global structure
 
-   /* // Setup very first frame to start with
-    // This 'fristFrameData' might be combined with currentFrameData
-    t_FrameData firstFrameData;
-    firstFrameData.ID = FrameID++;
-    firstFrameData.duration = 5;                  // arbritrary. Link to initial durration in gui
-    firstFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
-    theFrames.AddTail(firstFrameData);            // Put first frame onto the FrameList*/
-
-    //CurrentFrameData = theFrames.FirstNode();     // Get initial frame from the FrameList
-
-    //t_FrameData * testptr = theFrames.RetrieveNode_Middle(0); //This is the correct formate -n
-
     currentcolorsScene->addItem(Lcolor);
     currentcolorsScene->addItem(Rcolor);
 
@@ -278,10 +266,9 @@ void MainWindow::updateTimeline() //fix the update lag later -P
 
 void MainWindow::createFirstFrame()
 {
-    //updateTimeline();
     FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, 0); //fix indexing later -P
-    V_GLOBAL.G_FRAMECOUNT++;
     theFrames.AddTail(FrameData);
+    V_GLOBAL.G_FRAMECOUNT++;
     drawFrame();
 
     //draw red square around frame -P
@@ -324,9 +311,8 @@ void MainWindow::on_btn_NewFrame_clicked()
 {
     V_GLOBAL.G_CURRENTFRAME++;
     FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, V_GLOBAL.G_CURRENTFRAME); //fix indexing later -P
-    V_GLOBAL.G_FRAMECOUNT++; //add a frame to the count
-    //FrameData.squareData[i % V_GLOBAL.G_ROW][i % V_GLOBAL.G_COL].square_RGB = (Qt::blue); //show that each frame is in fact unique
     theFrames.AddNode_Middle(FrameData, V_GLOBAL.G_CURRENTFRAME);
+    V_GLOBAL.G_FRAMECOUNT++; //add a frame to the count
 
     drawFrame();
     if(V_GLOBAL.G_CURRENTFRAME < V_GLOBAL.G_FRAMECOUNT-1)//Only refresh the list if the current frame being added is in the middle
@@ -362,7 +348,9 @@ void MainWindow::on_btn_NewFrame_clicked()
 
     //Scroll -P
     qApp->processEvents();
-    ui->gView_Timeline->horizontalScrollBar()->setValue(( ui->gView_Timeline->horizontalScrollBar()->maximum()));
+    qDebug() << "Current frame: " << V_GLOBAL.G_CURRENTFRAME << "Framecount: " << V_GLOBAL.G_FRAMECOUNT << endl;
+    if((V_GLOBAL.G_CURRENTFRAME+1) == V_GLOBAL.G_FRAMECOUNT)
+        ui->gView_Timeline->horizontalScrollBar()->setValue(( ui->gView_Timeline->horizontalScrollBar()->maximum()));
     //Keep timeline scrolled all the way to the RIGHT -P
 }
 
@@ -531,6 +519,25 @@ void MainWindow::drawFrame()
 
 }
 
+//Refreshes timeline
+void MainWindow::initializeEntireTimeline()
+{
+    for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++) //loop through ALL? the frames -P
+    {
+        FrameData.squareData = theFrames.RetrieveNode_Middle(i)->squareData; //grabe every frame
+        for(int x=0; x<V_GLOBAL.G_ROW; x++)
+        {
+            for(int y=0; y<V_GLOBAL.G_COL; y++)
+            {
+                FrameData.squareData[x][y].timelineFrameNumber = i;
+                FrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
+                FrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
+                timelineScene->addItem(&(FrameData.squareData[x][y])); //timeline painting here -P
+            }
+        }
+    }
+}
+
 //Function that goes through the timeline and updates/moves frames after a frame is added in the middle of the list
 void MainWindow::refreshTimelineAdd()
 {
@@ -639,14 +646,14 @@ void MainWindow::on_actionAdd_100_Frames_triggered()
     // manually create the 100 frames.
     for (int i = 0; i < 100; i++) {
         t_FrameData newFrame;
-        newFrame.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, V_GLOBAL.G_FRAMECOUNT++);
+        V_GLOBAL.G_FRAMECOUNT++;
+        newFrame.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, V_GLOBAL.G_CURRENTFRAME++);
         fillFrame2(&newFrame, rand()%255, rand()%255, rand()%255);  // Random frame color
         theFrames.AddTail(newFrame);
     }
 
     // Redraw everything.
     // code below copied from on_btn_NewFrame_clicked. Except drawTimeline line
-        V_GLOBAL.G_CURRENTFRAME = V_GLOBAL.G_FRAMECOUNT; //fix indexing later -P
 
         //draw red square around frame -P
 
@@ -669,7 +676,7 @@ void MainWindow::on_actionAdd_100_Frames_triggered()
         }
 
         timelineScene->addRect((((V_GLOBAL.G_CURRENTFRAME-1)*redSpacingX)-10),(-10),redSizeX,redSizeY,redPen,(Qt::NoBrush));
-        drawTimeline();
+        drawFrame();
         //P
         initializeEntireTimeline();
 
