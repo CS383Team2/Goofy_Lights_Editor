@@ -26,9 +26,7 @@ public:
     //MAIN WINDOW TOO BIG, gonna take the scaling down to 85% -P
     double max_size;
     double G_SCALE;
-    int gridScale;
     int timelineScale;
-    int g_SPACING;
     int t_SPACING;
 
 

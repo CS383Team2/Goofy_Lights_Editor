@@ -51,9 +51,7 @@ MainWindow::MainWindow(QWidget *parent) :
         max_size = V_GLOBAL.G_COL;
     G_SCALE = ((20.0 / max_size) * 0.85); //scaled based on a max size of 20x20 -P
 
-    gridScale = 22*G_SCALE;
     timelineScale = 4*G_SCALE;
-    g_SPACING = 3; //grid spacing woohooo -P
     t_SPACING = 2; //timeline spacing woohooo -P
 
 
