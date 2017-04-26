@@ -93,7 +93,9 @@ private slots:
 
     void drawFrame();
 
-    void refreshTimeline();
+    void refreshTimelineAdd();
+
+    void refreshTimelineDelete();
 
     //void drawRedSquare();
 

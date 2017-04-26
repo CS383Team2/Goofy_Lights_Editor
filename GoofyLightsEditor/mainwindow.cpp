@@ -328,7 +328,7 @@ void MainWindow::on_btn_NewFrame_clicked()
 
     drawFrame();
     if(V_GLOBAL.G_CURRENTFRAME < V_GLOBAL.G_FRAMECOUNT-1)//Only refresh the list if the current frame being added is in the middle
-        refreshTimeline();
+        refreshTimelineAdd();
 
     //draw red square around frame -P
     QPen redPen;
@@ -552,10 +552,28 @@ void MainWindow::drawFrame()
 
 }
 
-//Function that goes through the timeline and updates/moves frames for a frame being added in the middle of the list
-void MainWindow::refreshTimeline()
+//Function that goes through the timeline and updates/moves frames after a frame is added in the middle of the list
+void MainWindow::refreshTimelineAdd()
 {
     for(int i= V_GLOBAL.G_CURRENTFRAME+1; i < V_GLOBAL.G_FRAMECOUNT; i++)
+        {
+            FrameData.squareData = theFrames.RetrieveNode_Middle(i)->squareData; //grabe every frame
+            for(int x=0; x<V_GLOBAL.G_ROW; x++)
+            {
+                for(int y=0; y<V_GLOBAL.G_COL; y++)
+                {
+                    FrameData.squareData[x][y].timelineFrameNumber = i;
+                    FrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
+                    FrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
+                }
+            }
+        }
+}
+
+//Function that goes through the timeline and updates/moves frames after a frame is deleted in the middle of the list
+void MainWindow::refreshTimelineDelete()
+{
+    for(int i= V_GLOBAL.G_CURRENTFRAME; i < V_GLOBAL.G_FRAMECOUNT; i++)
         {
             FrameData.squareData = theFrames.RetrieveNode_Middle(i)->squareData; //grabe every frame
             for(int x=0; x<V_GLOBAL.G_ROW; x++)
