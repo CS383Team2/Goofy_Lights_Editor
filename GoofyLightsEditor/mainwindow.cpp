@@ -61,15 +61,6 @@ MainWindow::MainWindow(QWidget *parent) :
     theFrames.SetColCount(V_GLOBAL.G_COL);        // Update col size in FrameList now that it is defined
     // V_GLOBAL.G_FRAMELIST = &theFrames;            // Attach FrameList to Global structure
 
-    // Setup very first frame to start with
-    // This 'fristFrameData' might be combined with currentFrameData
-    t_FrameData firstFrameData;
-    firstFrameData.ID = FrameID++;
-    firstFrameData.duration = 5;                  // arbritrary. Link to initial durration in gui
-    firstFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
-    theFrames.AddTail(firstFrameData);            // Put first frame onto the FrameList
-
-
     /* Global filename is only set in loading */
     if(V_GLOBAL.G_FILENAME != NULL){
         theFrames.DeleteList();
@@ -96,7 +87,7 @@ MainWindow::MainWindow(QWidget *parent) :
         V_GLOBAL.G_FRAMELIST = &theFrames;
     }
 
-    V_GLOBAL.G_CURRENTFRAME = 0; // Start at the beginning
+    V_GLOBAL.G_CURRENTFRAME = theFrames.Size() - 1;
 
     CurrentFrameData = theFrames.FirstNode();     // Get initial frame from the FrameList
 
@@ -317,9 +308,11 @@ void MainWindow::updateTimeline() //fix the update lag later -P
                 (*tempFrameData).squareData[x][y].update();
             }
         }
+        ui->dsbox_FrameDur->setValue(tempFrameData->duration);
     }
-
-    ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
+    else{
+        QMessageBox::information(0,"error", "Could not grab first frame!\n Failed to update timeline");
+    }
 }
 
 void MainWindow::initializeEntireTimeline() //try this one Tim -P
@@ -388,13 +381,13 @@ void MainWindow::on_btn_NewFrame_clicked()
             }
         }
 
-    //show duration of new frame
-    t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
-    ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
+        //show duration of new frame
+        t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
+        ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
 
-    //Scroll -P
-    qApp->processEvents();
-    ui->gView_Timeline->horizontalScrollBar()->setValue(( ui->gView_Timeline->horizontalScrollBar()->maximum()));
+        //Scroll -P
+        qApp->processEvents();
+        ui->gView_Timeline->horizontalScrollBar()->setValue(( ui->gView_Timeline->horizontalScrollBar()->maximum()));
     }
     else{
         QMessageBox::information(0,"error", "Could not grab first frame!\n Failed to draw new frame");
