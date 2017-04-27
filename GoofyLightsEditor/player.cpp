@@ -69,7 +69,7 @@ void Player::on_pushButton_clicked()
     {
         t_FrameData *tempFrameData;
         //loop
-        for(int i=0;i<=V_GLOBAL.G_FRAMECOUNT-1; i++)
+        for(int i=1;i<V_GLOBAL.G_FRAMECOUNT; i++)
         {
             tempFrameData = V_GLOBAL.G_FRAMELIST->RetrieveNode_Middle(i);   //grab the first frame
             for(int x=0; x<V_GLOBAL.G_ROW; x++)
