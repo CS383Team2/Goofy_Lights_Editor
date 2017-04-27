@@ -1,12 +1,4 @@
-/* Tim Sonnen       Lab #4
- * 9/25/2015
- *
- * FrameList.cpp
- *
- */
-
 #include <iostream>
-
 #include "FrameList.h"
 #include "framestructure.h"
 

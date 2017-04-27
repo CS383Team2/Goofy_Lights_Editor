@@ -35,6 +35,7 @@ SOURCES += main.cpp\
     timelinegrid.cpp \
     helpdialog.cpp \
     player.cpp \
+    gridsquarewrapper.cpp \
     palette.cpp \
     palettesquare.cpp
 
@@ -51,6 +52,7 @@ HEADERS  += mainwindow.h \
     timelinegrid.h \
     helpdialog.h \
     player.h \
+    gridsquarewrapper.h \
     palette.h \
     palettesquare.h
 

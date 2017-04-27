@@ -2,7 +2,6 @@
 #include "FileOperations.h"
 #include "ui_sizedialog.h"
 #include <globals.h> //V_GLOBAL.G_ROW and V_GLOBAL.G_COL
-#include <mainwindow.h>
 #include <QFileDialog> //file browser -P
 
 
