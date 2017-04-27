@@ -205,14 +205,17 @@ void FrameList::DeleteNode_Middle(int pos){
 	}
 	else if (pos == count)					// Delete the tail node and return. NOTE No time line position updates are needed here.
 	{
-		for (i = 0; i <= pos - 1 &&  current != NULL; i++)
+        for (i = 0; i < pos - 1; i++)
 		{
 			current = current -> next;
 		}
-		NodePtr p = current -> next;
-		current -> next = NULL;
-		// Delete attached RGB structures here.
+        NodePtr p = current -> next;
+        //current -> next = NULL;
+        // Delete attached RGB structures here.
 		delete(p);
+        current -> next = NULL;
+        UpdateTimeLine();
+        this -> count--;
 		return;
 	}
     
@@ -245,30 +248,51 @@ void FrameList::DeleteNode_Middle(int pos){
         this->count--;
         return;
     }
-    
-    for (i = 0; current != NULL && i <= pos - 1; i++){
+
+    for (i = 0; current != NULL && i < pos - 1; i++){
         current = current -> next;
     }
     
-    if (current == NULL || current -> next == NULL){
+    if (current == NULL){
+        // Failure
         // the position given is greater than total number of nodes in the list.
 		// Calling UpdateTimeLine here just in case, but I don't believe it is needed	-Kevin
 		UpdateTimeLine();
         return;
     }
 	i = 0;
-    
+
     // if this point has been reached and the function has not returned, current -> next holds
     // the node to be deleted from the list.
-    NodePtr p = current -> next -> next;
-    // Adjustment of previous pointers.
-    p -> prev = current;
+    if (current -> next != NULL && current -> next -> next == NULL)
+    {
+        // you are deleting the node before the tail
+        NodePtr p = current -> next;
+        current -> next = NULL;
+        // Delete Attached RGB Structures here
+        delete (p);
+        this -> count--;
+        UpdateTimeLine();
+        return;
+    }
+    else
+    {
+        //NodePtr p = current -> next -> next;
+        NodePtr t = current -> next;
+        NodePtr p = t -> next;
+        // Adjustment of previous pointers.
+        //p -> prev = current;
+        current -> next = p;
+        p -> prev = current;
+        //timeLinePos = current -> FrameData.Position;					// Assign timeLinePos, to adjust the time line positions of all successive nodes.
 	
-	//timeLinePos = current -> FrameData.Position;					// Assign timeLinePos, to adjust the time line positions of all successive nodes.
-	
-    // Delete Attached RGB Structure here
-    delete (current -> next);
-    current -> next = p;
+        // Delete Attached RGB Structure here
+        delete (t);
+
+        this -> count--;
+        UpdateTimeLine();
+        return;
+    }
 	
 /*
 	// Unique Time Line Position adjustments done after a node is deleted.
@@ -279,9 +303,9 @@ void FrameList::DeleteNode_Middle(int pos){
 		//current -> FrameData.Position = timeLinePos;
 	}
 */
-	UpdateTimeLine();
-    this->count--;
-    return;
+    //UpdateTimeLine();
+    //this->count--;
+    //return;
 }
 
 // Added this function to do all of the time line adjustments in a stand alone function.
