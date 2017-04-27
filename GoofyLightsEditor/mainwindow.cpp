@@ -59,16 +59,37 @@ MainWindow::MainWindow(QWidget *parent) :
 
     theFrames.SetRowCount(V_GLOBAL.G_ROW);        // Update row size in FrameList now that it is defined
     theFrames.SetColCount(V_GLOBAL.G_COL);        // Update col size in FrameList now that it is defined
-    V_GLOBAL.G_FRAMELIST = &theFrames;            // Attach FrameList to Global structure
+    // V_GLOBAL.G_FRAMELIST = &theFrames;            // Attach FrameList to Global structure
+
+    /* Global filename is only set in loading */
+    if(V_GLOBAL.G_FILENAME != NULL){
+        theFrames.DeleteList();
+        theFrames.SetColCount(V_GLOBAL.G_FRAMELIST->GetColCount());
+        theFrames.SetRowCount(V_GLOBAL.G_FRAMELIST->GetRowCount());
+
+        int i;
+        for(i = 0; i < V_GLOBAL.G_FRAMECOUNT; i++){
+            t_FrameData tempFrameData;
+            tempFrameData = (*(V_GLOBAL.G_FRAMELIST->RetrieveNode_Middle(i)));
+            theFrames.AddTail(tempFrameData);
+        }
+        initializeEntireTimeline();
+    }
+
+    V_GLOBAL.G_FRAMELIST = &theFrames;
+
+    V_GLOBAL.G_CURRENTFRAME = theFrames.Size();
+
+    //t_FrameData * testptr = theFrames.RetrieveNode_Middle(0); //This is the correct formate -n
 
     currentcolorsScene->addItem(Lcolor);
     currentcolorsScene->addItem(Rcolor);
 
-
     mainGrid.generate();  // Generate memory space
     mainGrid.setScene(gridScene);
     mainGrid.drawGrid();
-
+    
+    // initializeEntireTimeline();
     createFirstFrame(); //pseudo-fix for first frame not showing on timeline, fix the bug
 
     currentPalette->insertColor(V_GLOBAL.G_LEFT);
@@ -100,7 +121,7 @@ void MainWindow::on_actionSave_As_triggered()
             tr("Save Project"), "",
             tr("Project (*.tan);;All Files (*)"));
 
-    FileOperations::SaveToFile(fileName,theFrames);
+    FileOperations::SaveToFile(fileName,&theFrames);
     qDebug() << "Returned safely";
 }
 
@@ -211,6 +232,41 @@ void MainWindow::on_btn_ClearFrame_clicked() //Clear Frame
     mainGrid.loadFrame(currentFrameFill); // copy frame into editing grid
     updateTimeline();
 }
+
+/*
+//This copies the given frame to the GridSquare editing window
+void MainWindow::copyCurrentFrameData_into_gridGridSquare()
+{
+    t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
+    MainWindow::copyCurrentFrameData_into_gridGridSquare(tempFrameData);
+}
+
+//This copies the given frame to the GridSquare editing window with provided frame
+void MainWindow::copyCurrentFrameData_into_gridGridSquare(t_FrameData *CurrentFrame)
+{
+    for(int x=0; x<V_GLOBAL.G_ROW; x++)
+    {
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
+        {
+            gridGridSquare[x][y].square_RGB = (*CurrentFrame).squareData[x][y].square_RGB; //give the data to the grid -P
+            gridGridSquare[x][y].update(); //Fill that frame son -P
+        }
+    }
+}
+
+void MainWindow::drawGrid()
+{
+    //draw the grid -P
+    for(int x=0; x<V_GLOBAL.G_ROW; x++)
+    {
+        for(int y=0; y<V_GLOBAL.G_COL; y++)
+        {
+            gridGridSquare[x][y].y = (x*gridScale + x*g_SPACING);
+            gridGridSquare[x][y].x = (y*gridScale + y*g_SPACING);
+            gridScene->addItem(&gridGridSquare[x][y]);
+        }
+    }
+}*/
 
 void MainWindow::updateTimeline() //fix the update lag later -P
 {
@@ -540,15 +596,15 @@ void MainWindow::initializeEntireTimeline()
 {
     for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++) //loop through ALL? the frames -P
     {
-        FrameData.squareData = theFrames.RetrieveNode_Middle(i)->squareData; //grabe every frame
+        t_FrameData *tmpFrameData = theFrames.RetrieveNode_Middle(i); //grab every frame
         for(int x=0; x<V_GLOBAL.G_ROW; x++)
         {
             for(int y=0; y<V_GLOBAL.G_COL; y++)
             {
-                FrameData.squareData[x][y].timelineFrameNumber = i;
-                FrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
-                FrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
-                timelineScene->addItem(&(FrameData.squareData[x][y])); //timeline painting here -P
+                tmpFrameData->squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
+                tmpFrameData->squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
+
+                timelineScene->addItem(&(tmpFrameData->squareData[x][y])); //timeline painting here -P
             }
         }
     }

@@ -12,10 +12,12 @@ typedef struct Globals{
     QColor G_LEFT = (Qt::red); //default to red to match colorwheel default -P
     bool EyeDropper = false;
 
-    FrameList *G_FRAMELIST;
+    FrameList * G_FRAMELIST = new FrameList();
 
     int G_CURRENTFRAME = 0;
     bool G_TIMELINESELECTED = false;
+
+    QString G_FILENAME = QString();
 
 }V_Goofy;
 

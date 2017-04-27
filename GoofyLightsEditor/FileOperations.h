@@ -8,7 +8,7 @@ class FileOperations
 {
 public:
     /* Save to a file */
-    static int SaveToFile(QString fileName, FrameList frameList);
+    static int SaveToFile(QString fileName, FrameList * frameList);
     /* Load from a file */
     static int LoadFromFile(QString fileName, FrameList * frameList);
 };
