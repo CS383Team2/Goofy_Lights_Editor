@@ -168,8 +168,11 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
     Rcolor->update();
     Lcolor->update();
 
-    currentPalette->insertColor(V_GLOBAL.G_LEFT);
-    currentPalette->insertColor(V_GLOBAL.G_RIGHT);
+    if (event->button() == Qt::RightButton)
+        currentPalette->insertColor(V_GLOBAL.G_RIGHT);
+    else
+        currentPalette->insertColor(V_GLOBAL.G_LEFT);
+
     drawPalette();
 
     setCursor(Qt::ArrowCursor);

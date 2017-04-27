@@ -1,5 +1,6 @@
 #include "palette.h"
 #include "palettesquare.h"
+#include "gridsquare.h"
 #include <globals.h>
 #include <mainwindow.h>
 
@@ -25,7 +26,7 @@ Palette::~Palette()
 
 void Palette::insertColor(QColor newColor)
 {
-    if (checkPalette(newColor))
+    if ((checkPalette(newColor)) && newGridColor)
     {
         PalettePtr P, temp;
         P = new node;

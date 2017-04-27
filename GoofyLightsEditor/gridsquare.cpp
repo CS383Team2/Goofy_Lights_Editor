@@ -2,6 +2,8 @@
 #include <globals.h>
 #include <mainwindow.h>
 
+bool newGridColor = false;
+
 GridSquare::GridSquare()
 {
     Selected = false; //constructor
@@ -59,10 +61,12 @@ void GridSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 
     //Fix the FILL BUG: -P
     Selected = false; //simply unselect after each repaint/change. Fixed -P
+    newGridColor = false;
 }
 
 void GridSquare::mousePressEvent(QGraphicsSceneMouseEvent *event) //-P
 {
+    newGridColor = true;
     if (event->button() == Qt::RightButton)
         leftclick = false;
     else

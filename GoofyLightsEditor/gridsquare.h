@@ -5,6 +5,7 @@
 #include <QGraphicsItem> //What I'm building with this class -Paul
 #include <QDebug>
 
+extern bool newGridColor;
 
 class GridSquare : public QGraphicsItem //inherit the public methods of QGraphicsItem -Paul
 {

@@ -39,6 +39,13 @@ void PaletteSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
     painter->fillRect(rec,brush);
     painter->drawRect(rec);
     Selected = false;
+
+    Rcolor->square_RGB = V_GLOBAL.G_RIGHT;
+    Lcolor->square_RGB = V_GLOBAL.G_LEFT;
+
+    // Update GUI
+    Rcolor->update();
+    Lcolor->update();
 }
 
 void PaletteSquare::mousePressEvent(QGraphicsSceneMouseEvent *event) //-P
@@ -52,7 +59,6 @@ void PaletteSquare::mousePressEvent(QGraphicsSceneMouseEvent *event) //-P
     V_GLOBAL.G_TIMELINESELECTED = false;
 
     QGraphicsItem::mousePressEvent(event);
-
 }
 
 void PaletteSquare::mousePressEvent(QMouseEvent *event)

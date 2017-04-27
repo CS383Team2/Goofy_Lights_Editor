@@ -13,6 +13,9 @@
 #include <globals.h>
 #include <timelinegrid.h>
 
+extern PaletteSquare *Rcolor;
+extern PaletteSquare *Lcolor;
+
 namespace Ui {
 class MainWindow;
 }
