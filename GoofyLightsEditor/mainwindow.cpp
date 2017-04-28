@@ -295,35 +295,7 @@ void MainWindow::createFirstFrame()
     FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, 0); //fix indexing later -P
     theFrames.AddTail(FrameData);
     V_GLOBAL.G_FRAMECOUNT++;
-    drawFrame();
-
-    //draw red square around frame -P
-    QPen redPen;
-    QPen clearPen;
-    QColor clear;
-    clear.setRgb(211,215,207,255);
-    redPen.setColor(Qt::blue);
-    redPen.setWidth(4);
-    clearPen.setColor(clear);
-    clearPen.setWidth(4);
-
-    //int redSpacingX = V_GLOBAL.G_COL*timelineScale + V_GLOBAL.G_COL*t_SPACING + 30;
-    int redSpacingX = 110;
-    int redSizeX = V_GLOBAL.G_COL*timelineScale + V_GLOBAL.G_COL*t_SPACING + 20;
-    int redSizeY = V_GLOBAL.G_ROW*timelineScale + V_GLOBAL.G_ROW*t_SPACING + 20;
-
-    //timelineScene->clear();
-    for(int i=0;i<V_GLOBAL.G_FRAMECOUNT;i++)
-    {
-        timelineScene->addRect((((i)*redSpacingX)-10),(-10),redSizeX,redSizeY,clearPen,(Qt::NoBrush));
-    }
-    timelineScene->addRect((((V_GLOBAL.G_CURRENTFRAME)*redSpacingX)-10),(-10),redSizeX,redSizeY,redPen,(Qt::NoBrush));
-
-    //this sets the current frame you are editing to the new frame: -P
-    t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
-    mainGrid.loadFrame(tempFrameData);
-    //show duration of new frame
-    ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
+    newFrameHandler();
 }
 
 void MainWindow::on_btn_NewFrame_clicked()
@@ -332,46 +304,9 @@ void MainWindow::on_btn_NewFrame_clicked()
     FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, V_GLOBAL.G_CURRENTFRAME); //fix indexing later -P
     theFrames.AddNode_Middle(FrameData, V_GLOBAL.G_CURRENTFRAME);
     V_GLOBAL.G_FRAMECOUNT++; //add a frame to the count
-
-    drawFrame();
-    if(V_GLOBAL.G_CURRENTFRAME < V_GLOBAL.G_FRAMECOUNT-1)//Only refresh the list if the current frame being added is in the middle
-        refreshTimelineAdd();
-
-    //draw red square around frame -P
-    QPen redPen;
-    QPen clearPen;
-    QColor clear;
-    clear.setRgb(211,215,207,255);
-    redPen.setColor(Qt::blue);
-    redPen.setWidth(4);
-    clearPen.setColor(clear);
-    clearPen.setWidth(4);
-
-    //int redSpacingX = V_GLOBAL.G_COL*timelineScale + V_GLOBAL.G_COL*t_SPACING + 30;
-    int redSpacingX = 110;
-    int redSizeX = V_GLOBAL.G_COL*timelineScale + V_GLOBAL.G_COL*t_SPACING + 20;
-    int redSizeY = V_GLOBAL.G_ROW*timelineScale + V_GLOBAL.G_ROW*t_SPACING + 20;
-
-    //timelineScene->clear();
-    for(int i=0;i<V_GLOBAL.G_FRAMECOUNT;i++)
-    {
-        timelineScene->addRect((((i)*redSpacingX)-10),(-10),redSizeX,redSizeY,clearPen,(Qt::NoBrush));
-    }
-    timelineScene->addRect((((V_GLOBAL.G_CURRENTFRAME)*redSpacingX)-10),(-10),redSizeX,redSizeY,redPen,(Qt::NoBrush));
-
-    t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
-    mainGrid.loadFrame(tempFrameData_current); // copy frame into editing grid
-
-    //show duration of new frame
-    ui->dsbox_FrameDur->setValue((*tempFrameData_current).duration);
-
-    //Scroll -P
-    qApp->processEvents();
-    qDebug() << "Current frame: " << V_GLOBAL.G_CURRENTFRAME << "Framecount: " << V_GLOBAL.G_FRAMECOUNT << endl;
-    if((V_GLOBAL.G_CURRENTFRAME+1) == V_GLOBAL.G_FRAMECOUNT)
-        ui->gView_Timeline->horizontalScrollBar()->setValue(( ui->gView_Timeline->horizontalScrollBar()->maximum()));
-    //Keep timeline scrolled all the way to the RIGHT -P
+    newFrameHandler();
 }
+
 
 void MainWindow::on_btn_DeleteFrame_clicked()
 {
@@ -492,6 +427,7 @@ void MainWindow::on_dsbox_FrameDur_valueChanged(double arg1)
 
 void MainWindow::ProcessTranslateFrame(int DIR)
 {
+    translateClicked = true;
     // Get previous Frame for the purpose of copying later
     t_FrameData *tempFrameData_prev = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the previous frame
 
@@ -501,10 +437,10 @@ void MainWindow::ProcessTranslateFrame(int DIR)
     t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME); // Get current new Frame
 
     copyFrame(tempFrameData_current, tempFrameData_prev);                    // Copy prev Frame Into current new frame.
-    translateFrame(tempFrameData_current, DIR);                              // Translate newframe by direction
-
-    mainGrid.loadFrame(tempFrameData_current); // copy frame into editing grid
-    updateTimeline();
+    translateFrame(tempFrameData_current, DIR); // Translate newframe by direction
+    FrameData.squareData = tempFrameData_current->squareData;
+    newFrameHandler();
+    translateClicked = false;
 }
 
 void MainWindow::on_btn_TransUP_clicked()
@@ -582,6 +518,49 @@ void MainWindow::on_btn_RepeatFrame_clicked()
     on_btn_PasteFrame_clicked();
 }
 
+//BIG draw/refresh/all-in-one function. Handles adding drawing frame, refreshing timeline, drawing to grid, etc. Taken from onbtn_newFrame function.
+void MainWindow::newFrameHandler()
+{
+    drawFrame();
+    if(V_GLOBAL.G_CURRENTFRAME < V_GLOBAL.G_FRAMECOUNT-1)//Only refresh the list if the current frame being added is in the middle
+        refreshTimelineAdd();
+
+    //draw red square around frame -P
+    QPen redPen;
+    QPen clearPen;
+    QColor clear;
+    clear.setRgb(211,215,207,255);
+    redPen.setColor(Qt::blue);
+    redPen.setWidth(4);
+    clearPen.setColor(clear);
+    clearPen.setWidth(4);
+
+    //int redSpacingX = V_GLOBAL.G_COL*timelineScale + V_GLOBAL.G_COL*t_SPACING + 30;
+    int redSpacingX = 110;
+    int redSizeX = V_GLOBAL.G_COL*timelineScale + V_GLOBAL.G_COL*t_SPACING + 20;
+    int redSizeY = V_GLOBAL.G_ROW*timelineScale + V_GLOBAL.G_ROW*t_SPACING + 20;
+
+    //timelineScene->clear();
+    for(int i=0;i<V_GLOBAL.G_FRAMECOUNT;i++)
+    {
+    timelineScene->addRect((((i)*redSpacingX)-10),(-10),redSizeX,redSizeY,clearPen,(Qt::NoBrush));
+    }
+    timelineScene->addRect((((V_GLOBAL.G_CURRENTFRAME)*redSpacingX)-10),(-10),redSizeX,redSizeY,redPen,(Qt::NoBrush));
+
+    t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
+    mainGrid.loadFrame(tempFrameData_current); // copy frame into editing grid
+
+    //show duration of new frame
+    ui->dsbox_FrameDur->setValue((*tempFrameData_current).duration);
+
+    //Scroll -P
+    qApp->processEvents();
+    qDebug() << "Current frame: " << V_GLOBAL.G_CURRENTFRAME << "Framecount: " << V_GLOBAL.G_FRAMECOUNT << endl;
+    if((V_GLOBAL.G_CURRENTFRAME+1) == V_GLOBAL.G_FRAMECOUNT)
+    ui->gView_Timeline->horizontalScrollBar()->setValue(( ui->gView_Timeline->horizontalScrollBar()->maximum()));
+    //Keep timeline scrolled all the way to the RIGHT -P
+}
+
 //Draws and adds new frame to timeline
 void MainWindow::drawFrame()
 {
@@ -598,7 +577,7 @@ void MainWindow::drawFrame()
 
 }
 
-//Refreshes timeline
+//Refreshes entire timeline
 void MainWindow::initializeEntireTimeline()
 {
     for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++) //loop through ALL? the frames -P

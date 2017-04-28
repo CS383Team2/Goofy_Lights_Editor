@@ -93,6 +93,8 @@ private slots:
 
     void on_btn_RepeatFrame_clicked();
 
+    void newFrameHandler();
+
     void drawFrame();
 
     void refreshTimelineAdd();
@@ -143,6 +145,8 @@ private:
     QGraphicsScene *currentcolorsScene;
 
     QGraphicsScene *paletteScene;
+
+    bool translateClicked = false;
 
     void createActions();
 };
