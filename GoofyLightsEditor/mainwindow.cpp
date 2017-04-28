@@ -304,7 +304,8 @@ void MainWindow::on_btn_NewFrame_clicked()
     FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, V_GLOBAL.G_CURRENTFRAME);
     theFrames.AddNode_Middle(FrameData, V_GLOBAL.G_CURRENTFRAME);
     V_GLOBAL.G_FRAMECOUNT++; //add a frame to the count
-    newFrameHandler();
+    if(translateClicked == false)
+        newFrameHandler();
 }
 
 
