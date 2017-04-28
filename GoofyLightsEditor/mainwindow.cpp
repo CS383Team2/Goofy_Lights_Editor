@@ -285,9 +285,10 @@ void MainWindow::updateTimeline() //fix the update lag later -P
 
     ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
 
-    //for (int i = 0; i < V_GLOBAL.G_CURRENTFRAME; i++) //This is broken
-        //currtime += theFrames.RetrieveNode_Middle(i)->duration;
-   // ui->dsbox_CurrTime->setValue(currtime);
+    double currtime = 0.0;
+    for (int i = 0; i < V_GLOBAL.G_CURRENTFRAME; i++) //This is broken
+        currtime += theFrames.RetrieveNode_Middle(i)->duration;
+    ui->dsbox_CurrTime->setValue(currtime);
 }
 
 void MainWindow::createFirstFrame()
