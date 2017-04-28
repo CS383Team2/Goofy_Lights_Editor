@@ -285,9 +285,9 @@ void MainWindow::updateTimeline() //fix the update lag later -P
 
     ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
 
-    for (int i = 0; i < V_GLOBAL.G_CURRENTFRAME; i++)
-        currtime += theFrames.RetrieveNode_Middle(i)->duration;
-    ui->dsbox_CurrTime->setValue(currtime);
+    //for (int i = 0; i < V_GLOBAL.G_CURRENTFRAME; i++) //This is broken
+        //currtime += theFrames.RetrieveNode_Middle(i)->duration;
+   // ui->dsbox_CurrTime->setValue(currtime);
 }
 
 void MainWindow::createFirstFrame()
@@ -301,7 +301,7 @@ void MainWindow::createFirstFrame()
 void MainWindow::on_btn_NewFrame_clicked()
 {
     V_GLOBAL.G_CURRENTFRAME++;
-    FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, V_GLOBAL.G_CURRENTFRAME); //fix indexing later -P
+    FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, V_GLOBAL.G_CURRENTFRAME);
     theFrames.AddNode_Middle(FrameData, V_GLOBAL.G_CURRENTFRAME);
     V_GLOBAL.G_FRAMECOUNT++; //add a frame to the count
     newFrameHandler();
@@ -582,15 +582,15 @@ void MainWindow::initializeEntireTimeline()
 {
     for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++) //loop through ALL? the frames -P
     {
-        t_FrameData *tmpFrameData = theFrames.RetrieveNode_Middle(i); //grab every frame
+        FrameData.squareData = theFrames.RetrieveNode_Middle(i)->squareData; //grab every frame
         for(int x=0; x<V_GLOBAL.G_ROW; x++)
         {
             for(int y=0; y<V_GLOBAL.G_COL; y++)
             {
-                tmpFrameData->squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
-                tmpFrameData->squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
-
-                timelineScene->addItem(&(tmpFrameData->squareData[x][y])); //timeline painting here -P
+                FrameData.squareData[x][y].timelineFrameNumber = i;
+                FrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
+                FrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
+                timelineScene->addItem(&(FrameData.squareData[x][y])); //timeline painting here -P
             }
         }
     }
@@ -703,52 +703,14 @@ void MainWindow::on_actionAdd_100_Frames_triggered()
     std::cout << "Creating 100 frames" << std::endl;
     // manually create the 100 frames.
     for (int i = 0; i < 100; i++) {
-        t_FrameData newFrame;
-        V_GLOBAL.G_FRAMECOUNT++;
-        newFrame.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, V_GLOBAL.G_CURRENTFRAME++);
-        fillFrame2(&newFrame, rand()%255, rand()%255, rand()%255);  // Random frame color
-        theFrames.AddTail(newFrame);
+        V_GLOBAL.G_CURRENTFRAME++;
+        FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, V_GLOBAL.G_CURRENTFRAME);
+        fillFrame2(&FrameData, rand()%255, rand()%255, rand()%255);  // Random frame color
+        theFrames.AddTail(FrameData);
+        V_GLOBAL.G_FRAMECOUNT++; //add a frame to the count
     }
-
-    // Redraw everything.
-    // code below copied from on_btn_NewFrame_clicked. Except drawTimeline line
-
-        //draw red square around frame -P
-
-        QPen redPen;
-        QPen clearPen;
-        QColor clear;
-        clear.setRgb(211,215,207,255);
-        redPen.setColor(Qt::blue);
-        redPen.setWidth(4);
-        clearPen.setColor(clear);
-        clearPen.setWidth(4);
-
-        int redSpacingX = 110;
-        int redSizeX = V_GLOBAL.G_COL*timelineScale + V_GLOBAL.G_COL*t_SPACING + 20;
-        int redSizeY = V_GLOBAL.G_ROW*timelineScale + V_GLOBAL.G_ROW*t_SPACING + 20;
-
-        for(int i=0;i<V_GLOBAL.G_FRAMECOUNT;i++)
-        {
-            timelineScene->addRect((((i)*redSpacingX)-10),(-10),redSizeX,redSizeY,clearPen,(Qt::NoBrush));
-        }
-
-        timelineScene->addRect((((V_GLOBAL.G_CURRENTFRAME-1)*redSpacingX)-10),(-10),redSizeX,redSizeY,redPen,(Qt::NoBrush));
-        drawFrame();
-        //P
-        initializeEntireTimeline();
-
-
-        t_FrameData *tempFrameData_Current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
-        mainGrid.loadFrame(tempFrameData_Current); // copy frame into editing grid
-
-        //show duration of new frame
-        ui->dsbox_FrameDur->setValue((*tempFrameData_Current).duration);
-
-        //Scroll -P
-        qApp->processEvents();
-        ui->gView_Timeline->horizontalScrollBar()->setValue(( ui->gView_Timeline->horizontalScrollBar()->maximum()));
-        //Keep timeline scrolled all the way to the RIGHT -P
+   newFrameHandler();
+   initializeEntireTimeline();
 }
 
 void MainWindow::on_actionPrint_Frames_triggered()
