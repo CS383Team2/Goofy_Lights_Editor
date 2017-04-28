@@ -61,7 +61,4 @@ void PaletteSquare::mousePressEvent(QGraphicsSceneMouseEvent *event) //-P
     QGraphicsItem::mousePressEvent(event);
 }
 
-void PaletteSquare::mousePressEvent(QMouseEvent *event)
-{
-    update();
-}
+

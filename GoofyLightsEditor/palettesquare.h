@@ -27,7 +27,6 @@ public:
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
-    void mousePressEvent(QMouseEvent *event);
 
 };
 
