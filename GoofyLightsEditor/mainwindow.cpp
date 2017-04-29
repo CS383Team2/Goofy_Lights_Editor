@@ -312,37 +312,43 @@ void MainWindow::on_btn_NewFrame_clicked()
 
 void MainWindow::on_btn_DeleteFrame_clicked()
 {
+    t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_FRAMECOUNT-1);
 	
-	unsigned int TimePositionIndex = 0;
-	
-        if (V_GLOBAL.G_FRAMECOUNT == 1)
-		{
-            on_btn_ClearFrame_clicked();
-            return;
-            //drawGrid();
-            //updateTimeline();
-		}
-        else if (V_GLOBAL.G_CURRENTFRAME == V_GLOBAL.G_FRAMECOUNT - 1)
+    if (V_GLOBAL.G_FRAMECOUNT == 1)
+    {
+        on_btn_ClearFrame_clicked();
+        return;
+    }
+    else
+    {
+        for (int i = V_GLOBAL.G_CURRENTFRAME; i < V_GLOBAL.G_FRAMECOUNT-1; i++)
         {
-            t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
-            TimePositionIndex = tempFrameData -> Position;
+            t_FrameData *prevFrameData = theFrames.RetrieveNode_Middle(i);
+            t_FrameData *nextFrameData = theFrames.RetrieveNode_Middle(i+1);
 
-            theFrames.DeleteNode_Middle(V_GLOBAL.G_FRAMECOUNT);
-            V_GLOBAL.G_FRAMECOUNT = V_GLOBAL.G_FRAMECOUNT - 1;
-            //return;
+            for (int i = 0; i < V_GLOBAL.G_ROW; i++)
+                for (int j = 0; j < V_GLOBAL.G_COL; j++)
+                    prevFrameData->squareData[i][j].square_RGB = nextFrameData->squareData[i][j].square_RGB;
+            prevFrameData->duration = nextFrameData->duration;
+            prevFrameData->ID = nextFrameData->ID;
         }
-        else //if (V_GLOBAL.G_FRAMECOUNT != 1 && V_GLOBAL.G_CURRENTFRAME < V_GLOBAL.G_FRAMECOUNT)
-		{
-            t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
-			TimePositionIndex = tempFrameData -> Position;
-            //TimePositionIndex = TimePositionIndex + 1;
 
-            theFrames.DeleteNode_Middle(TimePositionIndex);
-            V_GLOBAL.G_FRAMECOUNT = V_GLOBAL.G_FRAMECOUNT - 1;
-			
-            //drawGrid();
-            //updateTimeline();
-		}
+        mainGrid.loadFrame(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME));
+
+        if (V_GLOBAL.G_CURRENTFRAME > 0) V_GLOBAL.G_CURRENTFRAME--;
+        V_GLOBAL.G_TIMELINESELECTED = true;
+
+        QMouseEvent *event = new QMouseEvent(QEvent::MouseButtonPress, QCursor::pos(), Qt::MouseButton::LeftButton, NULL, NULL);
+
+        mousePressEvent(event);
+
+        theFrames.DeleteNode_Middle(V_GLOBAL.G_FRAMECOUNT-1);
+        V_GLOBAL.G_FRAMECOUNT = V_GLOBAL.G_FRAMECOUNT - 1;
+
+        for (int i = 0; i < V_GLOBAL.G_ROW; i++)
+            for (int j = 0; j < V_GLOBAL.G_COL; j++)
+                timelineScene->removeItem(&(tempFrameData->squareData[i][j]));
+    }
 
 /*
  * Supposed to draw the timeline, but this isn't working for me at the moment.
@@ -629,6 +635,7 @@ void MainWindow::refreshTimelineDelete()
                     FrameData.squareData[x][y].timelineFrameNumber = i;
                     FrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
                     FrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
+
                 }
             }
         }
