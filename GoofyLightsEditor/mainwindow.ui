@@ -265,19 +265,6 @@
      <string>Echo</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btn_InsertChar">
-    <property name="geometry">
-     <rect>
-      <x>750</x>
-      <y>110</y>
-      <width>101</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Insert Char</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="btn_CopyFrame">
     <property name="geometry">
      <rect>
@@ -510,19 +497,6 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="btn_InsertShape">
-    <property name="geometry">
-     <rect>
-      <x>750</x>
-      <y>140</y>
-      <width>101</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Insert Shape</string>
-    </property>
-   </widget>
    <widget class="QGraphicsView" name="gView_Timeline">
     <property name="geometry">
      <rect>
@@ -707,7 +681,6 @@
     <addaction name="actionDelete_Frame"/>
     <addaction name="actionFill_Frame"/>
     <addaction name="actionClear_Frame"/>
-    <addaction name="actionInsert_Character"/>
    </widget>
    <widget class="QMenu" name="menuPlay">
     <property name="title">
