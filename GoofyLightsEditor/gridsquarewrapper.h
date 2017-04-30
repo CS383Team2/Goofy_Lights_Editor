@@ -11,7 +11,7 @@ public:
     gridsquarewrapper();
     ~gridsquarewrapper();
 
-    GridSquare ** gridSquareData = nullptr;
+    GridSquare ** gridSquareData = NULL;
     QGraphicsScene *gridScenePtr;     // This is created in mainwindow.cpp & passed to this object
     void loadFrame(t_FrameData *frameData);
     void setScene(QGraphicsScene *gridScene);

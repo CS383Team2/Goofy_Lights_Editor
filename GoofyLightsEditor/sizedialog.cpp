@@ -46,10 +46,17 @@ void SizeDialog::on_btn_Browse_clicked()
                        QDir::homePath(), tr("Only .tan Files (*.tan)")); //browse filename -P
                        */
 
-    QString fileName = QFileDialog::getOpenFileName(nullptr,
+    QString fileName = QFileDialog::getOpenFileName(NULL,
                                                     "Open some file", QString(),
-                                                    tr("Tan files (.tan)"), nullptr,
+                                                    tr("Tan files (*.tan);; All Files (*)"), NULL,
                                                     QFileDialog::ReadOnly | QFileDialog::DontUseNativeDialog);
+
+    if(fileName == NULL){
+        return;
+    }
+
+    if (!fileName.endsWith(".tan"))
+        fileName += ".tan";
 
     FrameList frameList;
     FileOperations::LoadFromFile(fileName, &(frameList));

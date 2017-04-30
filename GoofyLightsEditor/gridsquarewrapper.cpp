@@ -19,7 +19,7 @@ gridsquarewrapper::~gridsquarewrapper()
         for (int i = 0; i < V_GLOBAL.G_ROW; i++)
             delete [] gridSquareData[i];           // delete data arrays
         delete [] gridSquareData;                  // delete pointer array
-        gridSquareData = nullptr;                  // null the pointer
+        gridSquareData = NULL;                  // null the pointer
     }
 }
 
@@ -42,7 +42,7 @@ void gridsquarewrapper::generate()
 
 void gridsquarewrapper::loadFrame(t_FrameData *frameData)
 {
-    if (frameData == nullptr) {
+    if (frameData == NULL) {
         QMessageBox msgError;
             msgError.setText("gridsquareWrapper frameData null"),
             msgError.exec();
