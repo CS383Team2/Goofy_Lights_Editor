@@ -40,9 +40,16 @@ void SizeDialog::on_btnBox_OkClose_rejected()
 
 void SizeDialog::on_btn_Browse_clicked()
 {
+    /*
     QString fileName = QFileDialog::getOpenFileName(this,
                        tr("Open a Goofy File!"),
                        QDir::homePath(), tr("Only .tan Files (*.tan)")); //browse filename -P
+                       */
+
+    QString fileName = QFileDialog::getOpenFileName(nullptr,
+                                                    "Open some file", QString(),
+                                                    tr("Tan files (.tan)"), nullptr,
+                                                    QFileDialog::ReadOnly | QFileDialog::DontUseNativeDialog);
 
     FrameList frameList;
     FileOperations::LoadFromFile(fileName, &(frameList));

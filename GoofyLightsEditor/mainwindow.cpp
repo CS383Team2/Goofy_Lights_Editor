@@ -117,9 +117,16 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionSave_As_triggered()
 {
+    /*
     QString fileName = QFileDialog::getSaveFileName(this,
             tr("Save Project"), "",
             tr("Project (*.tan);;All Files (*)"));
+            */
+
+    QString fileName = QFileDialog::getOpenFileName(nullptr,
+                                                    "Open some file", QString(),
+                                                    tr("Tan files (.tan)"), nullptr,
+                                                    QFileDialog::ReadOnly | QFileDialog::DontUseNativeDialog);
 
     FileOperations::SaveToFile(fileName,&theFrames);
     qDebug() << "Returned safely";
@@ -127,9 +134,15 @@ void MainWindow::on_actionSave_As_triggered()
 
 void MainWindow::on_actionOpenProject_triggered()
 {
+    /*
     QString fileName = QFileDialog::getOpenFileName(this,
             tr("Open Project"), "",
             tr("Project (*.tan);;All Files (*)"));
+            */
+    QString fileName = QFileDialog::getOpenFileName(nullptr,
+                                                    "Open some file", QString(),
+                                                    tr("Tan files (.tan)"), nullptr,
+                                                    QFileDialog::ReadOnly | QFileDialog::DontUseNativeDialog);
 
     if(FileOperations::LoadFromFile(fileName, &theFrames) == -1){
         std::cout << "Failed to open" << std::endl;
