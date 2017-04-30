@@ -325,108 +325,44 @@ void MainWindow::on_btn_NewFrame_clicked()
 
 void MainWindow::on_btn_DeleteFrame_clicked()
 {
+    t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_FRAMECOUNT-1);
 	
-	unsigned int TimePositionIndex = 0;
-	
-        if (V_GLOBAL.G_FRAMECOUNT == 1)
-		{
-            on_btn_ClearFrame_clicked();
-            return;
-            //drawGrid();
-            //updateTimeline();
-		}
-        else if (V_GLOBAL.G_CURRENTFRAME == V_GLOBAL.G_FRAMECOUNT - 1)
-        {
-            t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
-            TimePositionIndex = tempFrameData -> Position;
-
-            theFrames.DeleteNode_Middle(V_GLOBAL.G_FRAMECOUNT);
-            V_GLOBAL.G_FRAMECOUNT = V_GLOBAL.G_FRAMECOUNT - 1;
-            //return;
-        }
-        else //if (V_GLOBAL.G_FRAMECOUNT != 1 && V_GLOBAL.G_CURRENTFRAME < V_GLOBAL.G_FRAMECOUNT)
-		{
-            t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
-			TimePositionIndex = tempFrameData -> Position;
-            //TimePositionIndex = TimePositionIndex + 1;
-
-            theFrames.DeleteNode_Middle(TimePositionIndex);
-            V_GLOBAL.G_FRAMECOUNT = V_GLOBAL.G_FRAMECOUNT - 1;
-			
-            //drawGrid();
-            //updateTimeline();
-		}
-
-/*
- * Supposed to draw the timeline, but this isn't working for me at the moment.
- * -Kevin 04-23-17 8:55pm
- *
-        for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++) //loop through ALL? the frames -P
-        {
-            t_FrameData *tmpFrameData = theFrames.RetrieveNode_Middle(i); //grab every frame
-            for(int x=0; x<V_GLOBAL.G_ROW; x++)
-            {
-                for(int y=0; y<V_GLOBAL.G_COL; y++)
-                {
-                    tmpFrameData->squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
-                    tmpFrameData->squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
-
-                    timelineScene->addItem(&(tmpFrameData->squareData[x][y])); //timeline painting here -P
-                }
-            }
-        }
-*/
-/*
-    if(V_GLOBAL.G_FRAMECOUNT != 0) //can't delete once there are no frames
+    if (V_GLOBAL.G_FRAMECOUNT == 1)
     {
-        if(V_GLOBAL.G_CURRENTFRAME == (V_GLOBAL.G_FRAMECOUNT-1)) // the last frame is being deleted -P
-        {
-            theFrames.DeleteNode_Middle(V_GLOBAL.G_CURRENTFRAME); //simple
-            updateTimeline();
-        }
-        else //Deleting a frame in the middle of the timeline, bugger -P
-        {
-            theFrames.DeleteNode_Middle(V_GLOBAL.G_CURRENTFRAME);
-            for(int i=V_GLOBAL.G_CURRENTFRAME+1; i<V_GLOBAL.G_FRAMECOUNT; i++) //go through all remaing frames after the deletion -P
-            {
-                t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(i);   //grab the this frame
-                for(int x=0; x<V_GLOBAL.G_ROW; x++)
-                {
-                    for(int y=0; y<V_GLOBAL.G_COL; y++)
-                    {
-                        (*tempFrameData).squareData[x][y].timelineFrameNumber--; //decrement frame number by 1
-                    }
-                }
-            }
-            updateTimeline(); //redraw -P
-            //crap
-        }
-        V_GLOBAL.G_FRAMECOUNT--; //remove 1 from the framecount -P
+        on_btn_ClearFrame_clicked();
+        return;
     }
-*/
-/*
-    //Redraw the timeline! -P
-<<<<<<< Fixing_add_frame
-    for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++)
-=======
-    for(int i=V_GLOBAL.G_CURRENTFRAME; i < V_GLOBAL.G_FRAMECOUNT; i++) //start from current frame, avoid lag -P
->>>>>>> Delete Frame MOSTLY Working
+    else
     {
-        t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(i);   //grab the this frame
-        for(int x=0; x<V_GLOBAL.G_ROW; x++)
-        {
-            for(int y=0; y<V_GLOBAL.G_COL; y++)
-            {
-                (*tempFrameData).squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
-                (*tempFrameData).squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
+        for (int i = 0; i < V_GLOBAL.G_ROW; i++) //moved here to work bettter -P
+            for (int j = 0; j < V_GLOBAL.G_COL; j++)
+                timelineScene->removeItem(&(tempFrameData->squareData[i][j]));
 
-                timelineScene->addItem(&((*tempFrameData).squareData[x][y])); //timeline painting here -P
-            }
+        for (int i = V_GLOBAL.G_CURRENTFRAME; i < V_GLOBAL.G_FRAMECOUNT-1; i++)
+        {
+            t_FrameData *prevFrameData = theFrames.RetrieveNode_Middle(i);
+            t_FrameData *nextFrameData = theFrames.RetrieveNode_Middle(i+1);
+
+            for (int i = 0; i < V_GLOBAL.G_ROW; i++)
+                for (int j = 0; j < V_GLOBAL.G_COL; j++)
+                    prevFrameData->squareData[i][j].square_RGB = nextFrameData->squareData[i][j].square_RGB;
+            prevFrameData->duration = nextFrameData->duration;
+            prevFrameData->ID = nextFrameData->ID;
         }
+
+        // If last frame subtract current frame
+        if (V_GLOBAL.G_CURRENTFRAME == V_GLOBAL.G_FRAMECOUNT-1)
+            V_GLOBAL.G_CURRENTFRAME--;
+        mainGrid.loadFrame(theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME));
+        V_GLOBAL.G_TIMELINESELECTED = true;
+
+        QMouseEvent *event = new QMouseEvent(QEvent::MouseButtonPress, QCursor::pos(), Qt::MouseButton::LeftButton, NULL, NULL);
+
+        mousePressEvent(event);
+
+        theFrames.DeleteNode_Middle(V_GLOBAL.G_FRAMECOUNT-1);
+        V_GLOBAL.G_FRAMECOUNT = V_GLOBAL.G_FRAMECOUNT - 1;
     }
-    //updateTimeline();
-    //drawGrid();
-*/
 }
 
 void MainWindow::insertFrame(t_FrameData newFrame)
@@ -642,6 +578,7 @@ void MainWindow::refreshTimelineDelete()
                     FrameData.squareData[x][y].timelineFrameNumber = i;
                     FrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
                     FrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
+
                 }
             }
         }
