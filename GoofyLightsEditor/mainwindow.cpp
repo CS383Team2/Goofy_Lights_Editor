@@ -123,7 +123,7 @@ void MainWindow::on_actionSave_As_triggered()
             tr("Project (*.tan);;All Files (*)"));
             */
 
-    QString fileName = QFileDialog::getOpenFileName(nullptr,
+    QString fileName = QFileDialog::getSaveFileName(nullptr,
                                                     "Open some file", QString(),
                                                     tr("Tan files (.tan)"), nullptr,
                                                     QFileDialog::ReadOnly | QFileDialog::DontUseNativeDialog);
