@@ -347,7 +347,7 @@ void MainWindow::on_btn_DeleteFrame_clicked()
             return;
             //drawGrid();
             //updateTimeline();
-		}
+        }
         else if (V_GLOBAL.G_CURRENTFRAME == V_GLOBAL.G_FRAMECOUNT - 1)
         {
             t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
@@ -696,7 +696,7 @@ void MainWindow::on_actionSave_2_triggered()
     QString fileName = V_GLOBAL.G_FILENAME;
 
     if(fileName == QString()){
-        QString QFileDialog::getSaveFileName(NULL, "Save some file", QString(),
+        fileName = QFileDialog::getSaveFileName(NULL, "Save some file", QString(),
                      tr("Tan files (*.tan);;All Files (*)"), NULL,
                      QFileDialog::ReadOnly | QFileDialog::DontUseNativeDialog);
 
