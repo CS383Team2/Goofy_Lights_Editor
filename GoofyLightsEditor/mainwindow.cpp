@@ -321,6 +321,10 @@ void MainWindow::on_btn_DeleteFrame_clicked()
     }
     else
     {
+        for (int i = 0; i < V_GLOBAL.G_ROW; i++) //moved here to work bettter -P
+            for (int j = 0; j < V_GLOBAL.G_COL; j++)
+                timelineScene->removeItem(&(tempFrameData->squareData[i][j]));
+
         for (int i = V_GLOBAL.G_CURRENTFRAME; i < V_GLOBAL.G_FRAMECOUNT-1; i++)
         {
             t_FrameData *prevFrameData = theFrames.RetrieveNode_Middle(i);
@@ -344,10 +348,6 @@ void MainWindow::on_btn_DeleteFrame_clicked()
 
         theFrames.DeleteNode_Middle(V_GLOBAL.G_FRAMECOUNT-1);
         V_GLOBAL.G_FRAMECOUNT = V_GLOBAL.G_FRAMECOUNT - 1;
-
-        for (int i = 0; i < V_GLOBAL.G_ROW; i++)
-            for (int j = 0; j < V_GLOBAL.G_COL; j++)
-                timelineScene->removeItem(&(tempFrameData->squareData[i][j]));
     }
 
 /*
