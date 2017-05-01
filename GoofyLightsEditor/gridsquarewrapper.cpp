@@ -104,7 +104,7 @@ void gridsquarewrapper::graphic_drawLine(point p1, point p2, QColor fillColor)
         std::cout << "endered row drawline" << std::endl;
         int commonPoint = p1.r;                 // the axis that doesnt change
         int direction = (p1.c < p2.c ? 1 : -1); // whether going left-right or right-left
-        for (int i = p1.c; i != p2.c; i+=direction) {
+        for (int i = p1.c; i != (p2.c+direction); i+=direction) {
             gridSquareData[commonPoint][i].square_RGB = fillColor;
             gridSquareData[commonPoint][i].update();
         }
@@ -113,7 +113,7 @@ void gridsquarewrapper::graphic_drawLine(point p1, point p2, QColor fillColor)
         std::cout << "endered row drawline" << std::endl;
         int commonPoint = p1.c;                 // the axis that doesnt change
         int direction = (p1.r < p2.r ? 1 : -1); // whether going top-down or down-up
-        for (int i = p1.r; i != p2.r; i+=direction) {
+        for (int i = p1.r; i != (p2.r+direction); i+=direction) {
             gridSquareData[i][commonPoint].square_RGB = fillColor;
             gridSquareData[i][commonPoint].update();
         }
@@ -127,20 +127,11 @@ void gridsquarewrapper::graphic_drawLine(point p1, point p2, QColor fillColor)
 
 void gridsquarewrapper::graphic_drawRect(point p1, point p2, QColor fillColor)
 {
+    int r_direction = (p1.r < p2.r ? 1 : -1); // whether going left-right or right-left
+    int c_direction = (p1.c < p2.c ? 1 : -1); // whether going top-down or down-up
 
-    // something is off if done anyway other than top->down. left->right
-    if (p1.c > p2.c || p1.r > p2.r || p1.r == p2.r || p1.c == p2.c) {
-        QMessageBox msgError;
-        msgError.setText("NOT That way. The rectangle will doom this program to a nasty segfault.\nWIP"),
-        msgError.exec();
-        return;
-    }
-
-
-    int r_direction = (p1.c < p2.c ? 1 : -1); // whether going left-right or right-left
-    int c_direction = (p1.r < p2.r ? 1 : -1); // whether going top-down or down-up
-    for (int i = p1.r; i != p2.r + r_direction; i+=r_direction) {
-        for (int j = p1.c; j != p2.c + c_direction; j+=c_direction) {
+    for (int i = p1.r; i != (p2.r + r_direction); i+=r_direction) {
+        for (int j = p1.c; j != (p2.c + c_direction); j+=c_direction) {
             gridSquareData[i][j].square_RGB = fillColor;
             gridSquareData[i][j].update();
         }
