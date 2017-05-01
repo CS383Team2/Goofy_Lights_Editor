@@ -135,8 +135,6 @@ private slots:
 
     void drawPalette();
 
-    void on_btn_DrawLine_clicked();
-
     void on_btn_DrawRect_clicked();
 
 private:

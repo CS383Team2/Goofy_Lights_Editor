@@ -715,10 +715,6 @@ void MainWindow::drawPalette()
         }
     }
 }
-void MainWindow::on_btn_DrawLine_clicked()
-{
-    mainGrid.graphic_drawLine(V_GLOBAL.graphicPoint_1, V_GLOBAL.graphicPoint_2, V_GLOBAL.G_LEFT);
-}
 
 void MainWindow::on_btn_DrawRect_clicked()
 {

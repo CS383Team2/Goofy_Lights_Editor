@@ -96,35 +96,6 @@ void gridsquarewrapper::drawGrid()
     }
 }
 
-
-void gridsquarewrapper::graphic_drawLine(point p1, point p2, QColor fillColor)
-{
-    // Test if straight line
-    if (p1.r == p2.r && p1.c != p2.c) { // if not same point & same row
-        std::cout << "endered row drawline" << std::endl;
-        int commonPoint = p1.r;                 // the axis that doesnt change
-        int direction = (p1.c < p2.c ? 1 : -1); // whether going left-right or right-left
-        for (int i = p1.c; i != (p2.c+direction); i+=direction) {
-            gridSquareData[commonPoint][i].square_RGB = fillColor;
-            gridSquareData[commonPoint][i].update();
-        }
-    }
-    else if (p1.c == p2.c && p1.r != p2.r) { // if not same point & same col
-        std::cout << "endered row drawline" << std::endl;
-        int commonPoint = p1.c;                 // the axis that doesnt change
-        int direction = (p1.r < p2.r ? 1 : -1); // whether going top-down or down-up
-        for (int i = p1.r; i != (p2.r+direction); i+=direction) {
-            gridSquareData[i][commonPoint].square_RGB = fillColor;
-            gridSquareData[i][commonPoint].update();
-        }
-    }
-    else {
-        QMessageBox msgError;
-        msgError.setText("DrawLine\nLines must be on the same row or on same column\nThe last two points clicked are used."),
-        msgError.exec();
-    }
-}
-
 void gridsquarewrapper::graphic_drawRect(point p1, point p2, QColor fillColor)
 {
     int r_direction = (p1.r < p2.r ? 1 : -1); // whether going left-right or right-left

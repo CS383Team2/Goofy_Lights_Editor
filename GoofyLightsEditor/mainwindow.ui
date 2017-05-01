@@ -295,7 +295,7 @@
     <property name="geometry">
      <rect>
       <x>470</x>
-      <y>40</y>
+      <y>70</y>
       <width>101</width>
       <height>25</height>
      </rect>
@@ -308,7 +308,7 @@
     <property name="geometry">
      <rect>
       <x>470</x>
-      <y>10</y>
+      <y>40</y>
       <width>101</width>
       <height>25</height>
      </rect>
@@ -654,19 +654,6 @@
      <string>Eye Dropper</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btn_DrawLine">
-    <property name="geometry">
-     <rect>
-      <x>470</x>
-      <y>70</y>
-      <width>101</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Draw Line</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="btn_DrawRect">
     <property name="geometry">
      <rect>
@@ -687,7 +674,7 @@
      <x>0</x>
      <y>0</y>
      <width>960</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuSuper_Animator_Window">

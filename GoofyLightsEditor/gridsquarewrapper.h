@@ -19,7 +19,6 @@ public:
     void generate(); // creates memory
     void drawGrid();
 
-    void graphic_drawLine(point p1, point p2, QColor fillColor);
     void graphic_drawRect(point p1, point p2, QColor fillColor);
 };
 
