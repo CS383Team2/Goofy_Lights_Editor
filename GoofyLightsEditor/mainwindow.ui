@@ -654,6 +654,19 @@
      <string>Eye Dropper</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="btn_DrawLine">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>120</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Draw Line</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

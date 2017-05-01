@@ -2,6 +2,7 @@
 #define GRIDSQUAREWRAPPER_H
 
 #include "gridsquare.h"
+#include "globals.h"
 #include "framestructure.h"
 
 
@@ -17,6 +18,9 @@ public:
     void setScene(QGraphicsScene *gridScene);
     void generate(); // creates memory
     void drawGrid();
+
+    void graphic_drawLine(point p1, point p2, QColor fillColor);
+    void graphic_drawRect(point p1, point p2, QColor fillColor);
 };
 
 #endif // GRIDSQUAREWRAPPER_H

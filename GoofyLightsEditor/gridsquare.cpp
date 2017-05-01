@@ -1,6 +1,7 @@
 #include "gridsquare.h"
 #include <globals.h>
 #include <mainwindow.h>
+#include <iostream>
 
 bool newGridColor = false;
 
@@ -67,6 +68,13 @@ void GridSquare::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 void GridSquare::mousePressEvent(QGraphicsSceneMouseEvent *event) //-P
 {
     newGridColor = true;
+
+    // save the last two points clicked
+    std::cout << "X: " << this->row_pos << "  Y: " << this->col_pos << std::endl;
+    V_GLOBAL.graphicPoint_1 = V_GLOBAL.graphicPoint_2;
+    V_GLOBAL.graphicPoint_2.r = this->row_pos;
+    V_GLOBAL.graphicPoint_2.c = this->col_pos;
+
     if (event->button() == Qt::RightButton)
         leftclick = false;
     else

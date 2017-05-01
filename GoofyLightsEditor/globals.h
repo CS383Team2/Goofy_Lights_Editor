@@ -2,11 +2,20 @@
 #define GLOBALS_H
 #include "FrameList.h"
 
+typedef struct point{
+    int r;
+    int c;
+} point;
+
 typedef struct Globals{
 
     int G_ROW;
     int G_COL;
     int G_FRAMECOUNT = 0;
+
+    // For DrawLine
+    point graphicPoint_1;
+    point graphicPoint_2;
 
     QColor G_RIGHT = (Qt::blue); //default to blue jsut for hoots -P
     QColor G_LEFT = (Qt::red); //default to red to match colorwheel default -P
