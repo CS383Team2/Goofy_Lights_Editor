@@ -137,6 +137,8 @@ private slots:
 
     void on_btn_DrawLine_clicked();
 
+    void on_btn_DrawRect_clicked();
+
 private:
     Ui::MainWindow *ui;
 

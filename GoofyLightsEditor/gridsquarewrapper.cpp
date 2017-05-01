@@ -128,4 +128,21 @@ void gridsquarewrapper::graphic_drawLine(point p1, point p2, QColor fillColor)
 void gridsquarewrapper::graphic_drawRect(point p1, point p2, QColor fillColor)
 {
 
+    // something is off if done anyway other than top->down. left->right
+    if (p1.c > p2.c || p1.r > p2.r || p1.r == p2.r || p1.c == p2.c) {
+        QMessageBox msgError;
+        msgError.setText("NOT That way. The rectangle will doom this program to a nasty segfault.\nWIP"),
+        msgError.exec();
+        return;
+    }
+
+
+    int r_direction = (p1.c < p2.c ? 1 : -1); // whether going left-right or right-left
+    int c_direction = (p1.r < p2.r ? 1 : -1); // whether going top-down or down-up
+    for (int i = p1.r; i != p2.r + r_direction; i+=r_direction) {
+        for (int j = p1.c; j != p2.c + c_direction; j+=c_direction) {
+            gridSquareData[i][j].square_RGB = fillColor;
+            gridSquareData[i][j].update();
+        }
+    }
 }
