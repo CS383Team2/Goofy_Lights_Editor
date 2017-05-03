@@ -61,3 +61,5 @@ FORMS    += mainwindow.ui \
     docdialog.ui \
     helpdialog.ui \
     player.ui
+
+CONFIG += c++11

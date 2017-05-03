@@ -124,9 +124,12 @@ void MainWindow::on_actionSave_As_triggered()
             */
 
     QString fileName = QFileDialog::getSaveFileName(nullptr,
-                                                    "Open some file", QString(),
-                                                    tr("Tan files (.tan)"), nullptr,
+                                                    "Save some file", QString(),
+                                                    tr("Tan files (*.tan);; All Files (*)"), nullptr,
                                                     QFileDialog::ReadOnly | QFileDialog::DontUseNativeDialog);
+
+    if(fileName == NULL)
+        return;
 
     FileOperations::SaveToFile(fileName,&theFrames);
     qDebug() << "Returned safely";
@@ -141,8 +144,13 @@ void MainWindow::on_actionOpenProject_triggered()
             */
     QString fileName = QFileDialog::getOpenFileName(nullptr,
                                                     "Open some file", QString(),
-                                                    tr("Tan files (.tan)"), nullptr,
+                                                    tr("Tan files (*.tan);; All Files (*)"), nullptr,
                                                     QFileDialog::ReadOnly | QFileDialog::DontUseNativeDialog);
+
+    if(fileName == NULL)
+        return;
+
+    theFrames.DeleteList();
 
     if(FileOperations::LoadFromFile(fileName, &theFrames) == -1){
         std::cout << "Failed to open" << std::endl;
@@ -152,7 +160,7 @@ void MainWindow::on_actionOpenProject_triggered()
     V_GLOBAL.G_FRAMECOUNT = theFrames.Size();
     V_GLOBAL.G_COL = theFrames.GetColCount();
     V_GLOBAL.G_ROW = theFrames.GetRowCount();
-    updateTimeline();
+    initializeEntireTimeline();
 }
 
 void MainWindow::on_sbox_ValueRed_editingFinished()
@@ -617,6 +625,17 @@ void MainWindow::on_actionPlay_All_triggered()
 
 void MainWindow::on_actionSave_2_triggered()
 {
+    QString fileName = V_GLOBAL.G_FILENAME;
+
+    if(fileName == NULL){
+        QString fileName = QFileDialog::getSaveFileName(nullptr,
+                    "Save some file", QString(),
+                    tr("Tan files (*.tan);; All Files (*)"), nullptr,
+                    QFileDialog::ReadOnly | QFileDialog::DontUseNativeDialog);
+
+        if(fileName == NULL)
+            return;
+    }
     //File -> Save menu clicked
     //Put some code here to save the project -P
 }

@@ -48,8 +48,11 @@ void SizeDialog::on_btn_Browse_clicked()
 
     QString fileName = QFileDialog::getOpenFileName(nullptr,
                                                     "Open some file", QString(),
-                                                    tr("Tan files (.tan)"), nullptr,
+                                                    tr("Tan files (*.tan);; All Files (*)"), nullptr,
                                                     QFileDialog::ReadOnly | QFileDialog::DontUseNativeDialog);
+
+    if(fileName == NULL)
+        return;
 
     FrameList frameList;
     FileOperations::LoadFromFile(fileName, &(frameList));
