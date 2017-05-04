@@ -62,7 +62,7 @@ int FileOperations::SaveToFile(QString fileName, FrameList * frameList){
                 }
                 stream << endl;
             }
-            elapsedTime = elapsedTime.addSecs(frameData.duration);
+            elapsedTime = elapsedTime.addMSecs(frameData.duration*1000);
             frameDataPtr = frameList->AdvanceList(); // grab next FrameDataPtr
         }
         file.close();
