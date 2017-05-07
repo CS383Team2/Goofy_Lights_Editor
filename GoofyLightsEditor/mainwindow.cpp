@@ -90,7 +90,7 @@ MainWindow::MainWindow(QWidget *parent) :
     mainGrid.drawGrid();
     
     // initializeEntireTimeline();
-    createFirstFrame(); //pseudo-fix for first frame not showing on timeline, fix the bug
+    if (V_GLOBAL.G_FRAMECOUNT == 0) createFirstFrame(); //pseudo-fix for first frame not showing on timeline, fix the bug
 
     currentPalette->insertColor(V_GLOBAL.G_LEFT);
     currentPalette->insertColor(V_GLOBAL.G_RIGHT);
@@ -334,7 +334,7 @@ void MainWindow::on_btn_NewFrame_clicked()
 void MainWindow::on_btn_DeleteFrame_clicked()
 {
     t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_FRAMECOUNT-1);
-	
+
     if (V_GLOBAL.G_FRAMECOUNT == 1)
     {
         on_btn_ClearFrame_clicked();
@@ -342,10 +342,9 @@ void MainWindow::on_btn_DeleteFrame_clicked()
     }
     else
     {
-        for (int i = 0; i < V_GLOBAL.G_ROW; i++) //moved here to work bettter -P
+        for (int i = 0; i < V_GLOBAL.G_ROW; i++)
             for (int j = 0; j < V_GLOBAL.G_COL; j++)
                 timelineScene->removeItem(&(tempFrameData->squareData[i][j]));
-
         for (int i = V_GLOBAL.G_CURRENTFRAME; i < V_GLOBAL.G_FRAMECOUNT-1; i++)
         {
             t_FrameData *prevFrameData = theFrames.RetrieveNode_Middle(i);
