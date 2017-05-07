@@ -257,41 +257,6 @@ void MainWindow::on_btn_ClearFrame_clicked() //Clear Frame
     updateTimeline();
 }
 
-/*
-//This copies the given frame to the GridSquare editing window
-void MainWindow::copyCurrentFrameData_into_gridGridSquare()
-{
-    t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
-    MainWindow::copyCurrentFrameData_into_gridGridSquare(tempFrameData);
-}
-
-//This copies the given frame to the GridSquare editing window with provided frame
-void MainWindow::copyCurrentFrameData_into_gridGridSquare(t_FrameData *CurrentFrame)
-{
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
-    {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
-        {
-            gridGridSquare[x][y].square_RGB = (*CurrentFrame).squareData[x][y].square_RGB; //give the data to the grid -P
-            gridGridSquare[x][y].update(); //Fill that frame son -P
-        }
-    }
-}
-
-void MainWindow::drawGrid()
-{
-    //draw the grid -P
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
-    {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
-        {
-            gridGridSquare[x][y].y = (x*gridScale + x*g_SPACING);
-            gridGridSquare[x][y].x = (y*gridScale + y*g_SPACING);
-            gridScene->addItem(&gridGridSquare[x][y]);
-        }
-    }
-}*/
-
 void MainWindow::updateTimeline() //fix the update lag later -P
 {
     t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
@@ -443,35 +408,6 @@ void MainWindow::on_btn_TransUpRight_clicked()
 
 void MainWindow::on_btn_RepeatFrame_clicked()
 {
-/*    on_btn_NewFrame_clicked();
-    t_FrameData *tempFrameData_current = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
-    t_FrameData *tempFrameData_prev    = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME-1); //grab the previous frame
-    t_FrameData newFrameData;                                                // New frame
-    newFrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);    // Allocate new frame
-
-// Change implementation to this. First need to update copyFrame to use pointers to t_FrameData
-//ref    int copyFrame(t_FrameData &copyFrame, t_FrameData origFrame);
-    //copyFrame(transFrameData, tempFrameData_current);
-
-
-    // copy prev frame into transFrameData
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
-    {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
-        {
-            newFrameData.squareData[x][y].square_RGB = (*tempFrameData_prev).squareData[x][y].square_RGB;
-        }
-    }
-    // copy transFrameData into current frame
-    for(int x=0; x<V_GLOBAL.G_ROW; x++)
-    {
-        for(int y=0; y<V_GLOBAL.G_COL; y++)
-        {
-            (*tempFrameData_current).squareData[x][y].square_RGB = newFrameData.squareData[x][y].square_RGB;
-        }
-    }
-    MainWindow::copyCurrentFrameData_into_dSquare(tempFrameData_current);
-*/
     on_btn_CopyFrame_clicked();
     on_btn_PasteFrame_clicked();
 }
