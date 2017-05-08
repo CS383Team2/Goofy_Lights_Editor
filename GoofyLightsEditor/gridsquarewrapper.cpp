@@ -23,6 +23,14 @@ gridsquarewrapper::~gridsquarewrapper()
     }
 }
 
+void gridsquarewrapper::clearGrid(){
+    // delete memory
+    if (gridSquareData) {                          // test if ! null
+        for (int i = 0; i < V_GLOBAL.G_ROW; i++)
+            delete [] gridSquareData[i];           // delete data arrays
+    }
+}
+
 // must call this and set gridscene
 void gridsquarewrapper::setScene(QGraphicsScene *gridScene)
 {

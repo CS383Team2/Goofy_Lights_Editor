@@ -18,6 +18,7 @@ public:
     void setScene(QGraphicsScene *gridScene);
     void generate(); // creates memory
     void drawGrid();
+    void clearGrid();
 
     void graphic_drawRect(point p1, point p2, QColor fillColor);
 };
