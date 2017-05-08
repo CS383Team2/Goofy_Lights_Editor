@@ -259,6 +259,11 @@ void MainWindow::on_btn_FillFrame_clicked() //Fill Frame
 
     mainGrid.loadFrame(currentFrameFill); // copy frame into editing grid
     updateTimeline();
+
+    newGridColor = true;
+    currentPalette->insertColor(V_GLOBAL.G_LEFT);
+    drawPalette();
+
 }
 
 void MainWindow::on_btn_ClearFrame_clicked() //Clear Frame

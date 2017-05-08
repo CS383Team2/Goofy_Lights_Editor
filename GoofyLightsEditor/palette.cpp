@@ -47,6 +47,7 @@ void Palette::insertColor(QColor newColor)
     }
     if(numColors == 9)
         deleteColor();
+    newGridColor = false;
 }
 
 void Palette::deleteColor()
