@@ -160,6 +160,20 @@ void MainWindow::on_actionOpenProject_triggered()
     V_GLOBAL.G_FRAMECOUNT = theFrames.Size();
     V_GLOBAL.G_COL = theFrames.GetColCount();
     V_GLOBAL.G_ROW = theFrames.GetRowCount();
+
+    if(V_GLOBAL.G_ROW > V_GLOBAL.G_COL)
+        max_size = V_GLOBAL.G_ROW;
+    else
+        max_size = V_GLOBAL.G_COL;
+    G_SCALE = ((20.0 / max_size) * 0.85); //scaled based on a max size of 20x20 -P
+
+    timelineScale = 4*G_SCALE;
+
+    mainGrid.clearGrid();
+    mainGrid.generate();  // Generate memory space
+    mainGrid.setScene(gridScene);
+    mainGrid.drawGrid();
+
     initializeEntireTimeline();
 }
 
@@ -474,6 +488,14 @@ void MainWindow::drawFrame()
 //Refreshes entire timeline
 void MainWindow::initializeEntireTimeline()
 {
+    timelineScene = NULL;
+    delete timelineScene;
+
+    timelineScene = new QGraphicsScene(this);
+    ui->gView_Timeline->setScene(timelineScene); //give the timeline to the graphics view -Paul
+
+    timelineScene->update();
+
     for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++) //loop through ALL? the frames -P
     {
         FrameData.squareData = theFrames.RetrieveNode_Middle(i)->squareData; //grab every frame
@@ -571,8 +593,8 @@ void MainWindow::on_actionSave_2_triggered()
         if(fileName == NULL)
             return;
     }
-    //File -> Save menu clicked
-    //Put some code here to save the project -P
+
+     FileOperations::SaveToFile(fileName,&theFrames);
 }
 
 void MainWindow::on_actionNew_Project_triggered()
