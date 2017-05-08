@@ -174,9 +174,6 @@ void MainWindow::on_actionOpenProject_triggered()
     mainGrid.setScene(gridScene);
     mainGrid.drawGrid();
 
-    // initializeEntireTimeline();
-    createFirstFrame(); //pseudo-fix for first frame not showing on timeline, fix the bug
-
     initializeEntireTimeline();
 }
 
@@ -661,8 +658,8 @@ void MainWindow::on_actionSave_2_triggered()
         if(fileName == NULL)
             return;
     }
-    //File -> Save menu clicked
-    //Put some code here to save the project -P
+
+     FileOperations::SaveToFile(fileName,&theFrames);
 }
 
 void MainWindow::on_actionNew_Project_triggered()
