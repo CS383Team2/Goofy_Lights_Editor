@@ -46,6 +46,11 @@ MainWindow::MainWindow(QWidget *parent) :
     paletteScene = new QGraphicsScene(this);
     ui->gPalette->setScene(paletteScene);
 
+    QFont font = ui->btn_TransDwn->font();
+    font.setPointSize(8);
+    ui->btn_TransDwn->setFont(font);
+    ui->btn_TransRight->setFont(font);
+
     //Main window scaling
     max_size = 0;
     if(V_GLOBAL.G_ROW > V_GLOBAL.G_COL)
@@ -455,7 +460,7 @@ void MainWindow::newFrameHandler()
 
     //Scroll -P
     qApp->processEvents();
-    qDebug() << "Current frame: " << V_GLOBAL.G_CURRENTFRAME << "Framecount: " << V_GLOBAL.G_FRAMECOUNT << endl;
+    //qDebug() << "Current frame: " << V_GLOBAL.G_CURRENTFRAME << "Framecount: " << V_GLOBAL.G_FRAMECOUNT << endl;
     if((V_GLOBAL.G_CURRENTFRAME+1) == V_GLOBAL.G_FRAMECOUNT)
     ui->gView_Timeline->horizontalScrollBar()->setValue(( ui->gView_Timeline->horizontalScrollBar()->maximum()));
     //Keep timeline scrolled all the way to the RIGHT -P
