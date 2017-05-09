@@ -47,7 +47,7 @@ void SizeDialog::on_btn_Browse_clicked()
                        */
 
     QString fileName = QFileDialog::getOpenFileName(nullptr,
-                                    "Open some file", QString(),
+                                    "Open project", QString(),
                                     tr("Tan files (*.tan);; All Files (*)"), nullptr,
                                     QFileDialog::ReadOnly | QFileDialog::DontUseNativeDialog);
 
