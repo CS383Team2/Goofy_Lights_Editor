@@ -22,7 +22,7 @@ public:
     QGraphicsScene *timelineScenePtr;     // This is created in mainwindow.cpp & passed to this object
     gridsquarewrapper *mainGridPtr;       // Main grid in mainwindow.cpp
 
-    void setScene(QGraphicsScene *timelineScene);
+    void setScene(QGraphicsScene *timelineScene, gridsquarewrapper *mainGrid);
 
     void drawFrame();
 

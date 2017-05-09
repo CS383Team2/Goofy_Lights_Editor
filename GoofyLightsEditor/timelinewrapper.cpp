@@ -2,6 +2,7 @@
 #include "framestructure.h"
 #include "globals.h"
 #include "gridsquarewrapper.h"
+#include "FrameManipulation.h"
 
 #include <QMainWindow>
 #include <QtCore>
@@ -31,16 +32,19 @@ void timelinewrapper::setScene(QGraphicsScene *gridScene, gridsquarewrapper *mai
 
 void timelinewrapper::drawFrame()
 {
+    t_FrameData FrameDatatemp;
+    FrameDatatemp.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
     int i = V_GLOBAL.G_CURRENTFRAME;
     for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
        for(int y=0; y<V_GLOBAL.G_COL; y++)
        {
-           FrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
-           FrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
-           timelineScenePtr->addItem(&(FrameData.squareData[x][y])); //timeline painting here -P
+           FrameDatatemp.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
+           FrameDatatemp.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
+           timelineScenePtr->addItem(&(FrameDatatemp.squareData[x][y])); //timeline painting here -P
        }
      }
+    // free FraemDatatemp squareData?
 }
 
 void timelinewrapper::updateTimeline() //fix the update lag later -P

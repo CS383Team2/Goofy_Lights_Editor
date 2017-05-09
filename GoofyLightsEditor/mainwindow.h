@@ -36,7 +36,6 @@ public:
 
 
     GridSquare **gridGridSquare;     //Type is GridSquare, square is object
-    t_FrameData FrameData;           // THE frame data (this is in mainwindow.h) -P
     t_FrameData CurrentFrameData;
     t_FrameData clipboard;
     bool clipboard_empty = true;

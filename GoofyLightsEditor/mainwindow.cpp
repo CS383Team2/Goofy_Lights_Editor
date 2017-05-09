@@ -321,8 +321,9 @@ void MainWindow::updateTimeline()
 
 void MainWindow::createFirstFrame()
 {
-    FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, 0);
-    theFrames.AddTail(FrameData);
+    t_FrameData FrameDatatemp;
+    FrameDatatemp.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, 0);
+    theFrames.AddTail(FrameDatatemp);
     V_GLOBAL.G_FRAMECOUNT++;
     newFrameHandler();
 }
@@ -330,8 +331,9 @@ void MainWindow::createFirstFrame()
 void MainWindow::on_btn_NewFrame_clicked()
 {
     V_GLOBAL.G_CURRENTFRAME++;
-    FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, V_GLOBAL.G_CURRENTFRAME);
-    theFrames.AddNode_Middle(FrameData, V_GLOBAL.G_CURRENTFRAME);
+    t_FrameData FrameDatatemp;
+    FrameDatatemp.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, V_GLOBAL.G_CURRENTFRAME);
+    theFrames.AddNode_Middle(FrameDatatemp, V_GLOBAL.G_CURRENTFRAME);
     V_GLOBAL.G_FRAMECOUNT++; //add a frame to the count
     if(translateClicked == false)
         newFrameHandler();
@@ -398,7 +400,7 @@ void MainWindow::ProcessTranslateFrame(int DIR)
 
     copyFrame(tempFrameData_current, tempFrameData_prev);                    // Copy prev Frame Into current new frame.
     translateFrame(tempFrameData_current, DIR); // Translate newframe by direction
-    FrameData.squareData = tempFrameData_current->squareData;
+//what is this    FrameData.squareData = tempFrameData_current->squareData;
     newFrameHandler();
     translateClicked = false;
 }
@@ -494,17 +496,19 @@ void MainWindow::newFrameHandler()
 //Draws and adds new frame to timeline
 void MainWindow::drawFrame()
 {
+    t_FrameData FrameDatatemp;
+    FrameDatatemp.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL);
     int i = V_GLOBAL.G_CURRENTFRAME;
     for(int x=0; x<V_GLOBAL.G_ROW; x++)
     {
        for(int y=0; y<V_GLOBAL.G_COL; y++)
        {
-           FrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
-           FrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P 
-           timelineScene->addItem(&(FrameData.squareData[x][y])); //timeline painting here -P
+           FrameDatatemp.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
+           FrameDatatemp.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
+           timelineScene->addItem(&(FrameDatatemp.squareData[x][y])); //timeline painting here -P
        }
      }
-
+    // what about the memory at squareData at this point?
 }
 
 void MainWindow::initializeEntireTimeline()
@@ -519,15 +523,16 @@ void MainWindow::initializeEntireTimeline()
 
     for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++) //loop through ALL the frames -P
     {
-        FrameData.squareData = theFrames.RetrieveNode_Middle(i)->squareData; //grab every frame
+        t_FrameData FrameDatatemp;
+        FrameDatatemp.squareData = theFrames.RetrieveNode_Middle(i)->squareData; //grab every frame
         for(int x=0; x<V_GLOBAL.G_ROW; x++)
         {
             for(int y=0; y<V_GLOBAL.G_COL; y++)
             {
-                FrameData.squareData[x][y].timelineFrameNumber = i;
-                FrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING);
-                FrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110);
-                timelineScene->addItem(&(FrameData.squareData[x][y])); //timeline painting here -P
+                FrameDatatemp.squareData[x][y].timelineFrameNumber = i;
+                FrameDatatemp.squareData[x][y].y = (x*timelineScale + x*t_SPACING);
+                FrameDatatemp.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110);
+                timelineScene->addItem(&(FrameDatatemp.squareData[x][y])); //timeline painting here -P
             }
         }
     }
@@ -538,14 +543,15 @@ void MainWindow::refreshTimelineAdd()
 {
     for(int i= V_GLOBAL.G_CURRENTFRAME+1; i < V_GLOBAL.G_FRAMECOUNT; i++)
         {
-            FrameData.squareData = theFrames.RetrieveNode_Middle(i)->squareData; //grabe every frame
+            t_FrameData FrameDatatemp;
+            FrameDatatemp.squareData = theFrames.RetrieveNode_Middle(i)->squareData; //grabe every frame
             for(int x=0; x<V_GLOBAL.G_ROW; x++)
             {
                 for(int y=0; y<V_GLOBAL.G_COL; y++)
                 {
-                    FrameData.squareData[x][y].timelineFrameNumber = i;
-                    FrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
-                    FrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
+                    FrameDatatemp.squareData[x][y].timelineFrameNumber = i;
+                    FrameDatatemp.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
+                    FrameDatatemp.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
                 }
             }
         }
@@ -609,11 +615,12 @@ void MainWindow::on_actionAdd_100_Frames_triggered()
 {
     std::cout << "Creating 100 frames" << std::endl;
     // manually create the 100 frames.
+    t_FrameData FrameDatatemp;
     for (int i = 0; i < 100; i++) {
         V_GLOBAL.G_CURRENTFRAME++;
-        FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, V_GLOBAL.G_CURRENTFRAME);
-        fillFrame2(&FrameData, rand()%255, rand()%255, rand()%255);  // Random frame color
-        theFrames.AddTail(FrameData);
+        FrameDatatemp.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, V_GLOBAL.G_CURRENTFRAME);
+        fillFrame2(&FrameDatatemp, rand()%255, rand()%255, rand()%255);  // Random frame color
+        theFrames.AddTail(FrameDatatemp);
         V_GLOBAL.G_FRAMECOUNT++; //add a frame to the count
     }
    newFrameHandler();
