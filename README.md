@@ -12,4 +12,4 @@ Create a QT based program that can create a frame-by-frame animation for the Tow
 The [Tower of Lights](https://www.youtube.com/watch?v=hESMhgDnk4E) show is displayed on the theopolis tower on campus.
 
 
-![screenshot](doc/GUI_Screenshots/GUI_17-04-17_3_3.JPG)
+![screenshot](doc/GUI_Screenshots/GUI_04_Final.JPG)
