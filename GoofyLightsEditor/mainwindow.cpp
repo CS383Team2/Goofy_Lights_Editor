@@ -51,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->btn_TransDwn->setFont(font);
     ui->btn_TransRight->setFont(font);
 
-    //Main window scaling
+    //timeline scaling
     max_size = 0;
     if(V_GLOBAL.G_ROW > V_GLOBAL.G_COL)
         max_size = V_GLOBAL.G_ROW;
@@ -128,9 +128,9 @@ void MainWindow::on_actionSave_As_triggered()
             */
 
     QString fileName = QFileDialog::getSaveFileName(nullptr,
-                                                    "Save some file", QString(),
-                                                    tr("Tan files (*.tan);; All Files (*)"), nullptr,
-                                                    QFileDialog::ReadOnly | QFileDialog::DontUseNativeDialog);
+                            "Save some file", QString(),
+                            tr("Tan files (*.tan);; All Files (*)"), nullptr,
+                            QFileDialog::ReadOnly | QFileDialog::DontUseNativeDialog);
 
     if(fileName == NULL)
         return;
@@ -147,14 +147,15 @@ void MainWindow::on_actionOpenProject_triggered()
             tr("Project (*.tan);;All Files (*)"));
             */
     QString fileName = QFileDialog::getOpenFileName(nullptr,
-                                                    "Open some file", QString(),
-                                                    tr("Tan files (*.tan);; All Files (*)"), nullptr,
-                                                    QFileDialog::ReadOnly | QFileDialog::DontUseNativeDialog);
+                            "Open some file", QString(),
+                            tr("Tan files (*.tan);; All Files (*)"), nullptr,
+                            QFileDialog::ReadOnly | QFileDialog::DontUseNativeDialog);
 
     if(fileName == NULL)
         return;
 
     theFrames.DeleteList();
+    mainGrid.degenerate(); // Delete memory space. For if current is different grid size
 
     if(FileOperations::LoadFromFile(fileName, &theFrames) == -1){
         std::cout << "Failed to open" << std::endl;
@@ -173,13 +174,37 @@ void MainWindow::on_actionOpenProject_triggered()
 
     timelineScale = 4*G_SCALE;
 
-    mainGrid.clearGrid();
-    mainGrid.generate();  // Generate memory space
+    mainGrid.generate();   // Generate memory space
     mainGrid.setScene(gridScene);
     mainGrid.drawGrid();
 
     initializeEntireTimeline();
 }
+
+//File -> New Project menu clicked
+void MainWindow::on_actionNew_Project_triggered()
+{
+    MainWindow::on_actionSave_2_triggered();      // save current project
+
+}
+
+void MainWindow::on_actionSave_2_triggered()
+{
+    QString fileName = V_GLOBAL.G_FILENAME;
+
+    if(fileName == NULL){
+        QString fileName = QFileDialog::getSaveFileName(nullptr,
+                    "Save some file", QString(),
+                    tr("Tan files (*.tan);; All Files (*)"), nullptr,
+                    QFileDialog::ReadOnly | QFileDialog::DontUseNativeDialog);
+
+        if(fileName == NULL)
+            return;
+    }
+
+     FileOperations::SaveToFile(fileName,&theFrames);
+}
+
 
 void MainWindow::on_sbox_ValueRed_editingFinished()
 {
@@ -557,23 +582,6 @@ void MainWindow::on_actionPlay_All_triggered()
     on_btn_PlayPause_clicked();
 }
 
-void MainWindow::on_actionSave_2_triggered()
-{
-    QString fileName = V_GLOBAL.G_FILENAME;
-
-    if(fileName == NULL){
-        QString fileName = QFileDialog::getSaveFileName(nullptr,
-                    "Save some file", QString(),
-                    tr("Tan files (*.tan);; All Files (*)"), nullptr,
-                    QFileDialog::ReadOnly | QFileDialog::DontUseNativeDialog);
-
-        if(fileName == NULL)
-            return;
-    }
-
-     FileOperations::SaveToFile(fileName,&theFrames);
-}
-
 // ==== Edit Menu ====
 
 void MainWindow::on_actionClear_Frame_triggered()
@@ -673,10 +681,4 @@ void MainWindow::on_btn_DrawRect_clicked()
 void MainWindow::insertFrame(t_FrameData newFrame)
 {
 
-}
-
-void MainWindow::on_actionNew_Project_triggered()
-{
-    //File -> New Project menu clicked
-    //create new project -P
 }
