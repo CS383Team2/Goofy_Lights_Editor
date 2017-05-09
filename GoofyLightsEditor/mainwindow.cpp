@@ -190,13 +190,11 @@ void MainWindow::on_actionNew_Project_triggered()
 
 void MainWindow::on_actionSave_2_triggered()
 {
-    QString fileName = V_GLOBAL.G_FILENAME;
-
-    if(fileName == NULL){
-        MainWindow::on_actionSave_As_triggered()
+    if(V_GLOBAL.G_FILENAME == NULL){
+        MainWindow::on_actionSave_As_triggered();
     }
-
-     FileOperations::SaveToFile(fileName,&theFrames);
+    else
+        FileOperations::SaveToFile(V_GLOBAL.G_FILENAME,&theFrames);
 }
 
 
