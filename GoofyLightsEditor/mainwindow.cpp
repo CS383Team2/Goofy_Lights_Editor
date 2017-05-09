@@ -6,16 +6,17 @@
 #include <QtDebug>
 #include <QWidget>
 #include <sizedialog.h>
-#include <globals.h> //V_GLOBAL.G_ROW and V_GLOBAL.G_COL
+#include <globals.h>
 #include <FrameManipulation.h>
 #include <player.h>
-#include <QApplication> //OP weapon -P
+#include <QApplication>
 #include <docdialog.h>
 #include <helpdialog.h>
 #include "gridsquarewrapper.h"
+#include "timelinewrapper.h"
 
 int FrameID = 0; //-P
-QColor temp_RGB; //yeah.... -P
+QColor temp_RGB;
 
 FrameList theFrames(V_GLOBAL.G_ROW, V_GLOBAL.G_COL); //HERE LAY THE LINKED LIST -P
 
@@ -27,6 +28,7 @@ PaletteSquare *Rcolor = new PaletteSquare(0,32.5,Qt::blue);
 Palette *currentPalette = new Palette;
 
 gridsquarewrapper mainGrid;
+timelinewrapper   timeLine;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -81,11 +83,12 @@ MainWindow::MainWindow(QWidget *parent) :
         initializeEntireTimeline();
     }
 
+    // setup timeline object
+    //timeLine.setScene(timelineScene, &mainGrid, ui, this);
+
     V_GLOBAL.G_FRAMELIST = &theFrames;
 
     V_GLOBAL.G_CURRENTFRAME = theFrames.Size();
-
-    //t_FrameData * testptr = theFrames.RetrieveNode_Middle(0); //This is the correct formate -n
 
     currentcolorsScene->addItem(Lcolor);
     currentcolorsScene->addItem(Rcolor);
@@ -178,7 +181,8 @@ void MainWindow::on_actionOpenProject_triggered()
     mainGrid.setScene(gridScene);
     mainGrid.drawGrid();
 
-    initializeEntireTimeline();
+    //initializeEntireTimeline();
+    timeLine.initializeEntireTimeline();
 }
 
 //File -> New Project menu clicked

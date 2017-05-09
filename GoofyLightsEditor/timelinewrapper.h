@@ -1,7 +1,9 @@
 #ifndef TIMELINEWRAPPER_H
 #define TIMELINEWRAPPER_H
 
+#include <QMainWindow>
 
+#include "ui_mainwindow.h"
 #include "framestructure.h"
 #include "gridsquarewrapper.h"
 
@@ -19,10 +21,13 @@ public:
     int t_SPACING;
 
     TimelineGrid ** gridSquareData = NULL;
+
+    // reference pointers loaded from mainwindow
     QGraphicsScene *timelineScenePtr;     // This is created in mainwindow.cpp & passed to this object
     gridsquarewrapper *mainGridPtr;       // Main grid in mainwindow.cpp
+    Ui::MainWindow uiPtr;                 // Main window ui
 
-    void setScene(QGraphicsScene *timelineScene, gridsquarewrapper *mainGrid);
+    void setScene(QGraphicsScene *timelineScene, gridsquarewrapper *mainGrid, Ui::MainWindow *UI, QOjbect windowPtr);
 
     void drawFrame();
 
@@ -34,6 +39,8 @@ public:
 
     //BIG draw/refresh/all-in-one function. Handles adding drawing frame, refreshing timeline, drawing to grid, etc. Taken from onbtn_newFrame function.
     void newFrameHandler();
+
+    void initializeEntireTimeline();
 
 
 };
