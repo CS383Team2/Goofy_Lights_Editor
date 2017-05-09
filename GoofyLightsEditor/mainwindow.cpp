@@ -46,16 +46,16 @@ MainWindow::MainWindow(QWidget *parent) :
     paletteScene = new QGraphicsScene(this);
     ui->gPalette->setScene(paletteScene);
 
-    //MAIN WINDOW TOO BIG, gonna take the scaling down to 85% -P
+    //Main window scaling
     max_size = 0;
     if(V_GLOBAL.G_ROW > V_GLOBAL.G_COL)
         max_size = V_GLOBAL.G_ROW;
     else
         max_size = V_GLOBAL.G_COL;
-    G_SCALE = ((20.0 / max_size) * 0.85); //scaled based on a max size of 20x20 -P
+    G_SCALE = ((20.0 / max_size) * 0.85); //scaled based on a max size of 20x20
 
     timelineScale = 4*G_SCALE;
-    t_SPACING = 2; //timeline spacing woohooo -P
+    t_SPACING = 2; //timeline spacing
 
     theFrames.SetRowCount(V_GLOBAL.G_ROW);        // Update row size in FrameList now that it is defined
     theFrames.SetColCount(V_GLOBAL.G_COL);        // Update col size in FrameList now that it is defined
@@ -89,8 +89,7 @@ MainWindow::MainWindow(QWidget *parent) :
     mainGrid.setScene(gridScene);
     mainGrid.drawGrid();
     
-    // initializeEntireTimeline();
-    if (V_GLOBAL.G_FRAMECOUNT == 0) createFirstFrame(); //pseudo-fix for first frame not showing on timeline, fix the bug
+    if (V_GLOBAL.G_FRAMECOUNT == 0) createFirstFrame(); //Creates first frame data and adds to the timeline
 
     currentPalette->insertColor(V_GLOBAL.G_LEFT);
     currentPalette->insertColor(V_GLOBAL.G_RIGHT);
@@ -220,8 +219,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
         //show duration of current frame
         ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
 
-        //draw red square around frame -P
-
+        //draw blue square around frame -P
         QPen redPen;
         QPen clearPen;
         QColor clear;
@@ -231,12 +229,10 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
         clearPen.setColor(clear);
         clearPen.setWidth(4);
 
-        //int redSpacingX = V_GLOBAL.G_COL*timelineScale + V_GLOBAL.G_COL*t_SPACING + 30;
         int redSpacingX = 110;
         int redSizeX = V_GLOBAL.G_COL*timelineScale + V_GLOBAL.G_COL*t_SPACING + 20;
         int redSizeY = V_GLOBAL.G_ROW*timelineScale + V_GLOBAL.G_ROW*t_SPACING + 20;
 
-        //timelineScene->clear();
         for(int i=0;i<V_GLOBAL.G_FRAMECOUNT;i++)
         {
             timelineScene->addRect((((i)*redSpacingX)-10),(-10),redSizeX,redSizeY,clearPen,(Qt::NoBrush));
@@ -244,18 +240,15 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
 
         timelineScene->addRect((((V_GLOBAL.G_CURRENTFRAME)*redSpacingX)-10),(-10),redSizeX,redSizeY,redPen,(Qt::NoBrush));
     }
-
-
-    qApp->processEvents(); //Extremely OP weapon, fixes all lag, use with caution -P
-
-    updateTimeline(); //lol -P
+    qApp->processEvents();
+    updateTimeline();
 }
 
 void MainWindow::on_btn_FillFrame_clicked() //Fill Frame
 {
     t_FrameData *currentFrameFill = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);
 
-    fillFrame(currentFrameFill, Lcolor->square_RGB); //do this later -P
+    fillFrame(currentFrameFill, Lcolor->square_RGB);
 
     mainGrid.loadFrame(currentFrameFill); // copy frame into editing grid
     updateTimeline();
@@ -276,7 +269,7 @@ void MainWindow::on_btn_ClearFrame_clicked() //Clear Frame
     updateTimeline();
 }
 
-void MainWindow::updateTimeline() //fix the update lag later -P
+void MainWindow::updateTimeline()
 {
     t_FrameData *tempFrameData = theFrames.RetrieveNode_Middle(V_GLOBAL.G_CURRENTFRAME);   //grab the current frame
     for(int x=0; x<V_GLOBAL.G_ROW; x++)
@@ -291,14 +284,14 @@ void MainWindow::updateTimeline() //fix the update lag later -P
     ui->dsbox_FrameDur->setValue((*tempFrameData).duration);
 
     double currtime = 0.0;
-    for (int i = 0; i < V_GLOBAL.G_CURRENTFRAME; i++) //This is broken
+    for (int i = 0; i < V_GLOBAL.G_CURRENTFRAME; i++)
         currtime += theFrames.RetrieveNode_Middle(i)->duration;
     ui->dsbox_CurrTime->setValue(currtime);
 }
 
 void MainWindow::createFirstFrame()
 {
-    FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, 0); //fix indexing later -P
+    FrameData.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, 0);
     theFrames.AddTail(FrameData);
     V_GLOBAL.G_FRAMECOUNT++;
     newFrameHandler();
@@ -354,11 +347,6 @@ void MainWindow::on_btn_DeleteFrame_clicked()
         theFrames.DeleteNode_Middle(V_GLOBAL.G_FRAMECOUNT-1);
         V_GLOBAL.G_FRAMECOUNT = V_GLOBAL.G_FRAMECOUNT - 1;
     }
-}
-
-void MainWindow::insertFrame(t_FrameData newFrame)
-{
-    //do this later lol
 }
 
 void MainWindow::on_dsbox_FrameDur_valueChanged(double arg1)
@@ -431,7 +419,6 @@ void MainWindow::on_btn_RepeatFrame_clicked()
     on_btn_PasteFrame_clicked();
 }
 
-//BIG draw/refresh/all-in-one function. Handles adding drawing frame, refreshing timeline, drawing to grid, etc. Taken from onbtn_newFrame function.
 void MainWindow::newFrameHandler()
 {
     drawFrame();
@@ -490,7 +477,6 @@ void MainWindow::drawFrame()
 
 }
 
-//Refreshes entire timeline
 void MainWindow::initializeEntireTimeline()
 {
     timelineScene = NULL;
@@ -501,7 +487,7 @@ void MainWindow::initializeEntireTimeline()
 
     timelineScene->update();
 
-    for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++) //loop through ALL? the frames -P
+    for(int i=0; i < V_GLOBAL.G_FRAMECOUNT; i++) //loop through ALL the frames -P
     {
         FrameData.squareData = theFrames.RetrieveNode_Middle(i)->squareData; //grab every frame
         for(int x=0; x<V_GLOBAL.G_ROW; x++)
@@ -509,8 +495,8 @@ void MainWindow::initializeEntireTimeline()
             for(int y=0; y<V_GLOBAL.G_COL; y++)
             {
                 FrameData.squareData[x][y].timelineFrameNumber = i;
-                FrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
-                FrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
+                FrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING);
+                FrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110);
                 timelineScene->addItem(&(FrameData.squareData[x][y])); //timeline painting here -P
             }
         }
@@ -530,25 +516,6 @@ void MainWindow::refreshTimelineAdd()
                     FrameData.squareData[x][y].timelineFrameNumber = i;
                     FrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
                     FrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
-                }
-            }
-        }
-}
-
-//Function that goes through the timeline and updates/moves frames after a frame is deleted in the middle of the list
-void MainWindow::refreshTimelineDelete()
-{
-    for(int i= V_GLOBAL.G_CURRENTFRAME; i < V_GLOBAL.G_FRAMECOUNT; i++)
-        {
-            FrameData.squareData = theFrames.RetrieveNode_Middle(i)->squareData; //grabe every frame
-            for(int x=0; x<V_GLOBAL.G_ROW; x++)
-            {
-                for(int y=0; y<V_GLOBAL.G_COL; y++)
-                {
-                    FrameData.squareData[x][y].timelineFrameNumber = i;
-                    FrameData.squareData[x][y].y = (x*timelineScale + x*t_SPACING); //timeline magic about to happen here -P
-                    FrameData.squareData[x][y].x = (y*timelineScale + y*t_SPACING) + (i*110); // magic -P
-
                 }
             }
         }
@@ -602,13 +569,7 @@ void MainWindow::on_actionSave_2_triggered()
      FileOperations::SaveToFile(fileName,&theFrames);
 }
 
-void MainWindow::on_actionNew_Project_triggered()
-{
-    //File -> New Project menu clicked
-    //create new project -P
-}
-
-// ==== Edit Menue ====
+// ==== Edit Menu ====
 
 void MainWindow::on_actionClear_Frame_triggered()
 {
@@ -702,4 +663,15 @@ void MainWindow::on_btn_DrawRect_clicked()
     mainGrid.graphic_drawRect(V_GLOBAL.graphicPoint_1, V_GLOBAL.graphicPoint_2, V_GLOBAL.G_LEFT);
     updateTimeline();
     drawFrame(); //fixed one click lag -P
+}
+
+void MainWindow::insertFrame(t_FrameData newFrame)
+{
+
+}
+
+void MainWindow::on_actionNew_Project_triggered()
+{
+    //File -> New Project menu clicked
+    //create new project -P
 }

@@ -17,7 +17,7 @@ typedef struct Globals{
     point graphicPoint_1;
     point graphicPoint_2;
 
-    QColor G_RIGHT = (Qt::blue); //default to blue jsut for hoots -P
+    QColor G_RIGHT = (Qt::blue); //default to blue just for hoots -P
     QColor G_LEFT = (Qt::red); //default to red to match colorwheel default -P
     bool EyeDropper = false;
 
