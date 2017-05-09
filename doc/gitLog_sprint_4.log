@@ -1,3 +1,17 @@
+* b38498e - Nick, Tue May 9 12:40:19 2017 -0700 : Update README.md
+* cc61973 - YupHio, Tue May 9 08:27:31 2017 -0700 : Text was being cut-off in dialog box on my machine, I fixed the size.
+* 5a67cb5 - Nick Krenowicz, Mon May 8 20:26:05 2017 -0700 : Fix mainGrid not loading a grid on file open
+* b0ec0e1 - Nick Krenowicz, Mon May 8 20:21:05 2017 -0700 : SaveAs append .tan if not specified
+* 1b05211 - gjcarter, Mon May 8 20:01:18 2017 -0700 : Fixed a few grammatical errors.
+* b629c5f - Nick Krenowicz, Mon May 8 19:48:25 2017 -0700 : save code condense minor fix
+* 31a2b36 - Nick Krenowicz, Mon May 8 19:42:31 2017 -0700 : save code condence
+* d8a02e7 - Nick Krenowicz, Mon May 8 19:36:24 2017 -0700 : Fix sizeDialog bug
+* 35997bf - Nick Krenowicz, Mon May 8 19:18:51 2017 -0700 : Fixed memory error in gridsquarewrapper. Fixed call operation in mainwindow
+* 71d392e - gjcarter, Mon May 8 19:08:10 2017 -0700 : Fixed a few sizing issues.
+* 8bab2b8 - gjcarter, Mon May 8 19:00:06 2017 -0700 : Adding links to UML use case diagrams to documentation window.
+* d58978a - gjcarter, Mon May 8 18:34:33 2017 -0700 : Some more cleanup. Added some very basic info to about menu with link to our GitHub. Changed around sizing window a little bit to look a little more pretty.
+* df74b2f - Nick Krenowicz, Mon May 8 18:34:10 2017 -0700 : Diagrams 0-10 added to master doc
+* 21acdc6 - Nick Krenowicz, Mon May 8 18:14:29 2017 -0700 : Doc: gitlog + header files + 1st 3 diagrams Added gitlog (update later for last few commits) Added header files to the document Linked first 3 UseCase files
 * 399dad0 - Nick Krenowicz, Mon May 8 17:55:02 2017 -0700 : Added my Diagrams. Removed spaces in other filenames
 * 979ea2d - gjcarter, Mon May 8 17:34:20 2017 -0700 : Added some comments for various functions in header files. Cleaned up some code that was not used and cleaned up unneeded comments.
 * 116018c - Nick Krenowicz, Mon May 8 17:27:18 2017 -0700 : Moved UML cases back & minor renaming
