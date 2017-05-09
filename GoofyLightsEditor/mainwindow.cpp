@@ -193,13 +193,7 @@ void MainWindow::on_actionSave_2_triggered()
     QString fileName = V_GLOBAL.G_FILENAME;
 
     if(fileName == NULL){
-        QString fileName = QFileDialog::getSaveFileName(nullptr,
-                    "Save some file", QString(),
-                    tr("Tan files (*.tan);; All Files (*)"), nullptr,
-                    QFileDialog::ReadOnly | QFileDialog::DontUseNativeDialog);
-
-        if(fileName == NULL)
-            return;
+        MainWindow::on_actionSave_As_triggered()
     }
 
      FileOperations::SaveToFile(fileName,&theFrames);
