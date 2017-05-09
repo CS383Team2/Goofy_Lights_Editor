@@ -80,11 +80,12 @@ MainWindow::MainWindow(QWidget *parent) :
             tempFrameData = (*(V_GLOBAL.G_FRAMELIST->RetrieveNode_Middle(i)));
             theFrames.AddTail(tempFrameData);
         }
-        initializeEntireTimeline();
+//wip        initializeEntireTimeline();
+        timeLine.initializeEntireTimeline();
     }
 
     // setup timeline object
-    //timeLine.setScene(timelineScene, &mainGrid, ui, this);
+    timeLine.configure(timelineScene, &mainGrid, ui, this);
 
     V_GLOBAL.G_FRAMELIST = &theFrames;
 
@@ -275,7 +276,8 @@ void MainWindow::mousePressEvent(QMouseEvent *event) //any time the window is cl
         timelineScene->addRect((((V_GLOBAL.G_CURRENTFRAME)*redSpacingX)-10),(-10),redSizeX,redSizeY,redPen,(Qt::NoBrush));
     }
     qApp->processEvents();
-    updateTimeline();
+//wip    updateTimeline();
+    timeLine.updateTimeline();
 }
 
 void MainWindow::on_btn_FillFrame_clicked() //Fill Frame
@@ -285,7 +287,8 @@ void MainWindow::on_btn_FillFrame_clicked() //Fill Frame
     fillFrame(currentFrameFill, Lcolor->square_RGB);
 
     mainGrid.loadFrame(currentFrameFill); // copy frame into editing grid
-    updateTimeline();
+//wip    updateTimeline();
+    timeLine.updateTimeline();
 
     newGridColor = true;
     currentPalette->insertColor(V_GLOBAL.G_LEFT);
@@ -300,7 +303,8 @@ void MainWindow::on_btn_ClearFrame_clicked() //Clear Frame
     fillFrame(currentFrameFill, Qt::black);
 
     mainGrid.loadFrame(currentFrameFill); // copy frame into editing grid
-    updateTimeline();
+//wip    updateTimeline();
+    timeLine.updateTimeline();
 }
 
 void MainWindow::updateTimeline()
@@ -329,7 +333,8 @@ void MainWindow::createFirstFrame()
     FrameDatatemp.squareData = create_RGB(V_GLOBAL.G_ROW, V_GLOBAL.G_COL, 0);
     theFrames.AddTail(FrameDatatemp);
     V_GLOBAL.G_FRAMECOUNT++;
-    newFrameHandler();
+//wip    newFrameHandler();
+    timeLine.newFrameHandler();
 }
 
 void MainWindow::on_btn_NewFrame_clicked()
@@ -340,7 +345,7 @@ void MainWindow::on_btn_NewFrame_clicked()
     theFrames.AddNode_Middle(FrameDatatemp, V_GLOBAL.G_CURRENTFRAME);
     V_GLOBAL.G_FRAMECOUNT++; //add a frame to the count
     if(translateClicked == false)
-        newFrameHandler();
+        /*wip    newFrameHandler();*/timeLine.newFrameHandler();
 }
 
 
@@ -405,7 +410,8 @@ void MainWindow::ProcessTranslateFrame(int DIR)
     copyFrame(tempFrameData_current, tempFrameData_prev);                    // Copy prev Frame Into current new frame.
     translateFrame(tempFrameData_current, DIR); // Translate newframe by direction
 //what is this    FrameData.squareData = tempFrameData_current->squareData;
-    newFrameHandler();
+//wip    newFrameHandler();
+    timeLine.newFrameHandler();
     translateClicked = false;
 }
 
@@ -457,9 +463,11 @@ void MainWindow::on_btn_RepeatFrame_clicked()
 
 void MainWindow::newFrameHandler()
 {
-    drawFrame();
+//wip    drawFrame();
+    timeLine.drawFrame();
     if(V_GLOBAL.G_CURRENTFRAME < V_GLOBAL.G_FRAMECOUNT-1)//Only refresh the list if the current frame being added is in the middle
-        refreshTimelineAdd();
+//wip        refreshTimelineAdd();
+        timeLine.refreshTimelineAdd();
 
     //draw red square around frame -P
     QPen redPen;
@@ -627,8 +635,9 @@ void MainWindow::on_actionAdd_100_Frames_triggered()
         theFrames.AddTail(FrameDatatemp);
         V_GLOBAL.G_FRAMECOUNT++; //add a frame to the count
     }
-   newFrameHandler();
-   initializeEntireTimeline();
+//wip   newFrameHandler();
+   timeLine.newFrameHandler();
+   timeLine.initializeEntireTimeline();
 }
 
 void MainWindow::on_actionPrint_Frames_triggered()
@@ -653,7 +662,8 @@ void MainWindow::on_btn_PasteFrame_clicked()
         copyFrame(tempFrameData_current, &clipboard);
         ui->dsbox_FrameDur->setValue(clipboard.duration);
         mainGrid.loadFrame(tempFrameData_current); // copy frame into editing grid
-        updateTimeline();
+    //wip    updateTimeline();
+        timeLine.updateTimeline();
     }
 }
 
@@ -685,8 +695,10 @@ void MainWindow::drawPalette()
 void MainWindow::on_btn_DrawRect_clicked()
 {
     mainGrid.graphic_drawRect(V_GLOBAL.graphicPoint_1, V_GLOBAL.graphicPoint_2, V_GLOBAL.G_LEFT);
-    updateTimeline();
-    drawFrame(); //fixed one click lag -P
+//wip    updateTimeline();
+    timeLine.updateTimeline();
+//wip    drawFrame(); //fixed one click lag -P
+    timeLine.drawFrame();
 }
 
 void MainWindow::insertFrame(t_FrameData newFrame)

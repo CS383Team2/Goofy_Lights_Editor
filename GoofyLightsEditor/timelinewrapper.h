@@ -25,9 +25,10 @@ public:
     // reference pointers loaded from mainwindow
     QGraphicsScene *timelineScenePtr;     // This is created in mainwindow.cpp & passed to this object
     gridsquarewrapper *mainGridPtr;       // Main grid in mainwindow.cpp
-    Ui::MainWindow uiPtr;                 // Main window ui
+    Ui::MainWindow *uiPtr;                 // Main window ui
+    void* MainWindowPtr;                  // Main window parent
 
-    void setScene(QGraphicsScene *timelineScene, gridsquarewrapper *mainGrid, Ui::MainWindow *UI, QOjbect windowPtr);
+    void configure(QGraphicsScene *timelineScene, gridsquarewrapper *mainGrid, Ui::MainWindow *UI, void* windowPtr);
 
     void drawFrame();
 

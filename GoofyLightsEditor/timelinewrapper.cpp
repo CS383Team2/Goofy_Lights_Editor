@@ -22,12 +22,26 @@ timelinewrapper::~timelinewrapper()
     // delete memory if needed
 }
 
-// must call this and set gridscene
-void timelinewrapper::setScene(QGraphicsScene *gridScene, gridsquarewrapper *mainGrid, Ui::MainWindow *UI)
+// must call this and setup pointers
+void timelinewrapper::configure(QGraphicsScene *gridScene, gridsquarewrapper *mainGrid, Ui::MainWindow *UI, void* windowPtr)
 {
     // link gridScene to internal pointer
     this->timelineScenePtr = gridScene;
-    this->mainGridPtr  = mainGrid;
+    this->mainGridPtr      = mainGrid;
+    this->uiPtr            = UI;
+   // this->MainWindowPtr    = windowPtr;
+    //QObject * test = windowPtr;
+
+    //timeline scaling
+    max_size = 0;
+    if(V_GLOBAL.G_ROW > V_GLOBAL.G_COL)
+        max_size = V_GLOBAL.G_ROW;
+    else
+        max_size = V_GLOBAL.G_COL;
+    G_SCALE = ((20.0 / max_size) * 0.85); //scaled based on a max size of 20x20
+
+    timelineScale = 4*G_SCALE;
+    t_SPACING = 2; //timeline spacing
 }
 
 
@@ -125,14 +139,14 @@ void timelinewrapper::newFrameHandler()
     mainGridPtr->loadFrame(tempFrameData_current); // copy frame into editing grid
 
     //show duration of new frame
-    uiPtr.dsbox_FrameDur->setValue((*tempFrameData_current).duration);
+    (*uiPtr).dsbox_FrameDur->setValue((*tempFrameData_current).duration);
 
 
     //Scroll -P
     qApp->processEvents();
     //qDebug() << "Current frame: " << V_GLOBAL.G_CURRENTFRAME << "Framecount: " << V_GLOBAL.G_FRAMECOUNT << endl;
     if((V_GLOBAL.G_CURRENTFRAME+1) == V_GLOBAL.G_FRAMECOUNT)
-    uiPtr.gView_Timeline->horizontalScrollBar()->setValue(( uiPtr.gView_Timeline->horizontalScrollBar()->maximum()));
+    (*uiPtr).gView_Timeline->horizontalScrollBar()->setValue(( (*uiPtr).gView_Timeline->horizontalScrollBar()->maximum()));
     //Keep timeline scrolled all the way to the RIGHT -P
 }
 
@@ -141,8 +155,8 @@ void timelinewrapper::initializeEntireTimeline()
     timelineScenePtr = NULL;
     delete timelineScenePtr;
 
-    timelineScenePtr = new QGraphicsScene(); //QOjbect *parent
-    uiPtr.gView_Timeline->setScene(timelineScenePtr); //give the timeline to the graphics view -Paul
+    timelineScenePtr = new QGraphicsScene();//MainWindowPtr); //QOjbect *parent
+    (*uiPtr).gView_Timeline->setScene(timelineScenePtr); //give the timeline to the graphics view -Paul
 
     timelineScenePtr->update();
 
