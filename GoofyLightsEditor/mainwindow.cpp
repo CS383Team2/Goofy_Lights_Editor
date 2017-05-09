@@ -179,6 +179,7 @@ void MainWindow::on_actionOpenProject_triggered()
     mainGrid.generate();   // Generate memory space
     mainGrid.setScene(gridScene);
     mainGrid.drawGrid();
+    mainGrid.loadFrame(theFrames.RetrieveNode_Middle(0));
 
     initializeEntireTimeline();
 }
