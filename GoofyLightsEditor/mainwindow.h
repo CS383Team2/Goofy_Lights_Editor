@@ -42,8 +42,11 @@ public:
     bool clipboard_empty = true;
     QRect redSquare; //in .h -P
 
+    //Updates timeline with current grid square
     void updateTimeline();
-    void initializeEntireTimeline(); //for Tim's file I/O -P
+
+    //Function used to initialize timeline when many frames are being added at once
+    void initializeEntireTimeline();
 
 private slots:
     void on_actionSave_As_triggered();
@@ -62,6 +65,7 @@ private slots:
 
     void on_btn_ClearFrame_clicked();
 
+    //Creates first frame of a new project or frame 0
     void createFirstFrame();
 
     void on_btn_NewFrame_clicked();
@@ -74,7 +78,7 @@ private slots:
 
     void on_dsbox_FrameDur_valueChanged(double arg1);
 
-    // This Does the actual translation work
+    //Processes translate button presses and performs actual translation actions
     void ProcessTranslateFrame(int DIR);
 
     void on_btn_TransUP_clicked();
@@ -93,15 +97,17 @@ private slots:
 
     void on_btn_RepeatFrame_clicked();
 
+    //Big function that handles all the actions that are needed related to drawing when a new frame is
+    //added. This includes adding the frame to the timeline, updating the timeline to fit the new frame,
+    //drawing the square around the new frame, and updating the grid with the new frame.
     void newFrameHandler();
 
+    //Adds new frame to timeline
     void drawFrame();
 
+    //Refreshes/updates the timeline after a new frame is added. This changes the timelinenumber of frames
+    //if needed to match the new indexing with the frame being added.
     void refreshTimelineAdd();
-
-    void refreshTimelineDelete();
-
-    //void drawRedSquare();
 
     void on_btn_PlayPause_clicked();
 
@@ -135,6 +141,8 @@ private slots:
 
     void drawPalette();
 
+    void on_btn_DrawRect_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -146,6 +154,9 @@ private:
 
     QGraphicsScene *paletteScene;
 
+    //Variable used to keep track if translate button was clicked so that newFrameHandler is
+    //only run once as it is in both the translate frame button click function and the new frame button
+    //press function.
     bool translateClicked = false;
 
     void createActions();

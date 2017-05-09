@@ -26,6 +26,10 @@ public:
     int x = 0; //drawing locations -P
     int y = 0;
 
+    // For drawLine feature
+    short row_pos = 0;
+    short col_pos = 0;
+
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event); //need to know when the things are clicked on -P
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);

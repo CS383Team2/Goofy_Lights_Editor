@@ -47,9 +47,12 @@ void SizeDialog::on_btn_Browse_clicked()
                        */
 
     QString fileName = QFileDialog::getOpenFileName(nullptr,
-                                                    "Open some file", QString(),
-                                                    tr("Tan files (.tan)"), nullptr,
-                                                    QFileDialog::ReadOnly | QFileDialog::DontUseNativeDialog);
+                                    "Open some file", QString(),
+                                    tr("Tan files (*.tan);; All Files (*)"), nullptr,
+                                    QFileDialog::ReadOnly | QFileDialog::DontUseNativeDialog);
+
+    if(fileName == NULL)
+        return;
 
     FrameList frameList;
     FileOperations::LoadFromFile(fileName, &(frameList));
@@ -75,11 +78,5 @@ void SizeDialog::on_btn_Browse_clicked()
     V_GLOBAL.G_COL          = V_GLOBAL.G_FRAMELIST->GetColCount();
     V_GLOBAL.G_ROW          = V_GLOBAL.G_FRAMELIST->GetRowCount();
 
-    // Update UI info
-    ui->sbox_Col->setValue(V_GLOBAL.G_COL);
-    ui->sbox_Row->setValue(V_GLOBAL.G_ROW);
-
-    //fun stuff -P
-    //filename variable now contains the file we want, woohoo
-    //do stuff with this later -P
+   this->close(); // close this window
 }

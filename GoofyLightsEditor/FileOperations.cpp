@@ -25,6 +25,7 @@
 /* Save the project to a file. There is no predefined file format for this */
 int FileOperations::SaveToFile(QString fileName, FrameList * frameList){
     QFile file; /* Load the file and write to it */
+    V_GLOBAL.G_FILENAME = fileName;
     QTime elapsedTime = QTime(0,0,0,0); // Time elapsed in milliseconds
     file.setFileName(fileName);
     if(file.open(QIODevice::WriteOnly | QIODevice::Text)){
@@ -62,7 +63,7 @@ int FileOperations::SaveToFile(QString fileName, FrameList * frameList){
                 }
                 stream << endl;
             }
-            elapsedTime = elapsedTime.addSecs(frameData.duration);
+            elapsedTime = elapsedTime.addMSecs(frameData.duration*1000);
             frameDataPtr = frameList->AdvanceList(); // grab next FrameDataPtr
         }
         file.close();

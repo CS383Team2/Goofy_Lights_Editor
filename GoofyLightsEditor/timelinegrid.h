@@ -22,7 +22,7 @@ public:
     int x = 0; //drawing locations -P
     int y = 0;
 
-    int timelineFrameNumber = 0;
+    int timelineFrameNumber = 0; //number used to keep track of indexing of frame for the timeline
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event); //need to know when the things are clicked on -P

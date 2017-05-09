@@ -1,0 +1,170 @@
+* 399dad0 - Nick Krenowicz, Mon May 8 17:55:02 2017 -0700 : Added my Diagrams. Removed spaces in other filenames
+* 979ea2d - gjcarter, Mon May 8 17:34:20 2017 -0700 : Added some comments for various functions in header files. Cleaned up some code that was not used and cleaned up unneeded comments.
+* 116018c - Nick Krenowicz, Mon May 8 17:27:18 2017 -0700 : Moved UML cases back & minor renaming
+* a2f50fd - Joe, Mon May 8 15:18:58 2017 -0700 : repeat_frame, translate_frame, and new_frame use case diagrams
+* a2ffba7 - YupHio, Mon May 8 15:13:00 2017 -0700 : Play Animation Use Case
+* 0976d7f - YupHio, Mon May 8 15:06:14 2017 -0700 : Add Pixel Use Case
+* 9b7c490 - YupHio, Mon May 8 14:58:57 2017 -0700 : Documentation use case
+* cef2407 - Emma Bateman, Mon May 8 13:50:44 2017 -0700 : 2 new use cases, and old use cases moved to separate folder
+* 5fc8b9e - welc2421, Mon May 8 11:34:05 2017 -0700 : New UML Diagrams
+* 6b2243a - welc2421, Mon May 8 11:04:36 2017 -0700 : Fixed palette bugs
+* e0a2167 - Kevin Dorscher, Mon May 8 10:55:06 2017 -0700 : Delete Frame and Copy Frame Final UML Diagrams
+* 3ef0925 - tsonnen, Mon May 8 00:37:47 2017 -0700 : Add new UML diagrams
+*   321a508 - emmabateman, Sun May 7 22:46:42 2017 -0700 : Merge pull request #48 from CS383Team2/fileLoadFix
+|\  
+| * c8c41cb - tsonnen, Sun May 7 17:29:45 2017 -0700 : Fixed save and load issues
+| * 3e0152b - tsonnen, Sun May 7 17:01:40 2017 -0700 : Fix load in the middle
+* | 6d2dd91 - Emma Bateman, Sun May 7 15:52:19 2017 -0700 : deleted some commented-out code
+* | 6fe932e - Emma Bateman, Sun May 7 15:47:43 2017 -0700 : open existing file fix
+|/  
+* 8dd174c - Emma Bateman, Wed May 3 17:34:30 2017 -0700 : save file fix
+* b491734 - tsonnen, Tue May 2 19:47:20 2017 -0700 : Re-add Fileio. Force c++11
+* a6bb22d - YupHio, Mon May 1 12:01:22 2017 -0700 : Fixed one click lag of Draw Rect
+*   4af0730 - Nick Krenowicz, Mon May 1 10:03:40 2017 -0700 : Merge branch 'Draw_Line'
+|\  
+| * 870de59 - Nick Krenowicz, Mon May 1 09:58:30 2017 -0700 : Removed DrawLine. DrawRect covers use case
+| * 776a454 - Nick Krenowicz, Mon May 1 09:51:42 2017 -0700 : Fixed stupid error mixed up c and r directions
+| * 7359eb5 - Nick Krenowicz, Mon May 1 01:23:00 2017 -0700 : UI rearranged.
+| * 3d8fc23 - Nick Krenowicz, Mon May 1 01:13:48 2017 -0700 : Feature: DrawLine. Slight WIP
+| * 7f14baa - Nick Krenowicz, Mon May 1 00:37:34 2017 -0700 : Feature: DrawLine
+|/  
+* 2800aa8 - Emma Bateman, Sun Apr 30 12:20:30 2017 -0700 : removed unused "insert char" and "insert shape" options
+* fe69711 - Emma Bateman, Sun Apr 30 11:34:56 2017 -0700 : save button
+*   7bfae05 - Nick Krenowicz, Sun Apr 30 11:28:42 2017 -0700 : Merge branch 'new-delete-function_emma'
+|\  
+| * da0fb74 - Nick Krenowicz, Sun Apr 30 11:18:29 2017 -0700 : Currentframe behavior change after delete Removed old commented code
+| * 4f58736 - YupHio, Sun Apr 30 11:07:04 2017 -0700 : It works
+| * 1d569dc - Emma Bateman, Sat Apr 29 12:34:57 2017 -0700 : Delete Fix
+* | 2bfa2de - YupHio, Sun Apr 30 10:45:09 2017 -0700 : Friendly file dialog.
+|/  
+* 393a0fd - Emma Bateman, Thu Apr 27 23:25:27 2017 -0700 : current time box
+* 1b49b93 - welc2421, Thu Apr 27 22:50:50 2017 -0700 : Deleted un-needed function
+* 41998cf - gjcarter, Thu Apr 27 22:34:49 2017 -0700 : Fixed small error in on_btn_NewFrame_clicked for translateFrame case.
+* 08105f4 - gjcarter, Thu Apr 27 22:21:34 2017 -0700 : Did some cleanup relating to the addition of the new newFrameHandler function. Fixed add 100 frames. Changed some code for consistency.
+* 6743d78 - gjcarter, Thu Apr 27 21:56:18 2017 -0700 : Added a majority of the drawing of the timeline, refreshing of the grid, etc. into a function. Translate frame now shows correctly on the timeline with this change.
+* 472480f - Emma Bateman, Thu Apr 27 19:56:43 2017 -0700 : frame duration fix & current time box
+* d05f3a6 - welc2421, Wed Apr 26 22:45:22 2017 -0700 : Fixed palette lag and made it so only colors on the grid appear in recent colors
+*   b3c8fb2 - Tim Sonnen, Wed Apr 26 19:30:27 2017 -0700 : Merge pull request #46 from CS383Team2/fileioInteg
+|\  
+| *   459a3d3 - Tim Sonnen, Wed Apr 26 18:40:32 2017 -0700 : Merge branch 'master' into fileioInteg
+| |\  
+| |/  
+|/|   
+* | ed3ad86 - Nick Krenowicz, Wed Apr 26 18:15:47 2017 -0700 : Player segfault fix
+| *   fcc1d6a - tsonnen, Wed Apr 26 17:44:16 2017 -0700 : Merge remote-tracking branch 'origin/master' into fileioInteg
+| |\  
+| |/  
+|/|   
+* | f94e3b5 - Nick Krenowicz, Wed Apr 26 16:44:53 2017 -0700 : gridsquareWrapper Now deletes allocated memory
+* |   e5b7bd5 - Nick Krenowicz, Wed Apr 26 16:25:25 2017 -0700 : Merge branch 'master' into gridclassWrapper
+|\ \  
+* | | 4a8830c - Nick Krenowicz, Tue Apr 25 19:18:01 2017 -0700 : Fixed mainGrid update call, Reworked paste function
+* | |   3a70076 - Nick Krenowicz, Tue Apr 25 19:09:43 2017 -0700 : Merge branch 'master' into gridclassWrapper
+|\ \ \  
+* | | | 51f417e - Nick Krenowicz, Tue Apr 25 18:57:54 2017 -0700 : gridsquareWrapper cleanup
+* | | | 81312f4 - Nick Krenowicz, Mon Apr 24 23:11:30 2017 -0700 : Cleaned up #includes
+* | | | 3c795cc - Nick Krenowicz, Mon Apr 24 11:27:30 2017 -0700 : gridsquareWrapper integration
+* | | | 3d2237f - Nick Krenowicz, Mon Apr 24 11:11:05 2017 -0700 : Created gridsquare wrapper class
+| | | *   d426999 - tsonnen, Wed Apr 26 17:06:27 2017 -0700 : Merge remote-tracking branch 'origin/master' into fileioInteg
+| | | |\  
+| | | |/  
+| | |/|   
+| | * | 9cad758 - Nick Krenowicz, Wed Apr 26 15:54:58 2017 -0700 : up and down translation fix (reverted from commit dfae731e9695e40e83174ea79008ab9b799863cc)
+| | * |   2a1950a - gjcarter, Wed Apr 26 14:54:23 2017 -0700 : Merge remote-tracking branch 'origin/Delete-Frame-Button'
+| | |\ \  
+| | | * \   df33b60 - gjcarter, Tue Apr 25 21:58:24 2017 -0700 : Merge remote-tracking branch 'origin/Delete-Frame-Button' into delete_frame
+| | | |\ \  
+| | | | * | 8bad13f - Kevin Dorscher, Sun Apr 23 21:14:52 2017 -0700 : Delete Frame WORKS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+| | | | * | 26cc54a - Kevin Dorscher, Sun Apr 23 19:46:06 2017 -0700 : Delete Frame MOSTLY Working
+| | | * | | cec410f - gjcarter, Tue Apr 25 20:54:42 2017 -0700 : Fixed a few merge errors and cleaned up some existing code. Added initializeTimeline from master code and fixed a potential seg fault in the function. Changed scroll bar code in new frame to only scroll to the right when the last frame is selected during an add.
+| | | * | |   39aa522 - gjcarter, Tue Apr 25 20:11:21 2017 -0700 : Merge remote-tracking branch 'origin/master' into fixing_add_frame
+| | | |\ \ \  
+| | | * | | | b2324e4 - gjcarter, Tue Apr 25 20:05:43 2017 -0700 : Added refreshTimelineDelete function for when a frame is deleted in the middle of the list. Needs testing. Renamed refreshTimeline to refreshTimelineAdd as it's only for cases where a frame is added in the middle.
+| | | * | | | 1b25f7a - gjcarter, Tue Apr 25 19:58:01 2017 -0700 : Fixed that pesky final indexing bug. Renamed drawTimeline to drawFrame as it now only handles adding a single frame to the timeline.
+| | | * | | | 6e1c1a7 - gjcarter, Sun Apr 23 20:07:15 2017 -0700 : New frame now correctly adds to the correct place on the timeline but still some bugs with the timeline relating to the last frame. Seems like it could be indexing.
+| | | | |/ /  
+| | | |/| |   
+| | | * | | 97a0544 - gjcarter, Sun Apr 23 14:39:20 2017 -0700 : Fixed minor error with creating first frame.
+| | | * | |   e4ec907 - gjcarter, Sun Apr 23 14:37:26 2017 -0700 : Merge remote-tracking branch 'origin/master' into fixing_add_frame
+| | | |\ \ \  
+| | | * | | | e6e8ce3 - gjcarter, Sun Apr 23 14:31:39 2017 -0700 : Fixed indexing bug. Timeline now correctly prints the 0th frame. Still have an issue with the timeline not correctly adding new frame to the correct position.
+| | | * | | | 9ed1846 - gjcarter, Thu Apr 20 21:16:27 2017 -0700 : Add new frame and translate functions now add frame after the selected one. Added refresh timeline function to refresh all frames after one is added in middle. Bug with timeline due to FrameData always being added to the end of a scene.
+| | | * | | | fa5b3bc - gjcarter, Thu Apr 20 19:22:43 2017 -0700 : Fixed issue where entire timeline was being updated on every click and new frame creation. Now only current selected frame is updated. Also fixed a bug where timeline was being updated on mouseClickEvent causing frame to appear incorrectly in timeline.
+| | * | | | | 3fa30d1 - YupHio, Wed Apr 26 13:08:14 2017 -0700 : Fixed eye-dropper click lag
+| | | |_|/ /  
+| | |/| | |   
+| | | | | * 8630dcc - tsonnen, Tue Apr 25 20:57:46 2017 -0700 : Fix starting new project
+| | | | | *   9120c46 - tsonnen, Tue Apr 25 20:40:45 2017 -0700 : Merge remote-tracking branch 'origin/master' into fileioInteg
+| | | | | |\  
+| | | |_|_|/  
+| | |/| | |   
+| | * | | | 1994996 - Emma Bateman, Tue Apr 25 18:29:29 2017 -0700 : keep duration value when translating frame
+| |/ / / /  
+| * | | | dfae731 - Emma Bateman, Tue Apr 25 17:50:42 2017 -0700 : up and down translation fix
+| * | | | f8e6c2d - welc2421, Tue Apr 25 00:00:02 2017 -0700 : Palette and Eye Dropper
+| * | | | e095c47 - Nick Krenowicz, Mon Apr 24 23:49:56 2017 -0700 : Doc screenshots update
+| * | | | d6a4d39 - Nick Krenowicz, Mon Apr 24 23:44:21 2017 -0700 : Doc update & sprint 4 outline
+| * | | | 4266a52 - Emma Bateman, Mon Apr 24 23:04:24 2017 -0700 : copy and paste frames
+|/ / / /  
+| | | *   1577fd8 - tsonnen, Sun Apr 23 23:55:52 2017 -0700 : Merge remote-tracking branch 'origin/master' into fileioInteg
+| | | |\  
+| |_|_|/  
+|/| | |   
+* | | | d2ef25d - Nick Krenowicz, Sun Apr 23 20:25:59 2017 -0700 : CopyFrame: missed a few instances & slight improvement
+* | | | 81c6e76 - Nick Krenowicz, Sun Apr 23 20:07:39 2017 -0700 : Copy Frame into gridGridsquare moved to function
+* | | | cd4a08f - Nick Krenowicz, Sun Apr 23 19:43:45 2017 -0700 : Removed some Comments and CurrentFrameData
+| | | * f81c6b7 - tsonnen, Sun Apr 23 19:16:04 2017 -0700 : Draw Timeline on loading.
+| | | *   5f4a823 - tsonnen, Sun Apr 23 18:56:48 2017 -0700 : Merge remote-tracking branch 'origin/master' into fileioInteg
+| | | |\  
+| |_|_|/  
+|/| | |   
+* | | | d9f0b6a - Nick Krenowicz, Sun Apr 23 14:44:46 2017 -0700 : Major optimize of add 100 frames
+| |/ /  
+|/| |   
+* | | d82461c - Nick Krenowicz, Sun Apr 23 14:08:06 2017 -0700 : Moved translate frame to ProcessTranslateFrame() function
+* | | 57f025e - Nick Krenowicz, Sun Apr 23 13:46:26 2017 -0700 : Consistency Made sure every index, framecount, frameid Used the same data type: int > There were a few variations throughout the program > Tried making everything unsigned int but something broke the timeline draw.
+* | | 358f3c6 - Nick Krenowicz, Sun Apr 23 13:30:49 2017 -0700 : Minor cleanups
+* | | 2601ee4 - YupHio, Sun Apr 23 13:15:59 2017 -0700 : Timeline stays scrolled to the right when you add frames.
+* | |   53456e8 - Nick Krenowicz, Sun Apr 23 12:38:56 2017 -0700 : Merge branch 'master' into Feature/Debug_Functions
+|\ \ \  
+* | | | 825740d - Nick Krenowicz, Sun Apr 23 12:38:43 2017 -0700 : Added Debug functions & removed a lag source
+| | | * 4e1f924 - tsonnen, Sun Apr 23 12:39:17 2017 -0700 : Fix merge errors
+| | | *   c3cd18f - tsonnen, Sun Apr 23 12:30:41 2017 -0700 : Merge remote-tracking branch 'origin/master' into fileioInteg
+| | | |\  
+| | |_|/  
+| |/| |   
+| * | | b33aa5d - YupHio, Sun Apr 23 12:19:54 2017 -0700 : Paint function for Tim
+| * | | 871efb3 - YupHio, Sun Apr 23 12:02:35 2017 -0700 : Added some hover tooltips on buttons, kinda cool I guess.
+|/ / /  
+* | | 41225b6 - YupHio, Sun Apr 23 11:45:55 2017 -0700 : Filled out the rest of the menu slots.
+* | | 7c298d1 - YupHio, Sun Apr 23 11:26:55 2017 -0700 : Play menu and Help menus are now functional.
+| | * b364909 - tsonnen, Sat Apr 22 22:28:33 2017 -0700 : Added Save. Load is WIP
+| | * 1f0f261 - tsonnen, Sat Apr 22 15:56:45 2017 -0700 : Change duration to sec.
+| | * 867d717 - tsonnen, Sat Apr 22 15:12:41 2017 -0700 : Error Handling. Fix seg fault on not loading file
+| | *   c91650d - tsonnen, Sat Apr 22 14:49:14 2017 -0700 : Merge remote-tracking branch 'origin/master' into fileioInteg
+| | |\  
+| |_|/  
+|/| |   
+* | | 67debeb - gjcarter, Fri Apr 21 19:34:47 2017 -0700 : Small optimization for new frames created. Timeline and grid already updated in newFrame function. drawGrid only needed on startup.
+| | * a0bf15b - tsonnen, Fri Apr 21 19:45:10 2017 -0700 : Not Painting but no seg fault
+| | *   50ffe8f - tsonnen, Fri Apr 21 19:06:50 2017 -0700 : Merge remote-tracking branch 'origin/master' into fileioInteg
+| | |\  
+| | | * 51b4a71 - YupHio, Fri Apr 21 16:36:44 2017 -0700 : Add Frame now adds to next, not to end. Doesn't re-draw rest of frames tho
+| | | * 7bd8c4d - YupHio, Fri Apr 21 16:23:36 2017 -0700 : Invisible frame and indexing fixed.
+| |_|/  
+|/| |   
+| | * 414ba7e - tsonnen, Fri Apr 21 18:55:10 2017 -0700 : Seg fault work
+| | * 5af8fe8 - tsonnen, Fri Apr 21 13:26:18 2017 -0700 : Work on segfault
+| | *   e4af5a4 - tsonnen, Fri Apr 21 12:38:23 2017 -0700 : Merge branch 'fileioInteg' of github.com:CS383Team2/Goofy_Lights_Editor into fileioInteg
+| | |\  
+| |/ /  
+|/| |   
+| | * a444668 - tsonnen, Fri Apr 21 00:44:31 2017 -0700 : Add load functionality to size select dialog
+| |/  
+* | 9cea632 - YupHio, Fri Apr 21 12:05:47 2017 -0700 : Adds frame to timeline on start. Fix this later Nick. There is still an invisible frame or 2 created at program start?
+* | efbf232 - YupHio, Fri Apr 21 11:39:49 2017 -0700 : Fixed crazy lag on drawing timeline
+* | 1e4c953 - YupHio, Fri Apr 21 11:31:09 2017 -0700 : Red box is now Blue, by Joe's request.
+* | bd16e1a - YupHio, Fri Apr 21 11:29:11 2017 -0700 : Fixed one click lag! Fixed player!
+|/  
+* 177bac9 - Joe, Thu Apr 20 18:34:53 2017 -0700 : Updated timeline for sprint 4.
+* 8d0d909 - Joe, Thu Apr 20 18:30:39 2017 -0700 : Added new timeline from meeting on 4/20/2017
