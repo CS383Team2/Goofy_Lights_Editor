@@ -1,6 +1,7 @@
 #include "timelinewrapper.h"
 #include "framestructure.h"
 #include "globals.h"
+#include "gridsquarewrapper.h"
 
 #include <QMainWindow>
 #include <QtCore>
@@ -19,10 +20,11 @@ timelinewrapper::~timelinewrapper()
 }
 
 // must call this and set gridscene
-void timelinewrapper::setScene(QGraphicsScene *gridScene)
+void timelinewrapper::setScene(QGraphicsScene *gridScene, gridsquarewrapper *mainGrid)
 {
     // link gridScene to internal pointer
     this->timelineScenePtr = gridScene;
+    this->mainGridPtr  = mainGrid;
 }
 
 
@@ -48,7 +50,7 @@ void timelinewrapper::updateTimeline() //fix the update lag later -P
     {
         for(int y=0; y<V_GLOBAL.G_COL; y++)
         {
-            (*tempFrameData).squareData[x][y].square_RGB = mainGrid.gridSquareData[x][y].square_RGB;
+            (*tempFrameData).squareData[x][y].square_RGB = (*mainGridPtr).gridSquareData[x][y].square_RGB;
             (*tempFrameData).squareData[x][y].update();
         }
     }

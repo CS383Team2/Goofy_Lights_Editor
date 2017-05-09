@@ -3,6 +3,7 @@
 
 
 #include "framestructure.h"
+#include "gridsquarewrapper.h"
 
 
 class timelinewrapper
@@ -19,6 +20,7 @@ public:
 
     TimelineGrid ** gridSquareData = NULL;
     QGraphicsScene *timelineScenePtr;     // This is created in mainwindow.cpp & passed to this object
+    gridsquarewrapper *mainGridPtr;       // Main grid in mainwindow.cpp
 
     void setScene(QGraphicsScene *timelineScene);
 
