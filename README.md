@@ -9,7 +9,7 @@ Bruce Bolden
 # Task
 Create a QT based program that can create a frame-by-frame animation for the Tower of Lights and the Goofy Glasses the marching band uses.
 
-The [Tower of Lights](https://www.youtube.com/watch?v=hESMhgDnk4E) show is displayed on the theopolis tower on campus.
+The [Tower of Lights](https://www.youtube.com/watch?v=hESMhgDnk4E) show is displayed on the Theophilus Tower on campus.
 
 
 ![screenshot](doc/GUI_Screenshots/GUI_04_Final.jpg)
